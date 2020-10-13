@@ -1,0 +1,15 @@
+<div class="sidebar-wrapper">
+  <ul class="nav">
+    <li
+      routerLinkActive="active"
+      *ngFor="let item of sideBarItems"
+      class="nav-item"
+      [routerLink]="[item.path]"
+    >
+      <a>
+        <i class="now-ui-icons {{ item.icon }}"></i>
+        <p class="side-bar-item">{{ item.title }}</p>
+      </a>
+    </li>
+  </ul>
+</div>

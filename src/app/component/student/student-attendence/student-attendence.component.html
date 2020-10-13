@@ -1,0 +1,42 @@
+<div class="panel-header panel-header-sm"></div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Stundents Attendence</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table">
+              <thead class="text-primary">
+                <th></th>
+                <th>Name</th>
+                <th></th>
+                <th class="text-center">Attendence</th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let student of students">
+                  <td></td>
+                  <td>
+                    {{ student.username }}
+                  </td>
+                  <td></td>
+                  <td class="text-center">
+                    <button class="btn btn-dark">
+                      <i class="now-ui-icons ui-1_simple-remove"></i>
+                    </button>
+
+                    <button class="btn btn-dark">
+                      <i class="now-ui-icons ui-1_check"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

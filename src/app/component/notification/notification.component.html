@@ -1,0 +1,36 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Notification</h4>
+        </div>
+        <div class="card-body">
+          <a
+            style="cursor: pointer"
+            *ngFor="let notification of notifications"
+            (click)="onSelectNotification(notification)"
+          >
+            <div
+              class="alert alert-info alert-with-icon"
+              data-notify="container"
+            >
+              <button type="button" aria-hidden="true" class="close">
+                <i class="now-ui-icons ui-1_simple-remove"></i>
+              </button>
+              <span data-notify="icon" class="now-ui-icons ui-1_bell-53"></span>
+              <span data-notify="message">{{ notification.message }}</span>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-8">
+      <app-notification-info
+        [viewNotification]="selectedNotification"
+      ></app-notification-info>
+    </div>
+  </div>
+</div>

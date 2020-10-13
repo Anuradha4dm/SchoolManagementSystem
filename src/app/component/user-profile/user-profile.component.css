@@ -1,0 +1,14 @@
+.card-content {
+  font-family: "Noto Serif", serif;
+  padding-left: 10px;
+  margin-top: 15px;
+  border-bottom: solid rgb(201, 174, 87) 3px;
+}
+
+.card-container {
+  margin: 20px;
+}
+
+.my-btn-group {
+  margin-top: 35px;
+}
