@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+
+import { ActivatedRoute, Data } from '@angular/router';
+import { StudentService } from 'src/app/services/student.service';
 
 @Component({
   selector: 'app-student-attendence',
@@ -6,13 +9,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-attendence.component.css'],
 })
 export class StudentAttendenceComponent implements OnInit {
-  students = [
-    { username: 'student1', email: 'student1@gmail.com', moble: '0771346601' },
-    { username: 'student2', email: 'student2@gmail.com', moble: '0771346601' },
-    { username: 'student3', email: 'student3@gmail.com', moble: '0771346601' },
-  ];
+  students: { _id: string; username: string; isOnline: boolean }[] = [];
+  prasent: boolean = false;
+  absent: boolean = false;
 
-  constructor() {}
+  @ViewChild('btnM', { static: false }) btn: ElementRef;
 
-  ngOnInit(): void {}
+  constructor(
+    private route: ActivatedRoute,
+    private studentService: StudentService
+  ) {}
+
+  ngOnInit(): void {
+    this.route.data.subscribe((data: Data) => {
+      this.students = data['studentList'];
+    });
+  }
+
+  // makePrasent(idRef, btn) {
+  //   console.log(this.btn.nativeElement.querySelectorAll('.my-set'));
+  // }
+
+  make(event) {
+    console.log(event);
+  }
+
+  makeAbsent(idRef) {
+    this.absent = !this.absent;
+
+    if (this.absent) {
+      this.studentService.addStudentToAbsentList(idRef.value);
+    } else {
+      this.studentService.removeStudentInAbsentList(idRef.value);
+    }
+  }
 }

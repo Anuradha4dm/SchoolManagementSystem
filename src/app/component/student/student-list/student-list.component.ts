@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Data } from '@angular/router';
 
 @Component({
   selector: 'app-student-list',
@@ -6,12 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./student-list.component.css'],
 })
 export class StudentListComponent implements OnInit {
-  students = [
-    { username: 'student1', email: 'student1@gmail.com', moble: '0771346601' },
-    { username: 'student2', email: 'student2@gmail.com', moble: '0771346601' },
-    { username: 'student3', email: 'student3@gmail.com', moble: '0771346601' },
-  ];
-  constructor() {}
+  students = [];
+  constructor(private route: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.data.subscribe((data: Data) => {
+      this.students = data['studentList'];
+    });
+  }
 }

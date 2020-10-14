@@ -20,20 +20,34 @@
                   <td></td>
                   <td>
                     {{ student.username }}
+                    <input type="hidden" value="{{ student._id }}" #idRef />
                   </td>
                   <td></td>
                   <td class="text-center">
-                    <button class="btn btn-dark">
-                      <i class="now-ui-icons ui-1_simple-remove"></i>
-                    </button>
-
-                    <button class="btn btn-dark">
+                    <button
+                      class="btn btn-dark my-set"
+                      appMarkPresent
+                      #btnM
+                      (click)="make($event)"
+                    >
                       <i class="now-ui-icons ui-1_check"></i>
+                    </button>
+                    <button
+                      class="btn btn-dark"
+                      appMarkAbsent
+                      (click)="makeAbsent(idRef)"
+                    >
+                      <i class="now-ui-icons ui-1_simple-remove"></i>
                     </button>
                   </td>
                 </tr>
               </tbody>
             </table>
+          </div>
+
+          <div class="my-btn">
+            <button class="btn btn-success">Submit</button>
+            <button class="btn btn-danger">Cansel</button>
           </div>
         </div>
       </div>

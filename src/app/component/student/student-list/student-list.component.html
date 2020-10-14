@@ -13,6 +13,7 @@
                 <th>Name</th>
                 <th>Mobile Number</th>
                 <th>Email</th>
+                <th>Status</th>
                 <th class="text-right">Send Message</th>
               </thead>
               <tbody>
@@ -21,10 +22,21 @@
                     {{ student.username }}
                   </td>
                   <td>
-                    {{ student.moble }}
+                    {{ student.mobile }}
                   </td>
                   <td>
                     {{ student.email }}
+                  </td>
+                  <td class="text-center">
+                    <button
+                      aria-hidden="true"
+                      class="btn"
+                      [ngStyle]="{
+                        backgroundColor: student.isOnline ? 'green' : 'red'
+                      }"
+                    >
+                      <i class="now-ui-icons users_circle-08 close"></i>
+                    </button>
                   </td>
                   <td>
                     <button type="button" aria-hidden="true" class="close">
