@@ -6,8 +6,10 @@ export class NotificationModel {
   public message: string;
   public description: string;
   public time: string;
+  public _id: string;
 
   constructor(
+    _id: string,
     from: string,
     to: string,
     message: string,
@@ -19,5 +21,6 @@ export class NotificationModel {
     this.message = message;
     this.description = description;
     this.time = time;
+    this._id = _id;
   }
 }

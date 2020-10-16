@@ -6,10 +6,10 @@ import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SiderbarComponent } from './component/siderbar/siderbar.component';
 import { NotificationComponent } from './component/notification/notification.component';
-import { UserProfileComponent } from './component/user-profile/user-profile.component';
-import { AddNewProfileComponent } from './component/user-profile/add-new-profile/add-new-profile.component';
-import { StudentListComponent } from './component/student/student-list/student-list.component';
-import { StudentAttendenceComponent } from './component/student/student-attendence/student-attendence.component';
+import { UserProfileComponent } from './component/student/user-profile/user-profile.component';
+import { AddNewProfileComponent } from './component/admin/add-new-profile/add-new-profile.component';
+import { StudentListComponent } from './component/teacher/student-list/student-list.component';
+
 import { NotificationService } from './services/notification.service';
 import { NotificationResolver } from './services/Notification-resolver.service';
 import { NotificationInfoComponent } from './component/notification/notification-info/notification-info.component';
@@ -19,6 +19,9 @@ import { MarkAbsentDirective } from './directive/mark-absent.directive';
 import { GetStudentListForAttendenceResolver } from './component/student/student-share-components/get-student-list-resolver.service';
 import { StudentService } from './services/student.service';
 import { GetClassStudentListResolver } from './component/student/student-share-components/get-class-student-list-resolver.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { StudentAttendenceComponent } from './component/teacher/student-attendence/student-attendence.component';
+import { NotificatinHiddenDirective } from './directive/notificatin-hidden.directive';
 
 @NgModule({
   declarations: [
@@ -34,8 +37,9 @@ import { GetClassStudentListResolver } from './component/student/student-share-c
     AddSubjectsComponent,
     MarkPresentDirective,
     MarkAbsentDirective,
+    NotificatinHiddenDirective,
   ],
-  imports: [BrowserModule, AppRoutingModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
     NotificationService,
     NotificationResolver,

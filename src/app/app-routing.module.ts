@@ -3,13 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { NotificationComponent } from './component/notification/notification.component';
 import { AddSubjectsComponent } from './component/student/add-subjects/add-subjects.component';
-import { StudentAttendenceComponent } from './component/student/student-attendence/student-attendence.component';
-import { StudentListComponent } from './component/student/student-list/student-list.component';
+import { StudentAttendenceComponent } from './component/teacher/student-attendence/student-attendence.component';
+import { StudentListComponent } from './component/teacher/student-list/student-list.component';
 import { GetClassStudentListResolver } from './component/student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from './component/student/student-share-components/get-student-list-resolver.service';
 
-import { UserProfileComponent } from './component/user-profile/user-profile.component';
+import { UserProfileComponent } from './component/student/user-profile/user-profile.component';
 import { NotificationResolver } from './services/Notification-resolver.service';
+import { AddNewProfileComponent } from './component/admin/add-new-profile/add-new-profile.component';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -29,6 +30,7 @@ const routes: Routes = [
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
+  { path: 'edit-profile', component: AddNewProfileComponent },
 ];
 
 @NgModule({

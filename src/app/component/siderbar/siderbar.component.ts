@@ -47,8 +47,8 @@ export class SiderbarComponent implements OnInit {
     },
     {
       path: '/addsubjects',
-      title: 'Notification',
-      icon: 'gestures_tap-01',
+      title: 'Add Subjects',
+      icon: 'files_single-copy-04',
       class: '',
     },
   ];

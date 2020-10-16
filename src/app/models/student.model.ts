@@ -6,6 +6,7 @@ export class Student {
   public email: string | null;
   public username: string | null;
   public age: string | null;
+  public gender: string | null;
   public grade: string | null;
   public addressLine1: string | null;
   public addressLine2: string | null;
@@ -22,6 +23,7 @@ export class Student {
     email: string,
     username: string,
     age: string,
+    gender: string,
     grade: string,
     addressLine1: string,
     addressLine2: string,
@@ -36,6 +38,8 @@ export class Student {
     this.lastName = lastName;
     this.username = username;
     this.age = age;
+    this.email = email;
+    this.gender = gender;
     this.grade = grade;
     this.addressLine1 = addressLine1;
     this.addressLine2 = addressLine2;
