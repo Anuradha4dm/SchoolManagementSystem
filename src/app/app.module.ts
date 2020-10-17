@@ -31,6 +31,8 @@ import { ConfirmationDialogService } from './services/confirmation-dialog.servic
 import { NotificationCloseDirective } from './directive/notification-close.directive';
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 import { StudentProfileService } from './services/studentProfile.service';
+import { Student } from './models/student.model';
+import { StudentPerformanceService } from './component/student/student-preformance.service';
 
 @NgModule({
   declarations: [
@@ -45,13 +47,9 @@ import { StudentProfileService } from './services/studentProfile.service';
     NotificationInfoComponent,
     AddSubjectsComponent,
     MarkPresentDirective,
-
     NotificatinHiddenDirective,
-
     ConfirmationDialogComponent,
-
     NotificationCloseDirective,
-
     EditProfileComponent,
   ],
   imports: [
@@ -72,6 +70,7 @@ import { StudentProfileService } from './services/studentProfile.service';
     StudentListService,
     ConfirmationDialogService,
     StudentProfileService,
+    StudentPerformanceService,
   ],
   bootstrap: [AppComponent],
 })

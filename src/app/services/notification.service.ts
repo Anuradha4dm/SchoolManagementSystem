@@ -12,10 +12,10 @@ export class NotificationService {
     ),
     new NotificationModel(
       '123',
-      'user1',
-      'user2',
-      'Serious Problem 2',
-      'This is the message in the notification',
+      'user3',
+      'user4',
+      'Serious Problem 4',
+      'This is the message2 in the notification',
       new Date().toUTCString()
     ),
   ];
