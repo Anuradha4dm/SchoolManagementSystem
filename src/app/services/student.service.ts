@@ -4,43 +4,6 @@ import { Student } from '../models/student.model';
 export class StudentService {
   private studentList: {};
 
-  // private students: Student[] = [
-  //   new Student(
-  //     '123',
-  //     'surname',
-  //     'name1',
-  //     'name2',
-  //     'email@gamail.com',
-  //     'username1',
-  //     '12',
-  //     'male',
-  //     '9',
-  //     'addressline1',
-  //     'addressline2',
-  //     'addressline3',
-  //     'city',
-  //     '077123123',
-  //     false
-  //   ),
-  //   new Student(
-  //     '123',
-  //     'surname2',
-  //     'name12',
-  //     'name22',
-  //     'email@gamail.com',
-  //     'username1',
-  //     '12',
-  //     'male',
-  //     '9',
-  //     'addressline12',
-  //     'addressline22',
-  //     'addressline32',
-  //     'city',
-  //     '077123123',
-  //     false
-  //   ),
-  // ];
-
   constructor() {}
 
   getStudentListForAttendence() {

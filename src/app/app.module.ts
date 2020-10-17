@@ -1,7 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SiderbarComponent } from './component/siderbar/siderbar.component';
@@ -20,14 +23,14 @@ import { MarkPresentDirective } from './directive/mark-present.directive';
 import { GetStudentListForAttendenceResolver } from './component/student/student-share-components/get-student-list-resolver.service';
 import { StudentService } from './services/student.service';
 import { GetClassStudentListResolver } from './component/student/student-share-components/get-class-student-list-resolver.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StudentAttendenceComponent } from './component/teacher/student-attendence/student-attendence.component';
 import { NotificatinHiddenDirective } from './directive/notificatin-hidden.directive';
 import { StudentListService } from './component/teacher/student-list.service';
-import { ToastrModule } from 'ngx-toastr';
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationDialogService } from './services/confirmation-dialog.service';
+import { NotificationCloseDirective } from './directive/notification-close.directive';
+import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
+import { StudentProfileService } from './services/studentProfile.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,10 @@ import { ConfirmationDialogService } from './services/confirmation-dialog.servic
     NotificatinHiddenDirective,
 
     ConfirmationDialogComponent,
+
+    NotificationCloseDirective,
+
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +71,7 @@ import { ConfirmationDialogService } from './services/confirmation-dialog.servic
     GetClassStudentListResolver,
     StudentListService,
     ConfirmationDialogService,
+    StudentProfileService,
   ],
   bootstrap: [AppComponent],
 })
