@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Student } from 'src/app/models/student.model';
 
@@ -23,7 +24,7 @@ export class StudentProfileService {
     'dumy 077123123'
   );
 
-  constructor() {}
+  constructor(private httpClien: HttpClient) {}
 
   getStudent() {
     //need to access data on the data base
@@ -37,4 +38,6 @@ export class StudentProfileService {
   getStudentId() {
     return this.student._id;
   }
+
+  addNewProfile(newProfile: Student) {}
 }

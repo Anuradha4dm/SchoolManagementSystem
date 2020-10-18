@@ -1,6 +1,6 @@
-import { ElementSchemaRegistry } from '@angular/compiler';
-import { Student } from '../models/student.model';
+import { Injectable } from '@angular/core';
 
+@Injectable({ providedIn: 'root' })
 export class StudentService {
   private studentList: {};
 

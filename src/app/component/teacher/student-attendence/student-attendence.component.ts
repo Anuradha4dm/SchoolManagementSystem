@@ -20,7 +20,7 @@ export class StudentAttendenceComponent implements OnInit {
     isOnline: boolean;
   }[] = [];
 
-  date: string = new Date().toUTCString();
+  date: Date = new Date();
   doneSubmition: boolean = false;
 
   constructor(

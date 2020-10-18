@@ -8,7 +8,16 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./student-list.component.css'],
 })
 export class StudentListComponent implements OnInit {
-  students = [];
+  students: {
+    _id: string;
+    username: string;
+    mobile: string;
+    email: string;
+    isOnline?: boolean;
+  }[] = [];
+
+  filtering: string;
+
   lastAttendanceupdate: { isDone: boolean; date: Date };
   constructor(private route: ActivatedRoute, private toastr: ToastrService) {}
 

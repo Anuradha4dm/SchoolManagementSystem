@@ -1,5 +1,7 @@
+import { Injectable } from '@angular/core';
 import { NotificationModel } from '../models/notification.module';
 
+@Injectable({ providedIn: 'root' })
 export class NotificationService {
   private notifications: NotificationModel[] = [
     new NotificationModel(
