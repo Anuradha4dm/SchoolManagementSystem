@@ -51,7 +51,7 @@
                   />
                 </div>
               </div>
-              <div class="col-md-8 pr-1">
+              <div class="col-md-7 pr-1">
                 <div class="form-group">
                   <label>Username</label>
                   <input
@@ -60,6 +60,19 @@
                     name="username"
                     id=""
                     placeholder="Username"
+                    ngModel
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Student Id</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="userid"
+                    id=""
+                    placeholder="Student Id"
                     ngModel
                   />
                 </div>
@@ -100,7 +113,7 @@
                   <input
                     type="email"
                     class="form-control"
-                    name="Grade"
+                    name="grade"
                     id=""
                     placeholder="Grade"
                     ngModel
@@ -126,7 +139,7 @@
                   <input
                     type="text"
                     class="form-control"
-                    name="start Year"
+                    name="start_Year"
                     id=""
                     placeholder="Year"
                     ngModel
@@ -150,13 +163,13 @@
               </div>
               <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Class Teacher</label>
+                  <label>Mobile Number</label>
                   <input
                     type="text"
                     class="form-control"
-                    name="classteacher"
+                    name="mobilenumber"
                     id=""
-                    placeholder="Class Teacher"
+                    placeholder="Mobile Number"
                     ngModel
                   />
                 </div>
@@ -236,7 +249,6 @@
             <div class="row">
               <div class="col-md-4"></div>
               <div class="col-md-4">
-                <button type="button" class="btn btn-primary">UPDATE</button>
                 <button class="btn btn-success">SAVE</button>
                 <button type="reset" class="btn btn-danger">RESET</button>
               </div>
