@@ -7,7 +7,7 @@
           <h1 class="title">Add New Profile</h1>
         </div>
         <div class="card-body">
-          <form>
+          <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
             <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
@@ -18,6 +18,7 @@
                     name="surname"
                     id=""
                     placeholder="Surname"
+                    ngModel
                   />
                 </div>
               </div>
@@ -30,6 +31,7 @@
                     id=""
                     placeholder="First Name"
                     class="form-control"
+                    ngModel
                   />
                 </div>
               </div>
@@ -45,10 +47,11 @@
                     name="lastname"
                     id=""
                     placeholder="Last Name"
+                    ngModel
                   />
                 </div>
               </div>
-              <div class="col-md-8 pr-1">
+              <div class="col-md-7 pr-1">
                 <div class="form-group">
                   <label>Username</label>
                   <input
@@ -57,6 +60,20 @@
                     name="username"
                     id=""
                     placeholder="Username"
+                    ngModel
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Student Id</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="userid"
+                    id=""
+                    placeholder="Student Id"
+                    ngModel
                   />
                 </div>
               </div>
@@ -71,6 +88,7 @@
                     name="email"
                     id=""
                     placeholder="Email"
+                    ngModel
                   />
                 </div>
               </div>
@@ -83,6 +101,7 @@
                     name="age"
                     id=""
                     placeholder="Age"
+                    ngModel
                   />
                 </div>
               </div>
@@ -94,9 +113,10 @@
                   <input
                     type="email"
                     class="form-control"
-                    name="Grade"
+                    name="grade"
                     id=""
                     placeholder="Grade"
+                    ngModel
                   />
                 </div>
               </div>
@@ -109,6 +129,7 @@
                     name="classteacher"
                     id=""
                     placeholder="Class Teacher"
+                    ngModel
                   />
                 </div>
               </div>
@@ -118,9 +139,10 @@
                   <input
                     type="text"
                     class="form-control"
-                    name="start Year"
+                    name="start_Year"
                     id=""
                     placeholder="Year"
+                    ngModel
                   />
                 </div>
               </div>
@@ -135,31 +157,30 @@
                     name="birthdate"
                     id=""
                     placeholder=""
+                    ngModel
                   />
                 </div>
               </div>
               <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Class Teacher</label>
+                  <label>Mobile Number</label>
                   <input
                     type="text"
                     class="form-control"
-                    name="classteacher"
+                    name="mobilenumber"
                     id=""
-                    placeholder="Class Teacher"
+                    placeholder="Mobile Number"
+                    ngModel
                   />
                 </div>
               </div>
               <div class="col-md-3 pr-1">
                 <div class="form-group">
-                  <label>Start Year</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="start Year"
-                    id=""
-                    placeholder="Year"
-                  />
+                  <label>Gender</label>
+                  <select class="form-control" name="gender" ngModel>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -174,6 +195,7 @@
                     name="addressline1"
                     id=""
                     placeholder="Line 1"
+                    ngModel
                   />
                 </div>
               </div>
@@ -188,6 +210,7 @@
                     name="addressline2"
                     id=""
                     placeholder="Line 2"
+                    ngModel
                   />
                 </div>
               </div>
@@ -202,6 +225,7 @@
                     name="addressline3"
                     id=""
                     placeholder="Line 3"
+                    ngModel
                   />
                 </div>
               </div>
@@ -216,6 +240,7 @@
                     name="city"
                     id=""
                     placeholder="City"
+                    ngModel
                   />
                 </div>
               </div>
@@ -224,9 +249,8 @@
             <div class="row">
               <div class="col-md-4"></div>
               <div class="col-md-4">
-                <button class="btn btn-primary">UPDATE</button>
                 <button class="btn btn-success">SAVE</button>
-                <button class="btn btn-danger">RESET</button>
+                <button type="reset" class="btn btn-danger">RESET</button>
               </div>
               <div class="col-md-4"></div>
             </div>

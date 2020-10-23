@@ -11,6 +11,7 @@ import { GetStudentListForAttendenceResolver } from './component/student/student
 import { UserProfileComponent } from './component/student/user-profile/user-profile.component';
 import { NotificationResolver } from './services/Notification-resolver.service';
 import { AddNewProfileComponent } from './component/admin/add-new-profile/add-new-profile.component';
+import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -30,7 +31,8 @@ const routes: Routes = [
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
-  { path: 'edit-profile', component: AddNewProfileComponent },
+  { path: 'edit-profile/:id', component: EditProfileComponent },
+  { path: 'add-new-profile', component: AddNewProfileComponent },
 ];
 
 @NgModule({
