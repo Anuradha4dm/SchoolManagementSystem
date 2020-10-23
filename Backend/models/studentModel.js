@@ -2,10 +2,10 @@ const { Sequelize, DataTypes } = require('sequelize');
 
 const sequelize = require('../util/databaseConnection');
 
-const Product = sequelize.define('product', {
+const Student = sequelize.define('student', {
     _id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
+        type: DataTypes.STRING,
+
         allowNull: false,
         primaryKey: true
     },
@@ -76,4 +76,6 @@ const Product = sequelize.define('product', {
 
 
 })
+
+module.exports = Student;
 

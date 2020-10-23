@@ -7,6 +7,7 @@ const app = express();
 //these are the main routing modules
 const studentRoute = require('./routes/studentRouter');
 const sequelize = require('./util/databaseConnection');
+const adminRouter = require('./routes/adminRoute');
 
 //resolving CORS errors
 app.use((req, res, next) => {
@@ -21,7 +22,8 @@ app.use((req, res, next) => {
 //include the body parser 
 app.use(bodyParser.json());
 
-app.use(studentRoute);
+app.use('/student', studentRoute);
+app.use('/admin', adminRouter);
 
 
 sequelize.sync({ force: true })
@@ -30,7 +32,7 @@ sequelize.sync({ force: true })
         app.listen(3000);
     })
     .catch(error => {
-        console.log('error')
+        console.log(error)
     })
 
 
