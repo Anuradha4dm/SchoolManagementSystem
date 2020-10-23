@@ -28,6 +28,7 @@ import { EditProfileComponent } from './component/student/edit-profile/edit-prof
 import { FilterStudentPipe } from './component/teacher/filter-student.pipe';
 import { LoginComponent } from './component/login/login.component';
 import { SignupComponent } from './component/login/signup/signup.component';
+import { AdminService } from './component/admin/admin.service';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { SignupComponent } from './component/login/signup/signup.component';
     NotificationResolver,
     GetStudentListForAttendenceResolver,
     GetClassStudentListResolver,
+    AdminService,
   ],
   bootstrap: [AppComponent],
 })
