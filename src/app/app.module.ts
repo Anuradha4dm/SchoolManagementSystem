@@ -22,14 +22,11 @@ import { GetClassStudentListResolver } from './component/student/student-share-c
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StudentAttendenceComponent } from './component/teacher/student-attendence/student-attendence.component';
 import { NotificatinHiddenDirective } from './directive/notificatin-hidden.directive';
-<<<<<<< HEAD
 import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
 import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { AboutComponent } from './component/homepage/about/about.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
-=======
->>>>>>> 183587bb36195c49bfcc0d98424d7067d1884e20
 
 @NgModule({
   declarations: [
@@ -46,14 +43,11 @@ import { DownloadsComponent } from './component/homepage/downloads/downloads.com
     MarkPresentDirective,
     MarkAbsentDirective,
     NotificatinHiddenDirective,
-<<<<<<< HEAD
     HomelayoutComponent,
     HomeComponent,
     StaffComponent,
     AboutComponent,
     DownloadsComponent,
-=======
->>>>>>> 183587bb36195c49bfcc0d98424d7067d1884e20
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
