@@ -11,10 +11,13 @@ import { GetStudentListForAttendenceResolver } from './component/student/student
 import { UserProfileComponent } from './component/student/user-profile/user-profile.component';
 import { NotificationResolver } from './services/Notification-resolver.service';
 import { AddNewProfileComponent } from './component/admin/add-new-profile/add-new-profile.component';
+<<<<<<< HEAD
 import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
 import { AboutComponent } from './component/homepage/about/about.component';
+=======
+>>>>>>> 183587bb36195c49bfcc0d98424d7067d1884e20
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -35,10 +38,13 @@ const routes: Routes = [
     resolve: { notifications: NotificationResolver },
   },
   { path: 'edit-profile', component: AddNewProfileComponent },
+<<<<<<< HEAD
   {path: 'homepage-home',component: HomeComponent},
   {path: 'homepage-staff',component: StaffComponent},
   {path: 'homepage-about',component: AboutComponent},
   {path: 'homepage-downloads',component: DownloadsComponent},
+=======
+>>>>>>> 183587bb36195c49bfcc0d98424d7067d1884e20
 ];
 
 @NgModule({
