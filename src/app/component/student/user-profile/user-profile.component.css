@@ -2,7 +2,13 @@
   font-family: "Noto Serif", serif;
   padding-left: 10px;
   margin-top: 15px;
-  border-bottom: solid rgb(201, 174, 87) 3px;
+  border-bottom: solid rgb(201, 174, 87) 2px;
+}
+
+.aword-content {
+  font-family: "Noto Serif", serif;
+  padding-left: 10px;
+  margin-top: 15px;
 }
 
 .card-container {

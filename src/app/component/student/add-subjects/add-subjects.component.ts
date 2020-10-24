@@ -1,15 +1,33 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-add-subjects',
   templateUrl: './add-subjects.component.html',
-  styleUrls: ['./add-subjects.component.css']
+  styleUrls: ['./add-subjects.component.css'],
 })
 export class AddSubjectsComponent implements OnInit {
+  subjectSet1: string[] = [
+    'Mathematics',
+    'Sinhala',
+    'English',
+    'Science',
+    'History',
+  ];
 
-  constructor() { }
+  subjectFormData: FormGroup;
 
-  ngOnInit(): void {
+  constructor() {}
+
+  ngOnInit(): void {}
+
+  onSubmitForm(data) {
+    console.log(data.value);
   }
-
 }

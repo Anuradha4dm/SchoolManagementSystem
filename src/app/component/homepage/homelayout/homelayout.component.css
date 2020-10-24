@@ -1,0 +1,18 @@
+.logodiv{
+    height: 80px;
+}
+
+.logo{
+    height: 100%;
+    width: 100%;
+    object-fit: fill;
+}
+
+.slideimage{
+    height: 450px;
+}
+
+.scroll{
+    height: 500px;
+    overflow-x: scroll;
+}

@@ -11,6 +11,8 @@ export class NotificationComponent implements OnInit {
   notifications: NotificationModel[] = [];
   selectedNotification: NotificationModel;
 
+  isClose: boolean = false;
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -21,5 +23,9 @@ export class NotificationComponent implements OnInit {
 
   onSelectNotification(notification) {
     this.selectedNotification = notification;
+  }
+
+  removeNotification() {
+    this.isClose = true;
   }
 }
