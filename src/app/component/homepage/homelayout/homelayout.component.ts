@@ -7,16 +7,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomelayoutComponent implements OnInit {
 
+  logoUrl = "assets/img/logo.png";
+  initialTab;
+  otherTab;
+  errorMessage="User Name Invalid";
+
   constructor() { }
 
   ngOnInit(): void {
     this.initialTab = true;
     this.otherTab =false;
   }
-
-  logoUrl = "assets/img/logo.png";
-  initialTab;
-  otherTab;
 
   tabActivate(){
     this.initialTab = false;

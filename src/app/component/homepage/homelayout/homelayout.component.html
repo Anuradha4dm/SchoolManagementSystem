@@ -1,11 +1,11 @@
-<div class="card bg-secondary">
+<div class="card bg-success">
     <!--School logo are-->
     <div class="logodiv">
         <img class="logo" src={{logoUrl}}>
     </div>  
     
     <!--Image slideshow start-->
-    <div class="card-header bg-dark">
+    <div class="card-header">
                 
         <div id="myslide" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
@@ -14,10 +14,10 @@
                 <li data-target="#myslide" data-slide-to="2"></li>
             </ol>
 
-            <div class="carousel-inner slideimage">
-                 <img  class="carousel-item active" src="assets/img/bg5.jpg" alt="Slide1"/>
-                 <img class="carousel-item" src="assets/img/bg6.jpg" alt="Slide2"/>
-                 <img class="carousel-item" src="assets/img/header.jpg" alt="Slide3"/>
+            <div class="carousel-inner">
+                 <img  class="carousel-item slideimage active" src="assets/img/bg5.jpg" alt="Slide1"/>
+                 <img class="carousel-item slideimage" src="assets/img/bg6.jpg" alt="Slide2"/>
+                 <img class="carousel-item slideimage" src="assets/img/header.jpg" alt="Slide3"/>
             </div>
 
 
@@ -34,7 +34,7 @@
     <br>
 
     <!--Navigation panel-->
-    <div class="card-block bg-light">
+    <div class="card-block bg-dark">
         <ul class="nav nav-tabs justify-content-center">
             <li *ngFor="let item of navItems" class="nav-item">
                 <a routerLink={{item.path}} class="nav-link" (click)="tabActivate()">{{item.display}}</a>
@@ -46,7 +46,7 @@
     </div>
 
     <!--Homepage body content-->
-    <div class="card-body bg-light text-center scroll">
+    <div class="card-body text-center scroll bg-secondary">
         <app-home *ngIf="initialTab"></app-home>
         <router-outlet *ngIf="otherTab"></router-outlet>
     </div>
@@ -85,6 +85,9 @@
                 </div>
             </div>
 
+            <div class="card-footer bg-danger text-center" *ngIf="errorMessage!=''">
+                <p class="card-text">{{errorMessage}}</p>
+            </div>
         </div>
     </div>
 </div>
