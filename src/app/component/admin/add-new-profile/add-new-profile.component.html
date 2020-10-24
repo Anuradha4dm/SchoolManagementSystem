@@ -18,10 +18,22 @@
                     name="userid"
                     id=""
                     placeholder="User Id"
-                    ngModel
+                    [ngModel]="nextVal"
                     #userid
                     required
                   />
+                </div>
+              </div>
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <button
+                    type="button"
+                    (click)="getId()"
+                    class="btn btn-round btn-danger"
+                    [disabled]="!generateid"
+                  >
+                    Get Id
+                  </button>
                 </div>
               </div>
             </div>
@@ -94,7 +106,7 @@
                   <input
                     type="file"
                     name="profilepicture"
-                    class="form-control"
+                    class="form-control btn"
                     accept="image/*"
                     ngModel
                     #imageRef
@@ -108,19 +120,6 @@
                     src="{{ profilePic }}"
                     alt="profilr picture"
                     class="profile-picuture"
-                  />
-                </div>
-              </div>
-              <div class="col-md-4 pr-1">
-                <div class="form-group">
-                  <label>Student Id</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="userid"
-                    id=""
-                    placeholder="Student Id"
-                    ngModel
                   />
                 </div>
               </div>
@@ -223,7 +222,7 @@
                     class="form-control"
                     name="mobilenumber"
                     id=""
-                    placeholder="Mobile Number"
+                    placeholder="MobileNumber"
                     ngModel
                     required
                   />

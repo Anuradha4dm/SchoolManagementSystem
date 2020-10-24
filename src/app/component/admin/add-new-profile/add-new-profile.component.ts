@@ -1,3 +1,4 @@
+import { ConstantPool } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdminService } from '../admin.service';
@@ -15,28 +16,37 @@ export class AddNewProfileComponent implements OnInit {
   teacherLoginn: boolean = false;
   nonAcademinLogin: boolean = false;
 
+  nextVal: string = '';
+  generateid: boolean = true;
+
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {}
 
   onSubmit(formData: NgForm) {
     const form = new FormData();
-    form.set('grade', formData.value.grade);
-    form.set('addressline1', formData.value.addressline1);
-    form.set('addressline2', formData.value.addressline2);
-    form.set('addressline3', formData.value.addressline3);
-    form.set('age', formData.value.age);
-    form.set('birthdate', formData.value.birthdate);
-    form.set('classteacher', formData.value.classteacher);
-    form.set('email', formData.value.email);
-    form.set('firstname', formData.value.firstname);
-    form.set('gender', formData.value.gender);
-    form.set('lastname', formData.value.lastname);
-    form.set('startyear', formData.value.startyear);
-    form.set('surname', formData.value.surname);
-    form.set('userid', formData.value.userid);
-    form.set('username', formData.value.username);
-    form.set('profilepicture', this.selectedFile);
+
+    console.log(formData.value.userid);
+
+    form.append('grade', formData.value.grade);
+    form.append('addressline1', formData.value.addressline1);
+    form.append('addressline2', formData.value.addressline2);
+    form.append('addressline3', formData.value.addressline3);
+    form.append('password', formData.value.userid);
+    form.append('age', formData.value.age);
+    form.append('birthdate', formData.value.birthdate);
+    form.append('classteacher', formData.value.classteacher);
+    form.append('city', formData.value.city);
+    form.append('mobile', formData.value.mobilenumber);
+    form.append('email', formData.value.email);
+    form.append('firstname', formData.value.firstname);
+    form.append('gender', formData.value.gender);
+    form.append('lastname', formData.value.lastname);
+    form.append('startyear', formData.value.startyear);
+    form.append('surname', formData.value.surname);
+    form.append('userid', formData.value.userid);
+    form.append('username', formData.value.username);
+    form.append('profilepicture', this.selectedFile);
 
     this.adminService.postNewStudentData(form).subscribe(
       (result) => {
@@ -53,5 +63,19 @@ export class AddNewProfileComponent implements OnInit {
 
   onChange(event) {
     this.selectedFile = <File>event.target.files[0];
+  }
+
+  getId() {
+    this.adminService.getNewStudentId().subscribe(
+      (result) => {
+        this.nextVal = result.Id;
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        this.generateid = false;
+      }
+    );
   }
 }
