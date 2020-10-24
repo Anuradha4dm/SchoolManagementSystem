@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+<<<<<<< HEAD
+=======
+import { DefaultUrlSerializer } from '@angular/router';
+>>>>>>> e0ce8596f98393a2af09cfd539a591e24c97e90e
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -8,14 +12,22 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./add-new-profile.component.css'],
 })
 export class AddNewProfileComponent implements OnInit {
+<<<<<<< HEAD
   profilePic: string = '../../../../assets/img/profile.png';
   selectedFile: File = null;
+=======
+  adminLogin: boolean = false;
+  studentLogin: boolean = false;
+  teacherLoginn: boolean = false;
+  nonAcademinLogin: boolean = false;
+>>>>>>> e0ce8596f98393a2af09cfd539a591e24c97e90e
 
   constructor(private adminService: AdminService) {}
 
   ngOnInit(): void {}
 
   onSubmit(formData: NgForm) {
+<<<<<<< HEAD
     const form = new FormData();
     form.set('grade', formData.value.grade);
     form.set('addressline1', formData.value.addressline1);
@@ -50,4 +62,15 @@ export class AddNewProfileComponent implements OnInit {
   onChange(event) {
     this.selectedFile = <File>event.target.files[0];
   }
+=======
+    this.adminService.addNewProfile(formData.value).subscribe(
+      (data) => {
+        console.log('success');
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+>>>>>>> e0ce8596f98393a2af09cfd539a591e24c97e90e
 }

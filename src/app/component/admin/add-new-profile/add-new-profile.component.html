@@ -71,7 +71,7 @@
                   />
                 </div>
               </div>
-              <div class="col-md-8 pr-1">
+              <div class="col-md-7 pr-1">
                 <div class="form-group">
                   <label>Username</label>
                   <input
@@ -108,6 +108,19 @@
                     src="{{ profilePic }}"
                     alt="profilr picture"
                     class="profile-picuture"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Student Id</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="userid"
+                    id=""
+                    placeholder="Student Id"
+                    ngModel
                   />
                 </div>
               </div>
@@ -178,7 +191,11 @@
                   <input
                     type="text"
                     class="form-control"
+<<<<<<< HEAD
                     name="startyear"
+=======
+                    name="start_Year"
+>>>>>>> e0ce8596f98393a2af09cfd539a591e24c97e90e
                     id=""
                     placeholder="Year"
                     ngModel
@@ -204,13 +221,13 @@
               </div>
               <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Class Teacher</label>
+                  <label>Mobile Number</label>
                   <input
                     type="text"
                     class="form-control"
-                    name="classteacher"
+                    name="mobilenumber"
                     id=""
-                    placeholder="Class Teacher"
+                    placeholder="Mobile Number"
                     ngModel
                     required
                   />
@@ -293,9 +310,13 @@
             <div class="row">
               <div class="col-md-4"></div>
               <div class="col-md-4">
+<<<<<<< HEAD
                 <button class="btn btn-success" [disabled]="!formData.valid">
                   Add New User
                 </button>
+=======
+                <button class="btn btn-success">SAVE</button>
+>>>>>>> e0ce8596f98393a2af09cfd539a591e24c97e90e
                 <button type="reset" class="btn btn-danger">RESET</button>
               </div>
               <div class="col-md-4"></div>

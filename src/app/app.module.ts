@@ -26,6 +26,12 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
 import { NotificationCloseDirective } from './directive/notification-close.directive';
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 import { FilterStudentPipe } from './component/teacher/filter-student.pipe';
+<<<<<<< HEAD
+=======
+import { LoginComponent } from './component/login/login.component';
+import { SignupComponent } from './component/login/signup/signup.component';
+import { AdminService } from './component/admin/admin.service';
+>>>>>>> e0ce8596f98393a2af09cfd539a591e24c97e90e
 
 @NgModule({
   declarations: [
@@ -60,6 +66,7 @@ import { FilterStudentPipe } from './component/teacher/filter-student.pipe';
     NotificationResolver,
     GetStudentListForAttendenceResolver,
     GetClassStudentListResolver,
+    AdminService,
   ],
   bootstrap: [AppComponent],
 })
