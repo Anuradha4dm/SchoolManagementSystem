@@ -65,6 +65,32 @@
                 </div>
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div>
+                  <label>Profile Picture</label>
+                  <input
+                    type="file"
+                    name="profilepicture"
+                    id="pic"
+                    class="form-control"
+                    accept="image/*"
+                    [ngModel]="studentData.profilePicture"
+                  />
+                </div>
+              </div>
+              <div class="col-md-7 pr-1">
+                <div>
+                  <img
+                    src="{{ profilePic }}"
+                    alt="profilr picture"
+                    class="profile-picuture"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div class="row">
               <div class="col-md-8 pr-1">
                 <div class="form-group">
@@ -93,6 +119,7 @@
                 </div>
               </div>
             </div>
+
             <div class="row">
               <div class="col-md-3 pr-1">
                 <div class="form-group">
@@ -152,14 +179,14 @@
               </div>
               <div class="col-md-5 pr-1">
                 <div class="form-group">
-                  <label>Class Teacher</label>
+                  <label>Mobile Number</label>
                   <input
                     type="text"
                     class="form-control"
-                    name="classteacherB"
+                    name="mobile"
                     id=""
-                    placeholder="Class Teacher"
-                    ngModel
+                    placeholder="Mobile number"
+                    [ngModel]="studentData.mobile"
                   />
                 </div>
               </div>

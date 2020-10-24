@@ -11,6 +11,23 @@
             <div class="row">
               <div class="col-md-6 pr-1">
                 <div class="form-group">
+                  <label>user Id</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="userid"
+                    id=""
+                    placeholder="User Id"
+                    ngModel
+                    #userid
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
                   <label>Surname</label>
                   <input
                     type="text"
@@ -19,6 +36,7 @@
                     id=""
                     placeholder="Surname"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -32,6 +50,7 @@
                     placeholder="First Name"
                     class="form-control"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -48,6 +67,7 @@
                     id=""
                     placeholder="Last Name"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -61,6 +81,33 @@
                     id=""
                     placeholder="Username"
                     ngModel
+                    required
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-5 pr-1">
+                <div>
+                  <label>Profile Picture</label>
+                  <input
+                    type="file"
+                    name="profilepicture"
+                    class="form-control"
+                    accept="image/*"
+                    ngModel
+                    #imageRef
+                    (change)="onChange($event)"
+                  />
+                </div>
+              </div>
+              <div class="col-md-7 pr-1">
+                <div>
+                  <img
+                    src="{{ profilePic }}"
+                    alt="profilr picture"
+                    class="profile-picuture"
                   />
                 </div>
               </div>
@@ -76,6 +123,8 @@
                     id=""
                     placeholder="Email"
                     ngModel
+                    email
+                    required
                   />
                 </div>
               </div>
@@ -89,6 +138,7 @@
                     id=""
                     placeholder="Age"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -98,12 +148,13 @@
                 <div class="form-group">
                   <label>Grade</label>
                   <input
-                    type="email"
+                    type="text"
                     class="form-control"
-                    name="Grade"
+                    name="grade"
                     id=""
                     placeholder="Grade"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -117,6 +168,7 @@
                     id=""
                     placeholder="Class Teacher"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -126,10 +178,11 @@
                   <input
                     type="text"
                     class="form-control"
-                    name="start Year"
+                    name="startyear"
                     id=""
                     placeholder="Year"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -145,6 +198,7 @@
                     id=""
                     placeholder=""
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -158,6 +212,7 @@
                     id=""
                     placeholder="Class Teacher"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -183,6 +238,7 @@
                     id=""
                     placeholder="Line 1"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -198,6 +254,7 @@
                     id=""
                     placeholder="Line 2"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -236,8 +293,9 @@
             <div class="row">
               <div class="col-md-4"></div>
               <div class="col-md-4">
-                <button type="button" class="btn btn-primary">UPDATE</button>
-                <button class="btn btn-success">SAVE</button>
+                <button class="btn btn-success" [disabled]="!formData.valid">
+                  Add New User
+                </button>
                 <button type="reset" class="btn btn-danger">RESET</button>
               </div>
               <div class="col-md-4"></div>

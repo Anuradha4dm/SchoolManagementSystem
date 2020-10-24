@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Student } from 'src/app/models/student.model';
-
-import { StudentProfileService } from '../../../services/studentProfile.service';
+import { StudentProfileService } from '../student-profile.service';
 
 @Component({
   selector: 'app-edit-profile',
@@ -12,6 +11,7 @@ import { StudentProfileService } from '../../../services/studentProfile.service'
 export class EditProfileComponent implements OnInit {
   studentId: string;
   studentData: Student;
+  profilePic: string = '../assets/img/profile.png';
 
   constructor(
     private studentProfileService: StudentProfileService,
@@ -24,8 +24,19 @@ export class EditProfileComponent implements OnInit {
       this.studentId = params['id'];
     });
 
-    this.studentData = this.studentProfileService.getStudent();
+    this.studentProfileService.getStudent(this.studentId).subscribe(
+      (result) => {
+        this.studentData = result;
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log('complete');
+      }
+    );
   }
+
   onSubmit(formData) {
     this.studentProfileService.updateStudentProfile(this.studentId, formData);
     this.router.navigate(['userprofile']);
@@ -33,5 +44,9 @@ export class EditProfileComponent implements OnInit {
 
   onReset() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => true;
+  }
+
+  onProfilePictureChange() {
+    console.log('data');
   }
 }

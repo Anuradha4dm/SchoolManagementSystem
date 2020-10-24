@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Student } from 'src/app/models/student.model';
-import { StudentProfileService } from 'src/app/services/studentProfile.service';
-import { StudentPerformanceService } from '../student-preformance.service';
+import { StudentProfileService } from '../student-profile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -27,15 +26,13 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private studentProfileService: StudentProfileService,
-    private studentPerformanceService: StudentPerformanceService
+    private studentProfileService: StudentProfileService
   ) {}
 
   ngOnInit(): void {
-    this.studentProfileData = this.studentProfileService.getStudent();
-    this.studentPerformance = this.studentPerformanceService.getStudentPerfomance(
-      this.studentProfileData._id
-    );
+    // this.studentPerformance = this.studentPerformanceService.getStudentPerfomance(
+    //   this.studentProfileData._id
+    // );
   }
 
   toggleShowBtn() {
@@ -43,6 +40,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   onEditProfile() {
-    this.router.navigate(['edit-profile', '123']);
+    this.router.navigate(['edit-profile', 'sc_10291']);
   }
 }

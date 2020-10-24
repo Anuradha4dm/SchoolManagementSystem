@@ -26,8 +26,6 @@ import { ConfirmationDialogComponent } from './component/confirmation-dialog/con
 import { NotificationCloseDirective } from './directive/notification-close.directive';
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 import { FilterStudentPipe } from './component/teacher/filter-student.pipe';
-import { LoginComponent } from './component/login/login.component';
-import { SignupComponent } from './component/login/signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -47,8 +45,6 @@ import { SignupComponent } from './component/login/signup/signup.component';
     NotificationCloseDirective,
     EditProfileComponent,
     FilterStudentPipe,
-    LoginComponent,
-    SignupComponent,
   ],
   imports: [
     BrowserModule,
