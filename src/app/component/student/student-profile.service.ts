@@ -7,7 +7,7 @@ import { Student } from 'src/app/models/student.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentProfileService {
-  logInStudentId: string = 'ST_1';
+  logInStudentId: string = 'ST_2';
 
   studentPerformace: {
     prasent: string;
