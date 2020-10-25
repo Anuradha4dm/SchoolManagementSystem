@@ -10,7 +10,6 @@ export class HomelayoutComponent implements OnInit {
   logoUrl = "assets/img/logo.png";
   initialTab;
   otherTab;
-  errorMessage="User Name Invalid";
 
   constructor() { }
 
@@ -31,5 +30,4 @@ export class HomelayoutComponent implements OnInit {
     {display:'Downloads',path:'homepage-downloads'},
     {display:'About',path:'homepage-about'},
   ];
-
 }

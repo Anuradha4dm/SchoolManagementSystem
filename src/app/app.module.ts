@@ -27,6 +27,7 @@ import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { AboutComponent } from './component/homepage/about/about.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
+import { LoginComponent } from './component/login/login.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { DownloadsComponent } from './component/homepage/downloads/downloads.com
     StaffComponent,
     AboutComponent,
     DownloadsComponent,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
