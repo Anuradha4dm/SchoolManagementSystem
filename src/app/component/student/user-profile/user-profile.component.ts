@@ -15,6 +15,8 @@ export class UserProfileComponent implements OnInit {
   specialAwards: string[] = ['Winner 1', 'winner 2', 'winner 3'];
   numOfAbsents: number;
 
+  imagePath: string = '';
+
   absentDates: string[] = [
     new Date().toDateString(),
     new Date().toDateString(),
@@ -30,9 +32,14 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.studentPerformance = this.studentPerformanceService.getStudentPerfomance(
-    //   this.studentProfileData._id
-    // );
+    this.studentPerformance = this.studentProfileService
+      .getStudent(this.studentProfileService.logInStudentId)
+      .subscribe((result) => {
+        this.studentProfileData = result;
+
+        this.imagePath =
+          'http://localhost:3000/' + this.studentProfileData.imagePath;
+      });
   }
 
   toggleShowBtn() {
@@ -40,6 +47,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   onEditProfile() {
-    this.router.navigate(['edit-profile', 'sc_10291']);
+    this.router.navigate([
+      'edit-profile',
+      this.studentProfileService.logInStudentId,
+    ]);
   }
 }

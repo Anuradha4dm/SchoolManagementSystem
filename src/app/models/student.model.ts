@@ -5,7 +5,7 @@ export interface Student {
   lastName: string;
   email: string;
   username: string;
-  profilePicture?: Blob;
+  imagePath?: string;
   age: string;
   gender: string;
   classTeacher?: string;

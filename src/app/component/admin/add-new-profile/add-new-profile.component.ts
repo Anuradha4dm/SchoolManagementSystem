@@ -1,5 +1,5 @@
 import { ConstantPool } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AdminService } from '../admin.service';
 
@@ -9,15 +9,21 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./add-new-profile.component.css'],
 })
 export class AddNewProfileComponent implements OnInit {
-  profilePic: string = '../../../../assets/img/profile.png';
-  selectedFile: File = null;
+  @ViewChild('userid', { static: false }) userid: ElementRef;
+
   adminLogin: boolean = false;
   studentLogin: boolean = false;
   teacherLoginn: boolean = false;
   nonAcademinLogin: boolean = false;
 
+  //this is for generating the studnet id
   nextVal: string = '';
   generateid: boolean = true;
+
+  //for image setup
+  profilePic: any = '../../../../assets/img/profile.png';
+  selectedFile: File = null;
+  imageFileName: string = '';
 
   constructor(private adminService: AdminService) {}
 
@@ -32,7 +38,7 @@ export class AddNewProfileComponent implements OnInit {
     form.append('addressline1', formData.value.addressline1);
     form.append('addressline2', formData.value.addressline2);
     form.append('addressline3', formData.value.addressline3);
-    form.append('password', formData.value.userid);
+    form.append('password', formData.value.userid + 'pwd');
     form.append('age', formData.value.age);
     form.append('birthdate', formData.value.birthdate);
     form.append('classteacher', formData.value.classteacher);
@@ -46,7 +52,7 @@ export class AddNewProfileComponent implements OnInit {
     form.append('surname', formData.value.surname);
     form.append('userid', formData.value.userid);
     form.append('username', formData.value.username);
-    form.append('profilepicture', this.selectedFile);
+    form.append('imageData', this.selectedFile, this.imageFileName);
 
     this.adminService.postNewStudentData(form).subscribe(
       (result) => {
@@ -62,7 +68,20 @@ export class AddNewProfileComponent implements OnInit {
   }
 
   onChange(event) {
+    const studentId = this.userid.nativeElement.value;
     this.selectedFile = <File>event.target.files[0];
+    const extention = this.selectedFile.name.split('.')[1];
+
+    this.imageFileName = studentId + '.' + extention;
+
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (_event) => {
+      this.profilePic = reader.result;
+    };
   }
 
   getId() {

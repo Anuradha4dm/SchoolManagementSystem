@@ -11,7 +11,7 @@ import { StudentProfileService } from '../student-profile.service';
 export class EditProfileComponent implements OnInit {
   studentId: string;
   studentData: Student;
-  profilePic: string = '../assets/img/profile.png';
+  profilePic: any = '../assets/img/profile.png';
 
   constructor(
     private studentProfileService: StudentProfileService,
@@ -46,7 +46,14 @@ export class EditProfileComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => true;
   }
 
-  onProfilePictureChange() {
-    console.log('data');
+  onChange(event) {
+    console.log(event.target.files[0]);
+    const file = event.target.files[0];
+
+    var reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = (_event) => {
+      this.profilePic = reader.result;
+    };
   }
 }
