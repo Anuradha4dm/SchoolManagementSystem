@@ -2,3 +2,9 @@
   float: right;
   margin-right: 150px;
 }
+
+.my-success {
+  font-family: "Bebas Neue", cursive;
+  color: rgb(33, 211, 77);
+  font-size: 25px;
+}

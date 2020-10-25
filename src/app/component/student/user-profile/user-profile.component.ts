@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Student } from 'src/app/models/student.model';
+import { StudentProfileService } from '../student-profile.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -6,6 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
+  studentProfileData: Student;
+  studentPerformance;
+
   specialAwards: string[] = ['Winner 1', 'winner 2', 'winner 3'];
   numOfAbsents: number;
 
@@ -17,13 +23,23 @@ export class UserProfileComponent implements OnInit {
 
   showDate: boolean = false;
 
-  constructor() {
-    this.numOfAbsents = this.absentDates.length;
-  }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private studentProfileService: StudentProfileService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // this.studentPerformance = this.studentPerformanceService.getStudentPerfomance(
+    //   this.studentProfileData._id
+    // );
+  }
 
   toggleShowBtn() {
     this.showDate = !this.showDate;
+  }
+
+  onEditProfile() {
+    this.router.navigate(['edit-profile', 'sc_10291']);
   }
 }

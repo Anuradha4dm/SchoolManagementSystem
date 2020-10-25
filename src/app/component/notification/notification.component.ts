@@ -11,7 +11,7 @@ export class NotificationComponent implements OnInit {
   notifications: NotificationModel[] = [];
   selectedNotification: NotificationModel;
 
-  isClose: boolean = false;
+  isNotificationAvailable: boolean;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -19,6 +19,7 @@ export class NotificationComponent implements OnInit {
     this.route.data.subscribe((data: Data) => {
       this.notifications = data['notifications'];
     });
+    this.isNotificationAvailable = this.notifications.length > 0;
   }
 
   onSelectNotification(notification) {
@@ -26,6 +27,6 @@ export class NotificationComponent implements OnInit {
   }
 
   removeNotification() {
-    this.isClose = true;
+    this.selectedNotification = null;
   }
 }

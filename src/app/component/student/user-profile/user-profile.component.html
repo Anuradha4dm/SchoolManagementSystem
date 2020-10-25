@@ -18,62 +18,84 @@
                 src="https://images.unsplash.com/photo-1497316730643-415fac54a2af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"
                 alt=""
               />
-              <h4>User Name</h4>
+              <h4>{{ studentProfileData.username }}</h4>
             </a>
-            <p class="description">username:@_user name</p>
+            <p class="description">
+              username:{{ studentProfileData.username }}
+            </p>
           </div>
 
           <div class="card-container">
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons users_single-02"></i>
-                Surname: Amarasena
+                Surname: {{ studentProfileData.surname }}
               </h5>
             </div>
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons users_single-02"></i>
-                First Name: Damith
+                First Name: {{ studentProfileData.firstName }}
               </h5>
             </div>
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons users_single-02"></i>
-                Last Name: Anuradha
+                Last Name: {{ studentProfileData.lastName }}
               </h5>
             </div>
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons ui-1_email-85"></i>
-                Email: damith@gmail.com
+                Email: {{ studentProfileData.email }}
               </h5>
             </div>
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons objects_globe"></i>
-                Grade: 12-MATH
+                Grade: {{ studentProfileData.grade }}
               </h5>
             </div>
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons shopping_tag-content"></i>
-                Age: 18
+                Age: {{ studentProfileData.age }}
+              </h5>
+            </div>
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons shopping_tag-content"></i>
+                Gender: {{ studentProfileData.gender }}
+              </h5>
+            </div>
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons shopping_tag-content"></i>
+                Class Teacher: {{ studentProfileData.classTeacher }}
               </h5>
             </div>
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons ui-1_send"></i>
-                address:5D53,national housing Scheme,raddolugama
+                address:<br />{{ studentProfileData.addressLine1 }} ,<br />
+                {{ studentProfileData.addressLine2 }},<br />
+                {{ studentProfileData.addressLine3 }},<br />
+                {{ studentProfileData.city }}
               </h5>
             </div>
             <div class="card-content">
               <h5 class="text-des cont-text">
                 <i class="now-ui-icons tech_mobile"></i>
-                Mobile: 077134601
+                Mobile: {{ studentProfileData.mobile }}
               </h5>
             </div>
             <div class="btn-group my-btn-group" role="group" aria-label="">
-              <button href="#" type="button" class="btn btn-dark">
+              <button
+                href="#"
+                type="button"
+                class="btn btn-dark"
+                (click)="onEditProfile()"
+              >
                 Edit Profile
               </button>
               <button href="#" type="button" class="btn btn-dark">
@@ -108,7 +130,7 @@
           <div class="card-content">
             <h5 class="text-des cont-text">
               <i class="now-ui-icons location_bookmark"></i>
-              Presnets: 16
+              Presnets: {{ studentPerformance.prasent }}
             </h5>
             <button
               style="float: right"
@@ -124,7 +146,10 @@
               Absents:{{ numOfAbsents }}
             </h5>
             <div class="aword-content" *ngIf="showDate">
-              <h6 class="text-des cont-text" *ngFor="let date of absentDates">
+              <h6
+                class="text-des cont-text"
+                *ngFor="let date of studentPerformance.absent"
+              >
                 <i class="now-ui-icons clothes_tie-bow"></i>
                 {{ date }}
               </h6>
@@ -138,10 +163,10 @@
             <div class="aword-content">
               <h6
                 class="text-des cont-text"
-                *ngFor="let aword of specialAwards"
+                *ngFor="let award of studentPerformance.awards"
               >
                 <i class="now-ui-icons clothes_tie-bow"></i>
-                {{ aword }}
+                {{ award }}
               </h6>
             </div>
           </div>
