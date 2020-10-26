@@ -7,12 +7,12 @@ import { Subject } from 'rxjs';
 export class UserLogInService {
   errorEmitEvent = new Subject<{ error: string }>();
 
-  userAuthData: {
+  userAuthData = new Subject<{
     _id: string;
     authentication: boolean;
     logInAs: string;
     token: string;
-  };
+  }>();
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -27,7 +27,7 @@ export class UserLogInService {
 
       .subscribe(
         (result) => {
-          this.userAuthData = result;
+          this.userAuthData.next(result);
           this.router.navigate['userprofile'];
         },
         ({ error }) => {

@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="userLogInData">
   <div class="sidebar" data-color="red">
     <app-siderbar></app-siderbar>
   </div>
@@ -6,3 +6,4 @@
     <router-outlet></router-outlet>
   </div>
 </div>
+<app-homelayout *ngIf="!userLogInData"></app-homelayout>
