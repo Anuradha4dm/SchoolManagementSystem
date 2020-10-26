@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'SchoolMangementSystem';
-  userLogged = false;
+  userLogged = true;
 }
