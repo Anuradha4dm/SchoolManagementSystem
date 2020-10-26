@@ -52,6 +52,12 @@ export class SiderbarComponent implements OnInit {
       icon: 'files_single-copy-04',
       class: '',
     },
+    {
+      path: '/teacher-profile',
+      title: 'Teacher Profile',
+      icon: 'files_single-copy-04',
+      class: '',
+    },
   ];
 
   constructor() {}
