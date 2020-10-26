@@ -7,7 +7,7 @@ import { Student } from 'src/app/models/student.model';
 
 @Injectable({ providedIn: 'root' })
 export class StudentProfileService {
-  logInStudentId: string = 'sc_10291';
+  logInStudentId: string = 'ST_1';
 
   studentPerformace: {
     prasent: string;
@@ -40,8 +40,11 @@ export class StudentProfileService {
       );
   }
 
-  updateStudentProfile(id: string, newData: Student) {
-    //new to send data to database and update
+  updateStudentProfile(newData) {
+    return this.httpClient.post(
+      'http://localhost:3000/student/edit-profile/' + this.logInStudentId,
+      newData
+    );
   }
 
   getStudentId() {}

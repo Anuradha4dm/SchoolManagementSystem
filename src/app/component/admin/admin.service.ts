@@ -5,10 +5,16 @@ import { Injectable } from '@angular/core';
 export class AdminService {
   constructor(private httpClient: HttpClient) {}
 
-  postNewStudentData(submissionData: FormData) {
+  postNewStudentData(submissionData) {
     return this.httpClient.post(
-      'http://localhost:3000/admin/new-student-add',
+      'http://localhost:3000/admin/new-student-profile',
       submissionData
+    );
+  }
+
+  getNewStudentId() {
+    return this.httpClient.get<{ fetch: Boolean; Id: string }>(
+      'http://localhost:3000/admin/get-new-student-id'
     );
   }
 }

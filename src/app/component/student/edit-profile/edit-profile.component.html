@@ -4,7 +4,7 @@
     <div class="col-xl-12">
       <div class="card">
         <div class="card-header">
-          <h1 class="title">Add New Profile</h1>
+          <h1 class="title">Edit User Profile</h1>
         </div>
         <div class="card-body">
           <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
@@ -72,11 +72,12 @@
                   <label>Profile Picture</label>
                   <input
                     type="file"
-                    name="profilepicture"
-                    id="pic"
-                    class="form-control"
+                    name="imageData"
+                    class="form-control btn"
                     accept="image/*"
-                    [ngModel]="studentData.profilePicture"
+                    ngModel
+                    #imageRef
+                    (change)="onChange($event)"
                   />
                 </div>
               </div>
