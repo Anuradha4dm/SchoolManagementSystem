@@ -21,12 +21,7 @@ export class SiderbarComponent implements OnInit {
       icon: 'users_single-02',
       class: '',
     },
-    {
-      path: '/edit-profile',
-      title: 'Edit Profile',
-      icon: 'education_agenda-bookmark',
-      class: '',
-    },
+
     {
       path: '/student-list',
       title: 'Student List',
@@ -42,12 +37,18 @@ export class SiderbarComponent implements OnInit {
     {
       path: '/notification',
       title: 'Notification',
-      icon: 'gestures_tap-01',
+      icon: 'education_agenda-bookmark',
       class: '',
     },
     {
       path: '/addsubjects',
       title: 'Add Subjects',
+      icon: 'files_single-copy-04',
+      class: '',
+    },
+    {
+      path: '/add-new-profile',
+      title: 'New Profile',
       icon: 'files_single-copy-04',
       class: '',
     },

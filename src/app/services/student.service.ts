@@ -1,67 +1,10 @@
-import { ElementSchemaRegistry } from '@angular/compiler';
-import { Student } from '../models/student.model';
+import { Injectable } from '@angular/core';
 
+@Injectable({ providedIn: 'root' })
 export class StudentService {
-  private prasentStudentList: string[] = [];
-  private absendStudentList: string[] = [];
-
-  private students: Student[] = [
-    new Student(
-      '123',
-      'surname',
-      'name1',
-      'name2',
-      'email@gamail.com',
-      'username1',
-      '12',
-      'male',
-      '9',
-      'addressline1',
-      'addressline2',
-      'addressline3',
-      'city',
-      '077123123',
-      false
-    ),
-    new Student(
-      '123',
-      'surname2',
-      'name12',
-      'name22',
-      'email@gamail.com',
-      'username1',
-      '12',
-      'male',
-      '9',
-      'addressline12',
-      'addressline22',
-      'addressline32',
-      'city',
-      '077123123',
-      false
-    ),
-  ];
+  private studentList: {};
 
   constructor() {}
-
-  addStudentToPresentList(id: string) {
-    this.prasentStudentList.push(id);
-    console.log(this.prasentStudentList);
-  }
-  removeStudentInPresentList(id: string) {
-    this.prasentStudentList.splice(this.prasentStudentList.indexOf(id), 1);
-    console.log(this.prasentStudentList);
-  }
-
-  addStudentToAbsentList(id: string) {
-    this.absendStudentList.push(id);
-    console.log(this.absendStudentList);
-  }
-
-  removeStudentInAbsentList(id: string) {
-    this.prasentStudentList.splice(this.prasentStudentList.indexOf(id), 1);
-    console.log(this.absendStudentList);
-  }
 
   getStudentListForAttendence() {
     let studentList: {
@@ -113,4 +56,6 @@ export class StudentService {
 
     return studentList;
   }
+
+  setStudentStateOnline(_id: string, state: boolean) {}
 }

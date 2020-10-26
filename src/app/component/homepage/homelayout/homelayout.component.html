@@ -1,90 +1,72 @@
-<div class="card bg-secondary">
-    <!--School logo are-->
-    <div class="logodiv">
-        <img class="logo" src={{logoUrl}}>
-    </div>  
-    
-    <!--Image slideshow start-->
-    <div class="card-header bg-dark">
-                
-        <div id="myslide" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myslide" data-slide-to="0" class="active"></li>
-                <li data-target="#myslide" data-slide-to="1"></li>
-                <li data-target="#myslide" data-slide-to="2"></li>
-            </ol>
+<div class="card bg-success">
+  <!--School logo here-->
+  <div class="logodiv">
+    <img class="logo" src="{{ logoUrl }}" />
+  </div>
 
-            <div class="carousel-inner slideimage">
-                 <img  class="carousel-item active" src="assets/img/bg5.jpg" alt="Slide1"/>
-                 <img class="carousel-item" src="assets/img/bg6.jpg" alt="Slide2"/>
-                 <img class="carousel-item" src="assets/img/header.jpg" alt="Slide3"/>
-            </div>
+  <!--Image slideshow start-->
+  <div class="card-header">
+    <div id="myslide" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myslide" data-slide-to="0" class="active"></li>
+        <li data-target="#myslide" data-slide-to="1"></li>
+        <li data-target="#myslide" data-slide-to="2"></li>
+      </ol>
 
+      <div class="carousel-inner">
+        <img
+          class="carousel-item slideimage active"
+          src="assets/img/bg5.jpg"
+          alt="Slide1"
+        />
+        <img
+          class="carousel-item slideimage"
+          src="assets/img/bg6.jpg"
+          alt="Slide2"
+        />
+        <img
+          class="carousel-item slideimage"
+          src="assets/img/header.jpg"
+          alt="Slide3"
+        />
+      </div>
 
-            <a class="carousel-control-prev" href="#myslide" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
+      <a class="carousel-control-prev" href="#myslide" data-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
 
-            <a class="carousel-control-next" href="#myslide" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
-
-        </div>
+      <a class="carousel-control-next" href="#myslide" data-slide="next">
+        <span class="carousel-control-next-icon"></span>
+      </a>
     </div>
-    <br>
+  </div>
+  <br />
 
-    <!--Navigation panel-->
-    <div class="card-block bg-light">
-        <ul class="nav nav-tabs justify-content-center">
-            <li *ngFor="let item of navItems" class="nav-item">
-                <a routerLink={{item.path}} class="nav-link" (click)="tabActivate()">{{item.display}}</a>
-            </li>
-            <li class="nav-item">
-                <a href="" data-target="#loginmodal" data-toggle="modal" class="nav-link" (click)="initialTab=true">Login</a>
-            </li>
-        </ul>
-    </div>
+  <!--Navigation panel-->
+  <div class="card-block bg-dark">
+    <ul class="nav nav-tabs justify-content-center">
+      <li *ngFor="let item of navItems" class="nav-item">
+        <a
+          routerLink="{{ item.path }}"
+          class="nav-link"
+          (click)="tabActivate()"
+          >{{ item.display }}</a
+        >
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="login" >Login</a>
+      </li>
+    </ul>
+  </div>
 
-    <!--Homepage body content-->
-    <div class="card-body bg-light text-center scroll">
-        <app-home *ngIf="initialTab"></app-home>
-        <router-outlet *ngIf="otherTab"></router-outlet>
-    </div>
+  <!--Homepage body content-->
+  <div class="card-body text-center scroll bg-secondary">
+    <app-home *ngIf="initialTab"></app-home>
+    <router-outlet *ngIf="otherTab"></router-outlet>
+  </div>
 
-    <!--Homepage footer area-->
-    <div class="card-footer text-center">
-        <h1>Footer Here</h1>
-    </div>
-    
-</div>
-
-<!--Login window development-->
-<div class="modal fade" id="loginmodal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h1>Login</h1>
-                <button class="close" data-dismiss="modal">x</button>
-            </div>
-
-            <div class="modal-body">
-                <div class="card card-dark">
-                    <div class="card-body bg-dark">
-                        <form>
-                            <div class="form-group">
-                                <label for="#username">Username</label>
-                                <input class="form-control" type="text" id="username">
-                            </div>
-                            <div class="form-group">
-                                <label for="#password">Password</label>
-                                <input class="form-control" type="password" id="password">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
+  <!--Homepage footer area-->
+  <div class="card-footer text-center">
+    <h1>Footer Here</h1>
+  </div>
 </div>

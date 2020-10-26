@@ -9,7 +9,8 @@
 }
 
 .slideimage{
-    height: 450px;
+    height: 75vh;
+    object-fit: fill;
 }
 
 .scroll{

@@ -7,16 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomelayoutComponent implements OnInit {
 
+  logoUrl = "assets/img/logo.png";
+  initialTab;
+  otherTab;
+
   constructor() { }
 
   ngOnInit(): void {
     this.initialTab = true;
     this.otherTab =false;
   }
-
-  logoUrl = "assets/img/logo.png";
-  initialTab;
-  otherTab;
 
   tabActivate(){
     this.initialTab = false;
@@ -30,5 +30,4 @@ export class HomelayoutComponent implements OnInit {
     {display:'Downloads',path:'homepage-downloads'},
     {display:'About',path:'homepage-about'},
   ];
-
 }
