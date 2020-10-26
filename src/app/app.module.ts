@@ -22,10 +22,19 @@ import { GetClassStudentListResolver } from './component/student/student-share-c
 import { GetStudentListForAttendenceResolver } from './component/student/student-share-components/get-student-list-resolver.service';
 import { StudentAttendenceComponent } from './component/teacher/student-attendence/student-attendence.component';
 import { NotificatinHiddenDirective } from './directive/notificatin-hidden.directive';
+
+import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
+import { HomeComponent } from './component/homepage/home/home.component';
+import { StaffComponent } from './component/homepage/staff/staff.component';
+import { AboutComponent } from './component/homepage/about/about.component';
+import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
+import { LoginComponent } from './component/login/login.component';
+
 import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
 import { NotificationCloseDirective } from './directive/notification-close.directive';
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 import { FilterStudentPipe } from './component/teacher/filter-student.pipe';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +50,14 @@ import { FilterStudentPipe } from './component/teacher/filter-student.pipe';
     AddSubjectsComponent,
     MarkPresentDirective,
     NotificatinHiddenDirective,
+
+    HomelayoutComponent,
+    HomeComponent,
+    StaffComponent,
+    AboutComponent,
+    DownloadsComponent,
+    LoginComponent,
+
     ConfirmationDialogComponent,
     NotificationCloseDirective,
     EditProfileComponent,
@@ -55,6 +72,7 @@ import { FilterStudentPipe } from './component/teacher/filter-student.pipe';
     BrowserAnimationsModule,
     NgbModule,
     HttpClientModule,
+
   ],
   providers: [
     NotificationResolver,
