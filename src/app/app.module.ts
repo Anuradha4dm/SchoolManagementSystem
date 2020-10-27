@@ -20,6 +20,7 @@ import { TeacherModule } from './component/teacher/teacher.module';
 import { NotificationModule } from './component/notification/notification.module';
 import { HomePageModule } from './component/homepage/homepage.module';
 import { CommonModule } from '@angular/common';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,8 @@ import { CommonModule } from '@angular/common';
     SiderbarComponent,
 
     ConfirmationDialogComponent,
+
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
