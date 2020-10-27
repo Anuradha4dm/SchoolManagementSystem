@@ -1,19 +1,21 @@
 <div class="main-content">
     <div class="card">
+        <!--Leave stats here-->
         <div class="card-header">
             <div class="row">
                 <div class="col bg-success card">
-                    <h4 class="card-title">Available Leaves</h4>
-                    <span class="label label-dark">hello</span>
+                    <h4 class="card-title text-center">Available Leaves</h4>
+                    <p class="badge-pill badge-dark text-center">{{leaveAvailable}}</p>
                 </div>
 
                 <div class="col bg-danger card">
-                    <h4 class="card-title">Leaves Taken</h4>
-                    <span class="label label-dark">hello</span>
+                    <h4 class="card-title text-center">Leaves Taken</h4>
+                    <p class="badge-pill badge-dark text-center">{{leaveTaken}}</p>
                 </div>
             </div>
         </div>
 
+        <!--Leave application here -->
         <div class="card-body">
             
             <form>
@@ -48,11 +50,21 @@
                 </div>
 
                 <div class="form-group pull-right">
-                    <button type="submit" class="btn btn-success">Send</button>
+                    <button type="button" class="btn btn-success">Send</button>
                     <button type="reset" class="btn btn-danger">Cancel</button>
                 </div>
             </form>
-
         </div>
     </div>
+
+    <!--Alert messages here>
+    <div class="alert alert-dismissible alert-warning">
+        <h5>Your request has been sent successfully !!</h5>
+        <button class="close" data-dismiss="alert">x</button>
+    </div>
+
+    <div class="alert alert-dissmisible alert-danger">
+        <h5>Your request could not be sent !!</h5>
+        <button class="close" data-dismiss="alert">x</button>
+    </div-->
 </div>

@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaverequestComponent implements OnInit {
 
+  leaveTaken = 0;
+  leaveAvailable = 3;
+  ads = "hidden";
   constructor() { }
 
   ngOnInit(): void {

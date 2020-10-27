@@ -32,7 +32,7 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
-  { path: 'addsubjects', component: AddSubjectsComponent },
+  { path: 'addsubjects', component: LeaverequestComponent },
   {
     path: 'notification',
     component: NotificationComponent,
