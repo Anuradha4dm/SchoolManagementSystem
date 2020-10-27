@@ -15,7 +15,8 @@ import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
 import { AboutComponent } from './component/homepage/about/about.component';
-import { LoginComponent } from './component/login/login.component';
+
+import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -35,12 +36,15 @@ const routes: Routes = [
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
-  { path: 'login', component: LoginComponent },
+
   { path: 'edit-profile', component: AddNewProfileComponent },
-  {path: 'homepage-home',component: HomeComponent},
-  {path: 'homepage-staff',component: StaffComponent},
-  {path: 'homepage-about',component: AboutComponent},
-  {path: 'homepage-downloads',component: DownloadsComponent},
+  { path: 'homepage-home', component: HomeComponent },
+  { path: 'homepage-staff', component: StaffComponent },
+  { path: 'homepage-about', component: AboutComponent },
+  { path: 'homepage-downloads', component: DownloadsComponent },
+
+  { path: 'edit-profile/:id', component: EditProfileComponent },
+  { path: 'add-new-profile', component: AddNewProfileComponent },
 ];
 
 @NgModule({
