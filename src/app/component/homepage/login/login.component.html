@@ -10,12 +10,12 @@
 <div class="modal fade" id="logindemo">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
+      <div class="modal-header bg-danger">
         <h1>Login</h1>
         <button class="close" data-dismiss="modal">x</button>
       </div>
 
-      <div class="modal-body bg-dark">
+      <div class="modal-body loginBack">
         <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
           <div class="form-group">
             <label for="username">Username</label>
@@ -44,7 +44,7 @@
       <a routerLink="" class="text-center">Reset Password</a>
       <br />
 
-      <div class="card-footer bg-danger text-center" *ngIf="errorMessage != ''">
+      <div class="card-footer bg-warning text-center" *ngIf="errorMessage != ''">
         <p class="card-text">{{ errorMessage }}</p>
       </div>
     </div>
