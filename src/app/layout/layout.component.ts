@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserLogInService } from '../component/login/user-login.service';
+import { UserLogInService } from '../component/homepage/login/user-login.service';
 
 @Component({
   selector: 'app-layout',
@@ -12,8 +12,8 @@ export class LayoutComponent implements OnInit {
   userLogInData: boolean = true;
 
   ngOnInit(): void {
-    this.userLogInService.userAuthData.subscribe(({ authentication }) => {
-      this.userLogInData = authentication;
-    });
+    // this.userLogInService.userAuthData.subscribe(({ Authentication }) => {
+    //   this.userLogInData = Authentication;
+    // });
   }
 }

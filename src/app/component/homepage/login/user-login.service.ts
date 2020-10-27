@@ -7,12 +7,14 @@ import { Subject } from 'rxjs';
 export class UserLogInService {
   errorEmitEvent = new Subject<{ error: string }>();
 
-  userAuthData = new Subject<{
+  logInUserData: {
     _id: string;
     authentication: boolean;
     logInAs: string;
     token: string;
-  }>();
+  } = null;
+
+  userAuthData = new Subject<{ Authentication: boolean }>();
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -27,14 +29,15 @@ export class UserLogInService {
 
       .subscribe(
         (result) => {
-          this.userAuthData.next(result);
-          this.router.navigate['userprofile'];
+          this.logInUserData = result;
+          this.userAuthData.next({ Authentication: result.authentication });
         },
         ({ error }) => {
           this.errorEmitEvent.next({ error: error.message });
         },
         () => {
           console.log('complete');
+          this.router.navigateByUrl('/userprofile');
         }
       );
   }
