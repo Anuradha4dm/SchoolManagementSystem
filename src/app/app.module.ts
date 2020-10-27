@@ -24,6 +24,7 @@ import { TeacherModule } from './component/teacher/teacher.module';
 import { NotificationModule } from './component/notification/notification.module';
 import { HomePageModule } from './component/homepage/homepage.module';
 import { LoginComponent } from './component/login/login.component';
+import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { LoginComponent } from './component/login/login.component';
     SiderbarComponent,
     LoginComponent,
     ConfirmationDialogComponent,
+    LeaverequestComponent,
   ],
   imports: [
     BrowserModule,

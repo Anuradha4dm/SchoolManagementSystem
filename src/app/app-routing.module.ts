@@ -19,6 +19,7 @@ import { LoginComponent } from './component/login/login.component';
 
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component';
+import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -47,7 +48,7 @@ const routes: Routes = [
 
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
-  { path: 'teacher-profile', component: TeacherProfileComponent },
+  { path: 'teacher-profile', component: LeaverequestComponent },
 ];
 
 @NgModule({
