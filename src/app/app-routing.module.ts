@@ -18,6 +18,8 @@ import { DownloadsComponent } from './component/homepage/downloads/downloads.com
 import { AboutComponent } from './component/homepage/about/about.component';
 
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ViewResultComponent } from './component/student/view-result/view-result.component';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -37,7 +39,8 @@ const routes: Routes = [
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
-
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'view-result', component: ViewResultComponent },
   { path: 'edit-profile', component: AddNewProfileComponent },
   { path: 'homepage-home', component: HomeComponent },
   { path: 'homepage-staff', component: StaffComponent },
