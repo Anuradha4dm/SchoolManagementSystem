@@ -38,12 +38,7 @@ const routes: Routes = [
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
-
   { path: 'edit-profile', component: AddNewProfileComponent },
-  { path: 'homepage-home', component: HomeComponent },
-  { path: 'homepage-staff', component: StaffComponent },
-  { path: 'homepage-about', component: AboutComponent },
-  { path: 'homepage-downloads', component: DownloadsComponent },
 
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },

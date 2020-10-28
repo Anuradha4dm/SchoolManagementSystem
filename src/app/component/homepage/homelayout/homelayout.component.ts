@@ -7,26 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomelayoutComponent implements OnInit {
   logoUrl = 'assets/img/logo.png';
-  initialTab;
-  otherTab;
+  tabName="Home";
+  tabs = [{name:'Home'},{name:'Academic Staff'},{name:'Downloads'},{name:'About'}];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.initialTab = true;
-    this.otherTab = false;
   }
 
-  tabActivate() {
-    this.initialTab = false;
-    this.otherTab = true;
+  tabActivate(tabName) {
+    this.tabName = tabName;
   }
 
-  //Homepage navigation details here
-  navItems = [
-    { display: 'Home', path: 'homepage-home' },
-    { display: 'Academic Staff', path: 'homepage-staff' },
-    { display: 'Downloads', path: 'homepage-downloads' },
-    { display: 'About', path: 'homepage-about' },
-  ];
 }

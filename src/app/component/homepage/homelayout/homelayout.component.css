@@ -16,4 +16,5 @@
 .scroll{
     height: 500px;
     overflow-x: scroll;
+    cursor: default;
 }

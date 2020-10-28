@@ -1,4 +1,4 @@
-<div class="card bg-success">
+<div class="card bg-danger">
   <!--School logo are-->
   <div class="logodiv">
     <img class="logo" src="{{ logoUrl }}" />
@@ -45,14 +45,10 @@
   <!--Navigation panel-->
   <div class="card-block bg-dark">
     <ul class="nav nav-tabs justify-content-center">
-      <li *ngFor="let item of navItems" class="nav-item">
-        <a
-          routerLink="{{ item.path }}"
-          class="nav-link"
-          (click)="tabActivate()"
-          >{{ item.display }}</a
-        >
+      <li class="nav-item" *ngFor="let tab of tabs">
+        <a role="button" class="nav-link" (click)="tabActivate(tab.name)">{{tab.name}}</a>
       </li>
+  
       <li class="nav-item">
         <app-login></app-login>
       </li>
@@ -60,9 +56,11 @@
   </div>
 
   <!--Homepage body content-->
-  <div class="card-body text-center scroll bg-secondary">
-    <app-home *ngIf="initialTab"></app-home>
-    <router-outlet *ngIf="otherTab"></router-outlet>
+  <div class="card-body text-center scroll bg-secondary" [ngSwitch]="tabName">
+    <app-home *ngSwitchCase="'Home'"></app-home>
+    <app-staff *ngSwitchCase="'Academic Staff'"></app-staff>
+    <app-downloads *ngSwitchCase="'Downloads'"></app-downloads>
+    <app-about *ngSwitchCase="'About'"></app-about>
   </div>
 
   <!--Homepage footer area-->
