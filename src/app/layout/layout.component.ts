@@ -9,7 +9,7 @@ import { UserLogInService } from '../component/homepage/login/user-login.service
 export class LayoutComponent implements OnInit {
   constructor(private userLogInService: UserLogInService) {}
 
-  userLogInData: boolean = false;
+  userLogInData: boolean = true;
 
   ngOnInit(): void {
     this.userLogInService.userAuthData.subscribe(({ Authentication }) => {

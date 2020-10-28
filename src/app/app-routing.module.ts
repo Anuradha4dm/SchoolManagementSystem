@@ -32,17 +32,18 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
-  { path: 'addsubjects', component: LeaverequestComponent },
+  { path: 'addsubjects', component: AddSubjectsComponent },
   {
     path: 'notification',
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
   { path: 'edit-profile', component: AddNewProfileComponent },
-
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
-  { path: 'teacher-profile', component: LeaverequestComponent },
+
+  { path: 'madmax-tprofile', component: TeacherProfileComponent },
+  { path: 'madmax-leave', component: LeaverequestComponent },
 ];
 
 @NgModule({

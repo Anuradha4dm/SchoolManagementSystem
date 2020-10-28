@@ -115,6 +115,18 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
+        {
+          path: '/madmax-tprofile',
+          title: 'madmax-tprofile',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/madmax-leave',
+          title: 'madax-leave',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
       ];
     }
 
