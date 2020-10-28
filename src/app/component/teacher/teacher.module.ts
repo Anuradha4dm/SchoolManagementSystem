@@ -5,9 +5,11 @@ import { MarkPresentDirective } from 'src/app/directive/mark-present.directive';
 import { FilterStudentPipe } from './filter-student.pipe';
 import { StudentAttendenceComponent } from './student-attendence/student-attendence.component';
 import { StudentListComponent } from './student-list/student-list.component';
+import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule,MatExpansionModule],
   exports: [
     StudentListComponent,
     StudentAttendenceComponent,
@@ -19,6 +21,7 @@ import { StudentListComponent } from './student-list/student-list.component';
     StudentAttendenceComponent,
     MarkPresentDirective,
     FilterStudentPipe,
+    TeacherProfileComponent,
   ],
   providers: [],
 })

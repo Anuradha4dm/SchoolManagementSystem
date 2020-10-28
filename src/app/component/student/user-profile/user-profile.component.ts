@@ -9,7 +9,7 @@ import { StudentProfileService } from '../student-profile.service';
   styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-  studentProfileData: Student;
+  studentProfileData: Student = null;
   studentPerformance;
 
   specialAwards: string[] = ['Winner 1', 'winner 2', 'winner 3'];

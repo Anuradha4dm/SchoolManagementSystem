@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-import { LoginComponent } from '../login/login.component';
+import { LoginComponent } from './login/login.component';
 
 import { AboutComponent } from './about/about.component';
 import { DownloadsComponent } from './downloads/downloads.component';
@@ -18,7 +18,7 @@ import { StaffComponent } from './staff/staff.component';
     HomelayoutComponent,
     HomeComponent,
     AboutComponent,
-
+    LoginComponent,
     DownloadsComponent,
   ],
   declarations: [
@@ -26,6 +26,7 @@ import { StaffComponent } from './staff/staff.component';
     HomelayoutComponent,
     HomeComponent,
     AboutComponent,
+    LoginComponent,
     DownloadsComponent,
   ],
   providers: [],

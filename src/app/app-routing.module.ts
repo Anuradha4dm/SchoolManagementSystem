@@ -15,7 +15,12 @@ import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
 import { AboutComponent } from './component/homepage/about/about.component';
-import { LoginComponent } from './component/login/login.component';
+
+import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
+import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component';
+import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ViewResultComponent } from './component/student/view-result/view-result.component';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -29,18 +34,23 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
-  { path: 'addsubjects', component: AddSubjectsComponent },
+  { path: 'addsubjects', component: LeaverequestComponent },
   {
     path: 'notification',
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
-  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'view-result', component: ViewResultComponent },
   { path: 'edit-profile', component: AddNewProfileComponent },
-  {path: 'homepage-home',component: HomeComponent},
-  {path: 'homepage-staff',component: StaffComponent},
-  {path: 'homepage-about',component: AboutComponent},
-  {path: 'homepage-downloads',component: DownloadsComponent},
+  { path: 'homepage-home', component: HomeComponent },
+  { path: 'homepage-staff', component: StaffComponent },
+  { path: 'homepage-about', component: AboutComponent },
+  { path: 'homepage-downloads', component: DownloadsComponent },
+
+  { path: 'edit-profile/:id', component: EditProfileComponent },
+  { path: 'add-new-profile', component: AddNewProfileComponent },
+  { path: 'teacher-profile', component: LeaverequestComponent },
 ];
 
 @NgModule({
