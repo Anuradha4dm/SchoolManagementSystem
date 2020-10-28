@@ -44,7 +44,10 @@
       <a routerLink="" class="text-center">Reset Password</a>
       <br />
 
-      <div class="card-footer bg-warning text-center" *ngIf="errorMessage != ''">
+      <div
+        class="card-footer bg-warning text-center"
+        *ngIf="errorMessage != ''"
+      >
         <p class="card-text">{{ errorMessage }}</p>
       </div>
     </div>
