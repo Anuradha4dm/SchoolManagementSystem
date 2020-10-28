@@ -4,10 +4,12 @@ import { map } from 'rxjs/operators';
 
 //import user define modules
 import { Student } from 'src/app/models/student.model';
+import { UserLogInService } from '../homepage/login/user-login.service';
 
 @Injectable({ providedIn: 'root' })
 export class StudentProfileService {
-  logInStudentId: string = 'ST_1';
+  logInStudentId: string = null; //this need to be taken form the log in compoentn
+  loginStudentData: Student = null;
 
   studentPerformace: {
     prasent: string;
@@ -19,7 +21,12 @@ export class StudentProfileService {
     awards: ['winner 1', 'winner 2'],
   };
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(
+    private httpClient: HttpClient,
+    private userLoginService: UserLogInService
+  ) {
+    this.logInStudentId = this.userLoginService.logInUserData._id;
+  }
 
   getStudentPerfomance(id: string) {
     //get Data form the database
@@ -44,6 +51,20 @@ export class StudentProfileService {
     return this.httpClient.post(
       'http://localhost:3000/student/edit-profile/' + this.logInStudentId,
       newData
+    );
+  }
+
+  getSelectSubjectInfomation(subjectname: string, grade: string) {
+    return this.httpClient.get<{
+      subjectName: string;
+      subjectDes: string;
+      teacherName: string;
+      imagePath: string;
+    }>(
+      'http://localhost:3000/student/getsubjectinfo/' +
+        subjectname +
+        '/' +
+        grade
     );
   }
 

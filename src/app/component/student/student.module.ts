@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { AddSubjectsComponent } from './add-subjects/add-subjects.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { AddSubjectResolverService } from './student-resolvers/add-subject-resolver.service';
 import { ViewResultComponent } from './view-result/view-result.component';
 
 @NgModule({

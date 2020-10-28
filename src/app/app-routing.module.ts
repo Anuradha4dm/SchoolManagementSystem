@@ -20,6 +20,7 @@ import { AboutComponent } from './component/homepage/about/about.component';
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ViewResultComponent } from './component/student/view-result/view-result.component';
+import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -33,7 +34,11 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
-  { path: 'addsubjects', component: AddSubjectsComponent },
+  {
+    path: 'addsubjects',
+    component: AddSubjectsComponent,
+    resolve: { student: AddSubjectResolverService },
+  },
   {
     path: 'notification',
     component: NotificationComponent,

@@ -32,7 +32,7 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.studentPerformance = this.studentProfileService
+    this.studentProfileService
       .getStudent(this.studentProfileService.logInStudentId)
       .subscribe((result) => {
         this.studentProfileData = result;
