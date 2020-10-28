@@ -21,15 +21,14 @@ import { NotificationModule } from './component/notification/notification.module
 import { HomePageModule } from './component/homepage/homepage.module';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     SiderbarComponent,
-
     ConfirmationDialogComponent,
-
     DashboardComponent,
   ],
   imports: [
@@ -41,6 +40,7 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
     NgbModule,
+    ChartsModule,
     HttpClientModule,
     StudentModule,
     AdminModule,

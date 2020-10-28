@@ -4,11 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { AddSubjectsComponent } from './add-subjects/add-subjects.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ViewResultComponent } from './view-result/view-result.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule],
-  exports: [AddSubjectsComponent, EditProfileComponent],
-  declarations: [AddSubjectsComponent, EditProfileComponent],
+  exports: [AddSubjectsComponent, EditProfileComponent, ViewResultComponent],
+  declarations: [
+    AddSubjectsComponent,
+    EditProfileComponent,
+    ViewResultComponent,
+  ],
   providers: [],
 })
 export class StudentModule {}
