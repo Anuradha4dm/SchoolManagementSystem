@@ -21,6 +21,8 @@ import { EditProfileComponent } from './component/student/edit-profile/edit-prof
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ViewResultComponent } from './component/student/view-result/view-result.component';
 import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
+import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
+import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -38,6 +40,11 @@ const routes: Routes = [
     path: 'addsubjects',
     component: AddSubjectsComponent,
     resolve: { student: AddSubjectResolverService },
+  },
+  {
+    path: 'viewsubjects',
+    component: ViewSubjectsComponent,
+    resolve: { subjectList: GetRegisteredSubjectList },
   },
   {
     path: 'notification',

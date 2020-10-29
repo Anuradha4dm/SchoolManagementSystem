@@ -84,4 +84,11 @@ export class StudentProfileService {
         console.log(data);
       });
   }
+
+  getRegisteredSubjectList() {
+    return this.httpClient.get<{
+      date: string;
+      dataArray: [{ subjectName: string; teacherId: string }];
+    }>('http://localhost:3000/student/get-subject-list/' + this.logInStudentId);
+  }
 }
