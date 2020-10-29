@@ -56,6 +56,7 @@ export class StudentProfileService {
 
   getSelectSubjectInfomation(subjectname: string, grade: string) {
     return this.httpClient.get<{
+      subjectId: number;
       subjectName: string;
       subjectDes: string;
       teacherName: string;
@@ -71,4 +72,16 @@ export class StudentProfileService {
   getStudentId() {}
 
   addNewProfile(newProfile: Student) {}
+
+  addSubjectsPrimary(postData: {
+    studentid: string;
+    grade: string;
+    optional1: string;
+  }) {
+    this.httpClient
+      .post('http://localhost:3000/student/addsubjectprimary', postData)
+      .subscribe((data) => {
+        console.log(data);
+      });
+  }
 }

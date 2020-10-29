@@ -30,7 +30,7 @@
                     <td class="text-left">
                       <input
                         type="button"
-                        [value]="subject"
+                        [value]="subject | titlecase"
                         class="form-control"
                         placeholder="Username"
                         style="cursor: pointer"
@@ -38,16 +38,16 @@
                       />
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="isOptionalList1">
                     <td>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input
                             class="form-check-input"
                             type="checkbox"
-                            name="religion_check"
+                            name="optional_1"
                             [ngModel]="true"
-                            #re_check="ngModel"
+                            required
                           />
 
                           <span class="form-check-sign"></span>
@@ -58,15 +58,20 @@
                       <select
                         name="religon"
                         class="form-control"
-                        [ngModel]="'buddhist'"
+                        ngModel
+                        #elRef1
+                        (change)="onChangeListItemOption1(elRef1.value)"
                       >
-                        <option value="buddhist">Buddhist</option>
-                        <option value="catalic">Catalic</option>
-                        <option value="roman_cathalic">Roman Cathalic</option>
+                        <option
+                          *ngFor="let opSub of optionalList1"
+                          [value]="opSub"
+                        >
+                          {{ opSub | titlecase }}
+                        </option>
                       </select>
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="isOptionalList2">
                     <td>
                       <div class="form-check">
                         <label class="form-check-label">
@@ -86,6 +91,8 @@
                         class="form-control"
                         id=""
                         [ngModel]="'esten_music'"
+                        #elRef
+                        (change)="onChangeListItemOption2(elRef.value)"
                       >
                         <option value="esten_music">Easten Music</option>
                         <option value="wester_music">Western Music</option>
@@ -94,7 +101,7 @@
                       </select>
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="isOptionalList3">
                     <td>
                       <div class="form-check">
                         <label class="form-check-label">
@@ -113,27 +120,22 @@
                         name="optional2"
                         class="form-control"
                         id=""
-                        [ngModel]="'commerse'"
+                        ngModel
+                        (change)="onChangeListItemOption2(elRef.value)"
                       >
                         <option value="commerse">Commerse</option>
-                        <option value="Health">Health</option>
-                        <option value="it">IT</option>
                       </select>
                     </td>
                   </tr>
                   <tr>
                     <td></td>
                     <td>
-                      <p style="color: red" *ngIf="!re_check.value">
-                        You must be follow subject Religion
-                      </p>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input
                             class="form-check-input btn-round btn-success"
                             type="submit"
                             value="Submit"
-                            [disabled]=""
                           />
                         </label>
                       </div>
@@ -141,20 +143,25 @@
                   </tr>
                 </tbody>
               </table>
+              <br />
+              <hr />
+              <p style="color: red" *ngIf="!formData.valid && formData.dirty">
+                You must be follow subject Religion
+              </p>
             </form>
           </div>
         </div>
         <div class="card-footer">
           <hr />
           <div class="stats">
-            <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes
-            ago
+            <i class="now-ui-icons loader_refresh"></i>
+            {{ timeInfo }}
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card card-user">
         <div class="image">
           <img src="../assets/img/bg5.jpg" alt="..." />
@@ -167,9 +174,13 @@
                 [src]="subjecRelatedData.imagePath"
                 alt="..."
               />
-              <h5 class="title">{{ subjecRelatedData.teacherName }}</h5>
+              <h5 class="title">
+                {{ subjecRelatedData.teacherName }}
+              </h5>
             </a>
-            <p class="description">{{ subjecRelatedData.subjectName }}</p>
+            <p class="description">
+              {{ subjecRelatedData.subjectName | uppercase }}
+            </p>
           </div>
           <p class="description text-center">
             {{ subjecRelatedData.subjectDes }}
