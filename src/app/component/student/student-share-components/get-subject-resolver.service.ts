@@ -7,8 +7,16 @@ import { StudentProfileService } from '../student-profile.service';
 export class GetRegisteredSubjectList
   implements
     Resolve<{
-      date: string;
-      dataArray: [{ subjectName: string; teacherId: string }];
+      query: boolean;
+      dataArray: [
+        {
+          subjectId: string;
+          subjectName: string;
+          teacherId: string;
+          teacherName: string;
+          teacherEmail: string;
+        }
+      ];
     }> {
   constructor(private userProfileSeeervice: StudentProfileService) {}
 
@@ -16,16 +24,40 @@ export class GetRegisteredSubjectList
     route: ActivatedRouteSnapshot
   ):
     | Observable<{
-        date: string;
-        dataArray: [{ subjectName: string; teacherId: string }];
+        query: boolean;
+        dataArray: [
+          {
+            subjectId: string;
+            subjectName: string;
+            teacherId: string;
+            teacherName: string;
+            teacherEmail: string;
+          }
+        ];
       }>
     | Promise<{
-        date: string;
-        dataArray: [{ subjectName: string; teacherId: string }];
+        query: boolean;
+        dataArray: [
+          {
+            subjectId: string;
+            subjectName: string;
+            teacherId: string;
+            teacherName: string;
+            teacherEmail: string;
+          }
+        ];
       }>
     | {
-        date: string;
-        dataArray: [{ subjectName: string; teacherId: string }];
+        query: boolean;
+        dataArray: [
+          {
+            subjectId: string;
+            subjectName: string;
+            teacherId: string;
+            teacherName: string;
+            teacherEmail: string;
+          }
+        ];
       } {
     return this.userProfileSeeervice.getRegisteredSubjectList();
   }

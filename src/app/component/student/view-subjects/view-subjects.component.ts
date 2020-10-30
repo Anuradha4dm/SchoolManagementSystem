@@ -8,7 +8,13 @@ import { isConstructorDeclaration } from 'typescript';
   styleUrls: ['./view-subjects.component.css'],
 })
 export class ViewSubjectsComponent implements OnInit {
-  subjectListObj: { subjectname: string; teacherid: string }[] = null;
+  subjectListObj: {
+    subjectid: string;
+    subjectname: string;
+    teacherid: string;
+    teachername: string;
+    teacheremail: string;
+  }[] = null;
 
   constructor(private route: ActivatedRoute) {}
 
@@ -17,7 +23,9 @@ export class ViewSubjectsComponent implements OnInit {
       (data) => {
         this.subjectListObj = data['subjectList'].dataArray;
       },
-      (err) => {},
+      (err) => {
+        console.log(err);
+      },
       () => {
         console.log('complete');
       }

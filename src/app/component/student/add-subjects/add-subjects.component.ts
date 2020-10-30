@@ -72,7 +72,7 @@ export class AddSubjectsComponent implements OnInit {
     var gradeVal = 7; //+this.studentData.grade.split('_')[0];
     if (gradeVal >= 6 && gradeVal <= 9) {
       this.isOptionalList1 = true;
-      this.optionalList1 = ['buddhist', 'catalic', 'islam'];
+      this.optionalList1 = ['estern_music', 'western_music', 'art', 'dancing'];
       this.subjectSet1 = [
         'mathemetics',
         'sinhala',
@@ -84,6 +84,7 @@ export class AddSubjectsComponent implements OnInit {
         'citizen education',
         'health',
         'pts',
+        'religion',
       ];
     }
 

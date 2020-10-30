@@ -87,8 +87,16 @@ export class StudentProfileService {
 
   getRegisteredSubjectList() {
     return this.httpClient.get<{
-      date: string;
-      dataArray: [{ subjectName: string; teacherId: string }];
-    }>('http://localhost:3000/student/get-subject-list/' + this.logInStudentId);
+      query: boolean;
+      dataArray: [
+        {
+          subjectId: string;
+          subjectName: string;
+          teacherId: string;
+          teacherName: string;
+          teacherEmail: string;
+        }
+      ];
+    }>('http://localhost:3000/student/get-subject-list/ST_1');
   }
 }
