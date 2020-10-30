@@ -21,6 +21,9 @@ import { TeacherProfileComponent } from './component/teacher/teacher-profile/tea
 import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ViewResultComponent } from './component/student/view-result/view-result.component';
+import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
+import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
+import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -34,7 +37,16 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
-  { path: 'addsubjects', component: LeaverequestComponent },
+  {
+    path: 'addsubjects',
+    component: AddSubjectsComponent,
+    resolve: { student: AddSubjectResolverService },
+  },
+  {
+    path: 'viewsubjects',
+    component: ViewSubjectsComponent,
+    resolve: { subjectList: GetRegisteredSubjectList },
+  },
   {
     path: 'notification',
     component: NotificationComponent,

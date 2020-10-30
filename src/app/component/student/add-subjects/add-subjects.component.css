@@ -1,1 +1,4 @@
-
+.my-sub-btn,
+.ng-invalid {
+  cursor: no-drop;
+}

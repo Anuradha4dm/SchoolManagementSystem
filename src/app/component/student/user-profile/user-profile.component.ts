@@ -12,6 +12,9 @@ export class UserProfileComponent implements OnInit {
   studentProfileData: Student = null;
   studentPerformance;
 
+  registeredSubjects: string[] = [];
+  isShowRegisteredSubject: boolean = false;
+
   specialAwards: string[] = ['Winner 1', 'winner 2', 'winner 3'];
   numOfAbsents: number;
 
@@ -32,7 +35,7 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.studentPerformance = this.studentProfileService
+    this.studentProfileService
       .getStudent(this.studentProfileService.logInStudentId)
       .subscribe((result) => {
         this.studentProfileData = result;
@@ -52,4 +55,6 @@ export class UserProfileComponent implements OnInit {
       this.studentProfileService.logInStudentId,
     ]);
   }
+
+  viewSubjectClick() {}
 }
