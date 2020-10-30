@@ -15,9 +15,14 @@ import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
 import { AboutComponent } from './component/homepage/about/about.component';
-import { LoginComponent } from './component/login/login.component';
 
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
+import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ViewResultComponent } from './component/student/view-result/view-result.component';
+import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
+import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
+import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -31,13 +36,23 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
-  { path: 'addsubjects', component: AddSubjectsComponent },
+  {
+    path: 'addsubjects',
+    component: AddSubjectsComponent,
+    resolve: { student: AddSubjectResolverService },
+  },
+  {
+    path: 'viewsubjects',
+    component: ViewSubjectsComponent,
+    resolve: { subjectList: GetRegisteredSubjectList },
+  },
   {
     path: 'notification',
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
-  { path: 'login', component: LoginComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'view-result', component: ViewResultComponent },
   { path: 'edit-profile', component: AddNewProfileComponent },
   { path: 'homepage-home', component: HomeComponent },
   { path: 'homepage-staff', component: StaffComponent },
@@ -46,6 +61,7 @@ const routes: Routes = [
 
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
+  { path: 'teacher-profile', component: LeaverequestComponent },
 ];
 
 @NgModule({

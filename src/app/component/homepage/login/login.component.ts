@@ -8,7 +8,7 @@ import { UserLogInService } from './user-login.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  errorMessage = 'User Name Invalid';
+  errorMessage: string = '';
 
   constructor(private userLogInService: UserLogInService) {}
 
@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formData) {
-    this.userLogInService.postLogInUser(formData.values);
+    this.userLogInService.postLogInUser({
+      _id: formData.value._id,
+      password: formData.value.password,
+    });
   }
 }
