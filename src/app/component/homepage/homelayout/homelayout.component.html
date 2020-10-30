@@ -1,70 +1,43 @@
-<div class="card bg-danger">
-  <!--School logo are-->
-  <div class="logodiv">
-    <img class="logo" src="{{ logoUrl }}" />
-  </div>
+<!--Header section here-->
+<header>
+  <nav class="navbar bg-dark">
+    <ul class="nav nav-navbar">
+        <li class="nav-link btn btn-sm btn-danger mr-1" role="button" (click)="tabActivate(tab.name)" *ngFor="let tab of tabs">
+          {{tab.name}}
+        </li>
+    </ul>
 
-  <!--Image slideshow start-->
-  <div class="card-header">
-    <div id="myslide" class="carousel slide" data-ride="carousel">
-      <ol class="carousel-indicators">
-        <li data-target="#myslide" data-slide-to="0" class="active"></li>
-        <li data-target="#myslide" data-slide-to="1"></li>
-        <li data-target="#myslide" data-slide-to="2"></li>
-      </ol>
+    <div>
+      <app-login></app-login>
+    </div>
+  </nav>
+</header>
 
-      <div class="carousel-inner">
-        <img
-          class="carousel-item slideimage active"
-          src="assets/img/bg5.jpg"
-          alt="Slide1"
-        />
-        <img
-          class="carousel-item slideimage"
-          src="assets/img/bg6.jpg"
-          alt="Slide2"
-        />
-        <img
-          class="carousel-item slideimage"
-          src="assets/img/header.jpg"
-          alt="Slide3"
-        />
+<!--Body section here-->
+<main class="text-center card" [ngSwitch]="tabName">
+  <app-home *ngSwitchCase="'Home'"></app-home>
+  <app-staff *ngSwitchCase="'Academic Staff'"></app-staff>
+  <app-downloads *ngSwitchCase="'Downloads'"></app-downloads> 
+  <app-about *ngSwitchCase="'About'"></app-about>
+</main>
+
+<!--Footer section here-->
+<footer>
+  <div class="card-body">
+    <div class="row footerText">
+
+      <!--Contact details here-->
+      <div class="col text-center">
+        <h3>Contact Us</h3>
+        <p>
+          <strong>Address: </strong>{{schoolAddress}}
+        </p>
+        <p>
+          <strong>Phone: </strong>{{schoolPhone}}<br>
+          <strong>Email: </strong>{{schoolMail}}<br>
+        </p>
       </div>
 
-      <a class="carousel-control-prev" href="#myslide" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-      </a>
-
-      <a class="carousel-control-next" href="#myslide" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-      </a>
     </div>
   </div>
-  <br />
-
-  <!--Navigation panel-->
-  <div class="card-block bg-dark">
-    <ul class="nav nav-tabs justify-content-center">
-      <li class="nav-item" *ngFor="let tab of tabs">
-        <a role="button" class="nav-link" (click)="tabActivate(tab.name)">{{tab.name}}</a>
-      </li>
-  
-      <li class="nav-item">
-        <app-login></app-login>
-      </li>
-    </ul>
-  </div>
-
-  <!--Homepage body content-->
-  <div class="card-body text-center scroll bg-secondary" [ngSwitch]="tabName">
-    <app-home *ngSwitchCase="'Home'"></app-home>
-    <app-staff *ngSwitchCase="'Academic Staff'"></app-staff>
-    <app-downloads *ngSwitchCase="'Downloads'"></app-downloads>
-    <app-about *ngSwitchCase="'About'"></app-about>
-  </div>
-
-  <!--Homepage footer area-->
-  <div class="card-footer text-center">
-    <h1>Footer Here</h1>
-  </div>
-</div>
+</footer>

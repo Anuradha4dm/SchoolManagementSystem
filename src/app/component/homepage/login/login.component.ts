@@ -9,7 +9,13 @@ import { UserLogInService } from './user-login.service';
 })
 export class LoginComponent implements OnInit {
   errorMessage: string = '';
+  //this is the start of new change look line 27 in login.component.html (data-dismiss and onclick)
+  close;
 
+  onClick(){
+    this.close="modal";
+  }
+  //this is the end of cjange
   constructor(private userLogInService: UserLogInService) {}
 
   ngOnInit(): void {
