@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { StudentProfileService } from '../student-profile.service';
 
 @Component({
@@ -15,6 +15,9 @@ export class AddSubjectsComponent implements OnInit {
     studentid: '',
     grade: '',
   };
+
+  //stundet grade
+  gradeVal: number = 11;
 
   //update value setup
   startTimeInMinutes: number = null;
@@ -50,7 +53,8 @@ export class AddSubjectsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private studentProfileService: StudentProfileService
+    private studentProfileService: StudentProfileService,
+    private alertMessageService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -68,7 +72,8 @@ export class AddSubjectsComponent implements OnInit {
     );
 
     //categorize subjects
-    var gradeVal = 7; //+this.studentData.grade.split('_')[0];
+    var gradeVal = 11; //+this.studentData.grade.split('_')[0];
+    //ths is the grades in between  grade 6-9
     if (gradeVal >= 6 && gradeVal <= 9) {
       this.isOptionalList1 = true;
       this.optionalList1 = ['estern_music', 'western_music', 'art', 'dancing'];
@@ -86,6 +91,38 @@ export class AddSubjectsComponent implements OnInit {
         'religion',
       ];
     }
+    //ths is the grades in between  grade 10-11
+    if (gradeVal == 10 || gradeVal == 11) {
+      this.isOptionalList1 = true;
+      this.optionalList1 = [
+        'commerce',
+        'geography',
+        'art',
+        'citizen_education',
+        'tamil',
+        'hindi',
+      ];
+      this.isOptionalList2 = true;
+      this.optionalList2 = [
+        'western_music',
+        'estern_music',
+        'art',
+        'dancing',
+        'drama',
+        'english_literature',
+        'sinhala_literature',
+      ];
+      this.isOptionalList3 = true;
+      this.optionalList3 = ['IT', 'health', 'agriculture'];
+      this.subjectSet1 = [
+        'mathematics',
+        'sinhala',
+        'science',
+        'history',
+        'english',
+        'religion',
+      ];
+    }
 
     setInterval(() => {
       this.endimeInMinutes = new Date().getMinutes();
@@ -100,7 +137,48 @@ export class AddSubjectsComponent implements OnInit {
   }
 
   onSubmitForm(data) {
-    console.log(data.value);
+    if (this.gradeVal >= 6 && this.gradeVal <= 9) {
+      this.studentProfileService
+        .addSubjectsPrimary({
+          studentid: this.studentData.studentid,
+          grade: this.studentData.grade,
+          optional1: data.optional1,
+        })
+        .subscribe(
+          (data) => {
+            console.log(data); //remove later
+          },
+          (error) => {
+            this.alertMessageService.errorAlert(error.error.message);
+          },
+          () => {
+            this.alertMessageService.competeAlert('Resistration Success');
+          }
+        );
+    }
+
+    if (this.gradeVal == 10 || this.gradeVal == 11) {
+      console.log(data.value);
+      this.studentProfileService
+        .addSubjectOrdinaryLevel({
+          studentid: this.studentData.studentid,
+          optional1: data.optional1,
+          optional2: data.optional2,
+          optional3: data.optional3,
+          grade: '11_D',
+        })
+        .subscribe(
+          (data) => {
+            console.log(data);
+          },
+          (error) => {
+            this.alertMessageService.errorAlert(error.error.message);
+          },
+          () => {
+            this.alertMessageService.competeAlert('Registration Success');
+          }
+        );
+    }
   }
 
   onSubjectCkick(element) {

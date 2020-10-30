@@ -78,11 +78,23 @@ export class StudentProfileService {
     grade: string;
     optional1: string;
   }) {
-    this.httpClient
-      .post('http://localhost:3000/student/addsubjectprimary', postData)
-      .subscribe((data) => {
-        console.log(data);
-      });
+    return this.httpClient.post(
+      'http://localhost:3000/student/addsubjectprimary',
+      postData
+    );
+  }
+
+  addSubjectOrdinaryLevel(postData: {
+    studentid: string;
+    grade: string;
+    optional1: string;
+    optional2: string;
+    optional3: String;
+  }) {
+    return this.httpClient.post(
+      'http://localhost:3000/student/add-subject-ordinaty-level',
+      postData
+    );
   }
 
   getRegisteredSubjectList() {

@@ -1,3 +1,4 @@
+<div class="panel-header panel-header-sm"></div>
 <div class="main-content">
   <div class="row">
     <div class="col-md-6">
@@ -44,10 +45,11 @@
                             class="form-check-input"
                             type="checkbox"
                             #op1Ref
-                            name="optional_1"
+                            name="optional1_check"
                             [ngModel]="true"
                             required
                           />
+                          <!-- to get the uncheck default need to do with grade -->
                           <!-- op1Ref used to validate the form disabled button -->
                           <span class="form-check-sign"></span>
                         </label>
@@ -70,8 +72,7 @@
                       </select>
                     </td>
                   </tr>
-
-                  <tr *ngIf="isOptionalList3">
+                  <tr *ngIf="isOptionalList2">
                     <td>
                       <div class="form-check">
                         <label class="form-check-label">
@@ -91,9 +92,48 @@
                         class="form-control"
                         id=""
                         ngModel
-                        (change)="onChangeListItemOption2(elRef.value)"
+                        #elRef2
+                        (change)="onChangeListItemOption2(elRef2.value)"
                       >
-                        <option value="commerse">Commerse</option>
+                        <option
+                          *ngFor="let item of optionalList2"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="isOptionalList3">
+                    <td>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="optional3_check"
+                            [ngModel]="false"
+                          />
+                          <span class="form-check-sign"></span>
+                        </label>
+                      </div>
+                    </td>
+                    <td style="cursor: pointer">
+                      <select
+                        name="optional3"
+                        class="form-control"
+                        id=""
+                        ngModel
+                        #elRef3
+                        (change)="onChangeListItemOption3(elRef3.value)"
+                      >
+                        <option
+                          *ngFor="let item of optionalList3"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </option>
                       </select>
                     </td>
                   </tr>
