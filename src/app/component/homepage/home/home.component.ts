@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  noOfStudent = 4000;
+  noOfTeacher = 500;
+  noOfClass = 60;
+  noOfNonAcademic = 300;
+
   constructor() { }
 
   ngOnInit(): void {

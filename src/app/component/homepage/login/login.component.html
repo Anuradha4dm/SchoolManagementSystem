@@ -1,10 +1,6 @@
-<a
-  routerLink="homepage-home"
-  data-target="#logindemo"
-  data-toggle="modal"
-  class="nav-link"
-  >Login</a
->
+<button class="btn btn-success rounded-circle" data-target="#logindemo" data-toggle="modal">
+  Login
+</button>
 
 <!--Login window development-->
 <div class="modal fade" id="logindemo">
@@ -19,32 +15,29 @@
         <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
           <div class="form-group">
             <label for="username">Username</label>
-            <input
-              class="form-control"
-              type="text"
-              id="username"
-              name="_id"
-              ngModel
-            />
+            <input class="form-control" type="text" id="username" name="_id" ngModel>
           </div>
+
           <div class="form-group">
             <label for="password">Password</label>
-            <input
-              class="form-control"
-              type="password"
-              id="password"
-              name="password"
-              ngModel
-            />
+            <input class="form-control" type="password" id="password" name="password" ngModel>
           </div>
-          <button type="submit" class="btn btn-primary">Login</button>
+
+          <div class="form-group">
+            <button class="btn btn-primary" [attr.data-dismiss]="close" (click)="onClick()">Login</button>
+          </div>
         </form>
       </div>
 
-      <a routerLink="" class="text-center">Reset Password</a>
-      <br />
+      <div class="text-center bg-primary">
+        <a href="">Reset Password</a>
+      </div>
 
+<<<<<<< HEAD
       <div class="card-footer bg-danger text-center" *ngIf="errorMessage != ''">
+=======
+      <div class="modal-footer bg-danger text-center" *ngIf="errorMessage != ''">
+>>>>>>> newhome
         <p class="card-text">{{ errorMessage }}</p>
       </div>
     </div>

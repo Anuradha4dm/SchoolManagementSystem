@@ -36,6 +36,7 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
+<<<<<<< HEAD
   {
     path: 'addsubjects',
     component: AddSubjectsComponent,
@@ -46,22 +47,25 @@ const routes: Routes = [
     component: ViewSubjectsComponent,
     resolve: { subjectList: GetRegisteredSubjectList },
   },
+=======
+  { path: 'addsubjects', component: AddSubjectsComponent },
+>>>>>>> newhome
   {
     path: 'notification',
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
+<<<<<<< HEAD
   { path: 'dashboard', component: DashboardComponent },
   { path: 'view-result', component: ViewResultComponent },
+=======
+>>>>>>> newhome
   { path: 'edit-profile', component: AddNewProfileComponent },
-  { path: 'homepage-home', component: HomeComponent },
-  { path: 'homepage-staff', component: StaffComponent },
-  { path: 'homepage-about', component: AboutComponent },
-  { path: 'homepage-downloads', component: DownloadsComponent },
-
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
-  { path: 'teacher-profile', component: LeaverequestComponent },
+
+  { path: 'madmax-tprofile', component: TeacherProfileComponent },
+  { path: 'madmax-leave', component: LeaverequestComponent },
 ];
 
 @NgModule({
