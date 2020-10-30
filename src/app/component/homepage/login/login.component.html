@@ -6,12 +6,12 @@
 <div class="modal fade" id="logindemo">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
-      <div class="modal-header bg-primary">
+      <div class="modal-header bg-danger">
         <h1>Login</h1>
         <button class="close" data-dismiss="modal">x</button>
       </div>
 
-      <div class="modal-body">
+      <div class="modal-body loginBack">
         <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
           <div class="form-group">
             <label for="username">Username</label>
@@ -33,11 +33,7 @@
         <a href="">Reset Password</a>
       </div>
 
-<<<<<<< HEAD
-      <div class="card-footer bg-danger text-center" *ngIf="errorMessage != ''">
-=======
       <div class="modal-footer bg-danger text-center" *ngIf="errorMessage != ''">
->>>>>>> newhome
         <p class="card-text">{{ errorMessage }}</p>
       </div>
     </div>

@@ -23,7 +23,7 @@ import { ViewResultComponent } from './component/student/view-result/view-result
 import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
 import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
 import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
-
+import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component'
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
   {
@@ -36,36 +36,15 @@ const routes: Routes = [
     component: StudentAttendenceComponent,
     resolve: { studentList: GetStudentListForAttendenceResolver },
   },
-<<<<<<< HEAD
-  {
-    path: 'addsubjects',
-    component: AddSubjectsComponent,
-    resolve: { student: AddSubjectResolverService },
-  },
-  {
-    path: 'viewsubjects',
-    component: ViewSubjectsComponent,
-    resolve: { subjectList: GetRegisteredSubjectList },
-  },
-=======
   { path: 'addsubjects', component: AddSubjectsComponent },
->>>>>>> newhome
   {
     path: 'notification',
     component: NotificationComponent,
     resolve: { notifications: NotificationResolver },
   },
-<<<<<<< HEAD
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'view-result', component: ViewResultComponent },
-=======
->>>>>>> newhome
   { path: 'edit-profile', component: AddNewProfileComponent },
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
-
-  { path: 'madmax-tprofile', component: TeacherProfileComponent },
-  { path: 'madmax-leave', component: LeaverequestComponent },
 ];
 
 @NgModule({
