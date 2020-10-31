@@ -45,6 +45,9 @@ const routes: Routes = [
   { path: 'edit-profile', component: AddNewProfileComponent },
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
+  //to remove
+  { path: 'madmax-tprofile', component: TeacherProfileComponent },
+  { path: 'madmax-leave', component: LeaverequestComponent },
 ];
 
 @NgModule({

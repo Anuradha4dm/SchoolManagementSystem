@@ -120,6 +120,19 @@ export class SiderbarComponent implements OnInit {
           title: 'PAYMENTS',
           icon: 'gestures_tap-01',
           class: '',
+        },
+        //to remove
+        {
+          path: '/madmax-tprofile',
+          title: 'Madmax-tprofile',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/madmax-leave',
+          title: 'Madmax-leave',
+          icon: 'gestures_tap-01',
+          class: '',
         }
       ];
     }
