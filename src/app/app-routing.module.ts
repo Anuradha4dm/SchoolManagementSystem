@@ -23,7 +23,7 @@ import { ViewResultComponent } from './component/student/view-result/view-result
 import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
 import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
 import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
-import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component'
+import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component';
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
   {

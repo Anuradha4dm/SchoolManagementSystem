@@ -12,8 +12,8 @@ export class LayoutComponent implements OnInit {
   userLogInData: boolean = false;
 
   ngOnInit(): void {
-    this.userLogInService.userAuthData.subscribe(({ Authentication }) => {
-      this.userLogInData = Authentication;
+    this.userLogInService.userAuthData.subscribe((userData) => {
+      this.userLogInData = userData.getAuthentication;
     });
   }
 }

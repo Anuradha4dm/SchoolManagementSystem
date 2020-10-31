@@ -14,52 +14,18 @@ declare interface SideBarItem {
   styleUrls: ['./siderbar.component.css'],
 })
 export class SiderbarComponent implements OnInit {
-  userRoll: string = 'student';
+  userRoll: string;
 
   sideBarItems: SideBarItem[] = [];
-  // { path: '/dashboard', title: 'Dashboard', icon: 'design_app', class: '' },
-  // {
-  //   path: '/userprofile',
-  //   title: 'Profile',
-  //   icon: 'users_single-02',
-  //   class: '',
-  // },
-
-  // {
-  //   path: '/student-list',
-  //   title: 'Student List',
-  //   icon: 'design_bullet-list-67',
-  //   class: '',
-  // },
-  // {
-  //   path: '/mark-attendence',
-  //   title: 'Student Attendence',
-  //   icon: 'gestures_tap-01',
-  //   class: '',
-  // },
-  // {
-  //   path: '/notification',
-  //   title: 'Notification',
-  //   icon: 'education_agenda-bookmark',
-  //   class: '',
-  // },
-  // {
-  //   path: '/addsubjects',
-  //   title: 'Add Subjects',
-  //   icon: 'files_single-copy-04',
-  //   class: '',
-  // },
-  // {
-  //   path: '/add-new-profile',
-  //   title: 'New Profile',
-  //   icon: 'files_single-copy-04',
-  //   class: '',
-  // },
 
   constructor(private userLogInService: UserLogInService) {}
 
   ngOnInit(): void {
-    if (this.userRoll === 'student') {
+    this.userLogInService.userAuthData.subscribe((userData) => {
+      this.userRoll = userData.getLoginAs;
+    });
+
+    if (true) {
       this.sideBarItems = [
         {
           path: '/dashboard',
@@ -103,24 +69,13 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
-        {
-          path: '/chat',
-          title: 'CHAT',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
+
         {
           path: '/events',
           title: 'EVENTS',
           icon: 'gestures_tap-01',
           class: '',
         },
-        {
-          path: '/payments',
-          title: 'PAYMENTS',
-          icon: 'gestures_tap-01',
-          class: '',
-        }
       ];
     }
 
