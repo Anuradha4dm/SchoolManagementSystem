@@ -133,6 +133,12 @@ export class SiderbarComponent implements OnInit {
           title: 'Madmax-leave',
           icon: 'gestures_tap-01',
           class: '',
+        },
+        {
+          path: '/madmax-termtest',
+          title: 'Madmax-TermTest',
+          icon: 'gestures_tap-01',
+          class: '',
         }
       ];
     }

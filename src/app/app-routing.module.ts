@@ -24,6 +24,7 @@ import { AddSubjectResolverService } from './component/student/student-resolvers
 import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
 import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
 import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component'
+import { TermTestResultsComponent } from './component/teacher/term-test-results/term-test-results.component';
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
   //to remove
   { path: 'madmax-tprofile', component: TeacherProfileComponent },
   { path: 'madmax-leave', component: LeaverequestComponent },
+  { path: 'madmax-termtest', component: TermTestResultsComponent },
 ];
 
 @NgModule({

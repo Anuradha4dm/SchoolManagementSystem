@@ -7,6 +7,7 @@ import { StudentAttendenceComponent } from './student-attendence/student-attende
 import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule,MatExpansionModule],
@@ -15,6 +16,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     StudentAttendenceComponent,
     MarkPresentDirective,
     FilterStudentPipe,
+    TermTestResultsComponent,
   ],
   declarations: [
     StudentListComponent,
@@ -22,6 +24,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MarkPresentDirective,
     FilterStudentPipe,
     TeacherProfileComponent,
+    TermTestResultsComponent,
   ],
   providers: [],
 })
