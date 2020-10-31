@@ -39,7 +39,7 @@ export class UserProfileComponent implements OnInit {
       .getStudent(this.studentProfileService.logInStudentId)
       .subscribe((result) => {
         this.studentProfileData = result;
-
+        console.log(result);
         this.imagePath =
           'http://localhost:3000/' + this.studentProfileData.imagePath;
       });
