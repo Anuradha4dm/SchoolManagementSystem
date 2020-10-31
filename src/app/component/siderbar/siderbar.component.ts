@@ -92,6 +92,12 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
+          path: '/viewsubjects',
+          title: 'View Subjects',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
           path: '/exams',
           title: 'EXAMS',
           icon: 'gestures_tap-01',
@@ -114,19 +120,7 @@ export class SiderbarComponent implements OnInit {
           title: 'PAYMENTS',
           icon: 'gestures_tap-01',
           class: '',
-        },
-        {
-          path: '/madmax-tprofile',
-          title: 'madmax-tprofile',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
-        {
-          path: '/madmax-leave',
-          title: 'madax-leave',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
+        }
       ];
     }
 

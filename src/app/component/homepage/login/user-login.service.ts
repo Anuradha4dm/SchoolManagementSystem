@@ -12,7 +12,12 @@ export class UserLogInService {
     authentication: boolean;
     logInAs: string;
     token: string;
-  } = null;
+  } = {
+    _id: 'ST_1',
+    authentication: true,
+    logInAs: 'student',
+    token: '',
+  }; //this is dumy for the development need to be get for the serve
 
   userAuthData = new Subject<{ Authentication: boolean }>();
 

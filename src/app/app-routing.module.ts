@@ -17,9 +17,13 @@ import { DownloadsComponent } from './component/homepage/downloads/downloads.com
 import { AboutComponent } from './component/homepage/about/about.component';
 
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
-import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component';
 import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
-
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ViewResultComponent } from './component/student/view-result/view-result.component';
+import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
+import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
+import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
+import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component'
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
   {
@@ -41,9 +45,6 @@ const routes: Routes = [
   { path: 'edit-profile', component: AddNewProfileComponent },
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
-
-  { path: 'madmax-tprofile', component: TeacherProfileComponent },
-  { path: 'madmax-leave', component: LeaverequestComponent },
 ];
 
 @NgModule({
