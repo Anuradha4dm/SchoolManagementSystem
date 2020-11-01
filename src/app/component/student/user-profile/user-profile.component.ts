@@ -42,6 +42,7 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loginUserService.userAuthData.subscribe((userData) => {
       this.loginUserData = userData;
+      console.log(this.loginUserData);
     });
 
     this.studentProfileService

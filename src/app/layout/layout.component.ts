@@ -9,11 +9,5 @@ import { UserLogInService } from '../component/homepage/login/user-login.service
 export class LayoutComponent implements OnInit {
   constructor(private userLogInService: UserLogInService) {}
 
-  userLogInData: boolean = false;
-
-  ngOnInit(): void {
-    this.userLogInService.userAuthData.subscribe((userData) => {
-      this.userLogInData = userData.getAuthentication;
-    });
-  }
+  ngOnInit(): void {}
 }

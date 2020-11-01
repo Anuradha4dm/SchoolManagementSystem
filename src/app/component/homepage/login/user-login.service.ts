@@ -11,7 +11,7 @@ export class UserLogInService {
 
   //this is dumy for the development need to be get for the serve
   userAuthData = new BehaviorSubject<LogInUserModel>(
-    new LogInUserModel('ST_1', false, 'student', '', 0)
+    new LogInUserModel('', false, '', '', 0)
   );
 
   constructor(private httpClient: HttpClient, private router: Router) {}
@@ -41,7 +41,7 @@ export class UserLogInService {
           this.errorEmitEvent.next({ error: error.message });
         },
         () => {
-          this.router.navigate(['/userprofile']);
+          this.router.navigate(['/user', 'dashboard']);
         }
       );
   }

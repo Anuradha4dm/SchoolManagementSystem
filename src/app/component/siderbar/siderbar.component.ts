@@ -24,114 +24,110 @@ export class SiderbarComponent implements OnInit {
     this.userLogInService.userAuthData.subscribe((userData) => {
       this.userRoll = userData.getLoginAs;
     });
-
-    if (true) {
+    if (this.userRoll) {
       this.sideBarItems = [
         {
-          path: '/dashboard',
+          path: '/user/dashboard',
           title: 'Dashboard',
           icon: 'design_app',
           class: '',
         },
         {
-          path: '/userprofile',
+          path: '/user/userprofile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',
         },
         {
-          path: '/notification',
+          path: '/user/notification',
           title: 'Notification',
           icon: 'education_agenda-bookmark',
           class: '',
         },
         {
-          path: '/view-result',
+          path: '/user/view-result',
           title: 'VIEW RESULT',
           icon: 'education_agenda-bookmark',
           class: '',
         },
         {
-          path: '/addsubjects',
+          path: '/user/addsubjects',
           title: 'Add Subjects',
           icon: 'files_single-copy-04',
           class: '',
         },
         {
-          path: '/viewsubjects',
+          path: '/user/viewsubjects',
           title: 'View Subjects',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/exams',
+          path: '/user/exams',
           title: 'EXAMS',
           icon: 'gestures_tap-01',
           class: '',
         },
-
         {
-          path: '/events',
+          path: '/user/events',
           title: 'EVENTS',
           icon: 'gestures_tap-01',
           class: '',
         },
       ];
     }
-
     if (this.userRoll === 'teacher') {
       this.sideBarItems = [
         {
-          path: '/dashboard',
+          path: '/user/dashboard',
           title: 'Dashboard',
           icon: 'design_app',
           class: '',
         },
         {
-          path: '/userprofile',
+          path: '/user/userprofile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',
         },
-
         {
-          path: '/student-list',
+          path: '/user/student-list',
           title: 'Student List',
           icon: 'design_bullet-list-67',
           class: '',
         },
         {
-          path: '/mark-attendence',
+          path: '/user/mark-attendence',
           title: 'Student Attendence',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/notification',
+          path: '/user/notification',
           title: 'Notification',
           icon: 'education_agenda-bookmark',
           class: '',
         },
         {
-          path: '/leave-request',
+          path: '/user/leave-request',
           title: 'Request Leave',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/exams',
+          path: '/user/exams',
           title: 'EXAMS',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/chat',
+          path: '/user/chat',
           title: 'CHAT',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/events',
+          path: '/user/events',
           title: 'EVENTS',
           icon: 'gestures_tap-01',
           class: '',
