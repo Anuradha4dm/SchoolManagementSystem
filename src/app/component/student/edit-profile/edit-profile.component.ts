@@ -60,6 +60,7 @@ export class EditProfileComponent implements OnInit {
     form.append('surname', formData.value.surname);
     form.append('userid', formData.value.userid);
     form.append('username', formData.value.username);
+    form.append('mobile', formData.value.mobile);
 
     if (!this.selectedFile) {
       form.append('imagepath', this.studentData.imagePath);
