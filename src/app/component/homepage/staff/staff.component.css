@@ -4,3 +4,8 @@
     font-weight: bold;
     color: black;
 }
+
+.divHeight{
+    height: 90vh;
+    overflow-x: scroll;
+}
