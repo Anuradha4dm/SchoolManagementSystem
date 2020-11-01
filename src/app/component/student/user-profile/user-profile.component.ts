@@ -42,17 +42,21 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loginUserService.userAuthData.subscribe((userData) => {
       this.loginUserData = userData;
-      console.log(this.loginUserData);
     });
 
     this.studentProfileService
       .getStudent(this.loginUserData.getUserId)
-      .subscribe((result) => {
-        this.studentProfileData = result;
-        console.log(result);
-        this.imagePath =
-          'http://localhost:3000/' + this.studentProfileData.imagePath;
-      });
+      .subscribe(
+        (result) => {
+          this.studentProfileData = result;
+
+          this.imagePath =
+            'http://localhost:3000/' + this.studentProfileData.imagePath;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   toggleShowBtn() {

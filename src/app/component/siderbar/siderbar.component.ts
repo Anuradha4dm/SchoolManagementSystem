@@ -24,7 +24,7 @@ export class SiderbarComponent implements OnInit {
     this.userLogInService.userAuthData.subscribe((userData) => {
       this.userRoll = userData.getLoginAs;
     });
-    if (this.userRoll) {
+    if (this.userRoll == 'student') {
       this.sideBarItems = [
         {
           path: '/user/dashboard',
