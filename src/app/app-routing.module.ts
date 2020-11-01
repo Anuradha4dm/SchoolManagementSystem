@@ -17,6 +17,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ViewResultComponent } from './component/student/view-result/view-result.component';
 import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
+import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
 const routes: Routes = [
   {
     path: '',
@@ -37,7 +38,11 @@ const routes: Routes = [
         component: StudentAttendenceComponent,
         resolve: { studentList: GetStudentListForAttendenceResolver },
       },
-      { path: 'addsubjects', component: AddSubjectsComponent },
+      {
+        path: 'addsubjects',
+        component: AddSubjectsComponent,
+        resolve: { details: AddSubjectResolverService },
+      },
       {
         path: 'notification',
         component: NotificationComponent,

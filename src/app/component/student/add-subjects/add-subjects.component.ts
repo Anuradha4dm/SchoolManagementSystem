@@ -62,8 +62,8 @@ export class AddSubjectsComponent implements OnInit {
     //getting data from the resolver
     this.route.data.subscribe(
       (studentData) => {
-        this.studentData.studentid = studentData.student.studentid;
-        this.studentData.grade = studentData.student.grade;
+        this.studentData.studentid = studentData['details'].studentid;
+        this.studentData.grade = studentData['details'].grade;
       },
       (error) => {
         console.log(error);
