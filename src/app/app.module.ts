@@ -18,10 +18,11 @@ import { StudentModule } from './component/student/student.module';
 import { AdminModule } from './component/admin/admin.module';
 import { TeacherModule } from './component/teacher/teacher.module';
 import { NotificationModule } from './component/notification/notification.module';
-import { HomePageModule } from './component/homepage/homepage.module';
+
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
+import { HomePageModule } from './component/homepage/homepage.module';
 
 @NgModule({
   declarations: [

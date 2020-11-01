@@ -1,10 +1,10 @@
-<div class="wrapper" *ngIf="userLogInData">
-  <div class="sidebar" data-color="red">
-    <app-siderbar></app-siderbar>
-  </div>
-  <div class="main-panel">
-    <div class="panel-header panel-header-sm"></div>
-    <router-outlet></router-outlet>
+<div class="wrapper">
+  <div>
+    <div class="sidebar" data-color="red">
+      <app-siderbar></app-siderbar>
+    </div>
+    <div class="main-panel">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>
-<app-homelayout *ngIf="!userLogInData"></app-homelayout>

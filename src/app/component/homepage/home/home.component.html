@@ -1,22 +1,62 @@
+<!--Image slideshow here-->
 <div>
-    <h3 class="card-title">Welcome to Our Official Page</h3>
+    <div id="myslide" class="carousel slide carousel-fade" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#myslide" data-slide-to="0" class="active"></li>
+            <li data-target="#myslide" data-slide-to="1"></li>
+            <li data-target="#myslide" data-slide-to="2"></li>
+        </ol>
+
+        <div class="carousel-inner">
+            <img class="carousel-item slideimage active" src="assets/img/bg5.jpg" alt="Slide1"/>
+            <img class="carousel-item slideimage" src="assets/img/bg6.jpg" alt="Slide2"/>
+            <img class="carousel-item slideimage" src="assets/img/header.jpg" alt="Slide3"/>
+        </div>
+
+        <a class="carousel-control-prev" href="#myslide" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+
+        <a class="carousel-control-next" href="#myslide" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    <br>
 </div>
 
-<div>
-    <pre>
-        Debbie put her hand into the hole, sliding her hand down as far as her arm could reach. She wiggled her fingers hoping to touch 
-        something, but all she felt was air. She shifted the 
-        weight of her body to try and reach an inch or two more down the hole. Her fingers still touched nothing but air.
-        He had three simple rules by which he lived. The first was to never eat blue food. 
-        There was nothing in nature that was edible that was blue. 
-        People often asked about blueberries, but everyone knows those are actually 
-        purple. He understood it was one of the stranger rules to live by, but it had served him well thus far in the 50+ years of his life.
-        It seemed like it should have been so simple. There was nothing inherently difficult with getting the
-         project done. It was simple and straightforward enough that even a child should have been able to complete it on time, but that wasn't the case.
-          The deadline had arrived and the project remained unfinished.
-        There was something beautiful in his hate.
-         It wasn't the hate itself as it was a disgusting display of racism and intolerance. 
-         It was what propelled the hate and the fact that although he had this hate, he didn't understand where it came from. 
-         It was at that moment that she realized that there was hope in changing him.  
-    </pre>
+<!--Home body content here-->
+<div class="container text-center">
+    <h3 class="card-title">Welcome to Our Official Page</h3>
+
+    <p>
+        Voluptua scripserit per ad, laudem viderer sit ex. Ex alia corrumpit voluptatibus usu, sed unum convenire id. Ut cum nisl moderatius, per nihil dicant commodo an. Eum tacimates erroribus ad. Atqui feugiat euripidis ea pri, sed veniam tacimates ex. Menandri
+        temporibus an duo.
+    </p>
+
+    <div class="row mt-5 mb-3">
+        <div class="stats-col text-center col-md-3 col-sm-6">
+            <div class="circle">
+                <span class="stats-no" data-toggle="counter-up">{{noOfStudent}}</span>Students
+            </div>
+        </div>
+
+        <div class="stats-col text-center col-md-3 col-sm-6">
+            <div class="circle">
+                <span class="stats-no" data-toggle="counter-up">{{noOfTeacher}}</span>Teachers
+            </div>
+        </div>
+
+        <div class="stats-col text-center col-md-3 col-sm-6">
+            <div class="circle">
+                <span class="stats-no" data-toggle="counter-up">{{noOfClass}}</span>Classes
+            </div>
+        </div>
+
+        <div class="stats-col text-center col-md-3 col-sm-6">
+            <div class="circle">
+                <span class="stats-no" data-toggle="counter-up">{{noOfNonAcademic}}</span>Non Academic staff
+            </div>
+        </div>
+    </div>
+
 </div>

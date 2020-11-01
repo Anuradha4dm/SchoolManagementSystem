@@ -1,3 +1,4 @@
+<div class="panel-header panel-header-sm"></div>
 <div class="main-content">
   <div class="row">
     <div class="col-md-6">
@@ -27,71 +28,51 @@
                     </td>
                     <td class="text-left">
                       <input
-                        type="text"
-                        [value]="subject"
+                        type="button"
+                        [value]="subject | titlecase"
                         class="form-control"
                         placeholder="Username"
-                        disabled
+                        style="cursor: pointer"
+                        (click)="onSubjectCkick($event)"
                       />
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="isOptionalList1">
                     <td>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input
                             class="form-check-input"
                             type="checkbox"
-                            name="religion_check"
+                            #op1Ref
+                            name="optional1_check"
                             [ngModel]="true"
-                            #re_check="ngModel"
+                            required
                           />
-
+                          <!-- to get the uncheck default need to do with grade -->
+                          <!-- op1Ref used to validate the form disabled button -->
                           <span class="form-check-sign"></span>
                         </label>
                       </div>
                     </td>
                     <td style="cursor: pointer">
                       <select
-                        name="religon"
-                        class="form-control"
-                        [ngModel]="'buddhist'"
-                      >
-                        <option value="buddhist">Buddhist</option>
-                        <option value="catalic">Catalic</option>
-                        <option value="roman_cathalic">Roman Cathalic</option>
-                      </select>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            name="optional1_check"
-                            [ngModel]="false"
-                          />
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                    </td>
-                    <td>
-                      <select
                         name="optional1"
                         class="form-control"
-                        id=""
-                        [ngModel]="'esten_music'"
+                        ngModel
+                        #elRef1
+                        (change)="onChangeListItemOption1(elRef1.value)"
                       >
-                        <option value="esten_music">Easten Music</option>
-                        <option value="wester_music">Western Music</option>
-                        <option value="art">Arts</option>
-                        <option value="danding">Dansing</option>
+                        <option
+                          *ngFor="let opSub of optionalList1"
+                          [value]="opSub"
+                        >
+                          {{ opSub | titlecase }}
+                        </option>
                       </select>
                     </td>
                   </tr>
-                  <tr>
+                  <tr *ngIf="isOptionalList2">
                     <td>
                       <div class="form-check">
                         <label class="form-check-label">
@@ -110,27 +91,61 @@
                         name="optional2"
                         class="form-control"
                         id=""
-                        [ngModel]="'commerse'"
+                        ngModel
+                        #elRef2
+                        (change)="onChangeListItemOption2(elRef2.value)"
                       >
-                        <option value="commerse">Commerse</option>
-                        <option value="Health">Health</option>
-                        <option value="it">IT</option>
+                        <option
+                          *ngFor="let item of optionalList2"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </option>
+                      </select>
+                    </td>
+                  </tr>
+
+                  <tr *ngIf="isOptionalList3">
+                    <td>
+                      <div class="form-check">
+                        <label class="form-check-label">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            name="optional3_check"
+                            [ngModel]="false"
+                          />
+                          <span class="form-check-sign"></span>
+                        </label>
+                      </div>
+                    </td>
+                    <td style="cursor: pointer">
+                      <select
+                        name="optional3"
+                        class="form-control"
+                        id=""
+                        ngModel
+                        #elRef3
+                        (change)="onChangeListItemOption3(elRef3.value)"
+                      >
+                        <option
+                          *ngFor="let item of optionalList3"
+                          [value]="item"
+                        >
+                          {{ item }}
+                        </option>
                       </select>
                     </td>
                   </tr>
                   <tr>
                     <td></td>
                     <td>
-                      <p style="color: red" *ngIf="!re_check.value">
-                        You must be follow subject Religion
-                      </p>
                       <div class="form-check">
                         <label class="form-check-label">
                           <input
                             class="form-check-input btn-round btn-success"
                             type="submit"
                             value="Submit"
-                            [disabled]=""
                           />
                         </label>
                       </div>
@@ -138,20 +153,25 @@
                   </tr>
                 </tbody>
               </table>
+              <br />
+              <hr />
+              <p style="color: red" *ngIf="!formData.valid && formData.dirty">
+                You must be follow subject
+              </p>
             </form>
           </div>
         </div>
         <div class="card-footer">
           <hr />
           <div class="stats">
-            <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes
-            ago
+            <i class="now-ui-icons loader_refresh"></i>
+            {{ timeInfo }}
           </div>
         </div>
       </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="card card-user">
         <div class="image">
           <img src="../assets/img/bg5.jpg" alt="..." />
@@ -161,18 +181,19 @@
             <a href="#">
               <img
                 class="avatar border-gray"
-                src="../assets/img/mike.jpg"
+                [src]="subjecRelatedData.imagePath"
                 alt="..."
               />
-              <h5 class="title">Mike Andrew</h5>
+              <h5 class="title">
+                {{ subjecRelatedData.teacherName }}
+              </h5>
             </a>
-            <p class="description">michael24</p>
+            <p class="description">
+              {{ subjecRelatedData.subjectName | uppercase }}
+            </p>
           </div>
           <p class="description text-center">
-            "Lamborghini Mercy
-            <br />
-            Your chick she so thirsty <br />
-            I'm in that two seat Lambo"
+            {{ subjecRelatedData.subjectDes }}
           </p>
         </div>
         <hr />

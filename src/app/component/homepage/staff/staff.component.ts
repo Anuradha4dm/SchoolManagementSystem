@@ -40,6 +40,21 @@ export class StaffComponent implements OnInit {
     {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
     {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
     {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
+    {photoUrl: 'assets/img/mike.jpg',name: 'W.A.K. Wickramaratne',category: 'Teacher',email: 'abc@gmail.com'},
   ]
 
 }

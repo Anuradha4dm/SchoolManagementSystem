@@ -37,24 +37,24 @@ export class DashboardComponent implements OnInit {
     this.gradientFill.addColorStop(1, 'rgba(249, 99, 59, 0.40)');
 
     this.lineBigDashboardChartLabels = [
-      'JANU',
-      'FEB',
-      'MAR',
-      'APR',
-      'MAY',
-      'JUN',
-      'JUL',
-      'AUG',
-      'SEP',
-      'OCT',
-      'NOV',
-      'DEC',
+      '2016 1T',
+      '2016 2T',
+      '2016 3T',
+      '2017 1T',
+      '2017 2T',
+      '2017 3T',
+      '2018 1T',
+      '2018 2T',
+      '2018 3T',
+      '2019 1T',
+      '2019 2T',
+      '2019 3T',
     ];
 
     this.lineBigDashboardChartType = 'line';
     this.lineBigDashboardChartData = [
       {
-        label: 'Data',
+        label: 'Average',
 
         pointBorderWidth: 1,
         pointHoverRadius: 7,
@@ -63,7 +63,7 @@ export class DashboardComponent implements OnInit {
         fill: true,
 
         borderWidth: 2,
-        data: [50, 150, 100, 190, 130, 90, 150, 160, 120, 140, 190, 95],
+        data: [50, 15, 10, 10, 30, 90, 50, 60, 20, 10, 10, 95],
       },
     ];
     this.lineBigDashboardChartColors = [
@@ -108,9 +108,9 @@ export class DashboardComponent implements OnInit {
             ticks: {
               fontColor: 'rgba(255,255,255,0.4)',
               fontStyle: 'bold',
+              max: 100,
+              stepSize: 10,
               beginAtZero: true,
-              maxTicksLimit: 5,
-              padding: 10,
             },
             gridLines: {
               drawTicks: true,
@@ -125,7 +125,7 @@ export class DashboardComponent implements OnInit {
           {
             gridLines: {
               zeroLineColor: 'transparent',
-              display: false,
+              display: true,
             },
             ticks: {
               padding: 10,
