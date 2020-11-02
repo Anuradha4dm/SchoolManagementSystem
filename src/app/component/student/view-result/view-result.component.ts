@@ -1,25 +1,89 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ThemeService } from 'ng2-charts';
+import { Subscription } from 'rxjs';
+import { min } from 'rxjs/operators';
+import { LogInUserModel } from 'src/app/models/login-user.model';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
+import { WebSocketService } from 'src/app/services/websocket.service';
+import { UserLogInService } from '../../homepage/login/user-login.service';
+import { StudentProfileService } from '../student-profile.service';
 
 @Component({
   selector: 'app-view-result',
   templateUrl: './view-result.component.html',
   styleUrls: ['./view-result.component.css'],
 })
-export class ViewResultComponent implements OnInit {
+export class ViewResultComponent implements OnInit, OnDestroy {
   averageMarks: number;
+  2;
+  subscrible1: Subscription;
+  subscrible2: Subscription;
+  loginuserData: LogInUserModel;
+  years: number[];
+  classVal: string;
 
-  resultReviewArray: { subject: string; marks: number; grade: string }[] = [
-    { subject: 'Mathemetics', marks: 88, grade: 'A' },
-    { subject: 'Science', marks: 88, grade: 'A' },
-    { subject: 'Sinhala', marks: 88, grade: 'A' },
-    { subject: 'History', marks: 88, grade: 'A' },
-    { subject: 'Buddhist', marks: 88, grade: 'A' },
-    { subject: 'IT', marks: 88, grade: 'A' },
-    { subject: 'Wester Music', marks: 88, grade: 'A' },
-    { subject: 'Commerce', marks: 88, grade: 'A' },
-  ];
+  resultReviewArray: { subject: string; marks: number; grade: string }[] = [];
 
-  constructor() {}
+  constructor(
+    private webSocketService: WebSocketService,
+    private userLoginService: UserLogInService,
+    private studentProfileService: StudentProfileService,
+    private alertMessageService: AlertMessageService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userLoginService.userAuthData.subscribe((data) => {
+      this.loginuserData = data;
+    });
+
+    this.webSocketService.emit('getYear', {
+      data: this.loginuserData.getUserId,
+    });
+
+    this.subscrible1 = this.webSocketService.listen('years').subscribe(
+      (data) => {
+        this.years = data.years;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.subscrible2 = this.webSocketService.listen('popClass').subscribe(
+      (data) => {
+        this.classVal = data;
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {}
+    );
+  }
+
+  onSubmit(formData) {
+    this.studentProfileService
+      .viewResultOfSpecificStudent(formData.value)
+      .subscribe(
+        (data) => {
+          this.resultReviewArray = data.resultarray;
+        },
+        (error) => {
+          this.alertMessageService.errorAlert('NO DATA FOUND');
+        }
+      );
+  }
+
+  ngOnDestroy() {
+    this.subscrible1.unsubscribe();
+    this.subscrible2.unsubscribe();
+  }
+
+  onSelectTerm(year, term) {
+    this.webSocketService.emit('getGrades', {
+      id: this.loginuserData.getUserId,
+      year: year,
+      term: term,
+    });
+  }
 }

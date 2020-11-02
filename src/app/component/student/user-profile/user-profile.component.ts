@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
+
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
 
@@ -42,17 +43,21 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.loginUserService.userAuthData.subscribe((userData) => {
       this.loginUserData = userData;
-      console.log(this.loginUserData);
     });
 
     this.studentProfileService
       .getStudent(this.loginUserData.getUserId)
-      .subscribe((result) => {
-        this.studentProfileData = result;
+      .subscribe(
+        (result) => {
+          this.studentProfileData = result;
 
-        this.imagePath =
-          'http://localhost:3000/' + this.studentProfileData.imagePath;
-      });
+          this.imagePath =
+            'http://localhost:3000/' + this.studentProfileData.imagePath;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   toggleShowBtn() {
@@ -60,7 +65,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   onEditProfile() {
-    this.router.navigate(['edit-profile', this.loginUserData.getUserId]);
+    this.router.navigate([
+      'user',
+      'edit-profile',
+      this.loginUserData.getUserId,
+    ]);
   }
 
   viewSubjectClick() {}

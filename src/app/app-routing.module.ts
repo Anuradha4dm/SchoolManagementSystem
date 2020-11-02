@@ -15,6 +15,10 @@ import { EditProfileComponent } from './component/student/edit-profile/edit-prof
 import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
 import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ViewResultComponent } from './component/student/view-result/view-result.component';
+import { ViewSubjectsComponent } from './component/student/view-subjects/view-subjects.component';
+import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
+import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
 const routes: Routes = [
   {
     path: '',
@@ -35,7 +39,11 @@ const routes: Routes = [
         component: StudentAttendenceComponent,
         resolve: { studentList: GetStudentListForAttendenceResolver },
       },
-      { path: 'addsubjects', component: AddSubjectsComponent },
+      {
+        path: 'addsubjects',
+        component: AddSubjectsComponent,
+        resolve: { data: AddSubjectResolverService },
+      },
       {
         path: 'notification',
         component: NotificationComponent,
@@ -45,6 +53,12 @@ const routes: Routes = [
       { path: 'edit-profile/:id', component: EditProfileComponent },
       { path: 'add-new-profile', component: AddNewProfileComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'view-result', component: ViewResultComponent },
+      {
+        path: 'viewsubjects',
+        component: ViewSubjectsComponent,
+        resolve: { subjectList: GetRegisteredSubjectList },
+      },
     ],
   },
 ];

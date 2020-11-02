@@ -8,32 +8,45 @@
           <h5 class="card-category">Enter Field Value to See Result</h5>
 
           <div>
-            <form>
+            <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
               <div class="row">
                 <div class="col-md-4">
                   <label for="year">Year</label>
-                  <select name="optional1" class="form-control" id="year">
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
+                  <select
+                    name="year"
+                    class="form-control"
+                    id="year"
+                    ngModel
+                    #elYear
+                  >
+                    <option [value]="year" *ngFor="let year of years">
+                      {{ year }}
+                    </option>
                   </select>
                 </div>
                 <div class="col-md-4">
                   <label for="term">Term</label>
-                  <select name="optional1" class="form-control" id="term">
-                    <option value="1_st_term">1st Term</option>
-                    <option value="2_st_term">2nd Term</option>
-                    <option value="3_st_term">3rd Term</option>
+                  <select
+                    name="term"
+                    class="form-control"
+                    id="term"
+                    #elTerm
+                    ngModel
+                    (change)="onSelectTerm(elYear.value, elTerm.value)"
+                  >
+                    <option value="1">1st Term</option>
+                    <option value="2">2nd Term</option>
+                    <option value="3">3rd Term</option>
                   </select>
                 </div>
                 <div class="col-md-4">
                   <label for="grade">Grade</label>
-                  <select name="optional1" class="form-control" id="grade">
-                    <option value="grade6">Grade 6</option>
-                    <option value="grade7">Grade 7</option>
-                    <option value="grade8">Grade 8</option>
-                  </select>
+                  <input
+                    type="text"
+                    name="class"
+                    class="form-control"
+                    [ngModel]="classVal"
+                  />
                 </div>
               </div>
               <div class="row">

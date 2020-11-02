@@ -114,4 +114,10 @@ export class StudentProfileService {
       ];
     }>('http://localhost:3000/student/get-subject-list/ST_1');
   }
+
+  viewResultOfSpecificStudent(formdata) {
+    return this.httpClient.post<{
+      resultarray: { subject: string; marks: number; grade: string }[];
+    }>('http://localhost:3000/student/view-result', formdata);
+  }
 }
