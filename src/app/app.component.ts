@@ -9,9 +9,7 @@ import { WebSocketService } from './services/websocket.service';
 export class AppComponent implements OnInit {
   title = 'SchoolMangementSystem';
 
-  constructor(private webSocketService: WebSocketService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.webSocketService.emit('ch', 'mg data');
-  }
+  ngOnInit(): void {}
 }

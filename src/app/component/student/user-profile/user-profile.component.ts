@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
+
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
 
@@ -64,7 +65,11 @@ export class UserProfileComponent implements OnInit {
   }
 
   onEditProfile() {
-    this.router.navigate(['edit-profile', this.loginUserData.getUserId]);
+    this.router.navigate([
+      'user',
+      'edit-profile',
+      this.loginUserData.getUserId,
+    ]);
   }
 
   viewSubjectClick() {}

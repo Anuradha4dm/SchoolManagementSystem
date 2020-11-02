@@ -46,7 +46,7 @@
                             type="checkbox"
                             #op1Ref
                             name="optional1_check"
-                            [ngModel]="true"
+                            [ngModel]
                             required
                           />
                           <!-- to get the uncheck default need to do with grade -->
@@ -80,7 +80,9 @@
                             class="form-check-input"
                             type="checkbox"
                             name="optional2_check"
+                            #op2Ref
                             [ngModel]="false"
+                            required
                           />
                           <span class="form-check-sign"></span>
                         </label>
@@ -113,7 +115,9 @@
                             class="form-check-input"
                             type="checkbox"
                             name="optional3_check"
+                            #op3Ref
                             [ngModel]="false"
+                            required
                           />
                           <span class="form-check-sign"></span>
                         </label>
@@ -146,6 +150,7 @@
                             class="form-check-input btn-round btn-success"
                             type="submit"
                             value="Submit"
+                            [disabled]="!formData.valid"
                           />
                         </label>
                       </div>
@@ -155,7 +160,7 @@
               </table>
               <br />
               <hr />
-              <p style="color: red" *ngIf="!formData.valid && formData.dirty">
+              <p style="color: red" *ngIf="!formData.valid">
                 You must be follow subject
               </p>
             </form>

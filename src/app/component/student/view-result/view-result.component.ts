@@ -4,6 +4,7 @@ import { ThemeService } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { min } from 'rxjs/operators';
 import { LogInUserModel } from 'src/app/models/login-user.model';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
@@ -27,7 +28,8 @@ export class ViewResultComponent implements OnInit, OnDestroy {
   constructor(
     private webSocketService: WebSocketService,
     private userLoginService: UserLogInService,
-    private studentProfileService: StudentProfileService
+    private studentProfileService: StudentProfileService,
+    private alertMessageService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -39,11 +41,14 @@ export class ViewResultComponent implements OnInit, OnDestroy {
       data: this.loginuserData.getUserId,
     });
 
-    this.subscrible1 = this.webSocketService
-      .listen('years')
-      .subscribe((data) => {
+    this.subscrible1 = this.webSocketService.listen('years').subscribe(
+      (data) => {
         this.years = data.years;
-      });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
 
     this.subscrible2 = this.webSocketService.listen('popClass').subscribe(
       (data) => {
@@ -62,10 +67,9 @@ export class ViewResultComponent implements OnInit, OnDestroy {
       .subscribe(
         (data) => {
           this.resultReviewArray = data.resultarray;
-          console.log(data);
         },
         (error) => {
-          console.log(error);
+          this.alertMessageService.errorAlert('NO DATA FOUND');
         }
       );
   }

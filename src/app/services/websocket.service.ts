@@ -13,7 +13,10 @@ export class WebSocketService {
   listen(eventname: string) {
     return new Observable<any>((subscriber) => {
       this.socket.on(eventname, (data) => {
-        subscriber.next(data);
+        if (data) {
+          subscriber.next(data);
+        }
+        subscriber.error('No Data Found');
       });
     });
   }
