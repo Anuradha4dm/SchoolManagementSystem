@@ -11,13 +11,9 @@ import { GetStudentListForAttendenceResolver } from './component/student/student
 import { UserProfileComponent } from './component/student/user-profile/user-profile.component';
 import { NotificationResolver } from './services/Notification-resolver.service';
 import { AddNewProfileComponent } from './component/admin/add-new-profile/add-new-profile.component';
-import { HomeComponent } from './component/homepage/home/home.component';
-import { StaffComponent } from './component/homepage/staff/staff.component';
-import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
-import { AboutComponent } from './component/homepage/about/about.component';
-
 import { EditProfileComponent } from './component/student/edit-profile/edit-profile.component';
-import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
+import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
+import { LayoutComponent } from './layout/layout.component';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ViewResultComponent } from './component/student/view-result/view-result.component';
 import { AddSubjectResolverService } from './component/student/student-resolvers/add-subject-resolver.service';
@@ -25,30 +21,45 @@ import { ViewSubjectsComponent } from './component/student/view-subjects/view-su
 import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
 import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component'
 import { TermTestResultsComponent } from './component/teacher/term-test-results/term-test-results.component';
+import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 const routes: Routes = [
-  { path: 'userprofile', component: UserProfileComponent },
   {
-    path: 'student-list',
-    component: StudentListComponent,
-    resolve: { studentList: GetClassStudentListResolver },
+    path: '',
+    component: HomelayoutComponent,
   },
   {
-    path: 'mark-attendence',
-    component: StudentAttendenceComponent,
-    resolve: { studentList: GetStudentListForAttendenceResolver },
-  },
-  { path: 'addsubjects', component: AddSubjectsComponent },
-  {
-    path: 'notification',
-    component: NotificationComponent,
-    resolve: { notifications: NotificationResolver },
+    path: 'user',
+    component: LayoutComponent,
+    children: [
+      { path: 'userprofile', component: UserProfileComponent },
+      {
+        path: 'student-list',
+        component: StudentListComponent,
+        resolve: { studentList: GetClassStudentListResolver },
+      },
+      {
+        path: 'mark-attendence',
+        component: StudentAttendenceComponent,
+        resolve: { studentList: GetStudentListForAttendenceResolver },
+      },
+      { path: 'addsubjects', component: AddSubjectsComponent },
+      {
+        path: 'notification',
+        component: NotificationComponent,
+        resolve: { notifications: NotificationResolver },
+      },
+      { path: 'edit-profile', component: AddNewProfileComponent },
+      { path: 'edit-profile/:id', component: EditProfileComponent },
+      { path: 'add-new-profile', component: AddNewProfileComponent },
+      { path: 'dashboard', component: DashboardComponent },
+    ],
   },
   { path: 'edit-profile', component: AddNewProfileComponent },
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
   //to remove
   { path: 'madmax-tprofile', component: TeacherProfileComponent },
-  { path: 'madmax-leave', component: LeaverequestComponent },
+  { path: 'madmax-leave', component: LeaverequestComponent},
   { path: 'madmax-termtest', component: TermTestResultsComponent },
 ];
 
