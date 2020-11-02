@@ -1,19 +1,28 @@
 <div class="main-content">
     <div class="card">
-        <!--Term selection here-->
+        <!--Term and year selection here-->
         <div class="card-header">
-            <div class="btn-group w-100">
-                <button (click)="term='term1'" class="btn btn-success">Term 1</button>
-                <button (click)="term='term2'" class="btn btn-info">Term 2</button>
-                <button (click)="term='term3'" class="btn btn-secondary">Term 3</button>
+            <div class="row mb-4">
+                <div class="col">
+                    <label>Term:</label>
+                    <select name="term" class="form-control" [(ngModel)]="term">
+                        <option value="term1">Term1</option>
+                        <option value="term2">Term2</option>
+                        <option value="term3">Term3</option>
+                    </select>
+                </div>
+
+                <div class="col">
+                    <label>Year:</label>
+                    <input type="date" class="form-control w-50">
+                </div>
             </div>
         </div>
 
         <div class="card-body">
-            <h4 class="text-muted text-center mb-4" *ngIf="term==''">Please select a term to continue</h4>
-            <h4 class="text-muted text-center mb-4" *ngIf="term!=''">Class student list here</h4>
+            <h4 class="text-muted text-center mb-4">Class student list here</h4>
 
-            <div class="row" *ngIf="term!=''">
+            <div class="row">
                 <!--Student list here-->
                 <div class="col-auto">
                     <table class="table text-center">
@@ -30,14 +39,14 @@
                             <td>{{student.average}}</td>
                             <td>{{student.position}}</td>
                             <td>
-                                <button (click)="studentID=student.id" class="btn btn-danger btn-sm">Add Result</button>
+                                <button (click)="selectedStudentID=student.id" class="btn btn-danger btn-sm">Add Result</button>
                             </td>
                         </tr>
                     </table>
                 </div>
 
                 <!--Results add form here-->
-                <div class="col-auto" *ngIf="studentID!=''">
+                <div class="col-auto" *ngIf="selectedStudentID!=''">
                     <form class="border border-dark p-2">
                         <div class="row">
                             <div class="col-auto">
@@ -47,7 +56,7 @@
 
                             <div class="col-auto">
                                 <label>Student ID</label>
-                                <input type="text" class="form-control" disabled [value]="studentID">
+                                <input type="text" class="form-control" disabled [value]="selectedStudentID">
                             </div>
                         </div>
                         
