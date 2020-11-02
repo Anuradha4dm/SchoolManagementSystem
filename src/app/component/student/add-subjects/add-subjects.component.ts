@@ -167,13 +167,12 @@ export class AddSubjectsComponent implements OnInit {
     }
 
     if (this.gradeVal == 10 || this.gradeVal == 11) {
-      console.log(data.value);
       this.studentProfileService
         .addSubjectOrdinaryLevel({
           studentid: this.studentData.studentid,
-          optional1: data.optional1,
-          optional2: data.optional2,
-          optional3: data.optional3,
+          optional1: data.value.optional1,
+          optional2: data.value.optional2,
+          optional3: data.value.optional3,
           grade: this.studentData.grade,
         })
         .subscribe(
