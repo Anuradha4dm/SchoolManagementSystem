@@ -18,39 +18,48 @@
         <!--Leave application here -->
         <div class="card-body">
             
-            <form>
-                <div class="form-group">
-                    <label>User ID</label>
-                    <input class="form-control" type="text" disabled placeholder="Auto complete">
-                </div>
+            <form #leaveForm="ngForm" (ngSubmit)="getLeaveData(leaveForm)">
+                <div class="row">
+                    <div class="col">
+                        <label>User ID</label>
+                        <input class="form-control" type="text" disabled>
+                    </div>
 
-                <div class="form-group">
-                    <label>Username</label>
-                    <input type="text" class="form-control" disabled placeholder="Auto complete">
-                </div>
+                    <div class="col">
+                        <label>Category</label>
+                        <input type="text" class="form-control" disabled>
+                    </div>
 
+                    <div class="col">
+                        <label>Date</label>
+                        <input required type="date" class="form-control" name="date" ngModel #date="ngModel">
+                        <small *ngIf="date.invalid && date.touched" class="error">Please select a date</small>
+                    </div>
+                </div>
+             
                 <div class="form-group">
                     <label>Name</label>
-                    <input type="text" class="form-control" disabled placeholder="Auto">
+                    <input type="text" class="form-control" disabled>
                 </div>
 
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" class="form-control" placeholder="Auto">
+                    <input type="email" class="form-control" name="email" ngModel>
                 </div>
 
                 <div class="form-group">
                     <label>Mobile Number</label>
-                    <input type="text" class="form-control" placeholder="Auto">
+                    <input type="text" class="form-control" name="phone" ngModel>
                 </div>
 
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control"></textarea>
+                    <textarea required class="form-control" name="description" ngModel #description="ngModel"></textarea>
+                    <small *ngIf="description.touched && description.invalid" class="error">Description is required</small>
                 </div>
 
                 <div class="form-group pull-right">
-                    <button type="button" class="btn btn-success">Send</button>
+                    <button type="submit" class="btn btn-success" [disabled]="leaveForm.invalid">Send</button>
                     <button type="reset" class="btn btn-danger">Cancel</button>
                 </div>
             </form>

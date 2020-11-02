@@ -22,6 +22,7 @@ import { HomePageModule } from './component/homepage/homepage.module';
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
+import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { ChartsModule } from 'ng2-charts';
     SiderbarComponent,
     ConfirmationDialogComponent,
     DashboardComponent,
+    LeaverequestComponent
   ],
   imports: [
     BrowserModule,

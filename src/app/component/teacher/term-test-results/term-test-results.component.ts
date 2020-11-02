@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from 'src/app/models/student.model';
-import { Teacher } from 'src/app/models/teacher.model';
 
 @Component({
   selector: 'app-term-test-results',
@@ -10,7 +9,6 @@ import { Teacher } from 'src/app/models/teacher.model';
 export class TermTestResultsComponent implements OnInit {
   term: string = 'term1';
   selectedStudentID: string = '';
-  teacher: Teacher;
   studentList: Student[];
 
   //to remove start
