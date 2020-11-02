@@ -40,4 +40,38 @@ export class DashboardService {
         })
       );
   }
+
+  getDataForChartData(subject: string) {
+    return this.httpClient
+      .post<{ data: { year: number; term: number; marks: number }[] }>(
+        'http://localhost:3000/student/get-chart1-data',
+        {
+          studentid: this.loginUserData.getUserId,
+          subjectname: subject,
+        }
+      )
+      .pipe(
+        map((data) => {
+          var xLabel = [];
+          var yLabel = [];
+
+          data.data.forEach((element) => {
+            xLabel.push(element.year + ' ' + element.term + 'T');
+            yLabel.push(element.marks);
+          });
+
+          return { xAxis: xLabel, yAxis: yLabel };
+        })
+      );
+  }
+
+  getChart2Data(year, term) {
+    return this.httpClient.post<{
+      resultarray: { subject: string; marks: number; grade: string }[];
+    }>('http://localhost:3000/student/view-result', {
+      year: year,
+      term: term,
+      sudentid: this.loginUserData.getUserId,
+    });
+  }
 }

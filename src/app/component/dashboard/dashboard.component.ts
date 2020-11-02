@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { WebSocketService } from 'src/app/services/websocket.service';
+
+import { StudentModule } from '../student/student.module';
 import { DashboardService } from './dashboard.service';
 
 @Component({
@@ -6,21 +10,52 @@ import { DashboardService } from './dashboard.service';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   //populating data
   xData: string[] = [];
   yData: number[] = [];
+  loginUserData: StudentModule;
+  subjectSubscription: Subscription;
+  yearSubscription: Subscription;
 
-  public gradientFill;
+  isChart1Show: boolean = false;
+  chart1DataList: { xLabel: string[]; yLabel: number[] } = {
+    xLabel: [],
+    yLabel: [],
+  };
+
+  subjects: string[] = ['sub1', 'sub2'];
+
+  //chart 2 data
+  years: number[] = [];
+  isYearChartShow: boolean = false;
+
+  public gradientFillMain;
+  public gradientFillChart1;
+  // public gradientFillChart1;
   public ctx;
   public canvas: any;
   public chartColor;
 
-  public lineBigDashboardChartType;
-  public lineBigDashboardChartData: Array<any>;
-  public lineBigDashboardChartColors: Array<any>;
-  public lineBigDashboardChartOptions: any;
-  public lineBigDashboardChartLabels: Array<any>;
+  public mainChartType;
+  public mainChartData: Array<any>;
+  public mainChartColor: Array<any>;
+  public mianChartOption: any;
+  public mainChartLabels: Array<any>;
+
+  //bar chart1
+  public chart1Type;
+  public char1Data: Array<any>;
+  public chart1Options: any;
+  public chart1Lables: Array<any>;
+  public chart1Color: Array<any>;
+
+  //bar chart12
+  public chart2Type;
+  public chart2Data: Array<any>;
+  public chart2Options: any;
+  public chart2Lables: Array<any>;
+  public chart2Color: Array<any>;
 
   public chartClicked(e: any): void {
     console.log(e);
@@ -30,9 +65,48 @@ export class DashboardComponent implements OnInit {
     console.log(e);
   }
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(
+    private dashboardService: DashboardService,
+    private webSockerService: WebSocketService
+  ) {}
 
   ngOnInit(): void {
+    //populate the subject fiels
+    this.webSockerService.emit('getSubjects', {
+      studentid: this.dashboardService.loginUserData.getUserId,
+    });
+
+    this.subjectSubscription = this.webSockerService
+      .listen('subectArr')
+      .subscribe(
+        (data) => {
+          this.subjects = data.subjectArray;
+        },
+        (error) => {
+          console.log(error);
+        },
+        () => {
+          console.log('complete');
+        }
+      );
+
+    //popualte year field
+    this.webSockerService.emit('getYear', {
+      studentid: this.dashboardService.loginUserData.getUserId,
+    });
+
+    this.yearSubscription = this.webSockerService.listen('years').subscribe(
+      (data) => {
+        this.years = data.years;
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        console.log('complete');
+      }
+    );
+
     //getting data form backend
     this.dashboardService.getMainBoardDetails().subscribe(
       (data) => {
@@ -47,11 +121,11 @@ export class DashboardComponent implements OnInit {
         this.canvas = document.getElementById('bigDashboardChart');
         this.ctx = this.canvas.getContext('2d');
 
-        this.gradientFill = this.ctx.createLinearGradient(0, 170, 0, 50);
-        this.gradientFill.addColorStop(0, 'rgba(128, 182, 244, 0)');
-        this.gradientFill.addColorStop(1, 'rgba(249, 99, 59, 0.40)');
+        this.gradientFillMain = this.ctx.createLinearGradient(0, 170, 0, 50);
+        this.gradientFillMain.addColorStop(1, 'rgba(0,26,77, 0.90)');
+        this.gradientFillMain.addColorStop(0, 'rgba(102, 153, 255, 0.6)');
 
-        this.lineBigDashboardChartLabels = [
+        this.mainChartLabels = [
           '2016 1T',
           '2016 2T',
           '2016 3T',
@@ -60,8 +134,8 @@ export class DashboardComponent implements OnInit {
           '2017 3T',
         ];
 
-        this.lineBigDashboardChartType = 'line';
-        this.lineBigDashboardChartData = [
+        this.mainChartType = 'line';
+        this.mainChartData = [
           {
             label: 'Average',
 
@@ -75,9 +149,9 @@ export class DashboardComponent implements OnInit {
             data: this.yData,
           },
         ];
-        this.lineBigDashboardChartColors = [
+        this.mainChartColor = [
           {
-            backgroundColor: this.gradientFill,
+            backgroundColor: this.gradientFillMain,
             borderColor: this.chartColor,
             pointBorderColor: this.chartColor,
             pointBackgroundColor: '#2c2c2c',
@@ -86,7 +160,18 @@ export class DashboardComponent implements OnInit {
           },
         ];
 
-        this.lineBigDashboardChartOptions = {
+        this.mainChartColor = [
+          {
+            backgroundColor: this.gradientFillMain,
+            borderColor: this.chartColor,
+            pointBorderColor: this.chartColor,
+            pointBackgroundColor: '#2c2c2c',
+            pointHoverBackgroundColor: '#2c2c2c',
+            pointHoverBorderColor: this.chartColor,
+          },
+        ];
+
+        this.mianChartOption = {
           layout: {
             padding: {
               left: 20,
@@ -145,7 +230,212 @@ export class DashboardComponent implements OnInit {
             ],
           },
         };
+
+        //start with bar chart1
       }
     );
+  }
+
+  onSelectListItem(value) {
+    this.dashboardService.getDataForChartData(value).subscribe(
+      (data) => {
+        this.chart1DataList.xLabel = data.xAxis;
+        this.chart1DataList.yLabel = data.yAxis;
+        console.log(data);
+      },
+      (error) => {
+        console.log('error');
+      },
+      () => {
+        console.log('complet');
+        this.gradientFillChart1 = this.ctx.createLinearGradient(0, 170, 0, 50);
+        this.gradientFillChart1.addColorStop(1, 'rgba(51, 153, 0, 0.90)');
+        this.gradientFillChart1.addColorStop(0, 'rgba(170, 255, 128, 0.9)');
+
+        this.chart1Type = 'bar';
+
+        this.char1Data = [
+          {
+            label: 'Marks',
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            fill: true,
+            borderWidth: 1,
+            data: this.chart1DataList.yLabel,
+          },
+        ];
+
+        this.chart1Options = {
+          maintainAspectRatio: false,
+          legend: {
+            display: false,
+          },
+          tooltips: {
+            bodySpacing: 4,
+            mode: 'nearest',
+            intersect: 0,
+            position: 'nearest',
+            xPadding: 10,
+            yPadding: 10,
+            caretPadding: 10,
+          },
+          responsive: 1,
+          scales: {
+            yAxes: [
+              {
+                gridLines: {
+                  zeroLineColor: 'transparent',
+                  display: true,
+                  linewidth: 1,
+                },
+                ticks: {
+                  beginAtZero: true,
+                  mirror: false,
+                  suggestedMin: 0,
+                  suggestedMax: 100,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                display: 0,
+                ticks: {
+                  display: false,
+                },
+
+                gridLines: {
+                  zeroLineColor: 'transparent',
+                  drawTicks: false,
+                  display: false,
+                  drawBorder: false,
+                },
+              },
+            ],
+          },
+          layout: {
+            padding: {
+              left: 0,
+              right: 0,
+              top: 15,
+              bottom: 15,
+            },
+          },
+        };
+
+        this.chart1Lables = this.chart1DataList.xLabel;
+
+        this.chart1Color = [
+          {
+            backgroundColor: this.gradientFillChart1,
+            borderColor: '#2CA8FF',
+            pointBorderColor: '#FFF',
+            pointBackgroundColor: '#2CA8FF',
+          },
+        ];
+
+        this.isChart1Show = true;
+      }
+    );
+  }
+
+  onSelectListItem2(year, term) {
+    this.dashboardService.getChart2Data(year, term).subscribe(
+      (data) => {
+        console.log(data);
+      },
+      (error) => {
+        console.log('error');
+      },
+      () => {
+        // this.gradientFillChart1 = this.ctx.createLinearGradient(0, 170, 0, 50);
+        // this.gradientFillChart1.addColorStop(1, 'rgba(51, 153, 0, 0.90)');
+        // this.gradientFillChart1.addColorStop(0, 'rgba(170, 255, 128, 0.9)');
+        // this.chart1Type = 'bar';
+        // this.char1Data = [
+        //   {
+        //     label: 'Marks',
+        //     pointBorderWidth: 2,
+        //     pointHoverRadius: 4,
+        //     pointHoverBorderWidth: 1,
+        //     pointRadius: 4,
+        //     fill: true,
+        //     borderWidth: 1,
+        //     data: this.chart1DataList.yLabel,
+        //   },
+        // ];
+        // this.chart1Options = {
+        //   maintainAspectRatio: false,
+        //   legend: {
+        //     display: false,
+        //   },
+        //   tooltips: {
+        //     bodySpacing: 4,
+        //     mode: 'nearest',
+        //     intersect: 0,
+        //     position: 'nearest',
+        //     xPadding: 10,
+        //     yPadding: 10,
+        //     caretPadding: 10,
+        //   },
+        //   responsive: 1,
+        //   scales: {
+        //     yAxes: [
+        //       {
+        //         gridLines: {
+        //           zeroLineColor: 'transparent',
+        //           display: true,
+        //           linewidth: 1,
+        //         },
+        //         ticks: {
+        //           beginAtZero: true,
+        //           mirror: false,
+        //           suggestedMin: 0,
+        //           suggestedMax: 100,
+        //         },
+        //       },
+        //     ],
+        //     xAxes: [
+        //       {
+        //         display: 0,
+        //         ticks: {
+        //           display: false,
+        //         },
+        //         gridLines: {
+        //           zeroLineColor: 'transparent',
+        //           drawTicks: false,
+        //           display: false,
+        //           drawBorder: false,
+        //         },
+        //       },
+        //     ],
+        //   },
+        //   layout: {
+        //     padding: {
+        //       left: 0,
+        //       right: 0,
+        //       top: 15,
+        //       bottom: 15,
+        //     },
+        //   },
+        // };
+        // this.chart1Lables = this.chart1DataList.xLabel;
+        // this.chart1Color = [
+        //   {
+        //     backgroundColor: this.gradientFillChart1,
+        //     borderColor: '#2CA8FF',
+        //     pointBorderColor: '#FFF',
+        //     pointBackgroundColor: '#2CA8FF',
+        //   },
+        // ];
+        // this.isChart1Show = true;
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.subjectSubscription.unsubscribe();
+    this.yearSubscription.unsubscribe();
   }
 }

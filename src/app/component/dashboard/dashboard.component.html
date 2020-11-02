@@ -2,13 +2,110 @@
   <canvas
     baseChart
     id="bigDashboardChart"
-    [datasets]="lineBigDashboardChartData"
-    [labels]="lineBigDashboardChartLabels"
-    [colors]="lineBigDashboardChartColors"
-    [options]="lineBigDashboardChartOptions"
-    [chartType]="lineBigDashboardChartType"
+    [datasets]="mainChartData"
+    [labels]="mainChartLabels"
+    [colors]="mainChartColor"
+    [options]="mianChartOption"
+    [chartType]="mainChartType"
     (chartHover)="chartHovered($event)"
     (chartClick)="chartClicked($event)"
   >
   </canvas>
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-lg-5 col-md-6">
+      <div class="card card-chart">
+        <div class="card-header">
+          <label for="subject">Select Subject</label>
+          <select
+            name="subject"
+            id="subject"
+            class="form-control"
+            #subRef
+            (change)="onSelectListItem(subRef.value)"
+          >
+            <option [value]="sub" *ngFor="let sub of subjects">
+              {{ sub }}
+            </option>
+          </select>
+          <h4 class="card-title">{{ subRef.value | titlecase }}</h4>
+        </div>
+        <div class="card-body" *ngIf="isChart1Show">
+          <div class="chart-area" style="position: relative; height: 350px">
+            <canvas
+              baseChart
+              id="barChartSimpleGradientsNumbers"
+              [datasets]="char1Data"
+              [labels]="chart1Lables"
+              [colors]="chart1Color"
+              [options]="chart1Options"
+              [chartType]="chart1Type"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+            ></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-7 col-md-7">
+      <div class="card card-chart">
+        <div class="card-header">
+          <label for="year">Select Year</label>
+          <div class="row">
+            <div class="col-md-4">
+              <select name="year" id="year" class="form-control" #yearRef>
+                <option [value]="year" *ngFor="let year of years">
+                  {{ year }}
+                </option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select
+                name="term"
+                id="term"
+                class="form-control"
+                #termRef
+                (change)="onSelectListItem2(yearRef.value, termRef.value)"
+              >
+                <option value="1">1 ST TERM</option>
+                <option value="2">2 ND TERM</option>
+                <option value="3">3 RD TERM</option>
+              </select>
+            </div>
+          </div>
+          <h4 class="card-title">
+            {{ yearRef.value | titlecase }} AND {{ termRef.value }} TERM
+          </h4>
+        </div>
+        <div class="card-body" *ngIf="isYearChartShow">
+          <div class="chart-area" style="position: relative; height: 350px">
+            <canvas
+              baseChart
+              id="barChartSimpleGradientsNumbers"
+              [datasets]="chart2Data"
+              [labels]="chart2Lables"
+              [colors]="chart2Color"
+              [options]="chart2Options"
+              [chartType]="chart2Type"
+              (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"
+            ></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div class="stats">
+            <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
