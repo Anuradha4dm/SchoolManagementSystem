@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Student } from 'src/app/models/student.model';
+import { Teacher } from 'src/app/models/teacher.model';
 
 @Component({
   selector: 'app-term-test-results',
@@ -6,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./term-test-results.component.css']
 })
 export class TermTestResultsComponent implements OnInit {
-  term: string= '';
-  studentID: string = '';
+  term: string = 'term1';
+  selectedStudentID: string = '';
+  teacher: Teacher;
+  studentList: Student[];
 
+  //to remove start
   classStudents = [
     {
       id: '239',fname: 'Kamal',lname: 'Silva',average: 30.87,position: 1
@@ -31,6 +36,7 @@ export class TermTestResultsComponent implements OnInit {
     {name: 'Commerce',marks: 56},
     {name: 'English',marks: 70},
   ];
+  //to remove end
 
   constructor() { }
 
