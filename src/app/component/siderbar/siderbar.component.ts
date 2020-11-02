@@ -14,62 +14,103 @@ declare interface SideBarItem {
   styleUrls: ['./siderbar.component.css'],
 })
 export class SiderbarComponent implements OnInit {
-  userRoll: string;
+  userRoll: string = 'student';
 
   sideBarItems: SideBarItem[] = [];
+  // { path: '/dashboard', title: 'Dashboard', icon: 'design_app', class: '' },
+  // {
+  //   path: '/userprofile',
+  //   title: 'Profile',
+  //   icon: 'users_single-02',
+  //   class: '',
+  // },
+
+  // {
+  //   path: '/student-list',
+  //   title: 'Student List',
+  //   icon: 'design_bullet-list-67',
+  //   class: '',
+  // },
+  // {
+  //   path: '/mark-attendence',
+  //   title: 'Student Attendence',
+  //   icon: 'gestures_tap-01',
+  //   class: '',
+  // },
+  // {
+  //   path: '/notification',
+  //   title: 'Notification',
+  //   icon: 'education_agenda-bookmark',
+  //   class: '',
+  // },
+  // {
+  //   path: '/addsubjects',
+  //   title: 'Add Subjects',
+  //   icon: 'files_single-copy-04',
+  //   class: '',
+  // },
+  // {
+  //   path: '/add-new-profile',
+  //   title: 'New Profile',
+  //   icon: 'files_single-copy-04',
+  //   class: '',
+  // },
 
   constructor(private userLogInService: UserLogInService) {}
 
   ngOnInit(): void {
-    this.userLogInService.userAuthData.subscribe((userData) => {
-      this.userRoll = userData.getLoginAs;
-    });
-    if (this.userRoll) {
+    if (this.userRoll === 'student') {
       this.sideBarItems = [
         {
-          path: '/user/dashboard',
+          path: '/dashboard',
           title: 'Dashboard',
           icon: 'design_app',
           class: '',
         },
         {
-          path: '/user/userprofile',
+          path: '/userprofile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',
         },
         {
-          path: '/user/notification',
+          path: '/notification',
           title: 'Notification',
           icon: 'education_agenda-bookmark',
           class: '',
         },
         {
-          path: '/user/view-result',
+          path: '/view-result',
           title: 'VIEW RESULT',
           icon: 'education_agenda-bookmark',
           class: '',
         },
         {
-          path: '/user/addsubjects',
+          path: '/addsubjects',
           title: 'Add Subjects',
           icon: 'files_single-copy-04',
           class: '',
         },
         {
-          path: '/user/viewsubjects',
+          path: '/viewsubjects',
           title: 'View Subjects',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/user/exams',
+          path: '/exams',
           title: 'EXAMS',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/user/events',
+          path: '/chat',
+          title: 'CHAT',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/events',
           title: 'EVENTS',
           icon: 'gestures_tap-01',
           class: '',
@@ -101,58 +142,60 @@ export class SiderbarComponent implements OnInit {
         }
       ];
     }
+
     if (this.userRoll === 'teacher') {
       this.sideBarItems = [
         {
-          path: '/user/dashboard',
+          path: '/dashboard',
           title: 'Dashboard',
           icon: 'design_app',
           class: '',
         },
         {
-          path: '/user/userprofile',
+          path: '/userprofile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',
         },
+
         {
-          path: '/user/student-list',
+          path: '/student-list',
           title: 'Student List',
           icon: 'design_bullet-list-67',
           class: '',
         },
         {
-          path: '/user/mark-attendence',
+          path: '/mark-attendence',
           title: 'Student Attendence',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/user/notification',
+          path: '/notification',
           title: 'Notification',
           icon: 'education_agenda-bookmark',
           class: '',
         },
         {
-          path: '/user/leave-request',
+          path: '/leave-request',
           title: 'Request Leave',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/user/exams',
+          path: '/exams',
           title: 'EXAMS',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/user/chat',
+          path: '/chat',
           title: 'CHAT',
           icon: 'gestures_tap-01',
           class: '',
         },
         {
-          path: '/user/events',
+          path: '/events',
           title: 'EVENTS',
           icon: 'gestures_tap-01',
           class: '',

@@ -3,16 +3,12 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Student } from 'src/app/models/student.model';
 import { StudentProfileService } from '../student-profile.service';
-import { exhaustMap, map, take } from 'rxjs/operators';
-import { UserLogInService } from '../../homepage/login/user-login.service';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AddSubjectResolverService
   implements Resolve<{ studentid: string; grade: string }> {
-  constructor(
-    private userLoginService: UserLogInService,
-    private studentProfileService: StudentProfileService
-  ) {}
+  constructor(private studentProfileService: StudentProfileService) {}
 
   resolve(
     route: ActivatedRouteSnapshot
@@ -20,15 +16,12 @@ export class AddSubjectResolverService
     | Observable<{ studentid: string; grade: string }>
     | Promise<{ studentid: string; grade: string }>
     | { studentid: string; grade: string } {
-    var id;
-    this.userLoginService.userAuthData.subscribe((data) => {
-      id = data.getUserId;
-    });
-
-    return this.studentProfileService.getStudent(id).pipe(
-      map((data: Student) => {
-        return { studentid: data._id, grade: data.grade };
-      })
-    );
+    return this.studentProfileService
+      .getStudent(this.studentProfileService.logInStudentId)
+      .pipe(
+        map((data: Student) => {
+          return { studentid: data._id, grade: data.grade };
+        })
+      );
   }
 }

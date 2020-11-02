@@ -1,18 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { LogInUserModel } from 'src/app/models/login-user.model';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class UserLogInService {
-  //emmiting the error when occur in the log in
   errorEmitEvent = new Subject<{ error: string }>();
 
-  //this is dumy for the development need to be get for the serve
-  userAuthData = new BehaviorSubject<LogInUserModel>(
-    new LogInUserModel('', false, '', '', 0)
-  );
+  logInUserData: {
+    _id: string;
+    authentication: boolean;
+    logInAs: string;
+    token: string;
+  } = {
+    _id: 'ST_1',
+    authentication: true,
+    logInAs: 'student',
+    token: '',
+  }; //this is dumy for the development need to be get for the serve
+
+  userAuthData = new Subject<{ Authentication: boolean }>();
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
@@ -23,25 +30,19 @@ export class UserLogInService {
         authentication: boolean;
         logInAs: string;
         token: string;
-        expirationdata: number;
       }>('http://localhost:3000/auth/login', formData)
+
       .subscribe(
         (result) => {
-          const userData = new LogInUserModel(
-            result._id,
-            result.authentication,
-            result.logInAs,
-            result.token,
-            result.expirationdata
-          );
-
-          this.userAuthData.next(userData);
+          this.logInUserData = result;
+          this.userAuthData.next({ Authentication: result.authentication });
         },
         ({ error }) => {
           this.errorEmitEvent.next({ error: error.message });
         },
         () => {
-          this.router.navigate(['/user', 'dashboard']);
+          console.log('complete');
+          this.router.navigateByUrl('/userprofile');
         }
       );
   }
