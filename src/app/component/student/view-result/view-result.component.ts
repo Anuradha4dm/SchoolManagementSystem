@@ -1,11 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ThemeService } from 'ng2-charts';
+
 import { Subscription } from 'rxjs';
-import { min } from 'rxjs/operators';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
+
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
 
@@ -62,16 +61,19 @@ export class ViewResultComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(formData) {
-    this.studentProfileService
-      .viewResultOfSpecificStudent(formData.value)
-      .subscribe(
-        (data) => {
-          this.resultReviewArray = data.resultarray;
-        },
-        (error) => {
-          this.alertMessageService.errorAlert('NO DATA FOUND');
-        }
-      );
+    var sendData = {
+      ...formData.value,
+      studentid: this.loginuserData.getUserId,
+    };
+
+    this.studentProfileService.viewResultOfSpecificStudent(sendData).subscribe(
+      (data) => {
+        this.resultReviewArray = data.resultarray;
+      },
+      (error) => {
+        this.alertMessageService.errorAlert('NO DATA FOUND');
+      }
+    );
   }
 
   ngOnDestroy() {
