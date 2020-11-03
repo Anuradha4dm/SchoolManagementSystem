@@ -6,12 +6,12 @@ import { LogInUserModel } from 'src/app/models/login-user.model';
 
 @Injectable({ providedIn: 'root' })
 export class UserLogInService {
-  //emmiting the error when occur in the log in
   errorEmitEvent = new Subject<{ error: string }>();
 
   //this is dumy for the development need to be get for the serve
+
   userAuthData = new BehaviorSubject<LogInUserModel>(
-    new LogInUserModel('', false, '', '', 0)
+    new LogInUserModel('ST_1', true, 'student', 'ss', 0)
   );
 
   constructor(private httpClient: HttpClient, private router: Router) {}
@@ -25,9 +25,10 @@ export class UserLogInService {
         token: string;
         expirationdata: number;
       }>('http://localhost:3000/auth/login', formData)
+
       .subscribe(
         (result) => {
-          const userData = new LogInUserModel(
+          var userData = new LogInUserModel(
             result._id,
             result.authentication,
             result.logInAs,
@@ -41,7 +42,7 @@ export class UserLogInService {
           this.errorEmitEvent.next({ error: error.message });
         },
         () => {
-          this.router.navigate(['/user', 'dashboard']);
+          this.router.navigate(['/user']);
         }
       );
   }

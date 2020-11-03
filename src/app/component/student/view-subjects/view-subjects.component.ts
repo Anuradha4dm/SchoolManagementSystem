@@ -24,7 +24,7 @@ export class ViewSubjectsComponent implements OnInit {
         this.subjectListObj = data['subjectList'].dataArray;
       },
       (err) => {
-        console.log(err);
+        console.log(err.error.message);
       },
       () => {
         console.log('complete');

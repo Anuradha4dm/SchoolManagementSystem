@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Student } from 'src/app/models/student.model';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { StudentProfileService } from '../student-profile.service';
 
 @Component({
@@ -20,7 +21,8 @@ export class EditProfileComponent implements OnInit {
   constructor(
     private studentProfileService: StudentProfileService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private alertMessageService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +53,6 @@ export class EditProfileComponent implements OnInit {
     form.append('birthdate', formData.value.birthdate);
     form.append('classteacher', formData.value.classteacher);
     form.append('city', formData.value.city);
-    form.append('mobile', formData.value.mobilenumber);
     form.append('email', formData.value.email);
     form.append('firstname', formData.value.firstname);
     form.append('gender', formData.value.gender);
@@ -76,7 +77,10 @@ export class EditProfileComponent implements OnInit {
         console.log(error);
       },
       () => {
-        this.router.navigate(['userprofile']);
+        this.alertMessageService.competeAlert('Update Profile Success!');
+        setTimeout(() => {
+          this.router.navigate(['user', 'userprofile']);
+        }, 1000);
       }
     );
   }
