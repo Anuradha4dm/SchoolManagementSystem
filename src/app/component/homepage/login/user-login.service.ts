@@ -42,7 +42,7 @@ export class UserLogInService {
           this.errorEmitEvent.next({ error: error.message });
         },
         () => {
-          this.router.navigate(['/user', 'userprofile']);
+          this.router.navigate(['/user']);
         }
       );
   }

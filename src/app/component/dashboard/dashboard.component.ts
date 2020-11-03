@@ -451,7 +451,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           layout: {
             padding: {
               left: 0,
-              right: 0,
+              right: 10,
               top: 15,
               bottom: 15,
             },

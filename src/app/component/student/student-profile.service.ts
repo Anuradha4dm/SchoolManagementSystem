@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { exhaustMap, map, take } from 'rxjs/operators';
+import { exhaustMap, map, take, tap } from 'rxjs/operators';
 
 //import user define modules
 import { Student } from 'src/app/models/student.model';
@@ -41,6 +41,9 @@ export class StudentProfileService {
       .pipe(
         map((responseDate) => {
           return responseDate.studentData;
+        }),
+        tap((studentData) => {
+          this.loginStudentData = studentData;
         })
       );
   }
@@ -120,4 +123,6 @@ export class StudentProfileService {
       resultarray: { subject: string; marks: number; grade: string }[];
     }>('http://localhost:3000/student/view-result', formdata);
   }
+
+  getLogInStudentData() {}
 }
