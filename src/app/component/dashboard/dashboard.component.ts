@@ -30,6 +30,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   years: number[] = [];
   isYearChartShow: boolean = false;
 
+  chart2xAxiadata: string[];
+  chart2yAxiadata: number[];
+
   public gradientFillMain;
   public gradientFillChart1;
   // public gradientFillChart1;
@@ -285,12 +288,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
           scales: {
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Subject Marks',
+                },
                 gridLines: {
                   zeroLineColor: 'transparent',
                   display: true,
                   linewidth: 1,
                 },
                 ticks: {
+                  minor: {},
                   beginAtZero: true,
                   mirror: false,
                   suggestedMin: 0,
@@ -300,9 +308,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
             ],
             xAxes: [
               {
-                display: 0,
+                display: true,
                 ticks: {
-                  display: false,
+                  minor: {
+                    fontSize: '16',
+                  },
+                  major: {
+                    fontStyle: 'bold',
+                    fontColor: '#FF0000',
+                  },
+                  display: true,
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Year And Term',
                 },
 
                 gridLines: {
@@ -343,93 +362,111 @@ export class DashboardComponent implements OnInit, OnDestroy {
   onSelectListItem2(year, term) {
     this.dashboardService.getChart2Data(year, term).subscribe(
       (data) => {
-        console.log(data);
+        this.chart2xAxiadata = data.resultarray.subjectname;
+        this.chart2yAxiadata = data.resultarray.marks;
+        console.log(this.chart2xAxiadata);
       },
       (error) => {
         console.log('error');
       },
       () => {
-        // this.gradientFillChart1 = this.ctx.createLinearGradient(0, 170, 0, 50);
-        // this.gradientFillChart1.addColorStop(1, 'rgba(51, 153, 0, 0.90)');
-        // this.gradientFillChart1.addColorStop(0, 'rgba(170, 255, 128, 0.9)');
-        // this.chart1Type = 'bar';
-        // this.char1Data = [
-        //   {
-        //     label: 'Marks',
-        //     pointBorderWidth: 2,
-        //     pointHoverRadius: 4,
-        //     pointHoverBorderWidth: 1,
-        //     pointRadius: 4,
-        //     fill: true,
-        //     borderWidth: 1,
-        //     data: this.chart1DataList.yLabel,
-        //   },
-        // ];
-        // this.chart1Options = {
-        //   maintainAspectRatio: false,
-        //   legend: {
-        //     display: false,
-        //   },
-        //   tooltips: {
-        //     bodySpacing: 4,
-        //     mode: 'nearest',
-        //     intersect: 0,
-        //     position: 'nearest',
-        //     xPadding: 10,
-        //     yPadding: 10,
-        //     caretPadding: 10,
-        //   },
-        //   responsive: 1,
-        //   scales: {
-        //     yAxes: [
-        //       {
-        //         gridLines: {
-        //           zeroLineColor: 'transparent',
-        //           display: true,
-        //           linewidth: 1,
-        //         },
-        //         ticks: {
-        //           beginAtZero: true,
-        //           mirror: false,
-        //           suggestedMin: 0,
-        //           suggestedMax: 100,
-        //         },
-        //       },
-        //     ],
-        //     xAxes: [
-        //       {
-        //         display: 0,
-        //         ticks: {
-        //           display: false,
-        //         },
-        //         gridLines: {
-        //           zeroLineColor: 'transparent',
-        //           drawTicks: false,
-        //           display: false,
-        //           drawBorder: false,
-        //         },
-        //       },
-        //     ],
-        //   },
-        //   layout: {
-        //     padding: {
-        //       left: 0,
-        //       right: 0,
-        //       top: 15,
-        //       bottom: 15,
-        //     },
-        //   },
-        // };
-        // this.chart1Lables = this.chart1DataList.xLabel;
-        // this.chart1Color = [
-        //   {
-        //     backgroundColor: this.gradientFillChart1,
-        //     borderColor: '#2CA8FF',
-        //     pointBorderColor: '#FFF',
-        //     pointBackgroundColor: '#2CA8FF',
-        //   },
-        // ];
-        // this.isChart1Show = true;
+        this.gradientFillChart1 = this.ctx.createLinearGradient(0, 170, 0, 50);
+        this.gradientFillChart1.addColorStop(1, 'rgba(179, 89, 0, 0.90)');
+        this.gradientFillChart1.addColorStop(0, 'rgba(255, 166, 77, 0.9)');
+        this.chart2Type = 'bar';
+        this.chart2Data = [
+          {
+            label: 'Marks',
+            pointBorderWidth: 2,
+            pointHoverRadius: 4,
+            pointHoverBorderWidth: 1,
+            pointRadius: 4,
+            fill: true,
+            borderWidth: 1,
+            data: this.chart2yAxiadata,
+          },
+        ];
+        this.chart2Options = {
+          maintainAspectRatio: false,
+          legend: {
+            display: false,
+          },
+          tooltips: {
+            bodySpacing: 4,
+            mode: 'nearest',
+            intersect: 0,
+            position: 'nearest',
+            xPadding: 10,
+            yPadding: 10,
+            caretPadding: 10,
+          },
+          responsive: 1,
+          scales: {
+            yAxes: [
+              {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Each Subject Marks',
+                },
+                gridLines: {
+                  zeroLineColor: 'transparent',
+                  display: true,
+                  linewidth: 1,
+                },
+                ticks: {
+                  minor: {},
+                  beginAtZero: true,
+                  mirror: false,
+                  suggestedMin: 0,
+                  suggestedMax: 100,
+                },
+              },
+            ],
+            xAxes: [
+              {
+                display: true,
+                ticks: {
+                  minor: {
+                    fontSize: '16',
+                  },
+                  major: {
+                    fontStyle: 'bold',
+                    fontColor: '#FF0000',
+                  },
+                  display: true,
+                },
+                scaleLabel: {
+                  display: true,
+                  labelString: 'subjects',
+                },
+                gridLines: {
+                  zeroLineColor: 'transparent',
+                  drawTicks: false,
+                  display: false,
+                  drawBorder: false,
+                },
+              },
+            ],
+          },
+          layout: {
+            padding: {
+              left: 0,
+              right: 0,
+              top: 15,
+              bottom: 15,
+            },
+          },
+        };
+        this.chart2Lables = this.chart2xAxiadata;
+        this.chart2Color = [
+          {
+            backgroundColor: this.gradientFillChart1,
+            borderColor: '#2CA8FF',
+            pointBorderColor: '#FFF',
+            pointBackgroundColor: '#2CA8FF',
+          },
+        ];
+        this.isYearChartShow = true;
       }
     );
   }

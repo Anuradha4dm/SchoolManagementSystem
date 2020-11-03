@@ -33,7 +33,7 @@
           <h4 class="card-title">{{ subRef.value | titlecase }}</h4>
         </div>
         <div class="card-body" *ngIf="isChart1Show">
-          <div class="chart-area" style="position: relative; height: 350px">
+          <div class="chart-area" style="position: relative; height: 550px">
             <canvas
               baseChart
               id="barChartSimpleGradientsNumbers"
@@ -45,11 +45,6 @@
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"
             ></canvas>
-          </div>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
           </div>
         </div>
       </div>
@@ -86,7 +81,7 @@
           </h4>
         </div>
         <div class="card-body" *ngIf="isYearChartShow">
-          <div class="chart-area" style="position: relative; height: 350px">
+          <div class="chart-area" style="position: relative; height: 550px">
             <canvas
               baseChart
               id="barChartSimpleGradientsNumbers"
@@ -98,11 +93,6 @@
               (chartHover)="chartHovered($event)"
               (chartClick)="chartClicked($event)"
             ></canvas>
-          </div>
-        </div>
-        <div class="card-footer">
-          <div class="stats">
-            <i class="now-ui-icons ui-2_time-alarm"></i> Last 7 days
           </div>
         </div>
       </div>

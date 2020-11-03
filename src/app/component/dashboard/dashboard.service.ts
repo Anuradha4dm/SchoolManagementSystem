@@ -66,12 +66,13 @@ export class DashboardService {
   }
 
   getChart2Data(year, term) {
-    return this.httpClient.post<{
-      resultarray: { subject: string; marks: number; grade: string }[];
-    }>('http://localhost:3000/student/view-result', {
-      year: year,
-      term: term,
-      sudentid: this.loginUserData.getUserId,
-    });
+    return this.httpClient.post<any>(
+      'http://localhost:3000/student/get-chart2-data',
+      {
+        year: year,
+        term: term,
+        studentid: this.loginUserData.getUserId,
+      }
+    );
   }
 }
