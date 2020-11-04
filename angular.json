@@ -127,6 +127,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "SchoolMangementSystem"
+    }
+  },
+  "defaultProject": "SchoolMangementSystem",
+  "cli": {
+    "analytics": false
+  }
 }

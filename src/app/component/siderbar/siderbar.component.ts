@@ -51,6 +51,12 @@ export class SiderbarComponent implements OnInit {
       icon: 'files_single-copy-04',
       class: '',
     },
+    {
+      path: '/non-acedemic-view-profile',
+      title: 'view profile',
+      icon: 'files_single-copy-04',
+      class: '',
+    },
   ];
 
   constructor() {}

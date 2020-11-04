@@ -15,6 +15,7 @@ import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
 import { AboutComponent } from './component/homepage/about/about.component';
+import { NonAcedemicViewProfileComponent } from './component/non-acedemic/non-acedemic-view-profile/non-acedemic-view-profile.component';
 
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
   {path: 'homepage-staff',component: StaffComponent},
   {path: 'homepage-about',component: AboutComponent},
   {path: 'homepage-downloads',component: DownloadsComponent},
+  {path:'non-acedemic-non-acedemic-view-profile',component:NonAcedemicViewProfileComponent},
 ];
 
 @NgModule({

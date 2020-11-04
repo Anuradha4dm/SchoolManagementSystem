@@ -27,6 +27,10 @@ import { HomeComponent } from './component/homepage/home/home.component';
 import { StaffComponent } from './component/homepage/staff/staff.component';
 import { AboutComponent } from './component/homepage/about/about.component';
 import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
+import { NonAcedemicViewProfileComponent } from './component/non-acedemic/non-acedemic-view-profile/non-acedemic-view-profile.component';
+
+import { NonAcedemicEditProfileComponent } from './component/non-acedemic/non-acedemic-edit-profile/non-acedemic-edit-profile.component';
+import { ViewNotificationComponent } from './component/non-acedemic/view-notification/view-notification.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +52,11 @@ import { DownloadsComponent } from './component/homepage/downloads/downloads.com
     StaffComponent,
     AboutComponent,
     DownloadsComponent,
+    NonAcedemicViewProfileComponent,
+   
+    NonAcedemicEditProfileComponent,
+   
+    ViewNotificationComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
