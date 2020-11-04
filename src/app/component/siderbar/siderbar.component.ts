@@ -23,6 +23,7 @@ export class SiderbarComponent implements OnInit {
   ngOnInit(): void {
     this.userLogInService.userAuthData.subscribe((userData) => {
       this.userRoll = userData.getLoginAs;
+      console.log(this.userRoll);
     });
     if (this.userRoll == 'student') {
       this.sideBarItems = [
@@ -120,12 +121,7 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
-        {
-          path: '/user/chat',
-          title: 'CHAT',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
+
         {
           path: '/user/events',
           title: 'EVENTS',
