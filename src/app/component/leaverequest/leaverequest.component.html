@@ -18,7 +18,7 @@
         <div class="card-body">
             <div class="row">
                 <!--leave form here-->
-                <div class="col-sm-12 col-md-6 border border-dark p-3 m-2">
+                <div class="col-md-6 border border-dark p-3">
                     <h5 class="text-center text-muted mb-4">Leave Request Form</h5>
                     <form #leaveForm="ngForm" (ngSubmit)="onLeaveSubmit(leaveForm.value)">
                         <div class="row">
@@ -69,16 +69,17 @@
                 <div class="col mt-3">
                     <h5 class="text-center text-muted mb-3">Previous Leave Details</h5>
 
-                    <table class="table">
+                    <table class="table text-center">
                         <tr>
                             <th>Leave Number</th>
                             <th>Date for Leave</th>
                             <th>Type</th>
                             <th>Status</th>
                         </tr>
-
-                        <tr>
-                        </tr>
+                        <tbody>
+                            <tr>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

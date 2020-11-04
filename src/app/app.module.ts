@@ -23,6 +23,7 @@ import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
 import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
+import { NonacademicModule } from './component/nonacademic/nonacademic.module';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { LeaverequestComponent } from './component/leaverequest/leaverequest.com
     StudentModule,
     AdminModule,
     TeacherModule,
+    NonacademicModule,
     NotificationModule,
     HomePageModule,
   ],

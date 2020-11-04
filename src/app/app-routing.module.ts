@@ -25,6 +25,7 @@ import { ViewSubjectsComponent } from './component/student/view-subjects/view-su
 import { GetRegisteredSubjectList } from './component/student/student-share-components/get-subject-resolver.service';
 import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component'
 import { TermTestResultsComponent } from './component/teacher/term-test-results/term-test-results.component';
+import { LeavehandleComponent } from './component/nonacademic/leavehandle/leavehandle.component';
 const routes: Routes = [
   { path: 'userprofile', component: UserProfileComponent },
   {
@@ -47,7 +48,7 @@ const routes: Routes = [
   { path: 'edit-profile/:id', component: EditProfileComponent },
   { path: 'add-new-profile', component: AddNewProfileComponent },
   //to remove
-  { path: 'madmax-tprofile', component: TeacherProfileComponent },
+  { path: 'madmax-tprofile', component: LeavehandleComponent },
   { path: 'madmax-leave', component: LeaverequestComponent },
   { path: 'madmax-termtest', component: TermTestResultsComponent },
 ];
