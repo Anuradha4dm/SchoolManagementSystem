@@ -7,9 +7,17 @@ import { StudentAttendenceComponent } from './student-attendence/student-attende
 import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { RouterModule } from '@angular/router';
+import { TeacherRoutingModule } from './teacher.routing';
 
 @NgModule({
-  imports: [FormsModule, CommonModule,MatExpansionModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    MatExpansionModule,
+    RouterModule,
+    TeacherRoutingModule,
+  ],
   exports: [
     StudentListComponent,
     StudentAttendenceComponent,

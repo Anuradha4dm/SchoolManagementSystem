@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { ThemeService } from 'ng2-charts';
 
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { StudentProfileService } from '../student-profile.service';
@@ -15,6 +17,8 @@ export class AddSubjectsComponent implements OnInit {
     studentid: '',
     grade: '',
   };
+
+  @ViewChild('formData', { static: true }) formData: NgForm;
 
   //stundet grade
   gradeVal: number = 11;
@@ -62,8 +66,13 @@ export class AddSubjectsComponent implements OnInit {
     //getting data from the resolver
     this.route.data.subscribe(
       (studentData) => {
-        this.studentData.studentid = studentData.student.studentid;
-        this.studentData.grade = studentData.student.grade;
+        this.studentData.studentid = studentData['data'].studentid;
+        this.studentData.grade = studentData['data'].grade;
+
+        if (!this.studentData.grade.includes('_')) {
+          this.alertMessageService.errorAlert('You Have No Class Assgign');
+          this.formData.invalid;
+        }
       },
       (error) => {
         console.log(error);
@@ -158,14 +167,13 @@ export class AddSubjectsComponent implements OnInit {
     }
 
     if (this.gradeVal == 10 || this.gradeVal == 11) {
-      console.log(data.value);
       this.studentProfileService
         .addSubjectOrdinaryLevel({
           studentid: this.studentData.studentid,
-          optional1: data.optional1,
-          optional2: data.optional2,
-          optional3: data.optional3,
-          grade: '11_D',
+          optional1: data.value.optional1,
+          optional2: data.value.optional2,
+          optional3: data.value.optional3,
+          grade: this.studentData.grade,
         })
         .subscribe(
           (data) => {

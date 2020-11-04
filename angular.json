@@ -14,7 +14,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "chart.js"
+              "chart.js",
+              "socket.io-client"
             ],
             "outputPath": "dist/SchoolMangementSystem",
             "index": "src/index.html",
