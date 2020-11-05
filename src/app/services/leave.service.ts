@@ -31,7 +31,7 @@ export class LeaveService {
           numberofpendingleave: number;
           pendingdatas: [];
         };
-      }>('http://localhost:3000/common//get-profile-data', {
+      }>('http://localhost:3000/common/get-profile-data', {
         id: id,
         year: year,
       })
