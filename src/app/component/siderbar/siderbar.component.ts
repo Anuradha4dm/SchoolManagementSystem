@@ -46,6 +46,13 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
+          path: '/user/view-participation',
+          title: 'PARTICIPATION',
+          icon: 'education_agenda-bookmark',
+          class: '',
+        },
+
+        {
           path: '/user/view-result',
           title: 'VIEW RESULT',
           icon: 'education_agenda-bookmark',

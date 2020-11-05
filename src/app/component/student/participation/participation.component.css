@@ -1,0 +1,33 @@
+.presentage {
+  font-size: 100px;
+  font-family: "Zilla Slab", serif;
+  text-align: center;
+}
+
+.my-des {
+  font-size: 30px;
+  text-align: center;
+  font-family: "Zilla Slab", serif;
+}
+
+.my-view {
+  font-family: "Zilla Slab", serif;
+  font-size: 20px;
+  border-bottom: 2px #809fff solid;
+}
+
+.presentage-data {
+  border: #ffdb4d 3px double;
+  border-radius: 10px;
+  height: 250px;
+}
+
+.absent-date {
+  font-family: "Zilla Slab", serif;
+  font-size: 20px;
+}
+
+.absent-date-content {
+  text-align: center;
+  font-size: 20px;
+}

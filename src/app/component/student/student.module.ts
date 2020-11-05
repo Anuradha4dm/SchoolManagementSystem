@@ -8,9 +8,11 @@ import { StudentRoutingModel } from './student.routing';
 
 import { ViewResultComponent } from './view-result/view-result.component';
 import { ViewSubjectsComponent } from './view-subjects/view-subjects.component';
+import { ParticipationComponent } from './participation/participation.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ChartsModule],
   exports: [
     AddSubjectsComponent,
     EditProfileComponent,
@@ -22,6 +24,7 @@ import { ViewSubjectsComponent } from './view-subjects/view-subjects.component';
     EditProfileComponent,
     ViewResultComponent,
     ViewSubjectsComponent,
+    ParticipationComponent,
   ],
   providers: [],
 })
