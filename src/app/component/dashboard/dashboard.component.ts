@@ -115,6 +115,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       (data) => {
         this.xData = data.xData;
         this.yData = data.yData;
+        console.log(this.yData);
       },
       (error) => {
         console.log(error);
@@ -128,14 +129,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.gradientFillMain.addColorStop(1, 'rgba(0,26,77, 0.90)');
         this.gradientFillMain.addColorStop(0, 'rgba(102, 153, 255, 0.6)');
 
-        this.mainChartLabels = [
-          '2016 1T',
-          '2016 2T',
-          '2016 3T',
-          '2017 1T',
-          '2017 2T',
-          '2017 3T',
-        ];
+        this.mainChartLabels = this.xData;
 
         this.mainChartType = 'line';
         this.mainChartData = [
@@ -202,6 +196,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
           scales: {
             yAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Average Mark Of Term',
+                  fontColor: 'white',
+                  fontSize: 16,
+                },
                 ticks: {
                   fontColor: 'rgba(255,255,255,0.4)',
                   fontStyle: 'bold',
@@ -220,6 +220,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
             ],
             xAxes: [
               {
+                scaleLabel: {
+                  display: true,
+                  labelString: 'Year And Term',
+                  fontColor: 'white',
+                  fontSize: 16,
+                },
                 gridLines: {
                   zeroLineColor: 'transparent',
                   display: true,

@@ -27,7 +27,12 @@ export class AddSubjectResolverService
 
     return this.studentProfileService.getStudent(id).pipe(
       map((data: Student) => {
-        return { studentid: data._id, grade: data.grade };
+        return {
+          studentid: data._id,
+          grade: data.grade,
+          imagedata: data.imagePath,
+          username: data.username,
+        };
       })
     );
   }

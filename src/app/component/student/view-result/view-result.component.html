@@ -1,6 +1,6 @@
 <div class="panel-header panel-header-sm"></div>
 
-<div class="main-content">
+<div class="main-content my-view">
   <div class="row">
     <div class="col-md-8">
       <div class="card card-tasks">
@@ -87,8 +87,8 @@
         <div class="card-footer">
           <hr />
           <div class="stats">
-            <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes
-            ago
+            <i class="now-ui-icons loader_refresh spin"></i> Updated
+            {{ averagedata.update | date }}
           </div>
         </div>
       </div>
@@ -105,14 +105,13 @@
         <div class="card-body">
           <div class="text-center">
             <a href="#">
-              <h5 class="title">Mike Andrew</h5>
+              <h5 class="title">{{ averagedata.name }}</h5>
             </a>
-            <p class="description">michael24</p>
           </div>
           <p class="description text-center">
             Contractulation!
             <br />
-            You have the best results <br />of the term
+            {{ averagedata.message }}
           </p>
         </div>
         <hr />
@@ -122,12 +121,12 @@
               <tr>
                 <td>Average</td>
 
-                <td class="text-right">88.36</td>
+                <td class="text-right">{{ averagedata.average }}</td>
               </tr>
               <tr>
                 <td>Place</td>
 
-                <td class="text-right">1</td>
+                <td class="text-right">{{ averagedata.place }}</td>
               </tr>
             </tbody>
           </table>

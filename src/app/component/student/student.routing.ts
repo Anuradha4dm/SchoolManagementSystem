@@ -7,9 +7,11 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { NotificationComponent } from '../notification/notification.component';
 import { AddSubjectsComponent } from './add-subjects/add-subjects.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { ParticipationComponent } from './participation/participation.component';
 import { AddSubjectResolverService } from './student-resolvers/add-subject-resolver.service';
 import { GetRegisteredSubjectList } from './student-share-components/get-subject-resolver.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ViewResultComponent } from './view-result/view-result.component';
 import { ViewSubjectsComponent } from './view-subjects/view-subjects.component';
 
 export const routes: Routes = [
@@ -28,6 +30,8 @@ export const routes: Routes = [
       { path: 'edit-profile/:id', component: EditProfileComponent },
       { path: 'add-new-profile', component: AddNewProfileComponent },
       { path: 'dashboard', component: DashboardComponent },
+      { path: 'view-participation', component: ParticipationComponent },
+      { path: 'view-result', component: ViewResultComponent },
       {
         path: 'viewsubjects',
         component: ViewSubjectsComponent,

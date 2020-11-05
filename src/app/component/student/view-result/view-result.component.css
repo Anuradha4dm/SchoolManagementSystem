@@ -1,3 +1,9 @@
 td {
   line-height: 44px;
 }
+
+.my-view {
+  font-family: "Zilla Slab", serif;
+  font-size: 20px;
+  border-bottom: 2px #809fff solid;
+}
