@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 
 import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
+
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
 
@@ -15,7 +16,22 @@ import { StudentProfileService } from '../student-profile.service';
 })
 export class ViewResultComponent implements OnInit, OnDestroy {
   averageMarks: number;
-  2;
+  averagedata: {
+    message: string;
+    average: number;
+    place: number;
+    name: string;
+    update: string;
+  } = {
+    name: 'Username',
+    average: 0,
+    place: 1,
+    message: 'This is the comment from teacher',
+    update: '200',
+  };
+
+  currentdate = new Date();
+
   subscrible1: Subscription;
   subscrible2: Subscription;
   loginuserData: LogInUserModel;
@@ -43,6 +59,7 @@ export class ViewResultComponent implements OnInit, OnDestroy {
     this.subscrible1 = this.webSocketService.listen('years').subscribe(
       (data) => {
         this.years = data.years;
+        console.log(data);
       },
       (error) => {
         console.log(error);
@@ -69,6 +86,11 @@ export class ViewResultComponent implements OnInit, OnDestroy {
     this.studentProfileService.viewResultOfSpecificStudent(sendData).subscribe(
       (data) => {
         this.resultReviewArray = data.resultarray;
+        this.averagedata.name = data.studentname;
+        this.averagedata.average = data.average;
+        this.averagedata.place = data.place;
+        this.averagedata.message = data.message;
+        this.averagedata.update = data.update;
       },
       (error) => {
         this.alertMessageService.errorAlert('NO DATA FOUND');

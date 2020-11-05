@@ -1,13 +1,14 @@
 <div class="panel-header panel-header-sm"></div>
 
-<div class="main-content">
+<div class="main-content my-view">
   <div class="row">
     <div class="col-md-11">
       <div class="card card-tasks">
         <div class="card-header">
-          <h5 class="card-category">Enter Field Value to See Result</h5>
-
-          <h4 class="card-title">Registered Subject List</h4>
+          <h1 class="card-title">Registered Subject List</h1>
+          <h5 class="card-category">
+            These are the subjects you have registerd
+          </h5>
         </div>
         <div class="card-body">
           <div class="table-full-width">
@@ -37,8 +38,8 @@
         <div class="card-footer">
           <hr />
           <div class="stats">
-            <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes
-            ago
+            <i class="now-ui-icons loader_refresh spin"></i> Updated
+            {{ update | date }}
           </div>
         </div>
       </div>

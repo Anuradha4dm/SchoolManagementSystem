@@ -8,6 +8,7 @@ export class GetRegisteredSubjectList
   implements
     Resolve<{
       query: boolean;
+      update: string;
       dataArray: [
         {
           subjectId: string;
@@ -25,6 +26,7 @@ export class GetRegisteredSubjectList
   ):
     | Observable<{
         query: boolean;
+        update: string;
         dataArray: [
           {
             subjectId: string;
@@ -37,6 +39,7 @@ export class GetRegisteredSubjectList
       }>
     | Promise<{
         query: boolean;
+        update: string;
         dataArray: [
           {
             subjectId: string;
@@ -49,6 +52,7 @@ export class GetRegisteredSubjectList
       }>
     | {
         query: boolean;
+        update: string;
         dataArray: [
           {
             subjectId: string;

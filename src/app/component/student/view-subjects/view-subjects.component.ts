@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { isConstructorDeclaration } from 'typescript';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
+import { createThis, isConstructorDeclaration } from 'typescript';
 
 @Component({
   selector: 'app-view-subjects',
@@ -16,18 +17,24 @@ export class ViewSubjectsComponent implements OnInit {
     teacheremail: string;
   }[] = null;
 
-  constructor(private route: ActivatedRoute) {}
+  update: string;
+
+  constructor(
+    private route: ActivatedRoute,
+    private alertMessageService: AlertMessageService
+  ) {}
 
   ngOnInit(): void {
     this.route.data.subscribe(
       (data) => {
         this.subjectListObj = data['subjectList'].dataArray;
+        this.update = data['subjectList'].update;
       },
       (err) => {
         console.log(err.error.message);
       },
       () => {
-        console.log('complete');
+        this.alertMessageService.competeAlert('Subject List Fetch Successfull');
       }
     );
   }
