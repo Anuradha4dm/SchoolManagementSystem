@@ -18,7 +18,7 @@ export class ParticipationComponent implements OnInit {
     presentage: number;
     totalpresents: number;
     absentDates: string[];
-  } = null;
+  } = { monthattendence: [], presentage: 0, totalpresents: 0, absentDates: [] };
 
   //overall attendace
   public ctx;
