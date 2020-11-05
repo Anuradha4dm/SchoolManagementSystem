@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
 
 import { UserLogInService } from '../../homepage/login/user-login.service';
@@ -14,8 +13,6 @@ import { StudentProfileService } from '../student-profile.service';
 export class UserProfileComponent implements OnInit {
   studentProfileData: Student = null;
   studentPerformance;
-
-  loginUserData: LogInUserModel;
 
   registeredSubjects: string[] = [];
   isShowRegisteredSubject: boolean = false;
@@ -36,7 +33,6 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private loginUserService: UserLogInService,
     private studentProfileService: StudentProfileService
   ) {}
 

@@ -9,7 +9,10 @@ import { UserLogInService } from '../homepage/login/user-login.service';
 
 @Injectable({ providedIn: 'root' })
 export class StudentProfileService {
-  logInStudentid: string = null; //this need to be taken form the log in compoentn
+
+  
+  logInStudentId: string = null; //this need to be taken form the log in compoentn
+
   loginStudentData: Student = null;
 
   studentPerformace: {
@@ -26,9 +29,11 @@ export class StudentProfileService {
     private httpClient: HttpClient,
     private userLoginService: UserLogInService
   ) {
+
     this.userLoginService.userAuthData.subscribe((data) => {
       this.logInStudentid = data.getUserId;
     });
+
   }
 
   getStudentPerfomance(id: string) {
@@ -55,7 +60,9 @@ export class StudentProfileService {
 
   updateStudentProfile(newData) {
     return this.httpClient.post(
+
       'http://localhost:3000/student/edit-profile/' + this.logInStudentid,
+
       newData
     );
   }
