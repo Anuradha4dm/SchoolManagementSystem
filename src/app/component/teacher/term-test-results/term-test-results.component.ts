@@ -41,4 +41,6 @@ export class TermTestResultsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onAddResultsClick(){
+  }
 }
