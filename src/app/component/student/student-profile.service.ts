@@ -106,6 +106,7 @@ export class StudentProfileService {
   getRegisteredSubjectList() {
     return this.httpClient.get<{
       query: boolean;
+      update: string;
       dataArray: [
         {
           subjectId: string;
@@ -113,6 +114,7 @@ export class StudentProfileService {
           teacherId: string;
           teacherName: string;
           teacherEmail: string;
+          update: string;
         }
       ];
     }>('http://localhost:3000/student/get-subject-list/ST_1');
@@ -120,6 +122,11 @@ export class StudentProfileService {
 
   viewResultOfSpecificStudent(formdata) {
     return this.httpClient.post<{
+      studentname: string;
+      average: number;
+      place: number;
+      message: string;
+      update: string;
       resultarray: { subject: string; marks: number; grade: string }[];
     }>('http://localhost:3000/student/view-result', formdata);
   }

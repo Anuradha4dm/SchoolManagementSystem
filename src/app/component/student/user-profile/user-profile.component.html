@@ -133,34 +133,7 @@
           </div>
           <p class="description text-center">some default text</p>
           <hr />
-          <div class="card-content">
-            <h5 class="text-des cont-text">
-              <i class="now-ui-icons location_bookmark"></i>
-              Presnets: {{ studentPerformance.prasent }}
-            </h5>
-            <button
-              style="float: right"
-              class="btn btn-danger"
-              (click)="toggleShowBtn()"
-            >
-              Show Dates
-            </button>
-          </div>
-          <div class="card-content">
-            <h5 class="text-des cont-text">
-              <i class="now-ui-icons location_map-big"></i>
-              Absents:{{ numOfAbsents }}
-            </h5>
-            <div class="aword-content" *ngIf="showDate">
-              <h6
-                class="text-des cont-text"
-                *ngFor="let date of studentPerformance.absent"
-              >
-                <i class="now-ui-icons clothes_tie-bow"></i>
-                {{ date }}
-              </h6>
-            </div>
-          </div>
+
           <div class="card-content">
             <h5 class="text-des cont-text">
               <i class="now-ui-icons education_paper"></i>

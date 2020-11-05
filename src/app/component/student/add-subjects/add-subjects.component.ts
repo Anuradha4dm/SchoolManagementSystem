@@ -38,10 +38,11 @@ export class AddSubjectsComponent implements OnInit {
   } = {
     subjectid: null,
     subjectName: '',
-    subjectDes: '',
+    subjectDes: 'Click subject to see infomation ',
     teacherName: '',
     imagePath: '../assets/img/mike.jpg',
   };
+  //special message
 
   //combination related to the catogory
   subjectSet1: string[];
@@ -81,7 +82,8 @@ export class AddSubjectsComponent implements OnInit {
     );
 
     //categorize subjects
-    var gradeVal = 11; //+this.studentData.grade.split('_')[0];
+    var gradeVal = +this.studentData.grade.split('_')[0];
+
     //ths is the grades in between  grade 6-9
     if (gradeVal >= 6 && gradeVal <= 9) {
       this.isOptionalList1 = true;
