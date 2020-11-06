@@ -1,0 +1,154 @@
+
+<div class="main-content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-tasks">
+          <div class="card-header">
+            <h5 class="card-category">need permition for remove events</h5>
+            <h4 class="card-title">REMOVE EVENTS</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-full-width">
+              <form>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              checked
+                              disabled
+                            />
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
+                      </td>
+                      <td class="text-left">
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Username"
+                          disabled
+                        />
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="religion_check"
+                              [ngModel]="true"
+                              #re_check="ngModel"
+                            />
+  
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
+                      </td>
+                      <td style="cursor: pointer">
+                        <select
+                          name="religon"
+                          class="form-control"
+                          [ngModel]="'SC/----/-----'"
+                        >
+                          <option value="buddhist">SC/2017/10272</option>
+                          <option value="catalic">SC/2017/10272</option>
+                          <option value="roman_cathalic">SC/2017/10274</option>
+                          <option value="roman_cathalic">SC/----/-----</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="optional1_check"
+                              [ngModel]="false"
+                            />
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
+                      </td>
+                      <td>
+                        <select
+                          name="optional1"
+                          class="form-control"
+                          id=""
+                          [ngModel]="'event type'"
+                        >
+                          <option value="sport">sport</option>
+                          <option value="music">music</option>
+                          <option value="art">Arts</option>
+                          <option value="danding">Dansing</option>
+                          <option value="traditional">traditional</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="checkbox"
+                              name="optional2_check"
+                              [ngModel]="false"
+                            />
+                            <span class="form-check-sign"></span>
+                          </label>
+                        </div>
+                      </td>
+                      <td style="cursor: pointer">
+                        <select
+                          name="optional2"
+                          class="form-control"
+                          id=""
+                          [ngModel]="'EVENT NAME'"
+                        >
+                          <option value="commerse">event1</option>
+                          <option value="Health">event2</option>
+                          <option value="it">event3</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td>
+                        <p style="color: red" *ngIf="!re_check.value">
+                          You must be add sc number
+                        </p>
+                        <div class="form-check">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input btn-round btn-success"
+                              type="clear"
+                              value="         delete event"
+                              [disabled]=""
+                            />
+                          </label>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </div>
+          </div>
+          <div class="card-footer">
+            <hr />
+            <div class="stats">
+              <i class="now-ui-icons loader_refresh spin"></i> Updated 3 minutes
+              ago
+            </div>
+          </div>
+        </div>
+      </div>

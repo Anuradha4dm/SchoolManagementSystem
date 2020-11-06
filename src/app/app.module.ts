@@ -20,6 +20,14 @@ import { TeacherModule } from './component/teacher/teacher.module';
 import { NotificationModule } from './component/notification/notification.module';
 import { HomePageModule } from './component/homepage/homepage.module';
 import { CommonModule } from '@angular/common';
+import { EventComponent } from './event/event.component';
+import { AddEventComponent } from './component/event/add-event/add-event.component';
+import { DeleteEventComponent } from './component/event/delete-event/delete-event.component';
+import { EmailComponent } from './email/email.component';
+import { EmailhandleComponent } from './component/emailhandle/emailhandle.component';
+
+
+
 
 @NgModule({
   declarations: [
@@ -28,6 +36,26 @@ import { CommonModule } from '@angular/common';
     SiderbarComponent,
 
     ConfirmationDialogComponent,
+
+    EventComponent,
+
+    AddEventComponent,
+
+    DeleteEventComponent,
+
+    EmailComponent,
+
+    EmailhandleComponent,
+
+   
+
+    
+
+  
+
+
+
+   
   ],
   imports: [
     BrowserModule,
