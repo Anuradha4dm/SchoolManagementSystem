@@ -8,10 +8,20 @@ import { LogInUserModel } from 'src/app/models/login-user.model';
 export class UserLogInService {
   errorEmitEvent = new Subject<{ error: string }>();
 
-  //this is dumy for the development need to be get for the serve
+  logInUserData: {
+    _id: string;
+    authentication: boolean;
+    logInAs: string;
+    token: string;
+  } = {
+    _id: 'ST_1',
+    authentication: true,
+    logInAs: 'student',
+    token: '',
+  }; //this is dumy for the development need to be get for the serve
 
   userAuthData = new BehaviorSubject<LogInUserModel>(
-    new LogInUserModel('ST_1', true, 'student', 'ss', 0)
+    new LogInUserModel('AC_1', true, 'teacher', 'ss', 112)
   );
 
   constructor(private httpClient: HttpClient, private router: Router) {}
@@ -42,7 +52,8 @@ export class UserLogInService {
           this.errorEmitEvent.next({ error: error.message });
         },
         () => {
-          this.router.navigate(['/user']);
+          console.log('complete');
+          this.router.navigate(['user']);
         }
       );
   }

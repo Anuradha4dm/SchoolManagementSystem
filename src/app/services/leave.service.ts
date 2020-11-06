@@ -19,24 +19,32 @@ export class LeaveService {
   constructor(private httpClient: HttpClient) {}
 
   getStaffData(id: string, year: number) {
-    this.httpClient
-      .post<{
-        username: string;
-        fullname: string;
-        email: string;
-        mobile: string;
-        leaveData: {
-          numberofleavetaken: number;
-          takenleavedates: [];
-          numberofpendingleave: number;
-          pendingdatas: [];
-        };
-      }>('http://localhost:3000/common//get-profile-data', {
+    return this.httpClient.post<{
+      username: string;
+      fullname: string;
+      email: string;
+      mobile: string;
+      leaveData: {
+        numberofleavetaken: number;
+        takenleavedates: [];
+        numberofpendingleave: number;
+        pendingdatas: [];
+      };
+    }>('http://localhost:3000/common/get-leave-profile-data', {
+      id: id,
+      year: year,
+    });
+  }
+
+  makeNewLeaveRequest(id: string, date: string, type: number, desctiption) {
+    return this.httpClient.post(
+      'http://localhost:3000/common/new-leave-request',
+      {
         id: id,
-        year: year,
-      })
-      .subscribe((staffData) => {
-        console.log(staffData);
-      });
+        date: date,
+        type: type,
+        description: desctiption,
+      }
+    );
   }
 }
