@@ -13,6 +13,7 @@ const routes: Routes = [
   {
     path: 'user',
     component: LayoutComponent,
+    children: [{ path: 'leave-request', component: LeaverequestComponent }],
   },
 ];
 

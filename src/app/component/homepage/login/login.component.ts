@@ -12,8 +12,8 @@ export class LoginComponent implements OnInit {
   //this is the start of new change look line 27 in login.component.html (data-dismiss and onclick)
   close;
 
-  onClick(){
-    this.close="modal";
+  onClick() {
+    this.close = 'modal';
   }
   //this is the end of cjange
   constructor(private userLogInService: UserLogInService) {}
