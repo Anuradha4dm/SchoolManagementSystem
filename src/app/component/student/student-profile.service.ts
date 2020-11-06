@@ -8,7 +8,8 @@ import { UserLogInService } from '../homepage/login/user-login.service';
 
 @Injectable({ providedIn: 'root' })
 export class StudentProfileService {
-  // logInStudentId: string = null; //this need to be taken form the log in compoentn
+  logInStudentid: string = null; //this need to be taken form the log in compoentn
+
   loginStudentData: Student = null;
 
   studentPerformace: {
@@ -24,7 +25,11 @@ export class StudentProfileService {
   constructor(
     private httpClient: HttpClient,
     private userLoginService: UserLogInService
-  ) {}
+  ) {
+    this.userLoginService.userAuthData.subscribe((data) => {
+      this.logInStudentid = data.getUserId;
+    });
+  }
 
   getStudentPerfomance(id: string) {
     //get Data form the database
@@ -49,14 +54,10 @@ export class StudentProfileService {
   }
 
   updateStudentProfile(newData) {
-    return this.userLoginService.userAuthData.pipe(
-      take(1),
-      exhaustMap((user) => {
-        return this.httpClient.post(
-          'http://localhost:3000/student/edit-profile/' + user.getUserId,
-          newData
-        );
-      })
+    return this.httpClient.post(
+      'http://localhost:3000/student/edit-profile/' + this.logInStudentid,
+
+      newData
     );
   }
 

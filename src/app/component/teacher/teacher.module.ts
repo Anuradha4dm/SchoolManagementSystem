@@ -9,6 +9,7 @@ import { TeacherProfileComponent } from './teacher-profile/teacher-profile.compo
 import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterModule } from '@angular/router';
 import { TeacherRoutingModule } from './teacher.routing';
+import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { TeacherRoutingModule } from './teacher.routing';
     StudentAttendenceComponent,
     MarkPresentDirective,
     FilterStudentPipe,
+    TermTestResultsComponent,
   ],
   declarations: [
     StudentListComponent,
@@ -30,6 +32,7 @@ import { TeacherRoutingModule } from './teacher.routing';
     MarkPresentDirective,
     FilterStudentPipe,
     TeacherProfileComponent,
+    TermTestResultsComponent,
   ],
   providers: [],
 })
