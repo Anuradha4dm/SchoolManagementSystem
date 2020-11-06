@@ -1,125 +1,126 @@
-<div class="my-align">
-  <div class="main-content">
-    <div class="card">
-      <!--leave stats here-->
-      <div class="card-header">
-        <div class="row">
-          <div class="col bg-success text-center">
-            <h5>Leaves Available</h5>
-            <h6 class="bg-secondary">{{ leaveAvailable }}</h6>
-          </div>
+<div class="panel-header panel-header-sm"></div>
 
-          <div class="col bg-danger text-center">
-            <h5>Leaves Taken</h5>
-            <h6 class="bg-secondary">{{ leaveTaken }}</h6>
-          </div>
+<div class="main-content">
+  <div class="card">
+    <!--leave stats here-->
+    <div class="card-header">
+      <div class="row">
+        <div class="col bg-success text-center">
+          <h5>Leaves Available</h5>
+          <h6 class="bg-secondary">{{ leaveAvailable }}</h6>
+        </div>
+
+        <div class="col bg-danger text-center">
+          <h5>Leaves Taken</h5>
+          <h6 class="bg-secondary">{{ leaveTaken }}</h6>
         </div>
       </div>
+    </div>
 
-      <div class="card-body">
-        <div class="row">
-          <!--leave form here-->
-          <div class="col-md-6 border border-dark p-3">
-            <h5 class="text-center text-muted mb-4">Leave Request Form</h5>
-            <form
-              #leaveForm="ngForm"
-              (ngSubmit)="onLeaveSubmit(leaveForm.value)"
-            >
-              <div class="row">
-                <div class="col">
-                  <label>User ID</label>
-                  <input type="text" class="form-control" disabled />
-                </div>
-                <div class="col">
-                  <label>Date for the Leave</label>
-                  <input
-                    type="date"
-                    #date="ngModel"
-                    name="date"
-                    class="form-control"
-                    required
-                    ngModel
-                  />
-                  <small class="error" *ngIf="date.touched && date.invalid"
-                    >Date field is required</small
-                  >
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label>Name</label>
+    <div class="card-body">
+      <div class="row">
+        <!--leave form here-->
+        <div class="col-md-6 border border-dark p-3">
+          <h5 class="text-center text-muted mb-4">Leave Request Form</h5>
+          <form
+            #leaveForm="ngForm"
+            (ngSubmit)="onLeaveSubmit(leaveForm.value)"
+          >
+            <div class="row">
+              <div class="col">
+                <label>User ID</label>
                 <input type="text" class="form-control" disabled />
               </div>
-
-              <div class="form-group">
-                <label>Leave Type</label>
-                <select
-                  class="form-control w-50 p-1"
-                  name="type"
-                  [ngModel]="type"
-                >
-                  <option value="full-day">Full day</option>
-                  <option value="half-day">Half day</option>
-                  <option value="short-leave">Short leave</option>
-                </select>
-              </div>
-
-              <div class="form-group">
-                <label>Role</label>
-                <input type="text" class="form-control" disabled />
-              </div>
-
-              <div class="form-group">
-                <label>Description</label>
-                <textarea
-                  name="description"
-                  #description="ngModel"
+              <div class="col">
+                <label>Date for the Leave</label>
+                <input
+                  type="date"
+                  #date="ngModel"
+                  name="date"
                   class="form-control"
                   required
                   ngModel
-                ></textarea>
-                <small
-                  class="error"
-                  *ngIf="description.touched && description.invalid"
-                  >Description field is required</small
+                />
+                <small class="error" *ngIf="date.touched && date.invalid"
+                  >Date field is required</small
                 >
               </div>
+            </div>
 
-              <div class="form-group text-right">
-                <button
-                  type="submit"
-                  class="btn btn-success btn-sm"
-                  [disabled]="leaveForm.invalid"
-                >
-                  Submit
-                </button>
-                <button type="reset" class="btn btn-danger btn-sm">
-                  Cancel
-                </button>
-              </div>
-            </form>
-          </div>
+            <div class="form-group">
+              <label>Name</label>
+              <input type="text" class="form-control" disabled />
+            </div>
 
-          <!--previous leave details here-->
-          <div class="col mt-3">
-            <h5 class="text-center text-muted mb-3">Previous Leave Details</h5>
+            <div class="form-group">
+              <label>Leave Type</label>
+              <select
+                class="form-control w-50 p-1"
+                name="type"
+                [ngModel]="type"
+              >
+                <option value="full-day">Full day</option>
+                <option value="half-day">Half day</option>
+                <option value="short-leave">Short leave</option>
+              </select>
+            </div>
 
-            <table class="table text-center">
-              <tr>
-                <th>Leave Number</th>
-                <th>Date for Leave</th>
-                <th>Type</th>
-                <th>Status</th>
-              </tr>
-              <tbody>
-                <tr></tr>
-              </tbody>
-            </table>
-          </div>
+            <div class="form-group">
+              <label>Role</label>
+              <input type="text" class="form-control" disabled />
+            </div>
+
+            <div class="form-group">
+              <label>Description</label>
+              <textarea
+                name="description"
+                #description="ngModel"
+                class="form-control"
+                required
+                ngModel
+              ></textarea>
+              <small
+                class="error"
+                *ngIf="description.touched && description.invalid"
+                >Description field is required</small
+              >
+            </div>
+
+            <div class="form-group text-right">
+              <button
+                type="submit"
+                class="btn btn-success btn-sm"
+                [disabled]="leaveForm.invalid"
+              >
+                Submit
+              </button>
+              <button type="reset" class="btn btn-danger btn-sm">
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!--previous leave details here-->
+        <div class="col mt-3">
+          <h5 class="text-center text-muted mb-3">Previous Leave Details</h5>
+
+          <table class="table text-center">
+            <tr>
+              <th>Leave Number</th>
+              <th>Date for Leave</th>
+              <th>Type</th>
+              <th>Status</th>
+            </tr>
+            <tbody>
+              <tr></tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <!--Alert messages here>
     <div class="alert alert-dismissible alert-warning">
@@ -131,4 +132,4 @@
         <h5>Your request could not be sent !!</h5>
         <button class="close" data-dismiss="alert">x</button>
     </div-->
-</div>
+
