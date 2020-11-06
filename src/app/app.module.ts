@@ -31,6 +31,7 @@ import { NonAcedemicViewProfileComponent } from './component/non-acedemic/non-ac
 
 import { NonAcedemicEditProfileComponent } from './component/non-acedemic/non-acedemic-edit-profile/non-acedemic-edit-profile.component';
 import { ViewNotificationComponent } from './component/non-acedemic/view-notification/view-notification.component';
+import { EmailComponent } from './component/email/email.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,8 @@ import { ViewNotificationComponent } from './component/non-acedemic/view-notific
     NonAcedemicEditProfileComponent,
    
     ViewNotificationComponent,
+   
+     EmailComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [
