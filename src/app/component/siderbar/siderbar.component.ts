@@ -117,6 +117,13 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
+          path: '/user/add-student-result',
+          title: 'ADD RESULT',
+          icon: 'education_agenda-bookmark',
+          class: '',
+        },
+
+        {
           path: '/user/leave-request',
           title: 'Request Leave',
           icon: 'gestures_tap-01',

@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(formData) {
+    console.log(formData);
     this.userLogInService.postLogInUser({
       _id: formData.value._id,
       password: formData.value.password,

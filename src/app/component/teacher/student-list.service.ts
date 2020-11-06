@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({ providedIn: 'root' })
@@ -40,7 +41,7 @@ export class StudentListService {
     },
   ];
 
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   getStudentList() {
     //need to get data from student_day_attendance
