@@ -159,6 +159,12 @@ export class SiderbarComponent implements OnInit {
           icon: 'users_single-02',
           class: '',
         },
+        {
+          path: '/user/add-event',
+          title: 'HANDLE LEAVES',
+          icon: 'users_single-02',
+          class: '',
+        },
       ];
     }
   }

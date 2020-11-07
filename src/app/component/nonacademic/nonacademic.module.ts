@@ -4,9 +4,10 @@ import { LeavehandleComponent } from './leavehandle/leavehandle.component';
 import { HttpClientModule } from '@angular/common/http';
 
 import { NonAcademicRoutingModule } from './nonacademic.routing';
+import { AddEventComponent } from './add-event/add-event.component';
 
 @NgModule({
-  declarations: [LeavehandleComponent],
+  declarations: [LeavehandleComponent, AddEventComponent],
   imports: [CommonModule, HttpClientModule, NonAcademicRoutingModule],
   exports: [LeavehandleComponent],
 })
