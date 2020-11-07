@@ -4,6 +4,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
 import { LayoutComponent } from './layout/layout.component';
 import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
+import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component';
+import { LeavehandleComponent } from './component/nonacademic/leavehandle/leavehandle.component';
 
 const routes: Routes = [
   {
@@ -13,7 +15,12 @@ const routes: Routes = [
   {
     path: 'user',
     component: LayoutComponent,
-    children: [{ path: 'leave-request', component: LeaverequestComponent }],
+    children: [
+      { path: 'leave-request', component: LeaverequestComponent },
+      //to remove
+      { path: 'userprofile', component: TeacherProfileComponent },
+      { path: 'leavehandle', component: LeavehandleComponent },
+    ],
   },
 ];
 
