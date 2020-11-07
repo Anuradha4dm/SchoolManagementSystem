@@ -25,7 +25,10 @@ export class TeacherService {
     });
   }
 
-  addStudentResult(studentResult){
-
+  addStudentResult(studentResult) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/add-student-result',
+      studentResult
+    );
   }
 }
