@@ -24,4 +24,8 @@ export class TeacherService {
       studentid: studentid,
     });
   }
+
+  addStudentResult(studentResult){
+
+  }
 }
