@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { NotificationModel } from '../models/notification.module';
+import { map } from 'rxjs/operators';
+import { NotificationModel } from '../models/notification.modele';
 import { NotificationService } from './notification.service';
 
 @Injectable({ providedIn: 'root' })
@@ -14,6 +15,24 @@ export class NotificationResolver implements Resolve<NotificationModel[]> {
     | Observable<NotificationModel[]>
     | Promise<NotificationModel[]>
     | NotificationModel[] {
-    return this.notificationService.getNotifications();
+    var array: NotificationModel[] = [];
+    return this.notificationService.getNotifications().pipe(
+      map((data: any) => {
+        data.notificationArray.forEach((element) => {
+          array.push(
+            new NotificationModel(
+              element.notificationid,
+              element.publisher,
+              element.from,
+              element.to,
+              element.message,
+              element.createdAt
+            )
+          );
+        });
+
+        return array;
+      })
+    );
   }
 }

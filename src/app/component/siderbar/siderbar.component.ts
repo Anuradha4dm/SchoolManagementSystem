@@ -144,5 +144,22 @@ export class SiderbarComponent implements OnInit {
         },
       ];
     }
+
+    if (this.userRoll === 'nonacademic') {
+      this.sideBarItems = [
+        {
+          path: '/user/userprofile',
+          title: 'Profile',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/handle-leave',
+          title: 'HANDLE LEAVES',
+          icon: 'users_single-02',
+          class: '',
+        },
+      ];
+    }
   }
 }
