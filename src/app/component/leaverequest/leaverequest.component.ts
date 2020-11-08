@@ -13,8 +13,12 @@ import { UserLogInService } from '../homepage/login/user-login.service';
 })
 export class LeaverequestComponent implements OnInit {
   loginUserData: LogInUserModel;
+  //to remove
+  leaveDate;
+  status;
+  type;
+  //end to remove
 
-  type: string = 'full-day';
   leaveData; //leave data assign when the form submitted
   leaveTaken = 0;
   leaveAvailable = 41;
@@ -87,6 +91,11 @@ export class LeaverequestComponent implements OnInit {
     if (formData.type === 'full-day') {
       formData.type = 2;
     }
+
+    //to delete
+    this.leaveDate=formData.date;
+    this.type=formData.type;
+    this.status="pending";
 
     this.leaveService
       .makeNewLeaveRequest(
