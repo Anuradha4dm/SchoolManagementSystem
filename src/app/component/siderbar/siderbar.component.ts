@@ -70,12 +70,7 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
-        {
-          path: '/user/exams',
-          title: 'EXAMS',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
+
         {
           path: '/user/events',
           title: 'EVENTS',
@@ -161,11 +156,21 @@ export class SiderbarComponent implements OnInit {
         },
         {
           path: '/user/add-event',
-          title: 'HANDLE LEAVES',
+          title: 'ADD EVENT',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/send-notification',
+          title: 'SEND NOTIFICATION',
           icon: 'users_single-02',
           class: '',
         },
       ];
     }
+  }
+
+  logout() {
+    this.userLogInService.logout();
   }
 }

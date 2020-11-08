@@ -11,5 +11,12 @@
         <p class="side-bar-item">{{ item.title }}</p>
       </a>
     </li>
+
+    <li routerLinkActive="active" class="nav-item" (click)="logout()">
+      <a>
+        <i class="now-ui-icons gestures_tap-01"></i>
+        <p class="side-bar-item">LOG OUT</p>
+      </a>
+    </li>
   </ul>
 </div>

@@ -11,14 +11,14 @@ const routes: Routes = [
     path: '',
     component: HomelayoutComponent,
   },
-  {
-    path: 'user',
-    component: LayoutComponent,
-    children: [
-      { path: 'leave-request', component: LeaverequestComponent },
-      { path: 'send-email', component: SendEmilComponent },
-    ],
-  },
+  // {
+  //   path: 'user',
+  //   component: LayoutComponent,
+  //   children: [
+  //     { path: 'leave-request', component: LeaverequestComponent },
+  //     { path: 'send-email', component: SendEmilComponent },
+  //   ],
+  // },
 ];
 
 @NgModule({

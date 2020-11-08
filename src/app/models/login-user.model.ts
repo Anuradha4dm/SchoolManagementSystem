@@ -27,10 +27,14 @@ export class LogInUserModel {
   }
 
   get getToken() {
-    if (!this.token || this.expirationData < new Date().getTime()) {
+    if (
+      !this.token ||
+      !this.expirationData ||
+      this.expirationData < new Date().getTime()
+    ) {
       return null;
     }
-    return null;
+    return this.token;
   }
 
   get getAuthentication() {
@@ -39,5 +43,9 @@ export class LogInUserModel {
 
   get getLoginAs() {
     return this.logInAs;
+  }
+
+  get getExpiration() {
+    return this.expirationData;
   }
 }
