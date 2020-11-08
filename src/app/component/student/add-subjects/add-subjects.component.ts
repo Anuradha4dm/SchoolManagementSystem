@@ -138,22 +138,19 @@ export class AddSubjectsComponent implements OnInit {
       ];
     }
 
+    //Mathematics students
+
     if (this.gradeVal >= 12 && this.stream === 'MATH') {
       this.subjectSet1 = ['combine_mathematics', 'physics'];
       this.isOptionalList1 = true;
       this.optionalList1 = ['Chemistry', 'Infomation Technology'];
     }
 
-    setInterval(() => {
-      this.endimeInMinutes = new Date().getMinutes();
-      let lastUpdate = this.endimeInMinutes - this.startTimeInMinutes;
-
-      if (lastUpdate < 1) {
-        this.timeInfo = 'Update less than minutes';
-      } else {
-        this.timeInfo = 'Update ' + lastUpdate + 'minutes ago';
-      }
-    }, 1000);
+    if (this.gradeVal >= 12 && this.stream === 'BIO') {
+      this.subjectSet1 = ['Biology', 'chemistry'];
+      this.isOptionalList1 = true;
+      this.optionalList1 = ['physics', 'agriculture'];
+    }
 
     if (this.gradeVal >= 12 && this.stream === 'ART') {
       this.isOptionalList1 = true;
@@ -207,6 +204,33 @@ export class AddSubjectsComponent implements OnInit {
         'hindi',
       ];
     }
+
+    if (this.gradeVal >= 12 && this.stream === 'TEC') {
+      this.subjectSet1 = ['science_for_teachnology'];
+      this.isOptionalList1 = true;
+      this.optionalList1 = ['engineering_tech', 'bio_system_tech'];
+      this.isOptionalList2 = true;
+      this.optionalList2 = [
+        'english',
+        'information_technology',
+        'economics',
+        'geography',
+        'commerce',
+        'accounting',
+        'art',
+      ];
+    }
+
+    setInterval(() => {
+      this.endimeInMinutes = new Date().getMinutes();
+      let lastUpdate = this.endimeInMinutes - this.startTimeInMinutes;
+
+      if (lastUpdate < 1) {
+        this.timeInfo = 'Update less than minutes';
+      } else {
+        this.timeInfo = 'Update ' + lastUpdate + 'minutes ago';
+      }
+    }, 1000);
   }
 
   onSubmitForm(data) {
@@ -272,6 +296,18 @@ export class AddSubjectsComponent implements OnInit {
 
         request.subject2 = this.subjectSet1[1];
         request.subject3 = data.value.optional1;
+      }
+
+      if (this.stream === 'ART' || this.stream === 'COM') {
+        request.subject1 = data.value.optional1;
+        request.subject2 = data.value.optional2;
+        request.subject3 = data.value.optional3;
+      }
+
+      if (this.stream === 'TEC') {
+        request.subject1 = this.subjectSet1[0];
+        request.subject2 = data.value.optional2;
+        request.subject3 = data.value.optional3;
       }
 
       this.studentProfileService

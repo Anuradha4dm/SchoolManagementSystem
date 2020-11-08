@@ -29,7 +29,7 @@
                     <td class="text-left">
                       <input
                         type="button"
-                        [value]="subject | titlecase"
+                        [value]="subject | titlecase | subjectName"
                         class="form-control"
                         placeholder="Username"
                         style="cursor: pointer"
@@ -67,7 +67,7 @@
                           *ngFor="let opSub of optionalList1"
                           [value]="opSub"
                         >
-                          {{ opSub | titlecase }}
+                          {{ opSub | titlecase | subjectName }}
                         </option>
                       </select>
                     </td>
@@ -101,7 +101,7 @@
                           *ngFor="let item of optionalList2"
                           [value]="item"
                         >
-                          {{ item }}
+                          {{ item | titlecase | subjectName }}
                         </option>
                       </select>
                     </td>
@@ -136,7 +136,7 @@
                           *ngFor="let item of optionalList3"
                           [value]="item"
                         >
-                          {{ item }}
+                          {{ item | titlecase | subjectName }}
                         </option>
                       </select>
                     </td>
