@@ -62,18 +62,16 @@ export class StudentProfileService {
   }
 
   getSelectSubjectInfomation(subjectname: string, grade: string) {
-    return this.httpClient.get<{
+    return this.httpClient.post<{
       subjectId: number;
       subjectName: string;
       subjectDes: string;
       teacherName: string;
       imagePath: string;
-    }>(
-      'http://localhost:3000/student/getsubjectinfo/' +
-        subjectname +
-        '/' +
-        grade
-    );
+    }>('http://localhost:3000/student/getsubjectinfo', {
+      grade: grade,
+      subjectname: subjectname,
+    });
   }
 
   getStudentId() {}
@@ -104,6 +102,19 @@ export class StudentProfileService {
     );
   }
 
+  addSubjectAdvanceLevel(postData: {
+    studentid: string;
+    grade: string;
+    subject1: string;
+    subject2: string;
+    subject3: string;
+  }) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/student/add-subject-advance-level',
+      postData
+    );
+  }
+
   getRegisteredSubjectList() {
     return this.httpClient.get<{
       query: boolean;
@@ -118,7 +129,7 @@ export class StudentProfileService {
           update: string;
         }
       ];
-    }>('http://localhost:3000/student/get-subject-list/ST_1');
+    }>('http://localhost:3000/student/get-subject-list/ST_6');
   }
 
   viewResultOfSpecificStudent(formdata) {

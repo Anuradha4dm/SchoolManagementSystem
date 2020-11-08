@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
 import { UserLogInService } from '../../homepage/login/user-login.service';
@@ -10,8 +11,12 @@ import { StudentProfileService } from '../student-profile.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
   loginUserData: LogInUserModel;
+
+  //subsvribers
+  loginUserDataSubscriber: Subscription;
+  userprofileSubscription: Subscription;
 
   studentProfileData: Student = null;
   studentPerformance;
@@ -40,11 +45,13 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loginUserService.userAuthData.subscribe((userData) => {
-      this.loginUserData = userData;
-    });
+    this.loginUserDataSubscriber = this.loginUserService.userAuthData.subscribe(
+      (userData) => {
+        this.loginUserData = userData;
+      }
+    );
 
-    this.studentProfileService
+    this.userprofileSubscription = this.studentProfileService
       .getStudent(this.loginUserData.getUserId)
       .subscribe(
         (result) => {
@@ -72,4 +79,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   viewSubjectClick() {}
+
+  ngOnDestroy() {
+    this.loginUserDataSubscriber.unsubscribe();
+    this.userprofileSubscription.unsubscribe();
+  }
 }

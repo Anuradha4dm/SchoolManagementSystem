@@ -21,7 +21,7 @@ export class UserLogInService {
   }; //this is dumy for the development need to be get for the serve
 
   userAuthData = new BehaviorSubject<LogInUserModel>(
-    new LogInUserModel('ST_1', true, 'student', 'ss', 112)
+    new LogInUserModel('ST_2', true, 'student', 'ss', 112)
   );
 
   constructor(private httpClient: HttpClient, private router: Router) {}
