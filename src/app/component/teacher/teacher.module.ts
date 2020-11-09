@@ -10,6 +10,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { RouterModule } from '@angular/router';
 import { TeacherRoutingModule } from './teacher.routing';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
+import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 
 @NgModule({
   imports: [
@@ -33,6 +34,7 @@ import { TermTestResultsComponent } from './term-test-results/term-test-results.
     FilterStudentPipe,
     TeacherProfileComponent,
     TermTestResultsComponent,
+    EditTermResultsComponent,
   ],
   providers: [],
 })

@@ -5,6 +5,7 @@ import { LayoutComponent } from 'src/app/layout/layout.component';
 import { LeavehandleComponent } from '../nonacademic/leavehandle/leavehandle.component';
 import { GetClassStudentListResolver } from '../student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from '../student/student-share-components/get-student-list-resolver.service';
+import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { StudentAttendenceComponent } from './student-attendence/student-attendence.component';
 import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
@@ -32,8 +33,8 @@ const routes: Routes = [
       },
       //to remove start
       {
-        path: 'test1',
-        component: TeacherProfileComponent,
+        path: 'edit-results',
+        component: EditTermResultsComponent,
       },
       {
         path: 'profile',

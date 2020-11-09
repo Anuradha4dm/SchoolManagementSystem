@@ -1,0 +1,99 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content">
+    <div class="card card-body">
+        <!--Year,class and Term selection here-->
+        <div class="row">
+            <div class="col">
+                <label>Year</label>
+                <select (change)="onYearChange($event)" class="form-control" [(ngModel)]="selectedClass">
+                    <option *ngFor="let class of classList" [value]="class.class">{{class.year}}</option>                    
+                </select>
+            </div>
+
+            <div class="col">
+                <label>Class</label>
+                <input type="text" class="form-control" [value]="selectedClass" disabled>
+            </div>
+
+            <div class="col">
+                <label>Term</label>
+                <select (change)="onTermChange()" class="form-control" [(ngModel)]="selectedTerm">
+                    <option value="1">Term1</option>
+                    <option value="2">Term2</option>
+                    <option value="3">Term3</option>
+                </select>
+            </div>
+        </div>
+
+        <!--Student list and results here-->
+        <div class="row mt-5">
+            <!--Breif description about result here-->
+            <div class="col">
+                <table class="table table-hover text-center">
+                    <tr class="bg-primary">
+                        <th>Student ID</th>
+                        <th>Full name</th>
+                        <th>Average</th>
+                        <th>Position</th>
+                    </tr>
+
+                    <tbody>
+                        <!--this should repeat-->
+                        <tr (click)="onRowClick()">
+                            <td>id</td>
+                            <td>name</td>
+                            <td>average</td>
+                            <td>position</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!--Edit results form here-->
+            <div *ngIf="show" class="col border border-dark p-2">
+                <form>
+                    <div class="row">
+                        <div class="col">
+                            <label>Year</label>
+                            <input type="text" class="form-control" [value]="selectedYear" disabled>
+                        </div>
+
+                        <div class="col">
+                            <label>Class</label>
+                            <input type="text" class="form-control" [value]="selectedClass" disabled>
+                        </div>
+
+                        <div class="col">
+                            <label>Term</label>
+                            <input type="text" class="form-control" [value]="selectedTerm" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Full name</label>
+                        <input type="text" class="form-control" disabled>
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table">
+                            <tr>
+                                <td>
+                                    <label>subject name:</label>
+                                </td>
+                                <td>
+                                    <input type="text" value="marks" class="w-50" disabled>
+                                </td>
+                            </tr>
+                       </table>
+                    </div>
+
+                    <div class="form-group pull-right">
+                        <button class="btn btn-info btn-sm">Edit Results</button>
+                        <button class="btn btn-danger btn-sm">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
