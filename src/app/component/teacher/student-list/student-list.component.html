@@ -1,10 +1,26 @@
-<div class="panel-header panel-header-sm"></div>
 <div class="main-content">
   <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Stundents List</h4>
+          <div class="row">
+            <div class="col-md-7">
+              <p class="description">
+                last update :{{ lastAttendanceupdate.date | date: "fullDate" }}
+              </p>
+            </div>
+            <div class="col-md-5">
+              <input
+                type="text"
+                name=""
+                class="form-control"
+                id=""
+                placeholder="Search Student...."
+                [(ngModel)]="filtering"
+              />
+            </div>
+          </div>
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -17,7 +33,7 @@
                 <th class="text-right">Send Message</th>
               </thead>
               <tbody>
-                <tr *ngFor="let student of students">
+                <tr *ngFor="let student of students | filterStudent: filtering">
                   <td>
                     {{ student.username }}
                   </td>

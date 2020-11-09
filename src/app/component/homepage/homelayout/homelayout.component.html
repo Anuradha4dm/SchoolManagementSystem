@@ -1,90 +1,43 @@
-<div class="card bg-secondary">
-    <!--School logo are-->
-    <div class="logodiv">
-        <img class="logo" src={{logoUrl}}>
-    </div>  
-    
-    <!--Image slideshow start-->
-    <div class="card-header bg-dark">
-                
-        <div id="myslide" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myslide" data-slide-to="0" class="active"></li>
-                <li data-target="#myslide" data-slide-to="1"></li>
-                <li data-target="#myslide" data-slide-to="2"></li>
-            </ol>
+<!--Header section here-->
+<header>
+  <nav class="navbar bg-dark">
+    <ul class="nav nav-navbar">
+        <li class="nav-link btn btn-sm btn-danger mr-1" role="button" (click)="tabActivate(tab.name)" *ngFor="let tab of tabs">
+          {{tab.name}}
+        </li>
+    </ul>
 
-            <div class="carousel-inner slideimage">
-                 <img  class="carousel-item active" src="assets/img/bg5.jpg" alt="Slide1"/>
-                 <img class="carousel-item" src="assets/img/bg6.jpg" alt="Slide2"/>
-                 <img class="carousel-item" src="assets/img/header.jpg" alt="Slide3"/>
-            </div>
-
-
-            <a class="carousel-control-prev" href="#myslide" data-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-
-            <a class="carousel-control-next" href="#myslide" data-slide="next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
-
-        </div>
+    <div>
+      <app-login></app-login>
     </div>
-    <br>
+  </nav>
+</header>
 
-    <!--Navigation panel-->
-    <div class="card-block bg-light">
-        <ul class="nav nav-tabs justify-content-center">
-            <li *ngFor="let item of navItems" class="nav-item">
-                <a routerLink={{item.path}} class="nav-link" (click)="tabActivate()">{{item.display}}</a>
-            </li>
-            <li class="nav-item">
-                <a href="" data-target="#loginmodal" data-toggle="modal" class="nav-link" (click)="initialTab=true">Login</a>
-            </li>
-        </ul>
+<!--Body section here-->
+<main class="text-center card" [ngSwitch]="tabName">
+  <app-home *ngSwitchCase="'Home'"></app-home>
+  <app-staff *ngSwitchCase="'Academic Staff'"></app-staff>
+  <app-downloads *ngSwitchCase="'Downloads'"></app-downloads> 
+  <app-about *ngSwitchCase="'About'"></app-about>
+</main>
+
+<!--Footer section here-->
+<footer>
+  <div class="card-body">
+    <div class="row footerText">
+
+      <!--Contact details here-->
+      <div class="col text-center">
+        <h3>Contact Us</h3>
+        <p>
+          <strong>Address: </strong>{{schoolAddress}}
+        </p>
+        <p>
+          <strong>Phone: </strong>{{schoolPhone}}<br>
+          <strong>Email: </strong>{{schoolMail}}<br>
+        </p>
+      </div>
+
     </div>
-
-    <!--Homepage body content-->
-    <div class="card-body bg-light text-center scroll">
-        <app-home *ngIf="initialTab"></app-home>
-        <router-outlet *ngIf="otherTab"></router-outlet>
-    </div>
-
-    <!--Homepage footer area-->
-    <div class="card-footer text-center">
-        <h1>Footer Here</h1>
-    </div>
-    
-</div>
-
-<!--Login window development-->
-<div class="modal fade" id="loginmodal">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h1>Login</h1>
-                <button class="close" data-dismiss="modal">x</button>
-            </div>
-
-            <div class="modal-body">
-                <div class="card card-dark">
-                    <div class="card-body bg-dark">
-                        <form>
-                            <div class="form-group">
-                                <label for="#username">Username</label>
-                                <input class="form-control" type="text" id="username">
-                            </div>
-                            <div class="form-group">
-                                <label for="#password">Password</label>
-                                <input class="form-control" type="password" id="password">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Login</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
+  </div>
+</footer>

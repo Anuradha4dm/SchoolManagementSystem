@@ -1,0 +1,48 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content my-view">
+  <div class="row">
+    <div class="col-md-11">
+      <div class="card card-tasks">
+        <div class="card-header">
+          <h1 class="card-title">Registered Subject List</h1>
+          <h5 class="card-category">
+            These are the subjects you have registerd
+          </h5>
+        </div>
+        <div class="card-body">
+          <div class="table-full-width">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>Subject Name</th>
+                  <th>Teacher Name</th>
+                  <th class="text-center">Send Mail</th>
+                </thead>
+                <tbody *ngFor="let subjectItem of subjectListObj">
+                  <tr>
+                    <td>{{ subjectItem.subjectname }}</td>
+
+                    <td>Sr. {{ subjectItem.teachername }}</td>
+                    <td class="text-center">
+                      <button class="btn btn-success">
+                        <i class="now-ui-icons ui-1_email-85"></i>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated
+            {{ update | date }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

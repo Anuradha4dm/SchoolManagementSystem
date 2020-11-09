@@ -1,0 +1,137 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content my-view">
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Enter Field Value to See Result</h5>
+
+          <div>
+            <form #formData="ngForm" (ngSubmit)="onSubmit(formData)">
+              <div class="row">
+                <div class="col-md-4">
+                  <label for="year">Year</label>
+                  <select
+                    name="year"
+                    class="form-control"
+                    id="year"
+                    ngModel
+                    #elYear
+                  >
+                    <option [value]="year" *ngFor="let year of years">
+                      {{ year }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="term">Term</label>
+                  <select
+                    name="term"
+                    class="form-control"
+                    id="term"
+                    #elTerm
+                    ngModel
+                    (change)="onSelectTerm(elYear.value, elTerm.value)"
+                  >
+                    <option value="1">1st Term</option>
+                    <option value="2">2nd Term</option>
+                    <option value="3">3rd Term</option>
+                  </select>
+                </div>
+                <div class="col-md-4">
+                  <label for="grade">Grade</label>
+                  <input
+                    type="text"
+                    name="class"
+                    class="form-control"
+                    [ngModel]="classVal"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6">
+                  <input
+                    type="submit"
+                    value="Find Result"
+                    class="btn btn-primary"
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <h4 class="card-title">View Student Result</h4>
+        </div>
+        <div class="card-body">
+          <div class="table-full-width">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class="text-primary">
+                  <th>Subject Name</th>
+                  <th>Mark</th>
+                  <th class="text-center">Grade</th>
+                </thead>
+                <tbody *ngFor="let subjectResult of resultReviewArray">
+                  <tr>
+                    <td>{{ subjectResult.subject }}</td>
+
+                    <td>{{ subjectResult.marks }} %</td>
+                    <td class="text-center">{{ subjectResult.grade }}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <hr />
+          <div class="stats">
+            <i class="now-ui-icons loader_refresh spin"></i> Updated
+            {{ averagedata.update | date }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img
+            src="https://pbs.twimg.com/profile_images/482795328148500480/w1-rFRz0.jpeg"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <div class="text-center">
+            <a href="#">
+              <h5 class="title">{{ averagedata.name }}</h5>
+            </a>
+          </div>
+          <p class="description text-center">
+            Contractulation!
+            <br />
+            {{ averagedata.message }}
+          </p>
+        </div>
+        <hr />
+        <div class="card-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Average</td>
+
+                <td class="text-right">{{ averagedata.average }}</td>
+              </tr>
+              <tr>
+                <td>Place</td>
+
+                <td class="text-right">{{ averagedata.place }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

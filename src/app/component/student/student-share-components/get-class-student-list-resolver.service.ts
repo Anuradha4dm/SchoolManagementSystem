@@ -2,23 +2,26 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { StudentService } from 'src/app/services/student.service';
+import { StudentListService } from '../../teacher/student-list.service';
 
-interface StudentList {
-  _id: string;
-  username: string;
-  mobile: string;
-  email: string;
-  isOnline: boolean;
+interface StudentListInfo {
+  StudentList: {
+    _id: string;
+    username: string;
+    mobile: string;
+    email: string;
+    isOnline?: boolean;
+  }[];
+  lastUpdate: { isDone: boolean; date: Date };
 }
 
 @Injectable({ providedIn: 'root' })
-export class GetClassStudentListResolver implements Resolve<StudentList[]> {
-  constructor(private studentService: StudentService) {}
+export class GetClassStudentListResolver implements Resolve<StudentListInfo> {
+  constructor(private studentListService: StudentListService) {}
 
   resolve(
     route: ActivatedRouteSnapshot
-  ): Observable<StudentList[]> | Promise<StudentList[]> | StudentList[] {
-    return this.studentService.getStudentClassList();
+  ): Observable<StudentListInfo> | Promise<StudentListInfo> | StudentListInfo {
+    return this.studentListService.getStudentList();
   }
 }

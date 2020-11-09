@@ -1,0 +1,77 @@
+<div class="main-content">
+  <div class="card card-body">
+    <h5 class="text-center text-muted mb-5">Pending Leave Request List</h5>
+
+    <div class="row">
+      <!--All leave requests are here-->
+      <div class="col">
+        <table class="table text-center table-hover">
+          <tr>
+            <th>Leave Number</th>
+            <th>User ID</th>
+            <th>Date for Leave</th>
+          </tr>
+          <tbody>
+            <tr>
+              <td>{{ leaveNumber }}</td>
+              <td>{{ leaveuserID }}</td>
+              <td>{{ leaveDate }}</td>
+              <td>
+                <button
+                  (click)="onHandleClick()"
+                  class="btn btn-primary btn-sm"
+                >
+                  Handle
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!--full detail of one leave-->
+      <div class="col border border-dark" *ngIf="show">
+        <table class="table">
+          <tbody>
+            <tr>
+              <th>Leave Number</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Date for Leave</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Leave Type</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>User ID</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Full Name</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Role</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Description</th>
+              <td></td>
+            </tr>
+            <tr>
+              <th>Leaves Left</th>
+              <td></td>
+            </tr>
+            <tr class="text-center">
+              <button class="btn btn-success">Accept</button>
+              <button class="btn btn-danger">Reject</button>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

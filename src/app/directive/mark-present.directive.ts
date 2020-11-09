@@ -24,6 +24,11 @@ export class MarkPresentDirective {
         'background-color',
         'green'
       );
+      this.renderer.setProperty(
+        this.elementRef.nativeElement,
+        'disabled',
+        false
+      );
     } else {
       this.renderer.addClass(this.elementRef.nativeElement, 'btn-dark');
       this.renderer.removeStyle(

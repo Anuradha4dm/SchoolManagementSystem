@@ -1,1 +1,10 @@
+.my-sub-btn,
+.ng-invalid {
+  cursor: no-drop;
+}
 
+.my-view {
+  font-family: "Zilla Slab", serif;
+  font-size: 20px;
+  border-bottom: 2px #809fff solid;
+}

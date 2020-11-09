@@ -1,0 +1,65 @@
+<div class="panel-header panel-header-lg" style="height: 500px">
+  <canvas
+    baseChart
+    id="bigDashboardChart"
+    [datasets]="mainChartData"
+    [labels]="mainChartLabels"
+    [colors]="mainChartColor"
+    [options]="mianChartOption"
+    [chartType]="mainChartType"
+  >
+  </canvas>
+</div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-lg-12 col md-12">
+      <div class="card card-chart">
+        <div class="card-header">
+          <h2 class="card-title">Participetion</h2>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-7 col-md-7">
+              <h3 class="my-view">
+                Total Number Of Days Presnt:&nbsp;
+                {{ attendenceData.totalpresents }}
+              </h3>
+
+              <h3 class="my-view">
+                Total Number Of Days Absent: &nbsp;{{
+                  attendenceData.absentDates.length
+                }}
+              </h3>
+              <div class="card-content absent-date">
+                <p class="text-des cont-text">
+                  <i class="now-ui-icons location_map-big"></i>
+                  Absents:
+                </p>
+                <input
+                  type="button"
+                  class="btn btn-danger"
+                  value="Show Me"
+                  (click)="showDates()"
+                />
+                <div class="absent-date-content" *ngIf="isAbsent">
+                  <p
+                    class="text-des cont-text"
+                    *ngFor="let date of attendenceData.absentDates"
+                  >
+                    <i class="now-ui-icons clothes_tie-bow"></i>
+                    {{ date.date | date }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4 col-md-5 presentage-data">
+              <p class="my-des">Presentage Of Attendence</p>
+              <h1 class="presentage">{{ attendenceData.presentage }}%</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

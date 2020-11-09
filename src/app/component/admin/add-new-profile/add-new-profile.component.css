@@ -1,0 +1,11 @@
+input.ng-invalid.ng-touched {
+  border: red 2px solid;
+}
+
+.profile-picuture {
+  width: 130px;
+  height: 130px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin-bottom: 15px;
+}

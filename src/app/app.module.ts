@@ -1,71 +1,61 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
+import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule } from '@angular/common/http';
+
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
 import { SiderbarComponent } from './component/siderbar/siderbar.component';
-import { NotificationComponent } from './component/notification/notification.component';
-import { UserProfileComponent } from './component/student/user-profile/user-profile.component';
-import { AddNewProfileComponent } from './component/admin/add-new-profile/add-new-profile.component';
-import { StudentListComponent } from './component/teacher/student-list/student-list.component';
-
-import { NotificationService } from './services/notification.service';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotificationResolver } from './services/Notification-resolver.service';
-import { NotificationInfoComponent } from './component/notification/notification-info/notification-info.component';
-import { AddSubjectsComponent } from './component/student/add-subjects/add-subjects.component';
-import { MarkPresentDirective } from './directive/mark-present.directive';
-import { MarkAbsentDirective } from './directive/mark-absent.directive';
-import { GetStudentListForAttendenceResolver } from './component/student/student-share-components/get-student-list-resolver.service';
-import { StudentService } from './services/student.service';
 import { GetClassStudentListResolver } from './component/student/student-share-components/get-class-student-list-resolver.service';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { StudentAttendenceComponent } from './component/teacher/student-attendence/student-attendence.component';
-import { NotificatinHiddenDirective } from './directive/notificatin-hidden.directive';
-import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
-import { HomeComponent } from './component/homepage/home/home.component';
-import { StaffComponent } from './component/homepage/staff/staff.component';
-import { AboutComponent } from './component/homepage/about/about.component';
-import { DownloadsComponent } from './component/homepage/downloads/downloads.component';
-import { NonAcedemicViewProfileComponent } from './component/non-acedemic/non-acedemic-view-profile/non-acedemic-view-profile.component';
-
-import { NonAcedemicEditProfileComponent } from './component/non-acedemic/non-acedemic-edit-profile/non-acedemic-edit-profile.component';
-import { ViewNotificationComponent } from './component/non-acedemic/view-notification/view-notification.component';
-import { EmailComponent } from './component/email/email.component';
+import { GetStudentListForAttendenceResolver } from './component/student/student-share-components/get-student-list-resolver.service';
+import { ConfirmationDialogComponent } from './component/confirmation-dialog/confirmation-dialog.component';
+import { StudentModule } from './component/student/student.module';
+import { AdminModule } from './component/admin/admin.module';
+import { TeacherModule } from './component/teacher/teacher.module';
+import { NotificationModule } from './component/notification/notification.module';
+import { HomePageModule } from './component/homepage/homepage.module';
+import { CommonModule } from '@angular/common';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
+import { NonacademicModule } from './component/nonacademic/nonacademic.module';
+import { SendEmilComponent } from './component/send-emil/send-emil.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LayoutComponent,
     SiderbarComponent,
-    NotificationComponent,
-    UserProfileComponent,
-    AddNewProfileComponent,
-    StudentListComponent,
-    StudentAttendenceComponent,
-    NotificationInfoComponent,
-    AddSubjectsComponent,
-    MarkPresentDirective,
-    MarkAbsentDirective,
-    NotificatinHiddenDirective,
-    HomelayoutComponent,
-    HomeComponent,
-    StaffComponent,
-    AboutComponent,
-    DownloadsComponent,
-    NonAcedemicViewProfileComponent,
-   
-    NonAcedemicEditProfileComponent,
-   
-    ViewNotificationComponent,
-   
-     EmailComponent,
+    ConfirmationDialogComponent,
+    DashboardComponent,
+    LeaverequestComponent,
+    SendEmilComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    NgbModule,
+    ChartsModule,
+    HttpClientModule,
+    StudentModule,
+    AdminModule,
+    TeacherModule,
+    NonacademicModule,
+    NotificationModule,
+    HomePageModule,
+  ],
   providers: [
-    NotificationService,
     NotificationResolver,
-    StudentService,
     GetStudentListForAttendenceResolver,
     GetClassStudentListResolver,
   ],

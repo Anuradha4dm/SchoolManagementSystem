@@ -1,5 +1,4 @@
-<div class="panel-header panel-header-sm"></div>
-
+<div class="panel-header"></div>
 <div class="main-content">
   <div class="row">
     <div class="col-md-5">
@@ -8,21 +7,22 @@
           <h4 class="card-title">Notification</h4>
         </div>
         <div class="card-body">
-          <div *ngIf="!isClose; else default">
+          <div *ngIf="isNotificationAvailable; else default">
             <a
               style="cursor: pointer"
               *ngFor="let notification of notifications"
-              (click)="onSelectNotification(notification)"
             >
               <div
                 class="alert alert-info alert-with-icon"
                 data-notify="container"
+                [hidden]="false"
               >
                 <button
                   type="button"
                   aria-hidden="true"
                   class="close"
                   (click)="removeNotification()"
+                  appNotificationClose
                 >
                   <i class="now-ui-icons ui-1_simple-remove"></i>
                 </button>
@@ -30,7 +30,11 @@
                   data-notify="icon"
                   class="now-ui-icons ui-1_bell-53"
                 ></span>
-                <span data-notify="message">{{ notification.message }}</span>
+                <span
+                  (click)="onSelectNotification(notification)"
+                  data-notify="message"
+                  >new Message</span
+                >
               </div>
             </a>
           </div>
@@ -42,6 +46,7 @@
     </div>
     <div class="col-md-7">
       <app-notification-info
+        *ngIf="selectedNotification"
         [viewNotification]="selectedNotification"
       ></app-notification-info>
     </div>
