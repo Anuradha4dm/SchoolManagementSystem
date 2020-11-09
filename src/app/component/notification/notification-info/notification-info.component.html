@@ -5,7 +5,7 @@
   <div class="card-body">
     <h6 class="description">From :{{ selectedNotification.from }}</h6>
     <h6 class="description">To :{{ selectedNotification.to }}</h6>
-    <h6 class="description">{{ selectedNotification.time }}</h6>
+    <h6 class="description">POST AT: {{ selectedNotification.time | date }}</h6>
 
     <div class="blockquote blockquote-primary text-center">
       <p *ngIf="selectedNotification; else show">
