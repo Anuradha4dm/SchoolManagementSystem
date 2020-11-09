@@ -130,13 +130,6 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
-
-        {
-          path: '/user/events',
-          title: 'EVENTS',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
       ];
     }
 
