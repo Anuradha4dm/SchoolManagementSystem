@@ -70,12 +70,7 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
-        {
-          path: '/user/exams',
-          title: 'EXAMS',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
+
         {
           path: '/user/events',
           title: 'EVENTS',
@@ -135,14 +130,40 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
+      ];
+    }
 
+    if (this.userRoll === 'nonacademic') {
+      this.sideBarItems = [
         {
-          path: '/user/events',
-          title: 'EVENTS',
-          icon: 'gestures_tap-01',
+          path: '/user/userprofile',
+          title: 'Profile',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/handle-leave',
+          title: 'HANDLE LEAVES',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/add-event',
+          title: 'ADD EVENT',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/send-notification',
+          title: 'SEND NOTIFICATION',
+          icon: 'users_single-02',
           class: '',
         },
       ];
     }
+  }
+
+  logout() {
+    this.userLogInService.logout();
   }
 }

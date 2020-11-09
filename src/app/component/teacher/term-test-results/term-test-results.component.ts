@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
+import { TermResults } from 'src/app/models/teacher.model';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { TeacherService } from '../teacher.service';
 
@@ -11,50 +13,18 @@ import { TeacherService } from '../teacher.service';
 })
 export class TermTestResultsComponent implements OnInit {
   loginUserData: LogInUserModel;
-  grade: string;
 
-  term: string = 'term1';
-  selectedStudentID: string = '';
   studentList: { _id: string; firstname: string; lastname: string }[];
-
-  //to remove start
-  classStudents = [
-    {
-      id: '239',
-      fname: 'Kamal',
-      lname: 'Silva',
-      average: 30.87,
-      position: 1,
-    },
-    {
-      id: '249',
-      fname: 'Kamal',
-      lname: 'Silva',
-      average: 30.87,
-      position: 2,
-    },
-    {
-      id: '2359',
-      fname: 'Kamal',
-      lname: 'Silva',
-      average: 30.87,
-      position: 3,
-    },
-    {
-      id: '2350',
-      fname: 'Kamal',
-      lname: 'Silva',
-      average: 30.87,
-      position: 4,
-    },
-  ];
-
+  termResult = new TermResults();
   subjectList = [];
-  //to remove end
+  fullname: string;
+
+  element: string = '';
 
   constructor(
     private userLoginService: UserLogInService,
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private alterMessageService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -66,17 +36,51 @@ export class TermTestResultsComponent implements OnInit {
       .getStudentListForAddResult(this.loginUserData.getUserId)
       .subscribe((data) => {
         this.studentList = data.studentListData;
-        this.grade = data.grade;
+        this.termResult.grade = data.grade;
       });
   }
 
-  onAddResultsClick(id) {
+  onAddResultsClick(id, fname, lname) {
     this.teacherService
-      .getSubjectsOfSpecificStudent(id, this.grade)
-      .subscribe((data) => {
-        this.subjectList = data.subjectlist;
+      .getSubjectsOfSpecificStudent(id, this.termResult.grade)
+      .subscribe(
+        (data) => {
+          this.subjectList = data.subjectlist;
+          console.log(data);
+        },
+        (error) => {
+          this.alterMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          if (this.subjectList.length === 0) {
+            this.alterMessageService.errorAlert(
+              'Student Is Not Register For Subjects'
+            );
+          }
+        }
+      );
+    this.termResult.studentid = id;
+    this.fullname = fname + ' ' + lname;
+  }
 
-        console.log(data);
-      });
+  onSubmitClick(value) {
+    var resultArray = [];
+
+    for (var key in value) {
+      resultArray.push({ subjectSubjectid: key, marks: value[key] });
+    }
+
+    this.termResult.result = resultArray;
+    console.log(value);
+    this.teacherService.addStudentResult(this.termResult).subscribe(
+      (data) => {},
+      (error) => {
+        this.alterMessageService.errorAlert(error.error.message);
+      },
+      () => {
+        this.alterMessageService.competeAlert('Result Added Successfully');
+      }
+    );
+    this.element = 'modal';
   }
 }

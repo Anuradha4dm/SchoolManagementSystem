@@ -1,3 +1,4 @@
+<div class="panel-header"></div>
 <div class="main-content">
   <div class="row my-view">
     <div class="col-md-6">
@@ -28,7 +29,7 @@
                     <td class="text-left">
                       <input
                         type="button"
-                        [value]="subject | titlecase"
+                        [value]="subject | titlecase | subjectName"
                         class="form-control"
                         placeholder="Username"
                         style="cursor: pointer"
@@ -66,7 +67,7 @@
                           *ngFor="let opSub of optionalList1"
                           [value]="opSub"
                         >
-                          {{ opSub | titlecase }}
+                          {{ opSub | titlecase | subjectName }}
                         </option>
                       </select>
                     </td>
@@ -100,7 +101,7 @@
                           *ngFor="let item of optionalList2"
                           [value]="item"
                         >
-                          {{ item }}
+                          {{ item | titlecase | subjectName }}
                         </option>
                       </select>
                     </td>
@@ -135,7 +136,7 @@
                           *ngFor="let item of optionalList3"
                           [value]="item"
                         >
-                          {{ item }}
+                          {{ item | titlecase | subjectName }}
                         </option>
                       </select>
                     </td>
@@ -160,7 +161,7 @@
               <br />
               <hr />
               <p style="color: red" *ngIf="!formData.valid">
-                You must be follow subject
+                You must follow all subjects
               </p>
             </form>
           </div>

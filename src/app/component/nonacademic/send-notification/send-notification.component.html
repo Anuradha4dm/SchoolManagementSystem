@@ -1,0 +1,87 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Notification</h4>
+        </div>
+        <div class="card-header">
+          <h5 class="card-category">select receiver</h5>
+          <form>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td style="cursor: pointer" rows="1" cols="80">
+                    <select name="religon" class="form-control">
+                      <option value="student">student</option>
+                      <option value="teacher">teacher</option>
+                      <option value="non_accedemic">non accedemic</option>
+                      <option value="other">other</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <select name="optional1" class="form-control" id="">
+                      <option value="grade 6">grade 6</option>
+                      <option value="grade 7">grade 7</option>
+                      <option value="grade 8">grade 8</option>
+                      <option value="grade 9">grade 9</option>
+                      <option value="grade 10">grade 10</option>
+                      <option value="grade 11">grade 11</option>
+                      <option value="grade 12">grade 12</option>
+                      <option value="grade 13">grade 13</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="cursor: pointer">
+                    <select name="optional2" class="form-control" id="">
+                      <option value="">sc/2017/10272</option>
+                      <option value="">sc/2017/10273</option>
+                      <option value="">sc/2017/10274</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <td>
+                  <textarea
+                    rows="4"
+                    cols="80"
+                    class="form-control"
+                    placeholder="Here can be write notification"
+                    value=""
+                  ></textarea>
+                </td>
+                <tr>
+                  <td>
+                    <p style="color: red">You must be select a role</p>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input btn-round btn-success"
+                          type="clear"
+                          value="    send notification"
+                          [disabled]=""
+                        />
+                      </label>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+        <div class="card-body">
+          <div></div>
+          <ng-template #default>
+            <p>check notification before sending</p>
+            <hr />
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

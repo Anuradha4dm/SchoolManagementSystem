@@ -1,26 +1,27 @@
-import { Data } from '@angular/router';
-
 export class NotificationModel {
+  public notificationid: string;
   public from: string;
   public to: string;
-  public message: string;
+
   public description: string;
   public time: string;
-  public _id: string;
+  public publisher: string;
 
   constructor(
-    _id: string,
+    notid: string,
+    publisher: string,
     from: string,
     to: string,
-    message: string,
+
     description: string,
     time: string
   ) {
+    this.notificationid = notid;
     this.from = from;
     this.to = to;
-    this.message = message;
+
     this.description = description;
     this.time = time;
-    this._id = _id;
+    this.publisher = publisher;
   }
 }
