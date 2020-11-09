@@ -3,13 +3,10 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-send-emil',
   templateUrl: './send-emil.component.html',
-  styleUrls: ['./send-emil.component.css']
+  styleUrls: ['./send-emil.component.css'],
 })
 export class SendEmilComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

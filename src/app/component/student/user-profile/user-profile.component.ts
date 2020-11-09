@@ -80,6 +80,19 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   viewSubjectClick() {}
 
+  onClickSports() {
+    this.router.navigate(['user', 'sports'], {
+      queryParams: {
+        age: this.studentProfileData.age,
+        studentid: this.studentProfileData._id,
+        studentname:
+          this.studentProfileData.firstName +
+          ' ' +
+          this.studentProfileData.lastName,
+      },
+    });
+  }
+
   ngOnDestroy() {
     this.loginUserDataSubscriber.unsubscribe();
     this.userprofileSubscription.unsubscribe();

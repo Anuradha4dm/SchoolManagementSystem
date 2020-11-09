@@ -8,6 +8,7 @@ import { NotificationComponent } from '../notification/notification.component';
 import { AddSubjectsComponent } from './add-subjects/add-subjects.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ParticipationComponent } from './participation/participation.component';
+import { SportsHandleComponent } from './sports-handle/sports-handle.component';
 import { AddSubjectResolverService } from './student-resolvers/add-subject-resolver.service';
 import { GetRegisteredSubjectList } from './student-share-components/get-subject-resolver.service';
 import { UserProfileComponent } from './user-profile/user-profile.component';
@@ -41,6 +42,10 @@ export const routes: Routes = [
         path: 'notification',
         component: NotificationComponent,
         resolve: { notifications: NotificationResolver },
+      },
+      {
+        path: 'sports',
+        component: SportsHandleComponent,
       },
     ],
   },

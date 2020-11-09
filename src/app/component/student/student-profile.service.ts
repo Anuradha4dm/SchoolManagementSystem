@@ -144,4 +144,17 @@ export class StudentProfileService {
   }
 
   getLogInStudentData() {}
+
+  getSportsList(studentid: string) {
+    return this.httpClient.get<{
+      sports: { sportname: string; allow: boolean }[];
+    }>('http://localhost:3000/student/get-sports/' + studentid);
+  }
+
+  addSports(sportsData) {
+    return this.httpClient.post(
+      'http://localhost:3000/student/add-sports',
+      sportsData
+    );
+  }
 }
