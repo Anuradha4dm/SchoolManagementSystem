@@ -31,7 +31,7 @@ export class ViewSubjectsComponent implements OnInit {
         this.update = data['subjectList'].update;
       },
       (err) => {
-        console.log(err.error.message);
+        console.log('sda');
       },
       () => {
         this.alertMessageService.competeAlert('Subject List Fetch Successfull');
