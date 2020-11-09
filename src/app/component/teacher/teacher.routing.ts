@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { LeavehandleComponent } from '../nonacademic/leavehandle/leavehandle.component';
 import { GetClassStudentListResolver } from '../student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from '../student/student-share-components/get-student-list-resolver.service';
 import { StudentAttendenceComponent } from './student-attendence/student-attendence.component';
 import { StudentListComponent } from './student-list/student-list.component';
+import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
 
 const routes: Routes = [
@@ -28,6 +30,19 @@ const routes: Routes = [
         path: 'add-student-result',
         component: TermTestResultsComponent,
       },
+      //to remove start
+      {
+        path: 'test1',
+        component: TeacherProfileComponent,
+      },
+      {
+        path: 'profile',
+        component: TeacherProfileComponent,
+      },   {
+        path: 'leave-handle',
+        component: LeavehandleComponent,
+      }
+      //to remove end
     ],
   },
 ];

@@ -17,9 +17,6 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: 'leave-request', component: LeaverequestComponent },
-      //to remove
-      { path: 'userprofile', component: TeacherProfileComponent },
-      { path: 'leavehandle', component: LeavehandleComponent },
     ],
   },
 ];
