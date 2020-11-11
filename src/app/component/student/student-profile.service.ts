@@ -129,7 +129,7 @@ export class StudentProfileService {
           update: string;
         }
       ];
-    }>('http://localhost:3000/student/get-subject-list/ST_1');
+    }>('http://localhost:3000/student/get-subject-list/' + studentid);
   }
 
   viewResultOfSpecificStudent(formdata) {

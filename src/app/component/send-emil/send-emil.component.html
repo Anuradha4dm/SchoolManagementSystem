@@ -8,14 +8,16 @@
             <label for="lastName">username</label>
             <input
               type="text"
-              name="lastName"
+              name="usename"
               class="form-control"
               ngModel
               required
-              #username
+              #username="ngModel"
             />
           </div>
-          <p class="error-msg">Username required to identify you</p>
+          <p class="error-msg" *ngIf="!username.valid && username.touched">
+            Username required to identify you
+          </p>
 
           <div class="form-group">
             <label for="email">Email</label>

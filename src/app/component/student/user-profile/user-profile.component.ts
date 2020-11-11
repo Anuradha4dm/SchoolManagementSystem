@@ -18,7 +18,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   loginUserDataSubscriber: Subscription;
   userprofileSubscription: Subscription;
 
-  studentProfileData: Student = null;
+  studentProfileData: Student;
   studentPerformance;
 
   registeredSubjects: string[] = [];
