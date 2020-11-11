@@ -7,12 +7,14 @@ import { NonAcademicRoutingModule } from './nonacademic.routing';
 import { AddEventComponent } from './add-event/add-event.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { FormsModule } from '@angular/forms';
+import { ClassHandlerComponent } from './class-handler/class-handler.component';
 
 @NgModule({
   declarations: [
     LeavehandleComponent,
     AddEventComponent,
     SendNotificationComponent,
+    ClassHandlerComponent,
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,6 @@ import { FormsModule } from '@angular/forms';
     NonAcademicRoutingModule,
     FormsModule,
   ],
-  exports: [LeavehandleComponent],
+  exports: [LeavehandleComponent, FormsModule, HttpClientModule],
 })
 export class NonacademicModule {}

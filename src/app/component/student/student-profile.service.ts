@@ -115,7 +115,7 @@ export class StudentProfileService {
     );
   }
 
-  getRegisteredSubjectList() {
+  getRegisteredSubjectList(studentid: string) {
     return this.httpClient.get<{
       query: boolean;
       update: string;
@@ -129,7 +129,7 @@ export class StudentProfileService {
           update: string;
         }
       ];
-    }>('http://localhost:3000/student/get-subject-list/ST_6');
+    }>('http://localhost:3000/student/get-subject-list/ST_1');
   }
 
   viewResultOfSpecificStudent(formdata) {

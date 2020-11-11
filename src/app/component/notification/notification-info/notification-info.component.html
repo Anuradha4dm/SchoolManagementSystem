@@ -8,9 +8,7 @@
     <h6 class="description">POST AT: {{ selectedNotification.time | date }}</h6>
 
     <div class="blockquote blockquote-primary text-center">
-      <p *ngIf="selectedNotification; else show">
-        {{ selectedNotification.description }}
-      </p>
+      <div #description></div>
     </div>
     <ng-template #show>
       <p>Please Select Notification</p>

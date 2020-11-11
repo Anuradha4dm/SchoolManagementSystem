@@ -1,4 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnInit,
+  Renderer2,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { NotificationModel } from 'src/app/models/notification.modele';
 
 @Component({
@@ -8,8 +16,16 @@ import { NotificationModel } from 'src/app/models/notification.modele';
 })
 export class NotificationInfoComponent implements OnInit {
   @Input('viewNotification') selectedNotification: NotificationModel;
+  @ViewChild('description', { static: true }) description: ElementRef;
 
-  constructor() {}
+  constructor(private renderer: Renderer2) {}
 
   ngOnInit(): void {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    //Called before any other lifecycle hook. Use it to inject dependencies, but avoid any serious work here.
+    //Add '${implements OnChanges}' to the class.
+
+    this.description.nativeElement.innerHTML = this.selectedNotification.description;
+  }
 }

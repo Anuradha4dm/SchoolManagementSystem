@@ -97,4 +97,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.loginUserDataSubscriber.unsubscribe();
     this.userprofileSubscription.unsubscribe();
   }
+
+  onClickTable() {
+    document.location.href = 'http://localhost:3000/timetable/tt_11_D.pdf';
+  }
 }
