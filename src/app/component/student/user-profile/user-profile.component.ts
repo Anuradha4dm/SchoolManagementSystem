@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ThemeService } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
@@ -19,13 +20,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   userprofileSubscription: Subscription;
 
   studentProfileData: Student;
-  studentPerformance;
+  studentPerformance: { eventname: string; place: string }[] = [
+    { eventname: 'Relay', place: '1 st Place' },
+    { eventname: 'Relay', place: '1 st Place' },
+  ];
 
   registeredSubjects: string[] = [];
   isShowRegisteredSubject: boolean = false;
-
-  specialAwards: string[] = ['Winner 1', 'winner 2', 'winner 3'];
-  numOfAbsents: number;
 
   imagePath: string = '';
 
@@ -78,7 +79,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  viewSubjectClick() {}
+  onResetPassword() {
+    this.router.navigate(['user', 'reset-password']);
+  }
 
   onClickSports() {
     this.router.navigate(['user', 'sports'], {

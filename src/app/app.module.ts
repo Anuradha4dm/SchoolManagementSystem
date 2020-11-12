@@ -25,6 +25,7 @@ import { ChartsModule } from 'ng2-charts';
 import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 import { NonacademicModule } from './component/nonacademic/nonacademic.module';
 import { SendEmilComponent } from './component/send-emil/send-emil.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { SendEmilComponent } from './component/send-emil/send-emil.component';
     ConfirmationDialogComponent,
     DashboardComponent,
     LeaverequestComponent,
-    SendEmilComponent
+    SendEmilComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

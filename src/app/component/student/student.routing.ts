@@ -5,6 +5,7 @@ import { NotificationResolver } from 'src/app/services/Notification-resolver.ser
 import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { NotificationComponent } from '../notification/notification.component';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 import { AddSubjectsComponent } from './add-subjects/add-subjects.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ParticipationComponent } from './participation/participation.component';
@@ -33,6 +34,7 @@ export const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'view-participation', component: ParticipationComponent },
       { path: 'view-result', component: ViewResultComponent },
+      { path: 'reset-password', component: ResetPasswordComponent },
       {
         path: 'viewsubjects',
         component: ViewSubjectsComponent,

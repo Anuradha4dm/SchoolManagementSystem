@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
@@ -10,6 +10,7 @@ import { AlertMessageService } from 'src/app/services/alert-message.service';
   styleUrls: ['./send-emil.component.css'],
 })
 export class SendEmilComponent implements OnInit {
+  @ViewChild('formData') formData: NgForm;
   email: string;
 
   constructor(
@@ -35,6 +36,7 @@ export class SendEmilComponent implements OnInit {
       .subscribe(
         (data) => {
           console.log(data);
+          this.formData.reset();
         },
         (error) => {
           this.alertMessageService.errorAlert('Internal Server Error');

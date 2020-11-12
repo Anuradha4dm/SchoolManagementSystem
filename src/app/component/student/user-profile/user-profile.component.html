@@ -111,9 +111,9 @@
                 href="#"
                 type="button"
                 class="btn btn-dark"
-                (click)="viewSubjectClick()"
+                (click)="onResetPassword()"
               >
-                View Subject
+                Reset Password
               </button>
             </div>
           </div>
@@ -147,9 +147,10 @@
               <i class="now-ui-icons education_paper"></i>
               Special Awards
             </h5>
-            <div class="aword-content">
+            <div class="aword-content" *ngFor="let event of studentPerformance">
               <h6 class="text-des cont-text">
                 <i class="now-ui-icons clothes_tie-bow"></i>
+                this
               </h6>
             </div>
           </div>
