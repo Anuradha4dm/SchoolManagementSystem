@@ -54,7 +54,6 @@ export class StudentAttendenceComponent implements OnInit {
 
   //execute when enter button click
   onEnterClick(value){
-    this.enterClicked = true;
     this.otherID=value.toUpperCase();
     this.teacherService.getStudentListForAddResult(this.otherID)
     .subscribe((data)=>{
@@ -63,6 +62,7 @@ export class StudentAttendenceComponent implements OnInit {
         this.teacherID = this.otherID;
         this.error = false; 
     });
+    this.enterClicked = true;
   }
 
   onCancelClick(){

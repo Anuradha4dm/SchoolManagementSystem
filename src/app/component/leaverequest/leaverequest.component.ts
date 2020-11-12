@@ -73,4 +73,9 @@ export class LeaverequestComponent implements OnInit {
         }
       );
   }
+
+  onCancelClick(){
+    window.location.reload();
+  }
+
 }
