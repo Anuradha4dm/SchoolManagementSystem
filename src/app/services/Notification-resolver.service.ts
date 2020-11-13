@@ -39,7 +39,8 @@ export class NotificationResolver implements Resolve<NotificationModel[]> {
                 element.to,
                 element.title,
                 element.message,
-                element.createdAt
+                element.createdAt,
+                element.attachmentpath
               )
             );
           });

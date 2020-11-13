@@ -73,8 +73,7 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
       formDataObj.append('expire', formData.value.expire);
 
       if (this.selectedFile != null) {
-        console.log(this.selectedFile);
-        formDataObj.append('attachment', this.selectedFile, 'thisfile.pdf');
+        formDataObj.append('attachment', this.selectedFile);
       }
 
       this.nonacademicService.sendNotification(formDataObj).subscribe(
@@ -87,6 +86,9 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.alertMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          this.selectedFile = null;
         }
       );
     }
@@ -108,7 +110,7 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
 
       if (this.selectedFile != null) {
         console.log(this.selectedFile);
-        formDataObj.append('attachment', this.selectedFile, 'thisfile.pdf');
+        formDataObj.append('attachment', this.selectedFile);
       }
 
       this.nonacademicService.sendNotification(formDataObj).subscribe(
@@ -121,6 +123,9 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
         },
         (error) => {
           this.alertMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          this.selectedFile = null;
         }
       );
     }
@@ -141,20 +146,22 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
       formDataObj.append('studentarray', studentArray);
 
       if (this.selectedFile != null) {
-        console.log(this.selectedFile);
-        formDataObj.append('attachment', this.selectedFile, 'thisfile.pdf');
+        formDataObj.append('attachment', this.selectedFile);
       }
 
       this.nonacademicService.sendNotification(formDataObj).subscribe(
         (data) => {
           if (data.notification) {
             this.alertMessageService.competeAlert(
-              'Notificatin Update Successfully...'
+              'Notification Update Successfully...'
             );
           }
         },
         (error) => {
           this.alertMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          this.selectedFile = null;
         }
       );
     }

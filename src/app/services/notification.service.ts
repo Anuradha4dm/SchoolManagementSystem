@@ -15,6 +15,7 @@ export class NotificationService {
         message: string;
         publisher: string;
         createdAt: string;
+        attachmentpath: string;
       }[];
     }>('http://localhost:3000/common/get-post/' + id);
   }

@@ -6,6 +6,7 @@ export class NotificationModel {
   public description: string;
   public time: string;
   public publisher: string;
+  public attachmentpath: string;
 
   constructor(
     notid: string,
@@ -14,7 +15,8 @@ export class NotificationModel {
     to: string,
     title: string,
     description: string,
-    time: string
+    time: string,
+    attachement: string
   ) {
     this.notificationid = notid;
     this.from = from;
@@ -23,5 +25,6 @@ export class NotificationModel {
     this.description = description;
     this.time = time;
     this.publisher = publisher;
+    this.attachmentpath = attachement;
   }
 }

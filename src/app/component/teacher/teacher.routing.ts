@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { NgModel } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
+import { NotificationResolver } from 'src/app/services/Notification-resolver.service';
 import { LeaverequestComponent } from '../leaverequest/leaverequest.component';
+import { NotificationComponent } from '../notification/notification.component';
 import { GetClassStudentListResolver } from '../student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from '../student/student-share-components/get-student-list-resolver.service';
 import { StudentAttendenceComponent } from './student-attendence/student-attendence.component';
@@ -32,6 +34,11 @@ const routes: Routes = [
       {
         path: 'leave-request',
         component: LeaverequestComponent,
+      },
+      {
+        path: 'teacher-notification',
+        component: NotificationComponent,
+        resolve: { notifications: NotificationResolver },
       },
     ],
   },
