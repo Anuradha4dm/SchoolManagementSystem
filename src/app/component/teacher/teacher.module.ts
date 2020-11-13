@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import { TeacherRoutingModule } from './teacher.routing';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
+import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { EditTermResultsComponent } from './edit-term-results/edit-term-results.
     MarkPresentDirective,
     FilterStudentPipe,
     TermTestResultsComponent,
+    EditTeacherProfileComponent
   ],
   declarations: [
     StudentListComponent,
@@ -37,6 +39,7 @@ import { EditTermResultsComponent } from './edit-term-results/edit-term-results.
     TeacherProfileComponent,
     TermTestResultsComponent,
     EditTermResultsComponent,
+    EditTeacherProfileComponent,
   ],
   providers: [],
 })

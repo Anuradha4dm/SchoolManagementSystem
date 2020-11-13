@@ -6,14 +6,12 @@
         <div class="row">
             <div class="col">
                 <label>Year</label>
-                <select (change)="onYearChange($event)" class="form-control" [(ngModel)]="selectedClass">
-                    <option *ngFor="let class of classList" [value]="class.class">{{class.year}}</option>                    
-                </select>
+                <input type="text" class="form-control" disabled value='2010'>
             </div>
 
             <div class="col">
                 <label>Class</label>
-                <input type="text" class="form-control" [value]="selectedClass" disabled>
+                <input type="text" class="form-control" value="11_D" disabled>
             </div>
 
             <div class="col">
@@ -56,12 +54,12 @@
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
-                            <input type="text" class="form-control" [value]="selectedYear" disabled>
+                            <input type="text" class="form-control" value="2010" disabled>
                         </div>
 
                         <div class="col">
                             <label>Class</label>
-                            <input type="text" class="form-control" [value]="selectedClass" disabled>
+                            <input type="text" class="form-control" value="11_D" disabled>
                         </div>
 
                         <div class="col">

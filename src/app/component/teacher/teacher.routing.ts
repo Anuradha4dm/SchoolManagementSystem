@@ -3,8 +3,10 @@ import { NgModel } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { LeavehandleComponent } from '../nonacademic/leavehandle/leavehandle.component';
+import { EditProfileComponent } from '../student/edit-profile/edit-profile.component';
 import { GetClassStudentListResolver } from '../student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from '../student/student-share-components/get-student-list-resolver.service';
+import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { StudentAttendenceComponent } from './student-attendence/student-attendence.component';
 import { StudentListComponent } from './student-list/student-list.component';
@@ -39,10 +41,15 @@ const routes: Routes = [
       {
         path: 'profile',
         component: TeacherProfileComponent,
-      },   {
+      },
+      {
         path: 'leave-handle',
         component: LeavehandleComponent,
-      }
+      },
+      {
+        path: 'edit-teacher',
+        component: EditTeacherProfileComponent,
+      },
       //to remove end
     ],
   },
