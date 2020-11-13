@@ -12,6 +12,7 @@ import { ParticipationComponent } from './participation/participation.component'
 import { SportsHandleComponent } from './sports-handle/sports-handle.component';
 import { AddSubjectResolverService } from './student-resolvers/add-subject-resolver.service';
 import { GetRegisteredSubjectList } from './student-share-components/get-subject-resolver.service';
+import { StudentRouteGuard } from './student-share-components/student-router.guard';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ViewResultComponent } from './view-result/view-result.component';
 import { ViewSubjectsComponent } from './view-subjects/view-subjects.component';
@@ -20,6 +21,7 @@ export const routes: Routes = [
   {
     path: 'user',
     component: LayoutComponent,
+    canActivate: [StudentRouteGuard],
     children: [
       { path: 'userprofile', component: UserProfileComponent },
 
