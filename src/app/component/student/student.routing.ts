@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { NotificationResolver } from 'src/app/services/Notification-resolver.service';
 import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+
 import { NotificationComponent } from '../notification/notification.component';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 import { AddSubjectsComponent } from './add-subjects/add-subjects.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { ParticipationComponent } from './participation/participation.component';
 import { SportsHandleComponent } from './sports-handle/sports-handle.component';
