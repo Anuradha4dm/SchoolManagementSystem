@@ -65,8 +65,9 @@ export class StudentAttendenceComponent implements OnInit {
     this.enterClicked = true;
   }
 
-  onCancelClick(){
-    window.location.reload();
+  onCancelClick(id,firstname){
+    this.ngOnInit();
+    //this.test1=this.studentList.find((res)=>{return res._id.match(id) && res.firstname.match(firstname)})
   }
 
   //execute when form submit  
