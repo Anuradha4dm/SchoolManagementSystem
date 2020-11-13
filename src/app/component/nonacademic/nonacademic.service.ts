@@ -33,4 +33,11 @@ export class NonAcademicService {
       submitData
     );
   }
+
+  sendNotification(formData) {
+    return this.httpClient.post<{ notification: boolean }>(
+      'http://localhost:3000/nonacademic/add-notification',
+      formData
+    );
+  }
 }
