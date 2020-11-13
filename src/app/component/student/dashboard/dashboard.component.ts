@@ -2,8 +2,8 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
+import { StudentModule } from '../student.module';
 
-import { StudentModule } from '../student/student.module';
 import { DashboardService } from './dashboard.service';
 
 @Component({

@@ -25,7 +25,10 @@
 
                     <td>Sr. {{ subjectItem.teachername }}</td>
                     <td class="text-center">
-                      <button class="btn btn-success">
+                      <button
+                        class="btn btn-success"
+                        (click)="sendEmail(subjectItem.teacheremail)"
+                      >
                         <i class="now-ui-icons ui-1_email-85"></i>
                       </button>
                     </td>

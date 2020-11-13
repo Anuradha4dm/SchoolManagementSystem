@@ -93,19 +93,27 @@
               >
                 Edit Profile
               </button>
-              <button href="#" type="button" class="btn btn-dark">
+              <button
+                type="button"
+                class="btn btn-dark"
+                (click)="onClickTable()"
+              >
                 View Time Table
               </button>
-              <button href="#" type="button" class="btn btn-dark">
-                Send Email
+              <button
+                type="button"
+                class="btn btn-dark"
+                (click)="onClickSports()"
+              >
+                Sports
               </button>
               <button
                 href="#"
                 type="button"
                 class="btn btn-dark"
-                (click)="viewSubjectClick()"
+                (click)="onResetPassword()"
               >
-                View Subject
+                Reset Password
               </button>
             </div>
           </div>
@@ -139,13 +147,10 @@
               <i class="now-ui-icons education_paper"></i>
               Special Awards
             </h5>
-            <div class="aword-content">
-              <h6
-                class="text-des cont-text"
-                *ngFor="let award of studentPerformance.awards"
-              >
+            <div class="aword-content" *ngFor="let event of studentPerformance">
+              <h6 class="text-des cont-text">
                 <i class="now-ui-icons clothes_tie-bow"></i>
-                {{ award }}
+                this
               </h6>
             </div>
           </div>

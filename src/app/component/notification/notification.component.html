@@ -1,5 +1,5 @@
 <div class="panel-header"></div>
-<div class="main-content">
+<div class="main-content my-view">
   <div class="row">
     <div class="col-md-5">
       <div class="card">
@@ -33,7 +33,7 @@
                 <span
                   (click)="onSelectNotification(notification)"
                   data-notify="message"
-                  >new Message</span
+                  >{{ notification.title }}</span
                 >
               </div>
             </a>

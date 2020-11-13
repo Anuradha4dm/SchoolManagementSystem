@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { map } from 'rxjs/operators';
 import { LogInUserModel } from 'src/app/models/login-user.model';
-
-import { UserLogInService } from '../homepage/login/user-login.service';
+import { UserLogInService } from '../../homepage/login/user-login.service';
 
 @Injectable({ providedIn: 'root' })
 export class DashboardService {

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SendNotificationComponent } from './send-notification.component';
+import { SportsHandleComponent } from './sports-handle.component';
 
-describe('SendNotificationComponent', () => {
-  let component: SendNotificationComponent;
-  let fixture: ComponentFixture<SendNotificationComponent>;
+describe('SportsHandleComponent', () => {
+  let component: SportsHandleComponent;
+  let fixture: ComponentFixture<SportsHandleComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SendNotificationComponent ]
+      declarations: [ SportsHandleComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SendNotificationComponent);
+    fixture = TestBed.createComponent(SportsHandleComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

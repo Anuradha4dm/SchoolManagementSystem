@@ -106,7 +106,7 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
-          path: '/user/notification',
+          path: '/user/teacher-notification',
           title: 'Notification',
           icon: 'education_agenda-bookmark',
           class: '',
@@ -156,6 +156,12 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/send-notification',
           title: 'SEND NOTIFICATION',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/class-handler',
+          title: 'HANDLE CLASS',
           icon: 'users_single-02',
           class: '',
         },

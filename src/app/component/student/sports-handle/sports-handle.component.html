@@ -1,0 +1,268 @@
+<div class="panel-header"></div>
+
+<div class="main-content my-view">
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">Add Sports</h1>
+          <p class="description">Add New Sport</p>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSportSubmit(formData)" #formData="ngForm">
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="studentname"
+                    id=""
+                    placeholder="username"
+                    [ngModel]="username"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>age</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="age"
+                    placeholder="age"
+                    [ngModel]="age"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <p>Your category (According to age)</p>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="category"
+                    class="form-control"
+                    [ngModel]="categorycal()"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="sport-box">
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="cricket"
+                      />
+                      <span class="form-check-sign my-tx-col">Cricket</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="hockey"
+                      />
+                      <span class="form-check-sign my-tx-col">Hockey</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="netball"
+                      />
+                      <span class="form-check-sign my-tx-col">Netball</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="basketball"
+                      />
+                      <span class="form-check-sign my-tx-col">basketball</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="elle"
+                      />
+                      <span class="form-check-sign my-tx-col">Elle</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="vollyball"
+                      />
+                      <span class="form-check-sign my-tx-col">Vollyball</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="badminton"
+                      />
+                      <span class="form-check-sign my-tx-col">Badminton</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="chess"
+                      />
+                      <span class="form-check-sign my-tx-col">Chess</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="table_tenis"
+                      />
+                      <span class="form-check-sign my-tx-col">Table Tenis</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="swmming"
+                      />
+                      <span class="form-check-sign my-tx-col">Swimming</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="martial_arts"
+                      />
+                      <span class="form-check-sign my-tx-col"
+                        >Martial Arts</span
+                      >
+                    </label>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        ngModel
+                        name="athletics"
+                      />
+                      <span class="form-check-sign my-tx-col">Athletics</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="btn-group">
+              <button class="btn btn-success">Submit</button>
+              <button class="btn btn-danger">Rest</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img
+            src="https://media-exp1.licdn.com/dms/image/C511BAQF1nvy7nYdt_w/company-background_10000/0?e=2159024400&v=beta&t=ht7eRIJbRM1FsocndkfrK-csvooQ_Zk-f3F6PK1YCng"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a href="#">
+              <img
+                class="avatar border-gray"
+                src="https://lk-maruads-1.nyc3.cdn.digitaloceanspaces.com/thumb_103339_0.png"
+                alt="..."
+              />
+              <h5 class="title">Student Preformance</h5>
+            </a>
+          </div>
+          <p class="description text-center">
+            You are alredy Doing the Followings
+          </p>
+          <hr />
+
+          <div class="card-content">
+            <h5 class="text-des cont-text" *ngFor="let sport of alredyDoing">
+              <i class="now-ui-icons education_paper"></i>
+              {{ sport.sportname | titlecase }}
+              <span *ngIf="!sport.allow" class="sport-pending"
+                >Pending Request...</span
+              >
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,7 @@ import { NotificationModel } from '../models/notification.modele';
 export class NotificationService {
   constructor(private httpClient: HttpClient) {}
 
-  getNotifications() {
+  getNotifications(id) {
     return this.httpClient.get<{
       notificationArray: {
         notificationid: string;
@@ -15,7 +15,8 @@ export class NotificationService {
         message: string;
         publisher: string;
         createdAt: string;
+        attachmentpath: string;
       }[];
-    }>('http://localhost:3000/common/get-post/ST_1');
+    }>('http://localhost:3000/common/get-post/' + id);
   }
 }

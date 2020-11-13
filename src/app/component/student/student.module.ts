@@ -11,6 +11,8 @@ import { ViewSubjectsComponent } from './view-subjects/view-subjects.component';
 import { ParticipationComponent } from './participation/participation.component';
 import { ChartsModule } from 'ng2-charts';
 import { SubjectNamePipe } from './subject-name.pipe';
+import { SportsHandleComponent } from './sports-handle/sports-handle.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule, ChartsModule],
@@ -18,6 +20,7 @@ import { SubjectNamePipe } from './subject-name.pipe';
     AddSubjectsComponent,
     EditProfileComponent,
     ViewResultComponent,
+    DashboardComponent,
     StudentRoutingModel,
   ],
   declarations: [
@@ -25,8 +28,10 @@ import { SubjectNamePipe } from './subject-name.pipe';
     EditProfileComponent,
     ViewResultComponent,
     ViewSubjectsComponent,
+    DashboardComponent,
     ParticipationComponent,
     SubjectNamePipe,
+    SportsHandleComponent,
   ],
   providers: [],
 })

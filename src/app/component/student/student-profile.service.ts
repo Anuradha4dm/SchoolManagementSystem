@@ -115,7 +115,7 @@ export class StudentProfileService {
     );
   }
 
-  getRegisteredSubjectList() {
+  getRegisteredSubjectList(studentid: string) {
     return this.httpClient.get<{
       query: boolean;
       update: string;
@@ -129,7 +129,7 @@ export class StudentProfileService {
           update: string;
         }
       ];
-    }>('http://localhost:3000/student/get-subject-list/ST_6');
+    }>('http://localhost:3000/student/get-subject-list/' + studentid);
   }
 
   viewResultOfSpecificStudent(formdata) {
@@ -144,4 +144,17 @@ export class StudentProfileService {
   }
 
   getLogInStudentData() {}
+
+  getSportsList(studentid: string) {
+    return this.httpClient.get<{
+      sports: { sportname: string; allow: boolean }[];
+    }>('http://localhost:3000/student/get-sports/' + studentid);
+  }
+
+  addSports(sportsData) {
+    return this.httpClient.post(
+      'http://localhost:3000/student/add-sports',
+      sportsData
+    );
+  }
 }
