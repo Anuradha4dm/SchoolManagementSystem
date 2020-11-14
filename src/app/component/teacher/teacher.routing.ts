@@ -1,9 +1,7 @@
 import { NgModule } from '@angular/core';
-import { NgModel } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { LeavehandleComponent } from '../nonacademic/leavehandle/leavehandle.component';
-import { EditProfileComponent } from '../student/edit-profile/edit-profile.component';
 import { LeaverequestComponent } from '../leaverequest/leaverequest.component';
 import { GetClassStudentListResolver } from '../student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from '../student/student-share-components/get-student-list-resolver.service';
@@ -34,6 +32,10 @@ const routes: Routes = [
         path: 'add-student-result',
         component: TermTestResultsComponent,
       },
+      {
+        path: 'leave-request',
+        component: LeaverequestComponent,
+      },
       //to remove start
       {
         path: 'edit-results',
@@ -52,10 +54,6 @@ const routes: Routes = [
         component: EditTeacherProfileComponent,
       },
       //to remove end
-      {
-        path: 'leave-request',
-        component: LeaverequestComponent,
-      },
     ],
   },
 ];
