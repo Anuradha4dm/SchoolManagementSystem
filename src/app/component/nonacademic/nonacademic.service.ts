@@ -47,12 +47,17 @@ export class NonAcademicService {
     );
   }
 
-  postUpdateStudentGrade(moveClass: string, studentid: string) {
+  postUpdateStudentGrade(
+    moveClass: string,
+    studentid: string,
+    nonacademicid: string
+  ) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/nonacademic/update-class-student',
       {
         moveclass: moveClass.toUpperCase(),
         studentid: studentid.toUpperCase(),
+        nonacademicid: nonacademicid,
       }
     );
   }

@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Console } from 'console';
 import { ThemeService } from 'ng2-charts';
 import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
+import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
 
@@ -38,11 +40,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   showDate: boolean = false;
 
+  gradeupdate: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private studentProfileService: StudentProfileService,
-    private loginUserService: UserLogInService
+    private loginUserService: UserLogInService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit(): void {
@@ -58,11 +63,34 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         (result) => {
           this.studentProfileData = result;
 
+          this.gradeupdate =
+            this.studentProfileData.graderegistration <
+            new Date(2021, 4, 9).getFullYear();
+
           this.imagePath =
             'http://localhost:3000/' + this.studentProfileData.imagePath;
         },
         (error) => {
           console.log(error);
+        },
+        () => {
+          if (this.gradeupdate) {
+            this.confirmationDialogService
+              .confirm(
+                'Please confirm...',
+                'You need to update your grade to the next yeat... Would you like to to it now?'
+              )
+              .then((confirmed) => {
+                if (confirmed) {
+                  this.onEditProfile(true);
+                }
+              })
+              .catch(() =>
+                console.log(
+                  'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+                )
+              );
+          }
         }
       );
   }
@@ -71,12 +99,11 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.showDate = !this.showDate;
   }
 
-  onEditProfile() {
-    this.router.navigate([
-      'user',
-      'edit-profile',
-      this.loginUserData.getUserId,
-    ]);
+  onEditProfile(update: boolean = this.gradeupdate) {
+    this.router.navigate(
+      ['user', 'edit-profile', this.loginUserData.getUserId],
+      { queryParams: { gradeupdate: update } }
+    );
   }
 
   onResetPassword() {

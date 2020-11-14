@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { LogInUserModel } from 'src/app/models/login-user.model';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
+import { UserLogInService } from '../../homepage/login/user-login.service';
 import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
@@ -16,17 +18,25 @@ export class ClassChangeComponent implements OnInit {
     gradeid: 0,
   };
 
+  loginUserData: LogInUserModel;
+
   constructor(
     private nonacademicService: NonAcademicService,
-    private alertMessageService: AlertMessageService
+    private alertMessageService: AlertMessageService,
+    private userLoginSercice: UserLogInService
   ) {}
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.userLoginSercice.userAuthData.subscribe((userData) => {
+      this.loginUserData = userData;
+    });
+  }
 
   onSubmit(formData: NgForm) {
     this.nonacademicService
       .postUpdateStudentGrade(
         formData.value.move_class,
-        formData.value.student_id
+        formData.value.student_id,
+        this.loginUserData.getUserId
       )
       .subscribe(
         (data) => {
