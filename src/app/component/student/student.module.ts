@@ -10,6 +10,8 @@ import { ViewResultComponent } from './view-result/view-result.component';
 import { ViewSubjectsComponent } from './view-subjects/view-subjects.component';
 import { ParticipationComponent } from './participation/participation.component';
 import { ChartsModule } from 'ng2-charts';
+import { SubjectNamePipe } from './subject-name.pipe';
+import { SportsHandleComponent } from './sports-handle/sports-handle.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule, ChartsModule],
@@ -25,6 +27,8 @@ import { ChartsModule } from 'ng2-charts';
     ViewResultComponent,
     ViewSubjectsComponent,
     ParticipationComponent,
+    SubjectNamePipe,
+    SportsHandleComponent,
   ],
   providers: [],
 })

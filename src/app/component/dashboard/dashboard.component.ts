@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
 
 import { StudentModule } from '../student/student.module';
@@ -70,7 +71,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private dashboardService: DashboardService,
-    private webSockerService: WebSocketService
+    private webSockerService: WebSocketService,
+    private alertMessageService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -253,7 +255,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log(data);
       },
       (error) => {
-        console.log('error');
+        this.alertMessageService.errorAlert(error.error.message);
       },
       () => {
         console.log('complet');
@@ -373,7 +375,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         console.log(this.chart2xAxiadata);
       },
       (error) => {
-        console.log('error');
+        this.alertMessageService.errorAlert(error.error.message);
       },
       () => {
         this.gradientFillChart1 = this.ctx.createLinearGradient(0, 170, 0, 50);

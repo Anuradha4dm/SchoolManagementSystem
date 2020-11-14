@@ -1,4 +1,5 @@
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NotificatinHiddenDirective } from 'src/app/directive/notificatin-hidden.directive';
@@ -7,7 +8,7 @@ import { NotificationInfoComponent } from './notification-info/notification-info
 import { NotificationComponent } from './notification.component';
 
 @NgModule({
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, HttpClientModule],
   exports: [
     NotificationComponent,
     NotificationInfoComponent,

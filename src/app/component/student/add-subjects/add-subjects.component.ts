@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -22,6 +23,7 @@ export class AddSubjectsComponent implements OnInit {
 
   //stundet grade
   gradeVal: number = 11;
+  stream: string = null;
 
   //update value setup
   startTimeInMinutes: number = null;
@@ -82,10 +84,11 @@ export class AddSubjectsComponent implements OnInit {
     );
 
     //categorize subjects
-    var gradeVal = +this.studentData.grade.split('_')[0];
+    this.gradeVal = +this.studentData.grade.split('_')[0];
+    this.stream = this.studentData.grade.split('_')[1];
 
     //ths is the grades in between  grade 6-9
-    if (gradeVal >= 6 && gradeVal <= 9) {
+    if (this.gradeVal >= 6 && this.gradeVal <= 9) {
       this.isOptionalList1 = true;
       this.optionalList1 = ['estern_music', 'western_music', 'art', 'dancing'];
       this.subjectSet1 = [
@@ -103,7 +106,7 @@ export class AddSubjectsComponent implements OnInit {
       ];
     }
     //ths is the grades in between  grade 10-11
-    if (gradeVal == 10 || gradeVal == 11) {
+    if (this.gradeVal == 10 || this.gradeVal == 11) {
       this.isOptionalList1 = true;
       this.optionalList1 = [
         'commerce',
@@ -132,6 +135,89 @@ export class AddSubjectsComponent implements OnInit {
         'history',
         'english',
         'religion',
+      ];
+    }
+
+    //Mathematics students
+
+    if (this.gradeVal >= 12 && this.stream === 'MATH') {
+      this.subjectSet1 = ['combine_mathematics', 'physics'];
+      this.isOptionalList1 = true;
+      this.optionalList1 = ['Chemistry', 'Infomation Technology'];
+    }
+
+    if (this.gradeVal >= 12 && this.stream === 'BIO') {
+      this.subjectSet1 = ['Biology', 'chemistry'];
+      this.isOptionalList1 = true;
+      this.optionalList1 = ['physics', 'agriculture'];
+    }
+
+    if (this.gradeVal >= 12 && this.stream === 'ART') {
+      this.isOptionalList1 = true;
+      this.optionalList1 = [
+        'economics',
+        'roman_Civilization',
+        'home_economics',
+        'divinity',
+        'ict',
+      ];
+      this.isOptionalList2 = true;
+      this.optionalList2 = [
+        'english',
+        'statistics',
+        'political_science',
+        'art',
+      ];
+      this.isOptionalList3 = true;
+      this.optionalList3 = [
+        'french',
+        'accounts',
+        'geography',
+        'logic',
+        'sinhala',
+        'hindi',
+      ];
+    }
+    if (this.gradeVal >= 12 && this.stream === 'COM') {
+      this.isOptionalList1 = true;
+      this.optionalList1 = [
+        'economics',
+        'roman_Civilization',
+        'home_economics',
+        'divinity',
+        'ict',
+      ];
+      this.isOptionalList2 = true;
+      this.optionalList2 = [
+        'english',
+        'statistics',
+        'political_science',
+        'art',
+      ];
+      this.isOptionalList3 = true;
+      this.optionalList3 = [
+        'french',
+        'accounts',
+        'geography',
+        'logic',
+        'sinhala',
+        'hindi',
+      ];
+    }
+
+    if (this.gradeVal >= 12 && this.stream === 'TEC') {
+      this.subjectSet1 = ['science_for_teachnology'];
+      this.isOptionalList1 = true;
+      this.optionalList1 = ['engineering_tech', 'bio_system_tech'];
+      this.isOptionalList2 = true;
+      this.optionalList2 = [
+        'english',
+        'information_technology',
+        'economics',
+        'geography',
+        'commerce',
+        'accounting',
+        'art',
       ];
     }
 
@@ -189,19 +275,73 @@ export class AddSubjectsComponent implements OnInit {
           }
         );
     }
+
+    if (this.gradeVal == 12 || this.gradeVal == 13) {
+      var request: {
+        studentid: string;
+        grade: string;
+        subject1: string;
+        subject2: string;
+        subject3: string;
+      } = {
+        studentid: '',
+        subject1: '',
+        subject2: '',
+        subject3: '',
+        grade: '',
+      };
+
+      if (this.stream === 'MATH' || this.stream === 'BIO') {
+        request.subject1 = this.subjectSet1[0];
+
+        request.subject2 = this.subjectSet1[1];
+        request.subject3 = data.value.optional1;
+      }
+
+      if (this.stream === 'ART' || this.stream === 'COM') {
+        request.subject1 = data.value.optional1;
+        request.subject2 = data.value.optional2;
+        request.subject3 = data.value.optional3;
+      }
+
+      if (this.stream === 'TEC') {
+        request.subject1 = this.subjectSet1[0];
+        request.subject2 = data.value.optional2;
+        request.subject3 = data.value.optional3;
+      }
+
+      this.studentProfileService
+        .addSubjectAdvanceLevel({
+          ...request,
+          studentid: this.studentData.studentid,
+          grade: this.studentData.grade,
+        })
+        .subscribe(
+          (data: { update: boolean }) => {
+            if (data.update) {
+              this.alertMessageService.competeAlert(
+                'Subjects Add Successful...'
+              );
+            }
+          },
+          (error) => {
+            this.alertMessageService.errorAlert(error.error.message);
+          }
+        );
+    }
   }
 
   onSubjectCkick(element) {
-    this.fetchDataAndPopulate(element.target.value, '8_D');
+    this.fetchDataAndPopulate(element.target.value, this.studentData.grade);
   }
 
   onChangeListItemOption2(subjectValue: string) {
     console.log(subjectValue);
-    this.fetchDataAndPopulate(subjectValue, '8_D');
+    this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
   }
 
   onChangeListItemOption1(subjectValue: string) {
-    this.fetchDataAndPopulate(subjectValue, '8_D');
+    this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
   }
 
   assignValues(
@@ -231,7 +371,9 @@ export class AddSubjectsComponent implements OnInit {
             data.imagePath
           );
         },
-        (error) => {},
+        (error) => {
+          this.alertMessageService.errorAlert(error.error.message);
+        },
         () => {}
       );
   }

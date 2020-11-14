@@ -24,9 +24,12 @@ export class TeacherService {
       studentid: studentid,
     });
   }
-  
-  addStudentResult(studentResult){
 
+  addStudentResult(studentResult) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/add-student-result',
+      studentResult
+    );
   }
 
   //new methods start

@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { LeavehandleComponent } from '../nonacademic/leavehandle/leavehandle.component';
 import { EditProfileComponent } from '../student/edit-profile/edit-profile.component';
+import { LeaverequestComponent } from '../leaverequest/leaverequest.component';
 import { GetClassStudentListResolver } from '../student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from '../student/student-share-components/get-student-list-resolver.service';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
@@ -51,6 +52,10 @@ const routes: Routes = [
         component: EditTeacherProfileComponent,
       },
       //to remove end
+      {
+        path: 'leave-request',
+        component: LeaverequestComponent,
+      },
     ],
   },
 ];

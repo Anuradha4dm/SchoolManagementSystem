@@ -7,7 +7,7 @@
         <div class="card-header">
           <h1 class="card-title">Registered Subject List</h1>
           <h5 class="card-category">
-            These are the subjects you have registerd
+            {{ "These are the subjects you have registerd" | titlecase }}
           </h5>
         </div>
         <div class="card-body">
@@ -25,7 +25,10 @@
 
                     <td>Sr. {{ subjectItem.teachername }}</td>
                     <td class="text-center">
-                      <button class="btn btn-success">
+                      <button
+                        class="btn btn-success"
+                        (click)="sendEmail(subjectItem.teacheremail)"
+                      >
                         <i class="now-ui-icons ui-1_email-85"></i>
                       </button>
                     </td>

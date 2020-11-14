@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ThemeService } from 'ng2-charts';
+import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
 import { UserLogInService } from '../../homepage/login/user-login.service';
@@ -10,17 +12,21 @@ import { StudentProfileService } from '../student-profile.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
   loginUserData: LogInUserModel;
 
-  studentProfileData: Student = null;
-  studentPerformance;
+  //subsvribers
+  loginUserDataSubscriber: Subscription;
+  userprofileSubscription: Subscription;
+
+  studentProfileData: Student;
+  studentPerformance: { eventname: string; place: string }[] = [
+    { eventname: 'Relay', place: '1 st Place' },
+    { eventname: 'Relay', place: '1 st Place' },
+  ];
 
   registeredSubjects: string[] = [];
   isShowRegisteredSubject: boolean = false;
-
-  specialAwards: string[] = ['Winner 1', 'winner 2', 'winner 3'];
-  numOfAbsents: number;
 
   imagePath: string = '';
 
@@ -40,11 +46,13 @@ export class UserProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.loginUserService.userAuthData.subscribe((userData) => {
-      this.loginUserData = userData;
-    });
+    this.loginUserDataSubscriber = this.loginUserService.userAuthData.subscribe(
+      (userData) => {
+        this.loginUserData = userData;
+      }
+    );
 
-    this.studentProfileService
+    this.userprofileSubscription = this.studentProfileService
       .getStudent(this.loginUserData.getUserId)
       .subscribe(
         (result) => {
@@ -71,5 +79,29 @@ export class UserProfileComponent implements OnInit {
     ]);
   }
 
-  viewSubjectClick() {}
+  onResetPassword() {
+    this.router.navigate(['user', 'reset-password']);
+  }
+
+  onClickSports() {
+    this.router.navigate(['user', 'sports'], {
+      queryParams: {
+        age: this.studentProfileData.age,
+        studentid: this.studentProfileData._id,
+        studentname:
+          this.studentProfileData.firstName +
+          ' ' +
+          this.studentProfileData.lastName,
+      },
+    });
+  }
+
+  ngOnDestroy() {
+    this.loginUserDataSubscriber.unsubscribe();
+    this.userprofileSubscription.unsubscribe();
+  }
+
+  onClickTable() {
+    document.location.href = 'http://localhost:3000/timetable/tt_11_D.pdf';
+  }
 }

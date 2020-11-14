@@ -24,6 +24,8 @@ import { DashboardComponent } from './component/dashboard/dashboard.component';
 import { ChartsModule } from 'ng2-charts';
 import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 import { NonacademicModule } from './component/nonacademic/nonacademic.module';
+import { SendEmilComponent } from './component/send-emil/send-emil.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { NonacademicModule } from './component/nonacademic/nonacademic.module';
     SiderbarComponent,
     ConfirmationDialogComponent,
     DashboardComponent,
-    LeaverequestComponent
+    LeaverequestComponent,
+    SendEmilComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,

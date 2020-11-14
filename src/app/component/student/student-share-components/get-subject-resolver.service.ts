@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
+import { catchError, exhaustMap, take } from 'rxjs/operators';
+import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
 
 @Injectable({ providedIn: 'root' })
@@ -19,7 +21,10 @@ export class GetRegisteredSubjectList
         }
       ];
     }> {
-  constructor(private userProfileSeeervice: StudentProfileService) {}
+  constructor(
+    private userProfileService: StudentProfileService,
+    private userLoginService: UserLogInService
+  ) {}
 
   resolve(
     route: ActivatedRouteSnapshot
@@ -63,6 +68,13 @@ export class GetRegisteredSubjectList
           }
         ];
       } {
-    return this.userProfileSeeervice.getRegisteredSubjectList();
+    return this.userLoginService.userAuthData.pipe(
+      take(1),
+      exhaustMap((userData) => {
+        return this.userProfileService.getRegisteredSubjectList(
+          userData.getUserId
+        );
+      })
+    );
   }
 }
