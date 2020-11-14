@@ -29,7 +29,7 @@ export class NonAcademicService {
 
   updateClassProperties(submitData: FormData) {
     return this.httpClient.post<{ success: boolean }>(
-      'http://localhost:3000/nonacademic/update-class',
+      'http://localhost:3000/nonacademic/update-class-handler',
       submitData
     );
   }
@@ -38,6 +38,22 @@ export class NonAcademicService {
     return this.httpClient.post<{ notification: boolean }>(
       'http://localhost:3000/nonacademic/add-notification',
       formData
+    );
+  }
+
+  getClassOfTheStudent(studentid: string) {
+    return this.httpClient.get<{ grade: string; gradeid: number }>(
+      'http://localhost:3000/nonacademic/get-class-student/' + studentid
+    );
+  }
+
+  postUpdateStudentGrade(moveClass: string, studentid: string) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/nonacademic/update-class-student',
+      {
+        moveclass: moveClass.toUpperCase(),
+        studentid: studentid.toUpperCase(),
+      }
     );
   }
 }

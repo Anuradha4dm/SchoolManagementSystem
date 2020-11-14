@@ -124,6 +124,7 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
+
         {
           path: '/user/exams',
           title: 'EXAMS',
@@ -163,6 +164,12 @@ export class SiderbarComponent implements OnInit {
           path: '/user/class-handler',
           title: 'HANDLE CLASS',
           icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/student-class-change',
+          title: 'Class Change',
+          icon: 'gestures_tap-01',
           class: '',
         },
       ];

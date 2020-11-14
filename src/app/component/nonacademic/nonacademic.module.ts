@@ -8,6 +8,7 @@ import { AddEventComponent } from './add-event/add-event.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { FormsModule } from '@angular/forms';
 import { ClassHandlerComponent } from './class-handler/class-handler.component';
+import { ClassChangeComponent } from './class-change/class-change.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { ClassHandlerComponent } from './class-handler/class-handler.component';
     AddEventComponent,
     SendNotificationComponent,
     ClassHandlerComponent,
+    ClassChangeComponent,
   ],
   imports: [
     CommonModule,
