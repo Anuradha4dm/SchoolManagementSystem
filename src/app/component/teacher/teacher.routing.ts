@@ -39,6 +39,11 @@ const routes: Routes = [
         path: 'leave-request',
         component: LeaverequestComponent,
       },
+      {
+        path: 'teacher-notification',
+        component: NotificationComponent,
+        resolve: { notifications: NotificationResolver },
+      },
       //to remove start
       {
         path: 'edit-results',
@@ -61,11 +66,6 @@ const routes: Routes = [
         component: TsendNotificationComponent,
       },
       //to remove end
-      {
-        path: 'teacher-notification',
-        component: NotificationComponent,
-        resolve: { notifications: NotificationResolver },
-      },
     ],
   },
 ];
