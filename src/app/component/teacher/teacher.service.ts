@@ -31,4 +31,19 @@ export class TeacherService {
       studentResult
     );
   }
+  getTeacherProfileData(teacherid: string) {
+    return this.httpClient.get(
+      'http://localhost:3000/teacher/get-teacher-profile/' + teacherid
+    );
+  }
+
+  getStudentPastResultForEdit(year: number, term: number, studentid: string) {
+    return this.httpClient.post<{
+      result: { subjectid: number; subjectname: string; mark: number }[];
+    }>('http://localhost:3000/teacher/edit-results-get-previous', {
+      year: year,
+      term: term,
+      studentid: studentid,
+    });
+  }
 }
