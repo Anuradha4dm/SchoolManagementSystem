@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { LeavehandleComponent } from '../nonacademic/leavehandle/leavehandle.component';
+import { NotificationResolver } from 'src/app/services/Notification-resolver.service';
 import { LeaverequestComponent } from '../leaverequest/leaverequest.component';
+import { NotificationComponent } from '../notification/notification.component';
 import { GetClassStudentListResolver } from '../student/student-share-components/get-class-student-list-resolver.service';
 import { GetStudentListForAttendenceResolver } from '../student/student-share-components/get-student-list-resolver.service';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
@@ -57,8 +59,13 @@ const routes: Routes = [
       {
         path: 'tsend-noti',
         component: TsendNotificationComponent,
-      }
+      },
       //to remove end
+      {
+        path: 'teacher-notification',
+        component: NotificationComponent,
+        resolve: { notifications: NotificationResolver },
+      },
     ],
   },
 ];

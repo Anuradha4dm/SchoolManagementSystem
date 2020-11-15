@@ -51,6 +51,8 @@ export class ResetPasswordComponent implements OnInit, OnDestroy {
             this.alertMessageService.competeAlert(
               'Password Change Successfully...'
             );
+
+            this.formData.reset();
           }
         },
         (error) => {

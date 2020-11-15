@@ -7,6 +7,7 @@ import {
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { NotificationModel } from 'src/app/models/notification.modele';
 
 @Component({
@@ -18,7 +19,7 @@ export class NotificationInfoComponent implements OnInit {
   @Input('viewNotification') selectedNotification: NotificationModel;
   @ViewChild('description', { static: true }) description: ElementRef;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -27,5 +28,10 @@ export class NotificationInfoComponent implements OnInit {
     //Add '${implements OnChanges}' to the class.
 
     this.description.nativeElement.innerHTML = this.selectedNotification.description;
+  }
+
+  onClickAttachment() {
+    document.location.href =
+      'http://localhost:3000/' + this.selectedNotification.attachmentpath;
   }
 }

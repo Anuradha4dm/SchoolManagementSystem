@@ -106,7 +106,7 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
-          path: '/user/notification',
+          path: '/user/teacher-notification',
           title: 'Notification',
           icon: 'education_agenda-bookmark',
           class: '',

@@ -34,27 +34,36 @@ export class TeacherService {
       studentResult
     );
   }
-
-  //new methods start
-
-  getAverage(year:number,grade:string,term:string){
-    //need to get student id,fullname,average,position from results table
-    /*format
-      [
-        {id: string,fullname: string,average: number,position: number}
-        {id: string,fullname: string,average: number,position: number}
-      ]
-    */ 
+  getTeacherProfileData(teacherid: string) {
+    return this.httpClient.get(
+      'http://localhost:3000/teacher/get-teacher-profile/' + teacherid
+    );
   }
 
-  getMarksList(year:number,term: string,id: string){
-    //need to get subject names with marks related to above details from results table
-    /*format
-    [
-      {subjectname: string,mark: number},
-      {subjectname: string,mark: number},
-    ]*/
+  getStudentPastResultForEdit(year: number, term: number, studentid: string) {
+    return this.httpClient.post<{
+      result: { subjectid: number; subjectname: string; mark: number }[];
+    }>('http://localhost:3000/teacher/edit-results-get-previous', {
+      year: year,
+      term: term,
+      studentid: studentid,
+    });
   }
-  //new methods end
 
+  updateStudentResultAfterEdit(
+    year: number,
+    term: number,
+    studentid: string,
+    result: { subjectid: number; mark: number }
+  ) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/update-student-result',
+      {
+        year: year,
+        term: term,
+        studentid: studentid,
+        result: result,
+      }
+    );
+  }
 }
