@@ -11,6 +11,7 @@ import { StudentAttendenceComponent } from './student-attendence/student-attende
 import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
+import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
         path: 'edit-teacher',
         component: EditTeacherProfileComponent,
       },
+      {
+        path: 'tsend-noti',
+        component: TsendNotificationComponent,
+      }
       //to remove end
     ],
   },

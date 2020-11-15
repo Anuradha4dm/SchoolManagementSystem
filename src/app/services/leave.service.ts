@@ -8,6 +8,7 @@ export class LeaveService {
 
   constructor(private httpClient: HttpClient) {}
 
+  //return staff member's personal and leave data when parse the year and id 
   getStaffData(id: string, year: number) {
     return this.httpClient.post('http://localhost:3000/common/get-leave-profile-data', {
       id: id,
@@ -47,6 +48,7 @@ export class LeaveService {
   }
   //required methods end
 
+  //make new leave
   makeNewLeaveRequest(id: string, date: string, type: number, desctiption) {
     return this.httpClient.post(
       'http://localhost:3000/common/new-leave-request',

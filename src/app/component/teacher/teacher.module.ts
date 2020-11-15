@@ -13,6 +13,7 @@ import { TeacherRoutingModule } from './teacher.routing';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
+import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher
     MarkPresentDirective,
     FilterStudentPipe,
     TermTestResultsComponent,
-    EditTeacherProfileComponent
+    EditTeacherProfileComponent,
+    TsendNotificationComponent,
   ],
   declarations: [
     StudentListComponent,
@@ -40,6 +42,7 @@ import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher
     TermTestResultsComponent,
     EditTermResultsComponent,
     EditTeacherProfileComponent,
+    TsendNotificationComponent,
   ],
   providers: [],
 })

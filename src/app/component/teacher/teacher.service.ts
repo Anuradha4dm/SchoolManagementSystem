@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 export class TeacherService {
   constructor(private httpClient: HttpClient) {}
 
+  //return class students list of data when give teacher's id
   getStudentListForAddResult(id: string) {
     return this.httpClient.get<{
       grade: string;
@@ -16,6 +17,7 @@ export class TeacherService {
     }>('http://localhost:3000/teacher/class-student-list/' + id);
   }
 
+  //return subject list of student when parse id and grade
   getSubjectsOfSpecificStudent(studentid: string, grade: string) {
     return this.httpClient.post<{
       subjectlist: { subjectid: string; subjectname: string }[];
@@ -25,6 +27,7 @@ export class TeacherService {
     });
   }
 
+  //submit student results to the database
   addStudentResult(studentResult) {
     return this.httpClient.post(
       'http://localhost:3000/teacher/add-student-result',
@@ -33,15 +36,6 @@ export class TeacherService {
   }
 
   //new methods start
-  
-  getTeacherClassList(id: string){
-    //get loged teacher id and need to return teachers classes with related year from class tabel
-    /*format
-      [
-        {year: number,class: string},
-        {year: number,class: string},
-      ]*/
-  }
 
   getAverage(year:number,grade:string,term:string){
     //need to get student id,fullname,average,position from results table
