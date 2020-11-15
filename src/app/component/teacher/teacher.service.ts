@@ -46,4 +46,21 @@ export class TeacherService {
       studentid: studentid,
     });
   }
+
+  updateStudentResultAfterEdit(
+    year: number,
+    term: number,
+    studentid: string,
+    result: { subjectid: number; mark: number }
+  ) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/update-student-result',
+      {
+        year: year,
+        term: term,
+        studentid: studentid,
+        result: result,
+      }
+    );
+  }
 }
