@@ -3,10 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
 import { LayoutComponent } from './layout/layout.component';
-import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 import { SendEmilComponent } from './component/send-emil/send-emil.component';
-import { TeacherProfileComponent } from './component/teacher/teacher-profile/teacher-profile.component';
-import { LeavehandleComponent } from './component/nonacademic/leavehandle/leavehandle.component';
 
 const routes: Routes = [
   {
@@ -17,7 +14,7 @@ const routes: Routes = [
     path: 'user',
     component: LayoutComponent,
     children: [{ path: 'send-email', component: SendEmilComponent }],
-  },
+  }
   // },
   // {
   //   path: 'user',
