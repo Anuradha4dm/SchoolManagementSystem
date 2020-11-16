@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ThemeService } from 'ng2-charts';
 
 @Injectable({ providedIn: 'root' })
 export class NonAcademicService {
@@ -65,6 +66,12 @@ export class NonAcademicService {
   subjectReset(studentid: string) {
     return this.httpClient.get<{ update: boolean }>(
       'http://localhost:3000/nonacademic/reset-student-subjects/' + studentid
+    );
+  }
+
+  getPendingLeaveData() {
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/get-pending-leaves'
     );
   }
 }
