@@ -72,8 +72,8 @@ export class SiderbarComponent implements OnInit {
         },
 
         {
-          path: '/user/events',
-          title: 'EVENTS',
+          path: '/user/payment',
+          title: 'Payment',
           icon: 'gestures_tap-01',
           class: '',
         },

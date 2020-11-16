@@ -5,6 +5,7 @@ import { NotificationResolver } from 'src/app/services/Notification-resolver.ser
 import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
 
 import { NotificationComponent } from '../notification/notification.component';
+
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 import { AddSubjectsComponent } from './add-subjects/add-subjects.component';
 import { DashboardComponent } from './dashboard/dashboard.component';

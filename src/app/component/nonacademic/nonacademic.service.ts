@@ -61,4 +61,10 @@ export class NonAcademicService {
       }
     );
   }
+
+  subjectReset(studentid: string) {
+    return this.httpClient.get<{ update: boolean }>(
+      'http://localhost:3000/nonacademic/reset-student-subjects/' + studentid
+    );
+  }
 }

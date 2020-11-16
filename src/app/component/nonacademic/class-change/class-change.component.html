@@ -113,6 +113,43 @@
             </div>
           </form>
         </div>
+        <hr />
+        <div class="card-header">
+          <h1 class="title">Reset Student Subjects</h1>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            <p>
+              Pleace notice that student subject can be reset and student can
+              register for the subject again
+            </p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="studentid"
+                  class="form-control"
+                  placeholder="Student ID"
+                  #stuIdRef
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <input
+                  type="button"
+                  name="resetData"
+                  class="btn btn-danger"
+                  value="Reset now"
+                  (click)="onSubjectRest(stuIdRef.value)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

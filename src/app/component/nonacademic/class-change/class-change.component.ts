@@ -67,4 +67,21 @@ export class ClassChangeComponent implements OnInit {
   onCansel() {
     this.formDataRef.reset();
   }
+
+  onSubjectRest(value: string) {
+    this.nonacademicService.subjectReset(value.toUpperCase()).subscribe(
+      (result) => {
+        if (result.update) {
+          this.alertMessageService.competeAlert(
+            'Reset ' +
+              value.toUpperCase() +
+              ' Student Subjects Successfully....'
+          );
+        }
+      },
+      (error) => {
+        this.alertMessageService.errorAlert(error.error.message);
+      }
+    );
+  }
 }
