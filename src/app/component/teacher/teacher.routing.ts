@@ -12,9 +12,9 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
 import { AddOLresultsComponent } from '../main-exams/add-olresults/add-olresults.component';
-import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 import { EditProfileComponent } from '../student/edit-profile/edit-profile.component';
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
+import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 
 const routes: Routes = [
   {
@@ -22,6 +22,10 @@ const routes: Routes = [
     component: LayoutComponent,
 
     children: [
+      {
+        path: 'teacher-profile',
+        component: TeacherProfileComponent,
+      },
       {
         path: 'mark-attendence',
         component: StudentAttendenceComponent,

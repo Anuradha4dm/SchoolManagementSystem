@@ -4,22 +4,10 @@ import { TeacherService } from '../teacher.service';
 @Component({
   selector: 'app-teacher-profile',
   templateUrl: './teacher-profile.component.html',
-  styleUrls: ['./teacher-profile.component.css']
+  styleUrls: ['./teacher-profile.component.css'],
 })
 export class TeacherProfileComponent implements OnInit {
+  constructor(private teacherService: TeacherService) {}
 
-  teacherPro:any;
-  constructor(private teacherService:TeacherService) { }
-
-  ngOnInit(): void {
-    this.teacherService.getTeacherProfileData("AC_1").subscribe((data)=>{
-      this.teacherPro = data;
-    },error=>{
-      console.log(error)
-    });
-  }
-
-  onClick(){
-    console.log(this.teacherPro);
-  }
+  ngOnInit(): void {}
 }
