@@ -74,4 +74,17 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/get-pending-leaves'
     );
   }
+
+  getListOfSubjectsTeachedByTeacher(teacherid: string) {
+    return this.httpClient.get<{
+      subjectlist: {
+        subjectid: number;
+        subjectname: string;
+        assigndate: Date;
+        grade: string;
+      }[];
+    }>(
+      'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
+    );
+  }
 }
