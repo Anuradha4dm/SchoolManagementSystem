@@ -11,10 +11,9 @@
             <div class="author">
                 <a href="">
                     <img class="avatar border-black" src="./assets/img/mike.jpg" alt="profile picture" />
-                    <h4></h4>
                 </a>
                 <p class="description">
-                    username:
+                    {{teacherProfileData.username}}
                 </p>
             </div>
 
@@ -22,50 +21,57 @@
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons users_single-02"></i>
-                        Surname:
+                        Surname: {{teacherProfileData.surname}}
                     </h5>
                 </div>
 
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons users_single-02"></i>
-                        First Name:
+                        First Name: {{teacherProfileData.firstname}}
                     </h5>
                 </div>
 
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons users_single-02"></i>
-                        Last Name:
+                        Last Name: {{teacherProfileData.lastname}}
                     </h5>
                 </div>
 
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons ui-1_email-85"></i>
-                        Email:
+                        Email: {{teacherProfileData.email}}
                     </h5>
                 </div>
 
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons tech_mobile"></i>
-                        Mobile:
+                        Mobile: {{teacherProfileData.mobile}}
                     </h5>
                 </div>
 
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons shopping_tag-content"></i>
-                        Age:
+                        Age: {{teacherProfileData.age}}
                     </h5>
                 </div>
 
                 <div class="card-content">
                     <h5 class="text-des cont-text">
+                        <i class="now-ui-icons objects_globe"></i>
+                        Subject: {{teacherProfileData.subjects}}
+                    </h5>
+                </div>
+                
+                <div class="card-content">
+                    <h5 class="text-des cont-text">
                     <i class="now-ui-icons ui-1_send"></i>
                     address:<br>
-                        Teacher.addressLine1 ,<br>
+                        Teacher.addressLine1,<br>
                         Teacher.addressLine2,<br>
                         Teacher.addressLine3,<br>
                         Teacher.city
@@ -75,48 +81,32 @@
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons objects_globe"></i>
-                        Subject:
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons objects_globe"></i>
-                        Qualifications:
+                        Qualifications: {{teacherProfileData.qualifications}}
                     </h5>
                 </div>
 
                 <div class="card-content">
                     <h5 class="text-des cont-text">
                         <i class="now-ui-icons shopping_tag-content"></i>
-                        Description:
+                        Description: {{teacherProfileData.description}}
                     </h5>
                 </div>
 
                 <!--Bottom button group here-->
                 <div class="btn-group my-btn-group" role="group" >
-                    <button href="#" type="button" class="btn btn-dark" (click)="onClick()">
-                    Edit Profile
+                    <button href="#" type="button" class="btn btn-dark" (click)="onEditClick()">
+                        Edit Profile
                     </button>
                     <button href="#" type="button" class="btn btn-dark">
-                    View Time Table
+                        View Time Table
                     </button>
                     <button href="#" type="button" class="btn btn-dark">
-                    Send Email
+                        Send Email
                     </button>
-                </div>
-
                 </div>
         </div>
     </div>
 </div>
-
-{{teacherPro}}
-
-
-
-
-
 
 
 

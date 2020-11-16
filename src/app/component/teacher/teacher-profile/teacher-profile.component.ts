@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TeacherProfileData } from 'src/app/models/teacher.model';
+import { UserLogInService } from '../../homepage/login/user-login.service';
 import { TeacherService } from '../teacher.service';
 
 @Component({
@@ -7,7 +10,36 @@ import { TeacherService } from '../teacher.service';
   styleUrls: ['./teacher-profile.component.css'],
 })
 export class TeacherProfileComponent implements OnInit {
-  constructor(private teacherService: TeacherService) {}
+  teacherProfileData: TeacherProfileData;
+  loggedTeacherID: string;
 
-  ngOnInit(): void {}
+  constructor(
+    private userLoginService: UserLogInService,
+    private teacherService: TeacherService,
+    private router: Router,
+  ) {}
+
+  ngOnInit(): void {
+    
+    this.userLoginService.userAuthData
+      .subscribe((data)=>{
+        this.loggedTeacherID = data.getUserId;
+      });
+
+    this.teacherService.getTeacherProfileData(this.loggedTeacherID)
+      .subscribe((data)=>{
+        this.teacherProfileData = data;
+      });
+  }
+
+  //execute when edit profile click
+  onEditClick() {
+    this.router.navigate([
+      'user',
+      'edit-teacher',
+      this.loggedTeacherID
+    ]);
+  }
+
+
 }

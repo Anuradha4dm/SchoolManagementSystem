@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params} from '@angular/router';
+import { TeacherProfileData } from 'src/app/models/teacher.model';
+import { TeacherService } from '../teacher.service';
 
 @Component({
   selector: 'app-edit-teacher-profile',
@@ -6,10 +9,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-teacher-profile.component.css']
 })
 export class EditTeacherProfileComponent implements OnInit {
+  loggedTeacherID: string;
+  teacherProfileData: TeacherProfileData;
 
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private teacherService: TeacherService
+  ) { }
 
   ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.loggedTeacherID = params['id'];
+    });
+
+    this.teacherService.getTeacherProfileData(this.loggedTeacherID)
+      .subscribe((data)=>{
+        this.teacherProfileData = data;
+      });
   }
 
   onFormSubmit(value){
