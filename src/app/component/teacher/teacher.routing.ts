@@ -14,6 +14,7 @@ import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
+import { AddOLresultsComponent } from '../main-exams/add-olresults/add-olresults.component';
 
 const routes: Routes = [
   {
@@ -65,6 +66,10 @@ const routes: Routes = [
         path: 'tsend-noti',
         component: TsendNotificationComponent,
       },
+      {
+        path: 'ol',
+        component: AddOLresultsComponent
+      }
       //to remove end
     ],
   },
