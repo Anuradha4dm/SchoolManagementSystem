@@ -1,10 +1,10 @@
-.my-btn {
-  float: right;
-  margin-right: 150px;
+.badge-pill{
+  font-weight: bold;
+  color: black;
+  margin-right: 3px;
+  font-size: 17px;
 }
 
-.my-success {
-  font-family: "Bebas Neue", cursive;
-  color: rgb(33, 211, 77);
-  font-size: 25px;
+.errorClass{
+  color: red;
 }

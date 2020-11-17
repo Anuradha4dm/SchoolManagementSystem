@@ -1,77 +1,88 @@
-<div class="main-content">
-  <div class="row">
-    <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Stundents Attendence</h4>
-          <p class="description">{{ date | date: "fullDate" }}</p>
-        </div>
-        <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
-          <input type="hidden" name="date" [ngModel]="date" />
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table">
-                <thead class="text-primary">
-                  <th></th>
-                  <th>Name</th>
-                  <th></th>
-                  <th class="text-center">Attendence</th>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let student of students; let i = index">
-                    <td></td>
-                    <td>
-                      {{ student.username }}
-                      <input type="hidden" value="{{ student._id }}" #idRef />
-                    </td>
-                    <td></td>
-                    <td class="text-center">
-                      <div class="form-check">
-                        <label class="form-check-label">
-                          <input
-                            class="form-check-input"
-                            type="checkbox"
-                            name="{{ student._id }}"
-                            [ngModel]="false"
-                          />
-                          <span class="form-check-sign"></span>
-                        </label>
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+<div class="panel-header"></div>
 
-            <div class="my-btn">
-              <button
-                type="button"
-                *ngIf="doneSubmition"
-                class="btn btn-success"
-                (click)="onReSubmitbtnClick(formData)"
-                #resubmitBtnRef
-              >
-                Re-Submittion
-              </button>
-              <button
-                [hidden]="doneSubmition"
-                class="btn btn-success"
-                [disabled]="doneSubmition"
-                #submitBtnRef
-              >
-                Submit
-              </button>
-              <button type="button" (click)="onCansel()" class="btn btn-danger">
-                Cansel
-              </button>
-            </div>
-          </div>
-        </form>
-        <div>
-          <p class="text-center my-success" *ngIf="doneSubmition">
-            You Have Done Mark Attendence
-          </p>
+<div class="main-content">
+  <div class="card">
+    <!--Date details here-->
+    <div class="card-header">
+      <h4 class="mb-4 font-italic">Students Attendance</h4>
+
+      <div class="row">
+        <div class="col">
+          <h6 class="text-muted">{{date| date: 'fullDate'}}</h6>
         </div>
+
+        <!--Today stats here-->
+        <div class="col-auto text-right">
+          <label class="badge-pill badge-info">Total: {{studentList.length}}</label>
+          <label class="badge-pill badge-success">Present: {{studentList.length-absent}}</label>
+          <label class="badge-pill badge-danger">Absent:{{absent}}</label>
+        </div>
+      </div>
+    </div>
+
+    <!--Student list here-->
+    <div class="card-body border border-dark m-2">
+      <!--current class and class teacher here-->
+      <div class="row mb-4">
+        <div class="col"></div>
+
+        <div class="col text-center">
+          <label>Class:
+            <input type="text" class="form-control" [ngModel]="grade" disabled>
+          </label>
+        </div>
+
+        <div class="col text-center">
+          <label>Class Teacher ID:
+            <input type="text" class="form-control" [ngModel]="teacherID" disabled>
+          </label>
+        </div>
+      </div>
+
+      <form #attendanceForm="ngForm" (ngSubmit)="onAttendanceSubmit(attendanceForm.value)">
+
+        <table class="table table-hover text-center">
+          <tr class="bg-secondary">
+            <th>Student ID</th>
+            <th>Fullname</th>
+            <th>Absent/Present</th>
+          </tr>
+          <tbody>
+              <tr *ngFor="let student of studentList">
+                <td>{{student._id}}</td>
+                <td>{{student.firstname + " " + student.lastname| titlecase }}</td>
+                <td>
+                  <mat-slide-toggle [name]="student._id" [ngModel]="true" (change)="onSliderChange($event)"></mat-slide-toggle>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+
+        <div class="col text-right">
+          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="onCancelClick('ST_5','naduni')">Cancel</button>
+        </div>
+    </form>
+
+    </div>
+
+    <!--Last update details here-->
+    <div class="card-footer mt-4">
+      <div class="row">
+       
+        <div class="col-auto" *ngIf="!otherClass">
+          <label>*Optional
+          <button class="btn btn-dark btn-sm" (click)="otherClass=true">Mark For Other Class</button>
+          </label>
+        </div>
+  
+        <div class="col-auto" *ngIf="otherClass">
+          <small *ngIf="enterClicked && error" class="errorClass">Please enter a valid ID</small>
+          <input #other type="text" placeholder="Enter target teacher's ID" class="form-control">
+          <button class="btn btn-dark btn-sm mt-2 mr-1" (click)="onEnterClick(other.value)">Enter</button>
+          <button class="btn btn-dark btn-sm mt-2" (click)="otherClass=false">Cancel</button>
+        </div>
+
       </div>
     </div>
   </div>

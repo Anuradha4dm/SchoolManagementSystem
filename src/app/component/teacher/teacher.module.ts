@@ -7,15 +7,20 @@ import { StudentAttendenceComponent } from './student-attendence/student-attende
 import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RouterModule } from '@angular/router';
 import { TeacherRoutingModule } from './teacher.routing';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
+import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
+import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
+import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 
 @NgModule({
   imports: [
     FormsModule,
     CommonModule,
     MatExpansionModule,
+    MatSlideToggleModule,
     RouterModule,
     TeacherRoutingModule,
   ],
@@ -25,6 +30,8 @@ import { TermTestResultsComponent } from './term-test-results/term-test-results.
     MarkPresentDirective,
     FilterStudentPipe,
     TermTestResultsComponent,
+    EditTeacherProfileComponent,
+    TsendNotificationComponent,
   ],
   declarations: [
     StudentListComponent,
@@ -33,6 +40,9 @@ import { TermTestResultsComponent } from './term-test-results/term-test-results.
     FilterStudentPipe,
     TeacherProfileComponent,
     TermTestResultsComponent,
+    EditTermResultsComponent,
+    EditTeacherProfileComponent,
+    TsendNotificationComponent,
   ],
   providers: [],
 })

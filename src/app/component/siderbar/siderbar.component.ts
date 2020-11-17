@@ -88,7 +88,7 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
-          path: '/user/userprofile',
+          path: '/user/teacher-profile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',

@@ -26,6 +26,7 @@ import { LeaverequestComponent } from './component/leaverequest/leaverequest.com
 import { NonacademicModule } from './component/nonacademic/nonacademic.module';
 import { SendEmilComponent } from './component/send-emil/send-emil.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { MainExamsModule } from './component/main-exams/main-exams.module';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
     NonacademicModule,
     NotificationModule,
     HomePageModule,
+    MainExamsModule
   ],
   providers: [
     NotificationResolver,

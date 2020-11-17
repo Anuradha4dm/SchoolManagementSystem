@@ -31,12 +31,16 @@ export class TermTestResultsComponent implements OnInit {
     this.userLoginService.userAuthData.subscribe((userData) => {
       this.loginUserData = userData;
     });
+    console.log("this is the data");
 
     this.teacherService
       .getStudentListForAddResult(this.loginUserData.getUserId)
       .subscribe((data) => {
+        console.log(data);
         this.studentList = data.studentListData;
         this.termResult.grade = data.grade;
+      },error=>{
+        console.log(error);
       });
   }
 
