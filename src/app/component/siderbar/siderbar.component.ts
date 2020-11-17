@@ -70,15 +70,10 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
+
         {
-          path: '/user/exams',
-          title: 'EXAMS',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
-        {
-          path: '/user/events',
-          title: 'EVENTS',
+          path: '/user/payment',
+          title: 'Payment',
           icon: 'gestures_tap-01',
           class: '',
         },
@@ -93,7 +88,7 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
-          path: '/user/userprofile',
+          path: '/user/teacher-profile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',
@@ -111,7 +106,7 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
-          path: '/user/notification',
+          path: '/user/teacher-notification',
           title: 'Notification',
           icon: 'education_agenda-bookmark',
           class: '',
@@ -129,20 +124,59 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
+
         {
           path: '/user/exams',
           title: 'EXAMS',
           icon: 'gestures_tap-01',
           class: '',
         },
+      ];
+    }
 
+    if (this.userRoll === 'nonacademic') {
+      this.sideBarItems = [
         {
-          path: '/user/events',
-          title: 'EVENTS',
+          path: '/user/userprofile',
+          title: 'Profile',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/handle-leave',
+          title: 'HANDLE LEAVES',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/add-event',
+          title: 'ADD EVENT',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/send-notification',
+          title: 'SEND NOTIFICATION',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/class-handler',
+          title: 'HANDLE CLASS',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/student-class-change',
+          title: 'Class Change',
           icon: 'gestures_tap-01',
           class: '',
         },
       ];
     }
+  }
+
+  logout() {
+    this.userLogInService.logout();
   }
 }

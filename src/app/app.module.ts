@@ -5,6 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -19,11 +21,12 @@ import { AdminModule } from './component/admin/admin.module';
 import { TeacherModule } from './component/teacher/teacher.module';
 import { NotificationModule } from './component/notification/notification.module';
 import { HomePageModule } from './component/homepage/homepage.module';
-import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { ChartsModule } from 'ng2-charts';
+
 import { LeaverequestComponent } from './component/leaverequest/leaverequest.component';
 import { NonacademicModule } from './component/nonacademic/nonacademic.module';
+import { SendEmilComponent } from './component/send-emil/send-emil.component';
+import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { MainExamsModule } from './component/main-exams/main-exams.module';
 
 @NgModule({
   declarations: [
@@ -31,8 +34,9 @@ import { NonacademicModule } from './component/nonacademic/nonacademic.module';
     LayoutComponent,
     SiderbarComponent,
     ConfirmationDialogComponent,
-    DashboardComponent,
-    LeaverequestComponent
+    LeaverequestComponent,
+    SendEmilComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,6 +55,7 @@ import { NonacademicModule } from './component/nonacademic/nonacademic.module';
     NonacademicModule,
     NotificationModule,
     HomePageModule,
+    MainExamsModule
   ],
   providers: [
     NotificationResolver,

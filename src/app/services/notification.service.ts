@@ -1,28 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { NotificationModel } from '../models/notification.module';
+import { NotificationModel } from '../models/notification.modele';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService {
-  private notifications: NotificationModel[] = [
-    new NotificationModel(
-      '123',
-      'user1',
-      'user2',
-      'Serious Problem 2',
-      'This is the message in the notification',
-      new Date().toUTCString()
-    ),
-    new NotificationModel(
-      '123',
-      'user3',
-      'user4',
-      'Serious Problem 4',
-      'This is the message2 in the notification',
-      new Date().toUTCString()
-    ),
-  ];
+  constructor(private httpClient: HttpClient) {}
 
-  getNotifications() {
-    return this.notifications;
+  getNotifications(id) {
+    return this.httpClient.get<{
+      notificationArray: {
+        notificationid: string;
+        to: number;
+        from: string;
+        message: string;
+        publisher: string;
+        createdAt: string;
+        attachmentpath: string;
+      }[];
+    }>('http://localhost:3000/common/get-post/' + id);
   }
 }

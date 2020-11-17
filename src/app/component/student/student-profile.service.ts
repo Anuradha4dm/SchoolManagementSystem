@@ -62,18 +62,16 @@ export class StudentProfileService {
   }
 
   getSelectSubjectInfomation(subjectname: string, grade: string) {
-    return this.httpClient.get<{
+    return this.httpClient.post<{
       subjectId: number;
       subjectName: string;
       subjectDes: string;
       teacherName: string;
       imagePath: string;
-    }>(
-      'http://localhost:3000/student/getsubjectinfo/' +
-        subjectname +
-        '/' +
-        grade
-    );
+    }>('http://localhost:3000/student/getsubjectinfo', {
+      grade: grade,
+      subjectname: subjectname,
+    });
   }
 
   getStudentId() {}
@@ -104,7 +102,20 @@ export class StudentProfileService {
     );
   }
 
-  getRegisteredSubjectList() {
+  addSubjectAdvanceLevel(postData: {
+    studentid: string;
+    grade: string;
+    subject1: string;
+    subject2: string;
+    subject3: string;
+  }) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/student/add-subject-advance-level',
+      postData
+    );
+  }
+
+  getRegisteredSubjectList(studentid: string) {
     return this.httpClient.get<{
       query: boolean;
       update: string;
@@ -118,7 +129,7 @@ export class StudentProfileService {
           update: string;
         }
       ];
-    }>('http://localhost:3000/student/get-subject-list/ST_1');
+    }>('http://localhost:3000/student/get-subject-list/' + studentid);
   }
 
   viewResultOfSpecificStudent(formdata) {
@@ -133,4 +144,17 @@ export class StudentProfileService {
   }
 
   getLogInStudentData() {}
+
+  getSportsList(studentid: string) {
+    return this.httpClient.get<{
+      sports: { sportname: string; allow: boolean }[];
+    }>('http://localhost:3000/student/get-sports/' + studentid);
+  }
+
+  addSports(sportsData) {
+    return this.httpClient.post(
+      'http://localhost:3000/student/add-sports',
+      sportsData
+    );
+  }
 }

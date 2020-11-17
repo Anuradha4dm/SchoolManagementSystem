@@ -1,0 +1,193 @@
+<div class="panel-header panel-header-sm"></div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Notification</h4>
+        </div>
+        <div class="card-header">
+          <h5 class="card-category">Send Notifications As You Wish</h5>
+          <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
+            <table class="table">
+              <tbody>
+                <tr>
+                  <td>
+                    <div class="form-group">
+                      <div class="col-md-8">
+                        <label> Select Category </label>
+                        <select
+                          name="category"
+                          id=""
+                          class="form-control"
+                          ngModel
+                          #catRef="ngModel"
+                          required
+                        >
+                          <option value="0">To All</option>
+                          <option value="1">To All Teacher</option>
+                          <option value="2">For A Teacher</option>
+                          <option value="3">To All Student</option>
+                          <option value="4">For A Student</option>
+                          <option value="5">For A Grade</option>
+                        </select>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr
+                  *ngIf="
+                    catRef.value == 2 || catRef.value == 4 || catRef.value == 5
+                  "
+                >
+                  <td>
+                    <div class="form-group">
+                      <div class="col-md-5">
+                        <label *ngIf="catRef.value == 2"
+                          >Number Of Teachers
+                        </label>
+                        <label *ngIf="catRef.value == 4"
+                          >Number Of Students</label
+                        >
+                        <label *ngIf="catRef.value == 5"
+                          >Number Of Classes
+                        </label>
+                        <input
+                          type="number"
+                          name="adduser"
+                          class="form-control"
+                          #numRef
+                        />
+                        <input
+                          type="button"
+                          name="adduser"
+                          class="btn btn-round btn-secondary"
+                          value="ADD ID"
+                          (click)="addUser(numRef.value)"
+                        />
+                      </div>
+                    </div>
+
+                    <div *ngIf="display">
+                      <div *ngFor="let listItem of userList">
+                        <div class="form-group">
+                          <div class="col-md-5">
+                            <input
+                              type="text"
+                              name="{{ listItem }}"
+                              class="form-control"
+                              [ngModel]=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <div class="form-group">
+                      <div class="col-md-8">
+                        <label>From</label>
+                        <input
+                          type="text"
+                          name="from"
+                          class="form-control"
+                          ngModel
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-8">
+                        <label>title</label>
+                        <input
+                          type="text"
+                          name="title"
+                          class="form-control"
+                          required
+                          ngModel
+                        />
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-md-8">
+                        <label>Remove At</label>
+                        <input
+                          type="date"
+                          name="expire"
+                          class="form-control"
+                          ngModel
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <div class="col-md-11">
+                        <label>Message</label>
+                        <textarea
+                          name="description"
+                          class="form-control my-text-area"
+                          id=""
+                          cols="150"
+                          rows="50"
+                          ngModel
+                          required
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div class="col-md-8">
+                      <label>Attachment</label><br />
+                      <input
+                        type="file"
+                        name="attachement"
+                        id=""
+                        ngModel
+                        (change)="onFileSelect($event)"
+                      />
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <p
+                      style="color: rgb(230, 72, 72)"
+                      *ngIf="!catRef.valid && catRef.touched"
+                    >
+                      You must select a Category
+                    </p>
+                    <div class="form-check">
+                      <input
+                        class="btn btn-round btn-success"
+                        type="submit"
+                        value="Sent Notification"
+                        [disabled]="!formData.valid"
+                      />
+                      |
+                      <input
+                        class="btn btn-round btn-danger"
+                        type="button"
+                        value="Cancel"
+                        (click)="onCancel()"
+                      />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+        <div class="card-body">
+          <div></div>
+          <ng-template #default>
+            <p>check notification before sending</p>
+            <hr />
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

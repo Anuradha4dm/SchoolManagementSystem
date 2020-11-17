@@ -1,0 +1,305 @@
+<div class="panel-header"></div>
+
+<div class="main-content my-view">
+  <div class="row">
+    <div class="col-xl-8">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">Class Handler</h1>
+          <p class="description">change the class properties</p>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Select Class</label>
+                  <select
+                    name="classname"
+                    class="form-control"
+                    #classRef
+                    ngModel
+                    (change)="onSelectClass(classRef.value)"
+                  >
+                    <option *ngFor="let class of classList" [value]="class">
+                      {{ class }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <p>Change Class Teacher</p>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    name="category"
+                    value="Select Teacher"
+                    class="btn btn-info btn-icon-mini"
+                    (click)="selectTeacher()"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5"></div>
+              <div class="col-md-6 pr-1">
+                <div
+                  class="form-group align-content"
+                  *ngIf="enableSelectTeacher"
+                >
+                  <label>Select Teacher</label>
+                  <select name="teacherid" class="form-control" ngModel>
+                    <option
+                      [value]="teacher.teacherid"
+                      *ngFor="let teacher of freeClassTeacher"
+                    >
+                      {{ teacher.username }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <p>Change Class Time Table</p>
+                </div>
+              </div>
+              <div class="col-md-5">
+                <input
+                  type="file"
+                  name="timetable"
+                  #fileRef
+                  ngModel
+                  (change)="onFileChange($event, classRef)"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button class="btn btn-success">Submit</button>
+
+              <button class="btn btn-danger">Rest</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card card-user">
+        <div class="image">
+          <img
+            src="https://media-exp1.licdn.com/dms/image/C511BAQF1nvy7nYdt_w/company-background_10000/0?e=2159024400&v=beta&t=ht7eRIJbRM1FsocndkfrK-csvooQ_Zk-f3F6PK1YCng"
+            alt="..."
+          />
+        </div>
+        <div class="card-body">
+          <div class="author">
+            <a href="#">
+              <img
+                class="avatar border-gray"
+                [src]="teacherData.image"
+                alt="..."
+              />
+              <h5 class="title">{{ teacherData.fullname }}</h5>
+            </a>
+          </div>
+          <p class="description text-center">{{ teacherData.email }}</p>
+          <p class="description text-center">{{ teacherData.teacherid }}</p>
+
+          <hr />
+
+          <div class="card-content">
+            <h5
+              class="text-des cont-text"
+              *ngFor="let qualification of teacherData.qualifications"
+            >
+              {{ qualification }}
+              <i class="now-ui-icons education_paper"></i>
+            </h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <hr />
+
+  <!-- this is the card that used to assign subject to teacher -->
+
+  <div class="row">
+    <div class="col-xl-10">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">Assing Subjects</h1>
+          <p class="description">
+            This Can Be Use To Assing Subjects To Teachers
+          </p>
+        </div>
+        <div class="card-body">
+          <form
+            (ngSubmit)="onSubmitSubjectList(formDataSub)"
+            #formDataSub="ngForm"
+          >
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="teacherid"
+                    #teacherIdRef="ngModel"
+                    ngModel
+                    class="form-control"
+                    required
+                    pattern="AC_[(0-9)]+"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    value="Find"
+                    class="btn btn-info"
+                    [disabled]="!teacherIdRef.touched && !teacherIdRef.valid"
+                    (click)="findSubjectsOfTeacher(teacherIdRef.value)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <p>Subject</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>class</p>
+                </div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+
+            <div class="row" *ngFor="let subject of subjectList; let i = index">
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="subjectid{{ i }}"
+                    class="form-control"
+                    [ngModel]="subject.subjectid"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="subjectname{{ i }}"
+                    class="form-control"
+                    [ngModel]="subject.subjectname"
+                  />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="classname{{ i }}"
+                    class="form-control"
+                    ngModel="{{ subject.grade | uppercase }}"
+                  />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    name="classname"
+                    value="X"
+                    class="btn btn-danger my-btn"
+                    (click)="removeSubect(i)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="classname"
+                    class="form-control"
+                    #classnameRef
+                    (change)="onClassChangeSubjectListSetUp(classnameRef.value)"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="form-group">
+                  <select
+                    name="subjectname"
+                    class="form-control"
+                    ngModel
+                    #subjectnameRef="ngModel"
+                  >
+                    <option
+                      *ngFor="let subject of validSubjectListForAClass"
+                      [value]="subject"
+                    >
+                      {{ subject | titlecase }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="subjectname"
+                    class="form-control"
+                    ngModel
+                    #subjectnameRef="ngModel"
+                  />
+                </div>
+              </div> -->
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    name="classname"
+                    value="ADD"
+                    class="btn btn-success my-btn"
+                    (click)="
+                      onAddSubject(subjectnameRef.value, classnameRef.value)
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button class="btn btn-success" [disabled]="!formDataSub.valid">
+                Submit
+              </button>
+
+              <button class="btn btn-danger">Rest</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

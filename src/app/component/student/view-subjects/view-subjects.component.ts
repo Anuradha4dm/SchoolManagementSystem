@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { createThis, isConstructorDeclaration } from 'typescript';
 
@@ -21,6 +21,7 @@ export class ViewSubjectsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private alertMessageService: AlertMessageService
   ) {}
 
@@ -31,11 +32,17 @@ export class ViewSubjectsComponent implements OnInit {
         this.update = data['subjectList'].update;
       },
       (err) => {
-        console.log(err.error.message);
+        console.log('sda');
       },
       () => {
         this.alertMessageService.competeAlert('Subject List Fetch Successfull');
       }
     );
+  }
+
+  sendEmail(email: string) {
+    this.router.navigate(['user', 'send-email'], {
+      queryParams: { teacheremail: email },
+    });
   }
 }

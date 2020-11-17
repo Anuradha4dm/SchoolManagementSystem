@@ -32,8 +32,6 @@ export class AddNewProfileComponent implements OnInit {
   onSubmit(formData: NgForm) {
     const form = new FormData();
 
-    console.log(formData.value.userid);
-
     form.append('grade', formData.value.grade);
     form.append('addressline1', formData.value.addressline1);
     form.append('addressline2', formData.value.addressline2);
@@ -74,7 +72,6 @@ export class AddNewProfileComponent implements OnInit {
 
     this.imageFileName = studentId + '.' + extention;
 
-    console.log(event.target.files[0]);
     const file = event.target.files[0];
 
     var reader = new FileReader();

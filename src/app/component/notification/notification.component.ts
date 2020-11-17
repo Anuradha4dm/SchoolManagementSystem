@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Data } from '@angular/router';
-import { NotificationModel } from 'src/app/models/notification.module';
+import { NotificationModel } from 'src/app/models/notification.modele';
 
 @Component({
   selector: 'app-notification',
@@ -18,6 +18,7 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
       this.notifications = data['notifications'];
+      console.log(this.notifications[0]);
     });
     this.isNotificationAvailable = this.notifications.length > 0;
   }

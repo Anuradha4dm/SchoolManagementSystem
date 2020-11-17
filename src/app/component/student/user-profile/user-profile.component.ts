@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Console } from 'console';
+import { ThemeService } from 'ng2-charts';
+import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
+import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
 
@@ -10,17 +14,21 @@ import { StudentProfileService } from '../student-profile.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css'],
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements OnInit, OnDestroy {
   loginUserData: LogInUserModel;
 
-  studentProfileData: Student = null;
-  studentPerformance;
+  //subsvribers
+  loginUserDataSubscriber: Subscription;
+  userprofileSubscription: Subscription;
+
+  studentProfileData: Student;
+  studentPerformance: { eventname: string; place: string }[] = [
+    { eventname: 'Relay', place: '1 st Place' },
+    { eventname: 'Relay', place: '1 st Place' },
+  ];
 
   registeredSubjects: string[] = [];
   isShowRegisteredSubject: boolean = false;
-
-  specialAwards: string[] = ['Winner 1', 'winner 2', 'winner 3'];
-  numOfAbsents: number;
 
   imagePath: string = '';
 
@@ -32,29 +40,57 @@ export class UserProfileComponent implements OnInit {
 
   showDate: boolean = false;
 
+  gradeupdate: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
     private studentProfileService: StudentProfileService,
-    private loginUserService: UserLogInService
+    private loginUserService: UserLogInService,
+    private confirmationDialogService: ConfirmationDialogService
   ) {}
 
   ngOnInit(): void {
-    this.loginUserService.userAuthData.subscribe((userData) => {
-      this.loginUserData = userData;
-    });
+    this.loginUserDataSubscriber = this.loginUserService.userAuthData.subscribe(
+      (userData) => {
+        this.loginUserData = userData;
+      }
+    );
 
-    this.studentProfileService
+    this.userprofileSubscription = this.studentProfileService
       .getStudent(this.loginUserData.getUserId)
       .subscribe(
         (result) => {
           this.studentProfileData = result;
+
+          this.gradeupdate =
+            this.studentProfileData.graderegistration <
+            new Date(2021, 4, 9).getFullYear();
 
           this.imagePath =
             'http://localhost:3000/' + this.studentProfileData.imagePath;
         },
         (error) => {
           console.log(error);
+        },
+        () => {
+          if (this.gradeupdate) {
+            this.confirmationDialogService
+              .confirm(
+                'Please confirm...',
+                'You need to update your grade to the next yeat... Would you like to to it now?'
+              )
+              .then((confirmed) => {
+                if (confirmed) {
+                  this.onEditProfile(true);
+                }
+              })
+              .catch(() =>
+                console.log(
+                  'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+                )
+              );
+          }
         }
       );
   }
@@ -63,13 +99,36 @@ export class UserProfileComponent implements OnInit {
     this.showDate = !this.showDate;
   }
 
-  onEditProfile() {
-    this.router.navigate([
-      'user',
-      'edit-profile',
-      this.loginUserData.getUserId,
-    ]);
+  onEditProfile(update: boolean = this.gradeupdate) {
+    this.router.navigate(
+      ['user', 'edit-profile', this.loginUserData.getUserId],
+      { queryParams: { gradeupdate: update } }
+    );
   }
 
-  viewSubjectClick() {}
+  onResetPassword() {
+    this.router.navigate(['user', 'reset-password']);
+  }
+
+  onClickSports() {
+    this.router.navigate(['user', 'sports'], {
+      queryParams: {
+        age: this.studentProfileData.age,
+        studentid: this.studentProfileData._id,
+        studentname:
+          this.studentProfileData.firstName +
+          ' ' +
+          this.studentProfileData.lastName,
+      },
+    });
+  }
+
+  ngOnDestroy() {
+    this.loginUserDataSubscriber.unsubscribe();
+    this.userprofileSubscription.unsubscribe();
+  }
+
+  onClickTable() {
+    document.location.href = 'http://localhost:3000/timetable/tt_11_D.pdf';
+  }
 }
