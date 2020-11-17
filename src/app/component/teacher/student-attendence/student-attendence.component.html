@@ -13,8 +13,8 @@
 
         <!--Today stats here-->
         <div class="col-auto text-right">
-          <label class="badge-pill badge-info">Total: {{studentList.length}}</label>
-          <label class="badge-pill badge-success">Present: {{studentList.length-absent}}</label>
+          <label class="badge-pill badge-info">Total: {{classStudentList.studentListData.length}}</label>
+          <label class="badge-pill badge-success">Present: {{classStudentList.studentListData.length-absent}}</label>
           <label class="badge-pill badge-danger">Absent:{{absent}}</label>
         </div>
       </div>
@@ -28,7 +28,7 @@
 
         <div class="col text-center">
           <label>Class:
-            <input type="text" class="form-control" [ngModel]="grade" disabled>
+            <input type="text" class="form-control" [ngModel]="classStudentList.grade" disabled>
           </label>
         </div>
 
@@ -48,7 +48,7 @@
             <th>Absent/Present</th>
           </tr>
           <tbody>
-              <tr *ngFor="let student of studentList">
+              <tr *ngFor="let student of classStudentList.studentListData">
                 <td>{{student._id}}</td>
                 <td>{{student.firstname + " " + student.lastname| titlecase }}</td>
                 <td>
@@ -60,7 +60,7 @@
 
         <div class="col text-right">
           <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-          <button type="button" class="btn btn-danger btn-sm" (click)="onCancelClick('ST_5','naduni')">Cancel</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="onCancelClick()">Cancel</button>
         </div>
     </form>
 

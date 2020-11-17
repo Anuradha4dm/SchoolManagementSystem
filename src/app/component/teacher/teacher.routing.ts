@@ -23,6 +23,14 @@ const routes: Routes = [
 
     children: [
       {
+        path: 'teacher-profile',
+        component: TeacherProfileComponent,
+      },
+      {
+        path: 'edit-teacher/:id',
+        component: EditTeacherProfileComponent,
+      },
+      {
         path: 'mark-attendence',
         component: StudentAttendenceComponent,
         resolve: { studentList: GetStudentListForAttendenceResolver },
@@ -51,17 +59,10 @@ const routes: Routes = [
         component: EditTermResultsComponent,
       },
       {
-        path: 'teacher-profile',
-        component: TeacherProfileComponent,
-      },
-      {
         path: 'leave-handle',
         component: LeavehandleComponent,
       },
-      {
-        path: 'edit-teacher/:id',
-        component: EditTeacherProfileComponent,
-      },
+   
       {
         path: 'tsend-noti',
         component: TsendNotificationComponent,

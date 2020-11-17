@@ -16,6 +16,14 @@ export interface TeacherProfileData{
   email: string;
 }
 
+export interface ClassStudentList{
+  grade: string;
+  studentListData: {
+    _id: string;
+    firstname: string;
+    lastname: string;
+  }[];
+}
 
 export class TermResults {
   year = new Date().getFullYear();

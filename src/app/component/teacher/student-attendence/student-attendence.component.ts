@@ -1,5 +1,6 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { ClassStudentList } from 'src/app/models/teacher.model';
 
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentListService } from '../student-list.service';
@@ -13,13 +14,8 @@ import { TeacherService } from '../teacher.service';
 export class StudentAttendenceComponent implements OnInit {
   teacherID:string;
   date: Date = new Date();
-  grade: string;
+  classStudentList: ClassStudentList;
   absent: number = 0;
-  studentList:{
-    _id: string;
-    firstname: string;
-    lastname: string;
-  }[];
 
   otherClass:boolean = false;
   enterClicked:boolean = false;
@@ -29,7 +25,6 @@ export class StudentAttendenceComponent implements OnInit {
   constructor(
     private userLoginService: UserLogInService,
     private teacherService: TeacherService,
-    private studentListService: StudentListService
   ) {}
 
   ngOnInit(): void {
@@ -37,10 +32,9 @@ export class StudentAttendenceComponent implements OnInit {
       this.teacherID=userData.getUserId;
     });
 
-    this.teacherService.getStudentListForAddResult(this.teacherID)
+    this.teacherService.getClassStudentList(this.teacherID)
     .subscribe((data)=>{
-      this.grade = data.grade;
-      this.studentList = data.studentListData;
+      this.classStudentList = data;
     });
   }
 
@@ -55,24 +49,23 @@ export class StudentAttendenceComponent implements OnInit {
   //execute when enter button click
   onEnterClick(value){
     this.otherID=value.toUpperCase();
-    this.teacherService.getStudentListForAddResult(this.otherID)
+    this.teacherService.getClassStudentList(this.otherID)
     .subscribe((data)=>{
-        this.grade=data.grade;
-        this.studentList=data.studentListData;
+        this.classStudentList = data;
         this.teacherID = this.otherID;
         this.error = false; 
     });
     this.enterClicked = true;
   }
 
-  onCancelClick(id,firstname){
+  onCancelClick(){
     this.ngOnInit();
     //this.test1=this.studentList.find((res)=>{return res._id.match(id) && res.firstname.match(firstname)})
   }
 
   //execute when form submit  
   onAttendanceSubmit(formValue){
-    console.log(formValue);
+    console.log(this.date,this.classStudentList.grade,formValue);
   }
 
 }
