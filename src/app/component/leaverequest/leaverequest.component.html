@@ -1,4 +1,4 @@
-<div class="panel-header panel-header-sm"></div>
+<div class="panel-header"></div>
 
 <div class="main-content">
   <div class="card">
@@ -7,12 +7,12 @@
       <div class="row">
         <div class="col bg-success text-center">
           <h5>Leaves Available</h5>
-          <h6 class="bg-secondary"></h6>
+          <h5 class="bg-secondary">{{41-prevLeaveData.numberdflevestaken}}</h5>
         </div>
 
         <div class="col bg-danger text-center">
           <h5>Leaves Taken</h5>
-          <h6 class="bg-secondary"></h6>
+          <h5 class="bg-secondary">{{prevLeaveData.numberdflevestaken}}</h5>
         </div>
       </div>
     </div>
@@ -20,7 +20,7 @@
     <div class="card-body">
       <div class="row">
         <!--leave form here-->
-        <div class="col-md-6 border border-dark p-3">
+        <div class="col border border-dark p-3 m-3">
           <h5 class="text-center text-muted mb-4">Leave Request Form</h5>
           <form
             #leaveForm="ngForm"
@@ -29,7 +29,7 @@
             <div class="row">
               <div class="col">
                 <label>User ID</label>
-                <input type="text" [value]="" class="form-control" disabled />
+                <input type="text" [value]="userID" class="form-control" disabled />
               </div>
               <div class="col">
                 <label>Date for the Leave</label>
@@ -49,7 +49,7 @@
 
             <div class="form-group">
               <label>Name</label>
-                <input type="text" [value]="" class="form-control" disabled />
+                <input type="text" [value]="profileData.fullname| titlecase" class="form-control" disabled />
             </div>
 
             <div class="form-group">
@@ -57,17 +57,17 @@
               <select
                 class="form-control w-50 p-1"
                 name="type"
-                [ngModel]="type"
+                [ngModel]="leaveType"
               >
-                <option value="full-day">Full day</option>
-                <option value="half-day">Half day</option>
-                <option value="short-leave">Short leave</option>
+                <option value="0">Half-day</option>
+                <option value="1">Short-leave</option>
+                <option value="2">Full-day</option>
               </select>
             </div>
 
             <div class="form-group">
               <label>Mobile</label>
-              <input type="text" [value]="" class="form-control" disabled />
+              <input type="text" [value]="profileData.mobile" class="form-control" disabled />
             </div>
 
             <div class="form-group">
@@ -94,14 +94,14 @@
               >
                 Submit
               </button>
-              <button type="reset" class="btn btn-danger btn-sm">
+              <button type="button" (click)="onCancelClick()" class="btn btn-danger btn-sm">
                 Cancel
               </button>
             </div>
           </form>
         </div>
 
-        <!--previous leave details here-->
+        <!--previous leave details here>
         <div class="col mt-3">
           <h5 class="text-center text-muted mb-3">Previous Leave Details</h5>
 
@@ -115,25 +115,14 @@
             <tbody>
               <tr>
                 <td></td>
-                <td>{{leaveDate}}</td>
-                <td>{{type}}</td>
-                <td>{{status}}</td>
+                <td></td>
+                <td></td>
+                <td></td>
               </tr>
             </tbody>
           </table>
-        </div>
+        </div-->
       </div>
     </div>
   </div>
 </div>
-
-  <!--Alert messages here>
-    <div class="alert alert-dismissible alert-warning">
-        <h5>Your request has been sent successfully !!</h5>
-        <button class="close" data-dismiss="alert">x</button>
-    </div>
-
-    <div class="alert alert-dissmisible alert-danger">
-        <h5>Your request could not be sent !!</h5>
-        <button class="close" data-dismiss="alert">x</button>
-    </div-->
