@@ -1,0 +1,156 @@
+<div class="panel-header"></div>
+<div class="main-content">
+  <div class row="row">
+    <div class="col-xl-10">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">Change Class Of A Students</h1>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            <p>You Can Chnage Students Class</p>
+          </div>
+          <form (ngSubmit)="onSubmit(formData)" #formData="ngForm">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="student_id"
+                    placeholder="Student Id"
+                    ngModel
+                    #studentIdRef
+                    required
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    name="find"
+                    value="Find"
+                    placeholder="First Name"
+                    class="btn btn-info"
+                    (click)="getClass(studentIdRef.value)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>From</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    name="current_class"
+                    [value]="currentGradeData.grade"
+                    disabled
+                  />
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>To</label>
+                  <input
+                    type="text"
+                    name="move_class"
+                    placeholder="Class Name"
+                    class="form-control"
+                    ngModel
+                    required
+                    minlength="3"
+                    #classNameRef="ngModel"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="classNameRef.valid">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    name="optional2_check"
+                    #classVerifyRef="ngModel"
+                    [ngModel]="false"
+                    required
+                  />
+                  <span class="form-check-sign"
+                    >This will student with student id
+                    {{ studentIdRef.value }} from the class
+                    {{ currentGradeData.grade }} to
+                    {{ classNameRef.value | uppercase }} . Are you allow that
+                    request...</span
+                  >
+                </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <input
+                    type="submit"
+                    class="btn btn-success"
+                    value="Submit"
+                    name="current_class"
+                    [disabled]="!formData.valid"
+                  />
+
+                  <input
+                    type="button"
+                    name="firstname"
+                    value="Find"
+                    placeholder="Class Name"
+                    class="btn btn-danger"
+                    value="Cancel"
+                    (click)="onCansel()"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+        <hr />
+        <div class="card-header">
+          <h1 class="title">Reset Student Subjects</h1>
+        </div>
+        <div class="card-body">
+          <div class="card-description">
+            <p>
+              Pleace notice that student subject can be reset and student can
+              register for the subject again
+            </p>
+          </div>
+
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <input
+                  type="text"
+                  name="studentid"
+                  class="form-control"
+                  placeholder="Student ID"
+                  #stuIdRef
+                />
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <input
+                  type="button"
+                  name="resetData"
+                  class="btn btn-danger"
+                  value="Reset now"
+                  (click)="onSubjectRest(stuIdRef.value)"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

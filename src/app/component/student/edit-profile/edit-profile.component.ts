@@ -14,6 +14,9 @@ export class EditProfileComponent implements OnInit {
   studentData: Student;
   profilePic: any = '../assets/img/profile.png';
 
+  gradeupdate: boolean = false;
+  gradeAvalilable: string[] = [];
+
   //this is the new upload file data
   selectedFile: File = null;
   imageFileName: string;
@@ -30,6 +33,10 @@ export class EditProfileComponent implements OnInit {
       this.studentId = params['id'];
     });
 
+    this.route.queryParams.subscribe((data) => {
+      this.gradeupdate = data['gradeupdate'] == 'true' ? true : false;
+    });
+
     this.studentProfileService.getStudent(this.studentId).subscribe(
       (result) => {
         this.studentData = result;
@@ -37,14 +44,28 @@ export class EditProfileComponent implements OnInit {
       },
       (error) => {
         console.log(error);
+      },
+      () => {
+        this.gradeAvalilable = this.gradeUpdateHandler(this.studentData.grade);
       }
     );
+  }
+
+  gradeUpdateHandler(classname: string) {
+    var classSplit = classname.split('_');
+
+    if (parseInt(classSplit[0]) < 11) {
+      return [classname, 1 + parseInt(classSplit[0]) + '_' + classSplit[1]];
+    } else if (parseInt(classSplit[0]) === 11) {
+      return ['12_MATH', '12_BIO', '12_ART', '12_COM', '12_TEC'];
+    } else {
+      return [classname, 1 + parseInt(classSplit[0]) + '_' + classSplit[1]];
+    }
   }
 
   onSubmit(formData) {
     const form = new FormData();
 
-    form.append('grade', formData.value.grade);
     form.append('addressline1', formData.value.addressline1);
     form.append('addressline2', formData.value.addressline2);
     form.append('addressline3', formData.value.addressline3);
@@ -67,6 +88,12 @@ export class EditProfileComponent implements OnInit {
       form.append('imagepath', this.studentData.imagePath);
     } else {
       form.append('imageData', this.selectedFile, this.imageFileName);
+    }
+
+    if (this.gradeupdate) {
+      form.append('grade', formData.value.Grade);
+    } else {
+      form.append('grade', this.studentData.grade);
     }
 
     this.studentProfileService.updateStudentProfile(form).subscribe(

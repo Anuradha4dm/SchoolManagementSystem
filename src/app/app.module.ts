@@ -33,7 +33,6 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
     LayoutComponent,
     SiderbarComponent,
     ConfirmationDialogComponent,
-
     LeaverequestComponent,
     SendEmilComponent,
     ResetPasswordComponent,

@@ -36,7 +36,6 @@ export class UserLogInService {
       }>('http://localhost:3000/auth/login', formData)
       .pipe(
         tap((result) => {
-          console.log(result);
           var userData = new LogInUserModel(
             result._id,
             result.authentication,

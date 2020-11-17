@@ -1,6 +1,17 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { error } from 'protractor';
+import { stringify } from 'querystring';
+import { Subscription } from 'rxjs';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
+import { WebSocketService } from 'src/app/services/websocket.service';
 import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
@@ -8,8 +19,23 @@ import { NonAcademicService } from '../nonacademic.service';
   templateUrl: './class-handler.component.html',
   styleUrls: ['./class-handler.component.css'],
 })
-export class ClassHandlerComponent implements OnInit {
+export class ClassHandlerComponent implements OnInit, OnDestroy {
   @ViewChild('formData', { static: true }) formDataRef;
+  @ViewChild('formDataSub', { static: true }) formDatasubRef: NgForm;
+
+  newlyAddedSubject: {
+    subjectid: number;
+    subjectname: string;
+    assigndate: Date;
+    grade: string;
+  } = { subjectid: 0, subjectname: '', assigndate: new Date(), grade: '' };
+
+  subjectList: {
+    subjectid: number;
+    subjectname: string;
+    assigndate: Date;
+    grade: string;
+  }[] = null;
 
   freeClassTeacher: { teacherid: string; username: string }[] = [];
   enableSelectTeacher: boolean = false;
@@ -32,6 +58,8 @@ export class ClassHandlerComponent implements OnInit {
     image:
       'https://lk-maruads-1.nyc3.cdn.digitaloceanspaces.com/thumb_103339_0.png',
   };
+
+  validSubjectListForAClass: string[] = [];
 
   classList: string[] = [
     '6_A',
@@ -76,9 +104,12 @@ export class ClassHandlerComponent implements OnInit {
     '13_TEC',
   ];
 
+  subjectidListenerSubscription: Subscription;
+
   constructor(
     private nonAcademicService: NonAcademicService,
-    private alertMessageService: AlertMessageService
+    private alertMessageService: AlertMessageService,
+    private webSocketService: WebSocketService
   ) {}
 
   ngOnInit(): void {}
@@ -134,5 +165,190 @@ export class ClassHandlerComponent implements OnInit {
         this.alertMessageService.errorAlert(error.error.message);
       }
     );
+  }
+
+  findSubjectsOfTeacher(teacherid: string) {
+    this.nonAcademicService
+      .getListOfSubjectsTeachedByTeacher(teacherid)
+      .subscribe(
+        (listdata) => {
+          this.subjectList = listdata.subjectlist;
+        },
+        (error) => {
+          console.log(error);
+          // this.alertMessageService.errorAlert(error.error.message);
+        }
+      );
+  }
+
+  onSubmitSubjectList(formDataSub: NgForm) {
+    this.nonAcademicService
+      .updateTeacherSubjectList({
+        teacherid: formDataSub.value.teacherid,
+        subjectListData: this.subjectList,
+      })
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          this.alertMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          this.formDatasubRef.reset();
+          this.subjectList = null;
+        }
+      );
+  }
+
+  removeSubect(i: number) {
+    this.subjectList.splice(i, 1);
+  }
+
+  onAddSubject(subjectname: string, classname: string) {
+    this.webSocketService.emit('findClassId', {
+      subjectname: subjectname.toLocaleLowerCase(),
+      classname: classname.toUpperCase(),
+    });
+    this.newlyAddedSubject.subjectname = subjectname.toLocaleLowerCase();
+    this.newlyAddedSubject.grade = classname.toUpperCase();
+    this.newlyAddedSubject.assigndate = new Date();
+
+    this.subjectidListenerSubscription = this.webSocketService
+      .listen('subjectIdRes')
+      .subscribe(
+        (data) => {
+          console.log(data.subjectid);
+          this.newlyAddedSubject.subjectid = data.subjectid;
+        },
+        (error) => {
+          this.alertMessageService.errorAlert('Can Not Find Details....');
+        },
+        () => {
+          this.subjectList.push(this.newlyAddedSubject);
+          this.newlyAddedSubject = {
+            subjectid: 0,
+            subjectname: '',
+            assigndate: new Date(),
+            grade: '',
+          };
+        }
+      );
+  }
+
+  ngOnDestroy() {
+    this.subjectidListenerSubscription.unsubscribe();
+  }
+
+  onClassChangeSubjectListSetUp(value: string) {
+    var classDetails = value.split('_');
+
+    if (parseInt(classDetails[0]) >= 6 && parseInt(classDetails[0]) <= 9) {
+      this.validSubjectListForAClass = [
+        'mathemetics',
+        'sinhala',
+        'science',
+        'history',
+        'english',
+        'tamil',
+        'geography',
+        'citizen education',
+        'health',
+        'pts',
+        'religion',
+        'estern_music',
+        'western_music',
+        'art',
+        'dancing',
+      ];
+    } else if (
+      parseInt(classDetails[0]) === 10 ||
+      parseInt(classDetails[0]) === 11
+    ) {
+      this.validSubjectListForAClass = [
+        'commerce',
+        'geography',
+        'art',
+        'citizen_education',
+        'tamil',
+        'hindi',
+        'western_music',
+        'estern_music',
+        'art',
+        'dancing',
+        'drama',
+        'english_literature',
+        'sinhala_literature',
+        'mathematics',
+        'sinhala',
+        'science',
+        'history',
+        'english',
+        'religion',
+      ];
+    } else if (classDetails[1] === 'MATH') {
+      this.validSubjectListForAClass = [
+        'combine_mathematics',
+        'physics',
+        'Chemistry',
+        'Infomation Technology',
+      ];
+    } else if (classDetails[1] === 'BIO') {
+      this.validSubjectListForAClass = [
+        'Biology',
+        'chemistry',
+        'physics',
+        'agriculture',
+      ];
+    } else if (classDetails[1] === 'ART') {
+      this.validSubjectListForAClass = [
+        'economics',
+        'roman_Civilization',
+        'home_economics',
+        'divinity',
+        'ict',
+        'english',
+        'statistics',
+        'political_science',
+        'art',
+        'french',
+        'accounts',
+        'geography',
+        'logic',
+        'sinhala',
+        'hindi',
+      ];
+    } else if (classDetails[1] === 'COM') {
+      this.validSubjectListForAClass = [
+        'economics',
+        'roman_Civilization',
+        'home_economics',
+        'divinity',
+        'ict',
+        'english',
+        'statistics',
+        'political_science',
+        'art',
+        'french',
+        'accounts',
+        'geography',
+        'logic',
+        'sinhala',
+        'hindi',
+      ];
+    } else if (classDetails[1] === 'TEC') {
+      this.validSubjectListForAClass = [
+        'science_for_teachnology',
+        'engineering_tech',
+        'bio_system_tech',
+        'english',
+        'information_technology',
+        'economics',
+        'geography',
+        'commerce',
+        'accounting',
+        'art',
+      ];
+    }
   }
 }

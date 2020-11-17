@@ -18,6 +18,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [{ path: 'send-email', component: SendEmilComponent }],
   },
+
   // },
   // {
   //   path: 'user',

@@ -122,20 +122,38 @@
             </div>
 
             <div class="row">
-              <div class="col-md-3 pr-1">
+              <div class="col-md-3 pr-1" *ngIf="gradeupdate">
                 <div class="form-group">
                   <label>Grade</label>
-                  <input
-                    type="email"
-                    class="form-control"
+                  <select
                     name="Grade"
-                    id=""
-                    placeholder="Grade"
                     [ngModel]="studentData.grade"
+                    [disabled]="!gradeupdate"
+                    class="form-control"
+                    required
+                    ngModel
+                  >
+                    <option
+                      *ngFor="let gradeVal of gradeAvalilable"
+                      [value]="gradeVal"
+                    >
+                      {{ gradeVal }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3" *ngIf="!gradeupdate">
+                <div class="form-group">
+                  <label>grade</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    [value]="studentData.grade"
                     disabled
                   />
                 </div>
               </div>
+
               <div class="col-md-5 pr-1">
                 <div class="form-group">
                   <label>Class Teacher</label>
@@ -165,6 +183,10 @@
                 </div>
               </div>
             </div>
+
+            <p *ngIf="gradeupdate" style="color: rgb(230, 64, 64)">
+              !Warrning! Grade Can Only Change It Once...
+            </p>
             <div class="row">
               <div class="col-md-3 pr-1">
                 <div class="form-group">
