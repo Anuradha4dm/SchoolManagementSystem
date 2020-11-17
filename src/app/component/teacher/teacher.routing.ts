@@ -51,7 +51,7 @@ const routes: Routes = [
         component: EditTermResultsComponent,
       },
       {
-        path: 'profile',
+        path: 'teacher-profile',
         component: TeacherProfileComponent,
       },
       {
@@ -68,8 +68,8 @@ const routes: Routes = [
       },
       {
         path: 'ol',
-        component: AddOLresultsComponent
-      }
+        component: AddOLresultsComponent,
+      },
       //to remove end
     ],
   },
