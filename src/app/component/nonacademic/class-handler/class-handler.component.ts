@@ -21,6 +21,7 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class ClassHandlerComponent implements OnInit, OnDestroy {
   @ViewChild('formData', { static: true }) formDataRef;
+  @ViewChild('formDataSub', { static: true }) formDatasubRef: NgForm;
 
   newlyAddedSubject: {
     subjectid: number;
@@ -57,6 +58,8 @@ export class ClassHandlerComponent implements OnInit, OnDestroy {
     image:
       'https://lk-maruads-1.nyc3.cdn.digitaloceanspaces.com/thumb_103339_0.png',
   };
+
+  validSubjectListForAClass: string[] = [];
 
   classList: string[] = [
     '6_A',
@@ -179,7 +182,23 @@ export class ClassHandlerComponent implements OnInit, OnDestroy {
   }
 
   onSubmitSubjectList(formDataSub: NgForm) {
-    console.log(formDataSub.value);
+    this.nonAcademicService
+      .updateTeacherSubjectList({
+        teacherid: formDataSub.value.teacherid,
+        subjectListData: this.subjectList,
+      })
+      .subscribe(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          this.alertMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          this.formDatasubRef.reset();
+          this.subjectList = null;
+        }
+      );
   }
 
   removeSubect(i: number) {
@@ -219,5 +238,117 @@ export class ClassHandlerComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.subjectidListenerSubscription.unsubscribe();
+  }
+
+  onClassChangeSubjectListSetUp(value: string) {
+    var classDetails = value.split('_');
+
+    if (parseInt(classDetails[0]) >= 6 && parseInt(classDetails[0]) <= 9) {
+      this.validSubjectListForAClass = [
+        'mathemetics',
+        'sinhala',
+        'science',
+        'history',
+        'english',
+        'tamil',
+        'geography',
+        'citizen education',
+        'health',
+        'pts',
+        'religion',
+        'estern_music',
+        'western_music',
+        'art',
+        'dancing',
+      ];
+    } else if (
+      parseInt(classDetails[0]) === 10 ||
+      parseInt(classDetails[0]) === 11
+    ) {
+      this.validSubjectListForAClass = [
+        'commerce',
+        'geography',
+        'art',
+        'citizen_education',
+        'tamil',
+        'hindi',
+        'western_music',
+        'estern_music',
+        'art',
+        'dancing',
+        'drama',
+        'english_literature',
+        'sinhala_literature',
+        'mathematics',
+        'sinhala',
+        'science',
+        'history',
+        'english',
+        'religion',
+      ];
+    } else if (classDetails[1] === 'MATH') {
+      this.validSubjectListForAClass = [
+        'combine_mathematics',
+        'physics',
+        'Chemistry',
+        'Infomation Technology',
+      ];
+    } else if (classDetails[1] === 'BIO') {
+      this.validSubjectListForAClass = [
+        'Biology',
+        'chemistry',
+        'physics',
+        'agriculture',
+      ];
+    } else if (classDetails[1] === 'ART') {
+      this.validSubjectListForAClass = [
+        'economics',
+        'roman_Civilization',
+        'home_economics',
+        'divinity',
+        'ict',
+        'english',
+        'statistics',
+        'political_science',
+        'art',
+        'french',
+        'accounts',
+        'geography',
+        'logic',
+        'sinhala',
+        'hindi',
+      ];
+    } else if (classDetails[1] === 'COM') {
+      this.validSubjectListForAClass = [
+        'economics',
+        'roman_Civilization',
+        'home_economics',
+        'divinity',
+        'ict',
+        'english',
+        'statistics',
+        'political_science',
+        'art',
+        'french',
+        'accounts',
+        'geography',
+        'logic',
+        'sinhala',
+        'hindi',
+      ];
+    } else if (classDetails[1] === 'TEC') {
+      this.validSubjectListForAClass = [
+        'science_for_teachnology',
+        'engineering_tech',
+        'bio_system_tech',
+        'english',
+        'information_technology',
+        'economics',
+        'geography',
+        'commerce',
+        'accounting',
+        'art',
+      ];
+    }
   }
 }

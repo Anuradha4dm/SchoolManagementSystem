@@ -233,24 +233,6 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-md-2">
-                <div class="form-group">
-                  <input type="text" name="subjectid" class="form-control" />
-                </div>
-              </div>
-
-              <div class="col-md-5">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    name="subjectname"
-                    class="form-control"
-                    required
-                    ngModel
-                    #subjectnameRef="ngModel"
-                  />
-                </div>
-              </div>
               <div class="col-md-3">
                 <div class="form-group">
                   <input
@@ -258,9 +240,41 @@
                     name="classname"
                     class="form-control"
                     #classnameRef
+                    (change)="onClassChangeSubjectListSetUp(classnameRef.value)"
                   />
                 </div>
               </div>
+
+              <div class="col-md-5">
+                <div class="form-group">
+                  <select
+                    name="subjectname"
+                    class="form-control"
+                    ngModel
+                    #subjectnameRef="ngModel"
+                  >
+                    <option
+                      *ngFor="let subject of validSubjectListForAClass"
+                      [value]="subject"
+                    >
+                      {{ subject | titlecase }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="subjectname"
+                    class="form-control"
+                    ngModel
+                    #subjectnameRef="ngModel"
+                  />
+                </div>
+              </div> -->
+
               <div class="col-md-2">
                 <div class="form-group">
                   <input

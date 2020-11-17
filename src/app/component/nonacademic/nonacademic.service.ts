@@ -87,4 +87,17 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
     );
   }
+
+  updateTeacherSubjectList(submitData: {
+    teacherid: string;
+    subjectListData: any;
+  }) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/update-teacher-subject-list',
+      {
+        teacherid: submitData.teacherid,
+        subjectList: submitData.subjectListData,
+      }
+    );
+  }
 }
