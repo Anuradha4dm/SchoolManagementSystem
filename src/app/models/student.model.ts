@@ -17,6 +17,7 @@ export interface Student {
   addressLine3: string;
   city: string;
   mobile: string;
+  graderegistration: number;
 
   // constructor(
   //   _id: string,

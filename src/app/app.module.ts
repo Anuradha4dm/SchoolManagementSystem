@@ -34,7 +34,6 @@ import { MainExamsModule } from './component/main-exams/main-exams.module';
     LayoutComponent,
     SiderbarComponent,
     ConfirmationDialogComponent,
-
     LeaverequestComponent,
     SendEmilComponent,
     ResetPasswordComponent,

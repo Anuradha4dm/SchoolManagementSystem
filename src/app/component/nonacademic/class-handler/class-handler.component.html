@@ -130,4 +130,176 @@
       </div>
     </div>
   </div>
+  <hr />
+
+  <!-- this is the card that used to assign subject to teacher -->
+
+  <div class="row">
+    <div class="col-xl-10">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">Assing Subjects</h1>
+          <p class="description">
+            This Can Be Use To Assing Subjects To Teachers
+          </p>
+        </div>
+        <div class="card-body">
+          <form
+            (ngSubmit)="onSubmitSubjectList(formDataSub)"
+            #formDataSub="ngForm"
+          >
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="teacherid"
+                    #teacherIdRef="ngModel"
+                    ngModel
+                    class="form-control"
+                    required
+                    pattern="AC_[(0-9)]+"
+                  />
+                </div>
+              </div>
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    value="Find"
+                    class="btn btn-info"
+                    [disabled]="!teacherIdRef.touched && !teacherIdRef.valid"
+                    (click)="findSubjectsOfTeacher(teacherIdRef.value)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-5">
+                <div class="form-group">
+                  <p>Subject</p>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <p>class</p>
+                </div>
+              </div>
+              <div class="col-md-2"></div>
+            </div>
+
+            <div class="row" *ngFor="let subject of subjectList; let i = index">
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="subjectid{{ i }}"
+                    class="form-control"
+                    [ngModel]="subject.subjectid"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="subjectname{{ i }}"
+                    class="form-control"
+                    [ngModel]="subject.subjectname"
+                  />
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="classname{{ i }}"
+                    class="form-control"
+                    ngModel="{{ subject.grade | uppercase }}"
+                  />
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    name="classname"
+                    value="X"
+                    class="btn btn-danger my-btn"
+                    (click)="removeSubect(i)"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="classname"
+                    class="form-control"
+                    #classnameRef
+                    (change)="onClassChangeSubjectListSetUp(classnameRef.value)"
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-5">
+                <div class="form-group">
+                  <select
+                    name="subjectname"
+                    class="form-control"
+                    ngModel
+                    #subjectnameRef="ngModel"
+                  >
+                    <option
+                      *ngFor="let subject of validSubjectListForAClass"
+                      [value]="subject"
+                    >
+                      {{ subject | titlecase }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- <div class="col-md-5">
+                <div class="form-group">
+                  <input
+                    type="text"
+                    name="subjectname"
+                    class="form-control"
+                    ngModel
+                    #subjectnameRef="ngModel"
+                  />
+                </div>
+              </div> -->
+
+              <div class="col-md-2">
+                <div class="form-group">
+                  <input
+                    type="button"
+                    name="classname"
+                    value="ADD"
+                    class="btn btn-success my-btn"
+                    (click)="
+                      onAddSubject(subjectnameRef.value, classnameRef.value)
+                    "
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button class="btn btn-success" [disabled]="!formDataSub.valid">
+                Submit
+              </button>
+
+              <button class="btn btn-danger">Rest</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

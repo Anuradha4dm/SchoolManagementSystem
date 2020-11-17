@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
-import { LayoutComponent } from './layout/layout.component';
 import { SendEmilComponent } from './component/send-emil/send-emil.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
   {
@@ -14,7 +14,8 @@ const routes: Routes = [
     path: 'user',
     component: LayoutComponent,
     children: [{ path: 'send-email', component: SendEmilComponent }],
-  }
+  },
+
   // },
   // {
   //   path: 'user',

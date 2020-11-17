@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLogInService } from '../component/homepage/login/user-login.service';
+import { LogInUserModel } from '../models/login-user.model';
+import { AlertMessageService } from '../services/alert-message.service';
+import { ConfirmationDialogService } from '../services/confirmation-dialog.service';
+import { WebSocketService } from '../services/websocket.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,7 +11,9 @@ import { UserLogInService } from '../component/homepage/login/user-login.service
   styleUrls: ['./layout.component.css'],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private userLogInService: UserLogInService) {}
+  role: string;
+
+  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -16,30 +16,23 @@ export class TeacherProfileComponent implements OnInit {
   constructor(
     private userLoginService: UserLogInService,
     private teacherService: TeacherService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    
-    this.userLoginService.userAuthData
-      .subscribe((data)=>{
-        this.loggedTeacherID = data.getUserId;
-      });
+    this.userLoginService.userAuthData.subscribe((data) => {
+      this.loggedTeacherID = data.getUserId;
+    });
 
-    this.teacherService.getTeacherProfileData(this.loggedTeacherID)
-      .subscribe((data)=>{
+    this.teacherService
+      .getTeacherProfileData(this.loggedTeacherID)
+      .subscribe((data) => {
         this.teacherProfileData = data;
       });
   }
 
   //execute when edit profile click
   onEditClick() {
-    this.router.navigate([
-      'user',
-      'edit-teacher',
-      this.loggedTeacherID
-    ]);
+    this.router.navigate(['user', 'edit-teacher', this.loggedTeacherID]);
   }
-
-
 }
