@@ -1,7 +1,7 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-  <div class="card">
+  <div class="card" *ngIf="classStudentList">
     <!--Date details here-->
     <div class="card-header">
       <h4 class="mb-4 font-italic">Students Attendance</h4>
@@ -85,5 +85,10 @@
 
       </div>
     </div>
+  </div>
+
+  <!--If not a class teacher-->
+  <div class="card card-body" *ngIf="!classStudentList">
+    <h4 class="text-muted text-center font-italic my-5">Sorry, You do not have permissions to enroll with student attendance</h4>
   </div>
 </div>
