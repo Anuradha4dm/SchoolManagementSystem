@@ -16,6 +16,9 @@ import { EditTermResultsComponent } from './edit-term-results/edit-term-results.
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
 import { AddALresultsComponent } from '../main-exams/add-alresults/add-alresults.component';
+import { ExamLayoutComponent } from '../main-exams/exam-layout/exam-layout.component';
+import { RegisterForOLComponent } from '../main-exams/register-for-ol/register-for-ol.component';
+import { RegisterForALComponent } from '../main-exams/register-for-al/register-for-al.component';
 
 const routes: Routes = [
   {
@@ -75,6 +78,16 @@ const routes: Routes = [
       {
         path: 'al',
         component: AddALresultsComponent,
+      },
+      {
+        path: 'exam-layout',
+        component: ExamLayoutComponent,
+      }, {
+        path: 'register-ol',
+        component: RegisterForOLComponent,
+      }, {
+        path: 'register-al',
+        component: RegisterForALComponent,
       },
       //to remove end
     ],

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-add-alresults',
@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./add-alresults.component.css']
 })
 export class AddALresultsComponent implements OnInit {
-  year:number = new Date().getFullYear()-1;
+  @Input() year;
   show:boolean = false;
 
   constructor() { }
