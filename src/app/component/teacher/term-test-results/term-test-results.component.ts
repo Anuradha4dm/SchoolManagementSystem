@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'ng2-charts';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
 import { TermResults } from 'src/app/models/teacher.model';
@@ -31,17 +32,20 @@ export class TermTestResultsComponent implements OnInit {
     this.userLoginService.userAuthData.subscribe((userData) => {
       this.loginUserData = userData;
     });
-    console.log("this is the data");
+    console.log('this is the data');
 
     this.teacherService
       .getStudentListForAddResult(this.loginUserData.getUserId)
-      .subscribe((data) => {
-        console.log(data);
-        this.studentList = data.studentListData;
-        this.termResult.grade = data.grade;
-      },error=>{
-        console.log(error);
-      });
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.studentList = data.studentListData;
+          this.termResult.grade = data.grade;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   onAddResultsClick(id, fname, lname) {
@@ -86,5 +90,9 @@ export class TermTestResultsComponent implements OnInit {
       }
     );
     this.element = 'modal';
+  }
+
+  onFileChange(event) {
+    this.teacherService.xlsxFileReader(event);
   }
 }

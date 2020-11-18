@@ -1,6 +1,9 @@
-import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import * as XLSX from 'xlsx';
 import { Injectable } from '@angular/core';
 import { TeacherProfileData } from 'src/app/models/teacher.model';
+import { R3TargetBinder, Xliff } from '@angular/compiler';
+import { reduceEachTrailingCommentRange } from 'typescript';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
@@ -43,7 +46,6 @@ export class TeacherService {
     );
   }
 
-
   getStudentPastResultForEdit(year: number, term: number, studentid: string) {
     return this.httpClient.post<{
       result: { subjectid: number; subjectname: string; mark: number }[];
@@ -67,6 +69,47 @@ export class TeacherService {
         term: term,
         studentid: studentid,
         result: result,
+      }
+    );
+  }
+
+  markStudentAttendence(teacherid: string, submitdata: string) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/mark-attendence',
+      {
+        teahcerid: teacherid,
+        submitdata: submitdata,
+      }
+    );
+  }
+
+  xlsxFileReader(event) {
+    const target: DataTransfer = <DataTransfer>event.target;
+
+    if (target.files.length !== 1) {
+      throw new Error('Can Not Select More Than One File At A Time');
+    }
+
+    const reader: FileReader = new FileReader();
+
+    reader.onload = (e: any) => {
+      const binartString: string = e.target.result;
+
+      const workbook: XLSX.WorkBook = XLSX.read(binartString, {
+        type: 'binary',
+      });
+    };
+
+    // reader.readAsBinaryString()
+  }
+
+  postGetAverageDataWithStudent(year: number, term: number, grade: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/get-average-data',
+      {
+        year: year,
+        term: term,
+        grade: grade,
       }
     );
   }

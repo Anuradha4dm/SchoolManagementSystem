@@ -9,12 +9,22 @@
       <div class="row mb-4">
         <div class="col">
           <label>Class:</label>
-          <input type="text" [value]="termResult.grade" class="form-control" disabled/>
+          <input
+            type="text"
+            [value]="termResult.grade"
+            class="form-control"
+            disabled
+          />
         </div>
 
         <div class="col">
           <label>Year:</label>
-          <input type="text" [value]="termResult.year" class="form-control" disabled/>
+          <input
+            type="text"
+            [value]="termResult.year"
+            class="form-control"
+            disabled
+          />
         </div>
 
         <div class="col">
@@ -27,6 +37,14 @@
         </div>
       </div>
 
+      <input
+        type="file"
+        name="filename"
+        multiple="false"
+        (change)="onFileChange($event)"
+        id=""
+      />
+
       <h5 class="text-center text-muted mb-4">Remainning Student List</h5>
 
       <table class="table table-hover text-center">
@@ -38,10 +56,21 @@
         <tbody>
           <tr *ngFor="let student of studentList">
             <td>{{ student._id }}</td>
-            <td>{{ student.firstname| titlecase}}</td>
-            <td>{{ student.lastname| titlecase}}</td>
+            <td>{{ student.firstname | titlecase }}</td>
+            <td>{{ student.lastname | titlecase }}</td>
             <td>
-              <button data-toggle="modal" data-target="#resultsModal" (click)="onAddResultsClick(student._id,student.firstname,student.lastname)" class="btn btn-primary btn-sm">
+              <button
+                data-toggle="modal"
+                data-target="#resultsModal"
+                (click)="
+                  onAddResultsClick(
+                    student._id,
+                    student.firstname,
+                    student.lastname
+                  )
+                "
+                class="btn btn-primary btn-sm"
+              >
                 Add Results
               </button>
             </td>
@@ -82,40 +111,76 @@
       </div>
 
       <div class="modal-body">
-        <form #resultForm="ngForm" (ngSubmit)="onSubmitClick(resultForm.value)" class="border border-dark p-2">
+        <form
+          #resultForm="ngForm"
+          (ngSubmit)="onSubmitClick(resultForm.value)"
+          class="border border-dark p-2"
+        >
           <div class="row">
             <div class="col-auto">
               <label>Term</label>
-              <input type="text" class="form-control" [value]="termResult.term" disabled/>
+              <input
+                type="text"
+                class="form-control"
+                [value]="termResult.term"
+                disabled
+              />
             </div>
 
             <div class="col-auto">
               <label>Year</label>
-              <input type="text" class="form-control" [value]="termResult.year" disabled />
+              <input
+                type="text"
+                class="form-control"
+                [value]="termResult.year"
+                disabled
+              />
             </div>
 
             <div class="col-auto">
               <label>Student ID</label>
-              <input type="text" class="form-control" [value]="termResult.studentid" disabled/>
+              <input
+                type="text"
+                class="form-control"
+                [value]="termResult.studentid"
+                disabled
+              />
             </div>
           </div>
 
           <div class="form-group">
             <label>Student Name</label>
-            <input type="text" class="form-control" [value]="fullname| titlecase" disabled/>
+            <input
+              type="text"
+              class="form-control"
+              [value]="fullname | titlecase"
+              disabled
+            />
           </div>
 
           <div class="row mb-2" *ngFor="let subject of subjectList">
             <div class="col text-right">
-              <label>{{ subject.subjectname| titlecase}}</label>
+              <label>{{ subject.subjectname | titlecase }}</label>
             </div>
             <div class="col">
-              <input type="text" [name]="subject.subjectid" class="form-control" ngModel required/>
+              <input
+                type="text"
+                [name]="subject.subjectid"
+                class="form-control"
+                ngModel
+                required
+              />
             </div>
           </div>
 
           <div class="form-group text-right">
-            <button class="btn btn-success" [disabled]="resultForm.invalid" [attr.data-dismiss]="element">Submit</button>
+            <button
+              class="btn btn-success"
+              [disabled]="resultForm.invalid"
+              [attr.data-dismiss]="element"
+            >
+              Submit
+            </button>
             <button data-dismiss="modal" class="btn btn-danger">Cancel</button>
           </div>
         </form>
