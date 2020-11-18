@@ -1,34 +1,36 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
+    <!--Year,class and Term selection here-->
     <div class="card card-body">
-        <h4 class="font-italic mb-4">Modify Term Test Results</h4>
-        <!--Year,class and Term selection here-->
+        <h4 class="font-italic">Modify Term Test Results</h4>
         <div class="row">
             <div class="col">
                 <label>Year</label>
-                <input type="text" class="form-control" disabled value='2010'>
+                <input type="text" class="form-control" [value]="year" disabled>
             </div>
 
             <div class="col">
                 <label>Class</label>
-                <input type="text" class="form-control" value="11_D" disabled>
+                <input type="text" class="form-control" [value]="classStudentList.grade" disabled>
             </div>
 
             <div class="col">
                 <label>Term</label>
-                <select (change)="onTermChange()" class="form-control" [(ngModel)]="selectedTerm">
+                <select (change)="onTermChange()" class="form-control" [(ngModel)]="term">
                     <option value="1">Term1</option>
                     <option value="2">Term2</option>
                     <option value="3">Term3</option>
                 </select>
             </div>
         </div>
+    </div>
 
-        <!--Student list and results here-->
-        <div class="row mt-5">
-            <!--Breif description about result here-->
-            <div class="col">
+    <!--Student list and results here--> 
+    <div class="row">
+        <!--Breif description about result here-->
+        <div class="col">
+            <div class="card card-body">
                 <table class="table table-hover text-center">
                     <tr class="bg-primary">
                         <th>Student ID</th>
@@ -39,33 +41,35 @@
 
                     <tbody>
                         <!--this should repeat-->
-                        <tr (click)="onRowClick()">
-                            <td>id</td>
-                            <td>name</td>
+                        <tr *ngFor="let student of classStudentList.studentListData" (click)="onRowClick()">
+                            <td>{{student._id}}</td>
+                            <td>{{student.firstname +" "+ student.lastname| titlecase}}</td>
                             <td>average</td>
                             <td>position</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
 
-            <!--Edit results form here-->
-            <div *ngIf="show" class="col border border-dark p-2">
+        <!--Edit results form here-->
+        <div class="col-md-5">
+            <div class="card card-body border border-dark p-3" *ngIf="show">
                 <form>
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
-                            <input type="text" class="form-control" value="2010" disabled>
+                            <input type="text" class="form-control" [value]="year" disabled>
                         </div>
 
                         <div class="col">
                             <label>Class</label>
-                            <input type="text" class="form-control" value="11_D" disabled>
+                            <input type="text" class="form-control" [value]="classStudentList.grade" disabled>
                         </div>
 
                         <div class="col">
                             <label>Term</label>
-                            <input type="text" class="form-control" [value]="selectedTerm" disabled>
+                            <input type="text" class="form-control" [value]="term" disabled>
                         </div>
                     </div>
 
@@ -76,12 +80,12 @@
 
                     <div class="form-group">
                         <table class="table">
-                            <tr>
+                            <tr *ngFor="let student of studentsResult">
                                 <td>
-                                    <label>subject name:</label>
+                                    <label>{{student.subjectname}}</label>
                                 </td>
                                 <td>
-                                    <input type="text" value="marks" class="w-50" disabled>
+                                    <input [name]="student.subjectid" type="text" [ngModel]="student.mark" class="w-50" disabled>
                                 </td>
                             </tr>
                        </table>
@@ -95,4 +99,12 @@
             </div>
         </div>
     </div>
+       
+        <div class="row">
+          
+
+            <div >
+               
+            </div>
+        </div>
 </div>

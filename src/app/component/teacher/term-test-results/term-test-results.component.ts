@@ -18,8 +18,7 @@ export class TermTestResultsComponent implements OnInit {
   termResult = new TermResults();
   subjectList = [];
   fullname: string;
-
-  element: string = '';
+  show:boolean = false;
 
   constructor(
     private userLoginService: UserLogInService,
@@ -34,7 +33,7 @@ export class TermTestResultsComponent implements OnInit {
     console.log("this is the data");
 
     this.teacherService
-      .getStudentListForAddResult(this.loginUserData.getUserId)
+      .getClassStudentList(this.loginUserData.getUserId)
       .subscribe((data) => {
         console.log(data);
         this.studentList = data.studentListData;
@@ -65,6 +64,7 @@ export class TermTestResultsComponent implements OnInit {
       );
     this.termResult.studentid = id;
     this.fullname = fname + ' ' + lname;
+    this.show = true;
   }
 
   onSubmitClick(value) {
@@ -85,6 +85,9 @@ export class TermTestResultsComponent implements OnInit {
         this.alterMessageService.competeAlert('Result Added Successfully');
       }
     );
-    this.element = 'modal';
+  }
+
+  onCancelClick(){
+    this.show = false;
   }
 }

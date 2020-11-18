@@ -29,15 +29,7 @@ export class TeacherService {
     });
   }
 
-  //submit student results to the database
-  addStudentResult(studentResult) {
-    return this.httpClient.post(
-      'http://localhost:3000/teacher/add-student-result',
-      studentResult
-    );
-  }
-
-
+  //return students past results with marks
   getStudentPastResultForEdit(year: number, term: number, studentid: string) {
     return this.httpClient.post<{
       result: { subjectid: number; subjectname: string; mark: number }[];
@@ -46,6 +38,14 @@ export class TeacherService {
       term: term,
       studentid: studentid,
     });
+  }
+
+  //submit student results to the database
+  addStudentResult(studentResult) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/add-student-result',
+      studentResult
+    );
   }
 
   updateStudentResultAfterEdit(

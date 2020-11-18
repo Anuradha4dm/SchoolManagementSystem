@@ -20,7 +20,6 @@
       </div>
     </div>
 
-    <!--Student list here-->
     <div class="card-body border border-dark m-2">
       <!--current class and class teacher here-->
       <div class="row mb-4">
@@ -40,7 +39,8 @@
       </div>
 
       <form #attendanceForm="ngForm" (ngSubmit)="onAttendanceSubmit(attendanceForm.value)">
-
+    
+        <!--Student list here-->
         <table class="table table-hover text-center">
           <tr class="bg-secondary">
             <th>Student ID</th>
@@ -59,7 +59,8 @@
         </table>
 
         <div class="col text-right">
-          <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+          <button type="submit" *ngIf="!doneSubmition" class="btn btn-primary btn-sm">Submit</button>
+          <button type="button" *ngIf="doneSubmition" (click)="onReSubmitbtnClick(attendanceForm.value)" class="btn btn-success btn-sm">Re-Submit</button>
           <button type="button" class="btn btn-danger btn-sm" (click)="onCancelClick()">Cancel</button>
         </div>
     </form>
