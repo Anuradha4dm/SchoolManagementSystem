@@ -2,8 +2,25 @@
 
 <div class="main-content">
     <div class="row">
+        <div class="card card-body">
+            <h4 class="font-italic">Add O/L Results</h4>
+            
+            <div class="row">
+                <div class="col">
+                    <label>Exam</label>
+                    <input type="text" value="G.C.E. O/L Examination" class="form-control" disabled>
+                </div>
+                <div class="col">
+                    <label>Select Year</label>
+                    <input type="number" [value]="year" class="form-control w-50">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
         <!--O/L student list here-->
-        <div class="col-md-7">
+        <div class="col">
             <div class="card card-body">
                 <h4 class="font-italic mb-4">"Year" O/L Student List</h4>
                 <table class="table table-hover text-center">
@@ -14,8 +31,8 @@
                         <th>Name</th>
                     </tr>
                     <tbody>
-                        <tr>
-                            <td>1</td>
+                        <tr *ngFor="let student of [0,1,2,3,4,5,6,7]" (click)="onRowClick()">
+                            <td>{{student}}</td>
                             <td>145344</td>
                             <td>ST_1</td>
                             <td>My name</td>
@@ -26,8 +43,8 @@
         </div>
 
         <!--Result of one student here-->
-        <div class="col-md-5">
-            <div class="card card-body">
+        <div *ngIf="show" class="col-md-5">
+            <div class="card card-body border border-dark">
                 <div class="row">
                     <div class="col">
                         <div class="form-group">
@@ -41,6 +58,12 @@
                             <input type="text" class="form-control" disabled>
                         </div>
                     </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label>Student ID</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -50,16 +73,57 @@
 
                 <!--Student subject list here-->
                 <form>
-                    <table>
-                        <tr>
-                            <td>
-                                <label>Subject name</label>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control">
-                            </td>
-                        </tr>
-                    </table>
+                    <div class="row">
+                          <!--Result stats here-->
+                          <div class="col">
+                            <div class="card border border-dark p-4">
+                                <label>
+                                    A count
+                                    <input type="text" class="form-control w-50">
+                                </label>
+                                <label>
+                                    B count
+                                    <input type="text" class="form-control w-50">
+                                </label>   <label>
+                                    C count
+                                    <input type="text" class="form-control w-50">
+                                </label>   <label>
+                                    S count
+                                    <input type="text" class="form-control w-50">
+                                </label>   <label>
+                                    W count
+                                    <input type="text" class="form-control w-50">
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <!--Student subject list here-->
+                        <div class="col">
+                            <table>
+                                <tr *ngFor="let number of [0,1,2,3,4,5,6,7,8]"><!--loop here-->
+                                    <td>
+                                        <label>Subject name</label>
+                                    </td>
+                                    <td>
+                                        <select [name]="number" class="form-control">
+                                            <option value="A">A</option>
+                                            <option value="B">B</option>
+                                            <option value="C">C</option>
+                                            <option value="S">S</option>
+                                            <option value="W">W</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                      
+                    </div>
+
+                    <div class="form-group text-right">
+                        <button class="btn btn-info btn-sm">Submit</button>
+                        <button class="btn btn-danger btn-sm">Cancel</button>
+                    </div>
                 </form>
             </div>
         </div>
