@@ -15,7 +15,8 @@
           "options": {
             "allowedCommonJsDependencies": [
               "chart.js",
-              "socket.io-client"
+              "socket.io-client",
+              "xlsx"
             ],
             "outputPath": "dist/SchoolMangementSystem",
             "index": "src/index.html",
