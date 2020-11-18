@@ -3,12 +3,12 @@
 <div class="main-content">
     <div class="row">
         <div class="card card-body">
-            <h4 class="font-italic">Add O/L Results</h4>
+            <h4 class="font-italic">Add A/L Results</h4>
             
             <div class="row">
                 <div class="col">
                     <label>Exam</label>
-                    <input type="text" value="G.C.E. O/L Examination" class="form-control" disabled>
+                    <input type="text" value="G.C.E. A/L Examination" class="form-control" disabled>
                 </div>
                 <div class="col">
                     <label>Select Year</label>
@@ -19,10 +19,10 @@
     </div>
 
     <div class="row">
-        <!--O/L student list here-->
+        <!--A/L student list here-->
         <div class="col">
             <div class="card card-body">
-                <h4 class="font-italic mb-4">"Year" O/L Student List</h4>
+                <h4 class="font-italic mb-4">"Year" A/L Student List</h4>
                 <table class="table table-hover text-center">
                     <tr class="bg-info">
                         <th>Number</th>
@@ -74,33 +74,11 @@
                 <!--Student subject list here-->
                 <form>
                     <div class="row">
-                          <!--Result stats here-->
-                          <div class="col">
-                            <div class="card border border-dark p-4">
-                                <label>
-                                    A count
-                                    <input type="text" class="form-control w-50">
-                                </label>
-                                <label>
-                                    B count
-                                    <input type="text" class="form-control w-50">
-                                </label>   <label>
-                                    C count
-                                    <input type="text" class="form-control w-50">
-                                </label>   <label>
-                                    S count
-                                    <input type="text" class="form-control w-50">
-                                </label>   <label>
-                                    W count
-                                    <input type="text" class="form-control w-50">
-                                </label>
-                            </div>
-                        </div>
-                        
+         
                         <!--Student subject list here-->
                         <div class="col">
                             <table>
-                                <tr *ngFor="let number of [0,1,2,3,4,5,6,7,8]"><!--loop here-->
+                                <tr *ngFor="let number of [0,1,2,3]"><!--loop here-->
                                     <td>
                                         <label>Subject name</label>
                                     </td>
@@ -114,10 +92,56 @@
                                         </select>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <label>Common Genaral Test</label>
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" disabled>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
-                        
-                      
+                    </div>
+                     
+                    <!--Island rank and Z score here-->
+                    <div class="row my-3">
+                        <div class="col">
+                            <label>Z Score</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label>Distric Rank</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="col">
+                            <label>Island Rank</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <!--Result stats here-->
+                    <div class="row border border-dark m-2 p-2">
+                        <div class="col">
+                            <label>A 's</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col">
+                            <label>B 's</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col">
+                            <label>C 's</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col">
+                            <label>S 's</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>
+                        <div class="col">
+                            <label>W 's</label>
+                            <input type="text" class="form-control" disabled>
+                        </div>  
                     </div>
 
                     <div class="form-group text-right">

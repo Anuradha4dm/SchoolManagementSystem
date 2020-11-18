@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-add-olresults',
-  templateUrl: './add-olresults.component.html',
-  styleUrls: ['./add-olresults.component.css']
+  selector: 'app-add-alresults',
+  templateUrl: './add-alresults.component.html',
+  styleUrls: ['./add-alresults.component.css']
 })
-export class AddOLresultsComponent implements OnInit {
+export class AddALresultsComponent implements OnInit {
   year:number = new Date().getFullYear()-1;
   show:boolean = false;
 

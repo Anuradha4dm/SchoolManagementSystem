@@ -15,6 +15,7 @@ import { AddOLresultsComponent } from '../main-exams/add-olresults/add-olresults
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
+import { AddALresultsComponent } from '../main-exams/add-alresults/add-alresults.component';
 
 const routes: Routes = [
   {
@@ -70,6 +71,10 @@ const routes: Routes = [
       {
         path: 'ol',
         component: AddOLresultsComponent,
+      },
+      {
+        path: 'al',
+        component: AddALresultsComponent,
       },
       //to remove end
     ],
