@@ -2,11 +2,11 @@ import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { Injectable } from '@angular/core';
 import { TeacherProfileData } from 'src/app/models/teacher.model';
-import { R3TargetBinder, Xliff } from '@angular/compiler';
-import { reduceEachTrailingCommentRange } from 'typescript';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
+  examResultsOfAllSubjects: any[][];
+
   constructor(private httpClient: HttpClient) {}
 
   //return teacher profile data
@@ -98,9 +98,16 @@ export class TeacherService {
       const workbook: XLSX.WorkBook = XLSX.read(binartString, {
         type: 'binary',
       });
+
+      const workbookName: string = workbook.SheetNames[0];
+      const worksheet: XLSX.WorkSheet = workbook.Sheets[workbookName];
+
+      this.examResultsOfAllSubjects = XLSX.utils.sheet_to_json(worksheet, {
+        header: 1,
+      });
     };
 
-    // reader.readAsBinaryString()
+    reader.readAsBinaryString(target.files[0]);
   }
 
   postGetAverageDataWithStudent(year: number, term: number, grade: string) {
@@ -112,5 +119,27 @@ export class TeacherService {
         grade: grade,
       }
     );
+  }
+
+  mapDataFormTheServiceToStudent(studentid: string, subjectidArray: number[]) {
+    var resultArray: { subjectid: number; marks: any }[] = [];
+    var index: number = 0;
+
+    const resultList: any[] = this.examResultsOfAllSubjects.filter(
+      (result: any[]) => {
+        return result[0] === studentid;
+      }
+    );
+
+    subjectidArray.forEach((subjectid: any) => {
+      index = this.examResultsOfAllSubjects[0].indexOf(subjectid);
+
+      resultArray.push({ subjectid: subjectid, marks: resultList[0][index] });
+    });
+
+    //relected student result are read
+    console.log(resultArray);
+
+    return resultArray;
   }
 }

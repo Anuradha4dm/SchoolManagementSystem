@@ -95,4 +95,11 @@ export class TermTestResultsComponent implements OnInit {
   onFileChange(event) {
     this.teacherService.xlsxFileReader(event);
   }
+
+  //this methos is used to read the data from the specific student
+  onReadStudentResult() {
+    //need to pass the data of the studentis => who is the results need to read =>ST_1
+    //need to pass the subjectid => array which contains the subjects , done by the student  =>[id1,id2,id3.....]
+    this.teacherService.mapDataFormTheServiceToStudent('ST_1', [65, 66]);
+  }
 }
