@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { positionElements, Positioning } from '@ng-bootstrap/ng-bootstrap/util/positioning';
 import { ConfirmationDialogComponent } from '../component/confirmation-dialog/confirmation-dialog.component';
 
 @Injectable({ providedIn: 'root' })
@@ -9,9 +10,9 @@ export class ConfirmationDialogService {
   public confirm(
     title: string,
     message: string,
-    btnCanselText: string = 'Cansel',
+    btnCanselText: string = 'Cancel',
     btnOktext: string = 'Ok',
-    dialogSize: 'sm' | 'lg' = 'sm'
+    dialogSize = 'md'
   ): Promise<boolean> {
     const modelRef = this.modalService.open(ConfirmationDialogComponent, {
       size: dialogSize,

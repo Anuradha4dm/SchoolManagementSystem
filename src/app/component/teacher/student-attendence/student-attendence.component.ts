@@ -1,5 +1,8 @@
 import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { ClassStudentList } from 'src/app/models/teacher.model';
+import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentListService } from '../student-list.service';
@@ -13,22 +16,20 @@ import { TeacherService } from '../teacher.service';
 export class StudentAttendenceComponent implements OnInit {
   teacherID:string;
   date: Date = new Date();
-  grade: string;
+  classStudentList: ClassStudentList;
   absent: number = 0;
-  studentList:{
-    _id: string;
-    firstname: string;
-    lastname: string;
-  }[];
 
   otherClass:boolean = false;
   enterClicked:boolean = false;
   otherID:string;
   error:boolean = true;
+  doneSubmition: boolean = false;
 
   constructor(
     private userLoginService: UserLogInService,
     private teacherService: TeacherService,
+    private confirmationDialogService: ConfirmationDialogService,
+    private toastr: ToastrService,
     private studentListService: StudentListService
   ) {}
 
@@ -37,10 +38,9 @@ export class StudentAttendenceComponent implements OnInit {
       this.teacherID=userData.getUserId;
     });
 
-    this.teacherService.getStudentListForAddResult(this.teacherID)
+    this.teacherService.getClassStudentList(this.teacherID)
     .subscribe((data)=>{
-      this.grade = data.grade;
-      this.studentList = data.studentListData;
+      this.classStudentList = data;
     });
   }
 
@@ -55,24 +55,62 @@ export class StudentAttendenceComponent implements OnInit {
   //execute when enter button click
   onEnterClick(value){
     this.otherID=value.toUpperCase();
-    this.teacherService.getStudentListForAddResult(this.otherID)
+    this.teacherService.getClassStudentList(this.otherID)
     .subscribe((data)=>{
-        this.grade=data.grade;
-        this.studentList=data.studentListData;
+        this.classStudentList = data;
         this.teacherID = this.otherID;
         this.error = false; 
     });
     this.enterClicked = true;
   }
 
-  onCancelClick(id,firstname){
+  onCancelClick(){
     this.ngOnInit();
     //this.test1=this.studentList.find((res)=>{return res._id.match(id) && res.firstname.match(firstname)})
   }
 
   //execute when form submit  
   onAttendanceSubmit(formValue){
-    console.log(formValue);
+    this.studentListService.setDayAttendenceSubmit(true, new Date());
+
+    this.toastr.info(
+      '<span class="now-ui-icons ui-1_bell-53"></span> Done Submition For ' +
+        this.date,
+      '',
+      {
+        timeOut: 8000,
+        closeButton: true,
+        enableHtml: true,
+        toastClass: 'alert alert-info alert-with-icon',
+        positionClass: 'toast-top-center',
+      }
+    );
+    this.doneSubmition = true;
+    console.log(this.date,this.classStudentList.grade,formValue);
   }
+
+  
+  onReSubmitbtnClick(formValue) {
+    this.confirmationDialogService
+      .confirm(
+        'Please confirm...',
+        'Do you really want to resubmit the attendance?'
+      )
+      .then((confirmed) => {
+        if (confirmed) {
+          this.doneSubmition = true;
+          ////sent directly this onbect
+          console.log(formValue);
+
+          this.studentListService.updateStudentOnline(formValue);
+        }
+      })
+      .catch(() =>
+        console.log(
+          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
+        )
+      );
+  }
+
 
 }

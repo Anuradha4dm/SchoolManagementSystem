@@ -1,6 +1,6 @@
 import { HttpClient, HttpClientJsonpModule } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { TeacherProfileData } from 'src/app/models/teacher.model';
+import { ClassStudentList, TeacherProfileData } from 'src/app/models/teacher.model';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
@@ -14,15 +14,9 @@ export class TeacherService {
   }
 
   //return class students list of data when give teacher's id
-  getStudentListForAddResult(id: string) {
-    return this.httpClient.get<{
-      grade: string;
-      studentListData: {
-        _id: string;
-        firstname: string;
-        lastname: string;
-      }[];
-    }>('http://localhost:3000/teacher/class-student-list/' + id);
+  getClassStudentList(teacherid: string) {
+    return this.httpClient.get<ClassStudentList>(
+      'http://localhost:3000/teacher/class-student-list/' + teacherid);
   }
 
   //return subject list of student when parse id and grade
@@ -35,15 +29,7 @@ export class TeacherService {
     });
   }
 
-  //submit student results to the database
-  addStudentResult(studentResult) {
-    return this.httpClient.post(
-      'http://localhost:3000/teacher/add-student-result',
-      studentResult
-    );
-  }
-
-
+  //return students past results with marks
   getStudentPastResultForEdit(year: number, term: number, studentid: string) {
     return this.httpClient.post<{
       result: { subjectid: number; subjectname: string; mark: number }[];
@@ -52,6 +38,14 @@ export class TeacherService {
       term: term,
       studentid: studentid,
     });
+  }
+
+  //submit student results to the database
+  addStudentResult(studentResult) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/add-student-result',
+      studentResult
+    );
   }
 
   updateStudentResultAfterEdit(
