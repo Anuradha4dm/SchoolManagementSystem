@@ -14,15 +14,15 @@ import { TeacherService } from '../teacher.service';
   styleUrls: ['./student-attendence.component.css'],
 })
 export class StudentAttendenceComponent implements OnInit {
-  teacherID:string;
+  teacherID: string;
   date: Date = new Date();
   classStudentList: ClassStudentList;
   absent: number = 0;
 
-  otherClass:boolean = false;
-  enterClicked:boolean = false;
-  otherID:string;
-  error:boolean = true;
+  otherClass: boolean = false;
+  enterClicked: boolean = false;
+  otherID: string;
+  error: boolean = true;
   doneSubmition: boolean = false;
 
   constructor(
@@ -35,42 +35,40 @@ export class StudentAttendenceComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLoginService.userAuthData.subscribe((userData) => {
-      this.teacherID=userData.getUserId;
+      this.teacherID = userData.getUserId;
     });
 
-    this.teacherService.getClassStudentList(this.teacherID)
-    .subscribe((data)=>{
-      this.classStudentList = data;
-    });
+    this.teacherService
+      .getClassStudentList(this.teacherID)
+      .subscribe((data) => {
+        this.classStudentList = data;
+      });
   }
 
   //execute when change the slider state
-  onSliderChange(event){
-    if(event.checked)
-      this.absent-=1;
-    else
-      this.absent+=1;
+  onSliderChange(event) {
+    if (event.checked) this.absent -= 1;
+    else this.absent += 1;
   }
 
   //execute when enter button click
-  onEnterClick(value){
-    this.otherID=value.toUpperCase();
-    this.teacherService.getClassStudentList(this.otherID)
-    .subscribe((data)=>{
-        this.classStudentList = data;
-        this.teacherID = this.otherID;
-        this.error = false; 
+  onEnterClick(value) {
+    this.otherID = value.toUpperCase();
+    this.teacherService.getClassStudentList(this.otherID).subscribe((data) => {
+      this.classStudentList = data;
+      this.teacherID = this.otherID;
+      this.error = false;
     });
     this.enterClicked = true;
   }
 
-  onCancelClick(){
+  onCancelClick() {
     this.ngOnInit();
     //this.test1=this.studentList.find((res)=>{return res._id.match(id) && res.firstname.match(firstname)})
   }
 
-  //execute when form submit  
-  onAttendanceSubmit(formValue){
+  //execute when form submit
+  onAttendanceSubmit(formValue) {
     this.studentListService.setDayAttendenceSubmit(true, new Date());
 
     this.toastr.info(
@@ -86,10 +84,9 @@ export class StudentAttendenceComponent implements OnInit {
       }
     );
     this.doneSubmition = true;
-    console.log(this.date,this.classStudentList.grade,formValue);
+    console.log(this.date, this.classStudentList.grade, formValue);
   }
 
-  
   onReSubmitbtnClick(formValue) {
     this.confirmationDialogService
       .confirm(
@@ -111,6 +108,4 @@ export class StudentAttendenceComponent implements OnInit {
         )
       );
   }
-
-
 }

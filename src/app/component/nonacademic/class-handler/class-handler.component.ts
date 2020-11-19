@@ -6,10 +6,7 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { error } from 'protractor';
-import { stringify } from 'querystring';
 import { Subscription } from 'rxjs';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
 import { NonAcademicService } from '../nonacademic.service';
