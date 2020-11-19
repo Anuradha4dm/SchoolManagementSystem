@@ -27,7 +27,7 @@
                     <th>Stream</th>
                 </tr>
                 <tbody>
-                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7]" (click)="onRowClick()">
+                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7]| paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick()">
                         <td>{{student}}</td>
                         <td>ST_1</td>
                         <td>My name</td>
@@ -36,6 +36,11 @@
                     </tr>
                 </tbody>
             </table>
+            
+            <!--Pagination here-->
+            <div class="row mx-auto">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
+            </div>
         </div>
     </div>
 

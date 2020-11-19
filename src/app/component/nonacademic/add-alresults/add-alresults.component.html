@@ -27,7 +27,7 @@
                     <th>Stream</th>
                 </tr>
                 <tbody>
-                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7]" (click)="onRowClick()">
+                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7,8,9,10,11]|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick()">
                         <td>{{student}}</td>
                         <td>145344</td>
                         <td>ST_1</td>
@@ -36,6 +36,10 @@
                     </tr>
                 </tbody>
             </table>
+            <!--pagination here-->            
+            <div class="row mx-auto">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
+            </div>
         </div>
     </div>
 
@@ -75,12 +79,26 @@
                     <!--Student subject list here-->
                     <div class="col">
                         <table>
-                            <tr *ngFor="let number of [0,1,2,3]"><!--loop here-->
+                            <tr *ngFor="let number of ['e','r','f'];let i=index"><!--loop here-->
                                 <td>
                                     <label>Subject name</label>
                                 </td>
                                 <td>
-                                    <select [name]="number" class="form-control">
+                                    <select [name]="number" ngModel (change)="onChange($event.target.value,i)" class="form-control">
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="S">S</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>General English</label>
+                                </td>
+                                <td>
+                                    <select class="form-control" ngModel>
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -94,7 +112,7 @@
                                     <label>Common Genaral Test</label>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" disabled>
+                                    <input type="text" class="form-control">
                                 </td>
                             </tr>
                         </table>
@@ -121,23 +139,23 @@
                 <div class="row border border-dark m-2 p-2">
                     <div class="col">
                         <label>A 's</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="Acount" class="form-control" disabled>
                     </div>
                     <div class="col">
                         <label>B 's</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="Bcount" class="form-control" disabled>
                     </div>
                     <div class="col">
                         <label>C 's</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="Ccount" class="form-control" disabled>
                     </div>
                     <div class="col">
                         <label>S 's</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="Scount" class="form-control" disabled>
                     </div>
                     <div class="col">
                         <label>W 's</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="Wcount" class="form-control" disabled>
                     </div>  
                 </div>
 

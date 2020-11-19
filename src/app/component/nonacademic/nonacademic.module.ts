@@ -14,6 +14,7 @@ import { AddALresultsComponent } from './add-alresults/add-alresults.component';
 import { ExamLayoutComponent } from './exam-layout/exam-layout.component';
 import { RegisterForALComponent } from './register-for-al/register-for-al.component';
 import { RegisterForOLComponent } from './register-for-ol/register-for-ol.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { RegisterForOLComponent } from './register-for-ol/register-for-ol.compon
     HttpClientModule,
     NonAcademicRoutingModule,
     FormsModule,
+    NgxPaginationModule
   ],
   exports: [LeavehandleComponent, FormsModule, HttpClientModule],
 })

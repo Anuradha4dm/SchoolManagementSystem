@@ -8,7 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class RegisterForALComponent implements OnInit {
   @Input() year;
   show:boolean = false;
-
+  page:number = 1;
+  
   constructor() { }
 
   ngOnInit(): void {

@@ -11,7 +11,7 @@
                     <th>Name</th>
                 </tr>
                 <tbody>
-                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7]" (click)="onRowClick()">
+                    <tr *ngFor="let student of [1,2,3,4,5,6,7,8]|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick()">
                         <td>{{student}}</td>
                         <td>145344</td>
                         <td>ST_1</td>
@@ -19,6 +19,11 @@
                     </tr>
                 </tbody>
             </table>
+
+            <!--Pagination here-->
+            <div class="row mx-auto">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
+            </div>
         </div>
     </div>
 
@@ -59,20 +64,20 @@
                         <div class="card border border-dark p-4">
                             <label>
                                 A count
-                                <input type="text" class="form-control w-50">
+                                <input type="text" [value]="Acount" class="form-control w-50">
                             </label>
                             <label>
                                 B count
-                                <input type="text" class="form-control w-50">
+                                <input type="text" [value]="Bcount" class="form-control w-50">
                             </label>   <label>
                                 C count
-                                <input type="text" class="form-control w-50">
+                                <input type="text" [value]="Ccount" class="form-control w-50">
                             </label>   <label>
                                 S count
-                                <input type="text" class="form-control w-50">
+                                <input type="text" [value]="Scount" class="form-control w-50">
                             </label>   <label>
                                 W count
-                                <input type="text" class="form-control w-50">
+                                <input type="text" [value]="Wcount" class="form-control w-50">
                             </label>
                         </div>
                     </div>
@@ -80,12 +85,12 @@
                     <!--Student subject list here-->
                     <div class="col">
                         <table>
-                            <tr *ngFor="let number of [0,1,2,3,4,5,6,7,8]"><!--loop here-->
+                            <tr *ngFor="let number of [0,1,2,3,4,5,6,7,8];let i=index"><!--loop here-->
                                 <td>
                                     <label>Subject name</label>
                                 </td>
                                 <td>
-                                    <select [name]="number" class="form-control">
+                                    <select [name]="number" ngModel (change)="onCange($event.target.value,i)" class="form-control">
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>

@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExamLayoutComponent implements OnInit {
 
-  selection:number = 3;
+  selection:number = 1;
   selectedYear:number = new Date().getFullYear();
   exam:string = "G.C.E. A/L Examination";
 
