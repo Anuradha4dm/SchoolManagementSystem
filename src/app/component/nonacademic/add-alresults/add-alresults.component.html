@@ -3,11 +3,12 @@
     <div class="col">
         <div class="card card-body">
             <div class="row">
-                <div class="col-sm-8">
+                <div class="col-sm-7">
                     <h4 class="font-italic mb-4">{{year}} A/L Student List</h4>
                 </div>
-                <div class="col-sm-4 text-right">
+                <div class="col-sm-5 text-right">
                     <select class="form-control">
+                        <option>All</option>
                         <option>Maths Stream</option>
                         <option>Bio Stream</option>
                         <option>Commerce Stream</option>
@@ -45,7 +46,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Year</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="year" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="col">

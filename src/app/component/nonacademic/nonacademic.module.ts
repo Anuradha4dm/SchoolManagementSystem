@@ -11,6 +11,9 @@ import { ClassHandlerComponent } from './class-handler/class-handler.component';
 import { ClassChangeComponent } from './class-change/class-change.component';
 import { AddOLresultsComponent } from './add-olresults/add-olresults.component';
 import { AddALresultsComponent } from './add-alresults/add-alresults.component';
+import { ExamLayoutComponent } from './exam-layout/exam-layout.component';
+import { RegisterForALComponent } from './register-for-al/register-for-al.component';
+import { RegisterForOLComponent } from './register-for-ol/register-for-ol.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +24,9 @@ import { AddALresultsComponent } from './add-alresults/add-alresults.component';
     ClassChangeComponent,
     AddOLresultsComponent,
     AddALresultsComponent,
+    ExamLayoutComponent,
+    RegisterForALComponent,
+    RegisterForOLComponent
   ],
   imports: [
     CommonModule,
