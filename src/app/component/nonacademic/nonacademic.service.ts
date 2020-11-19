@@ -100,4 +100,28 @@ export class NonAcademicService {
       }
     );
   }
+
+  //this method is used to register student for the a/l or o/l examinations
+  registerStudentsForExams(
+    nonacademicid: string,
+    year: number,
+    indexnumber: number,
+    studentid: string,
+    shy: number,
+    type: boolean,
+    subjectnames: string[]
+  ) {
+    return this.httpClient.post<{
+      registration: boolean;
+      subjectRegister: boolean;
+    }>('http://localhost:3000/nonacademic/registration-exam', {
+      nonacademicid: nonacademicid,
+      year: year,
+      indexnumber: indexnumber,
+      studentid: studentid,
+      shy: shy,
+      type: type,
+      subjectnames: subjectnames,
+    });
+  }
 }
