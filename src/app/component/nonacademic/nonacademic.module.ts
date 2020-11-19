@@ -9,6 +9,8 @@ import { SendNotificationComponent } from './send-notification/send-notification
 import { FormsModule } from '@angular/forms';
 import { ClassHandlerComponent } from './class-handler/class-handler.component';
 import { ClassChangeComponent } from './class-change/class-change.component';
+import { AddOLresultsComponent } from './add-olresults/add-olresults.component';
+import { AddALresultsComponent } from './add-alresults/add-alresults.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { ClassChangeComponent } from './class-change/class-change.component';
     SendNotificationComponent,
     ClassHandlerComponent,
     ClassChangeComponent,
+    AddOLresultsComponent,
+    AddALresultsComponent,
   ],
   imports: [
     CommonModule,
