@@ -2,13 +2,28 @@
     <!--A/L student list here-->
     <div class="col">
         <div class="card card-body">
-            <h4 class="font-italic mb-4">{{year}} A/L Student List</h4>
+            <div class="row">
+                <div class="col-sm-8">
+                    <h4 class="font-italic mb-4">{{year}} A/L Student List</h4>
+                </div>
+                <div class="col-sm-4 text-right">
+                    <select class="form-control">
+                        <option>Maths Stream</option>
+                        <option>Bio Stream</option>
+                        <option>Commerce Stream</option>
+                        <option>Art Stream</option>
+                        <option>Tech Stream</option>
+                    </select>
+                </div>
+            </div>
+
             <table class="table table-hover text-center">
                 <tr class="bg-info">
                     <th>Number</th>
                     <th>Index Number</th>
                     <th>Student ID</th>
                     <th>Name</th>
+                    <th>Stream</th>
                 </tr>
                 <tbody>
                     <tr *ngFor="let student of [0,1,2,3,4,5,6,7]" (click)="onRowClick()">
@@ -16,6 +31,7 @@
                         <td>145344</td>
                         <td>ST_1</td>
                         <td>My name</td>
+                        <td>Maths</td>
                     </tr>
                 </tbody>
             </table>
