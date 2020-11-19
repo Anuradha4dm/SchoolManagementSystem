@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { LeavehandleComponent } from '../nonacademic/leavehandle/leavehandle.component';
 import { NotificationResolver } from 'src/app/services/Notification-resolver.service';
@@ -11,14 +12,9 @@ import { StudentAttendenceComponent } from './student-attendence/student-attende
 import { StudentListComponent } from './student-list/student-list.component';
 import { TeacherProfileComponent } from './teacher-profile/teacher-profile.component';
 import { TermTestResultsComponent } from './term-test-results/term-test-results.component';
-import { AddOLresultsComponent } from '../main-exams/add-olresults/add-olresults.component';
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
-import { AddALresultsComponent } from '../main-exams/add-alresults/add-alresults.component';
-import { ExamLayoutComponent } from '../main-exams/exam-layout/exam-layout.component';
-import { RegisterForOLComponent } from '../main-exams/register-for-ol/register-for-ol.component';
-import { RegisterForALComponent } from '../main-exams/register-for-al/register-for-al.component';
 
 const routes: Routes = [
   {
@@ -66,28 +62,10 @@ const routes: Routes = [
         path: 'leave-handle',
         component: LeavehandleComponent,
       },
-   
+
       {
         path: 'tsend-noti',
         component: TsendNotificationComponent,
-      },
-      {
-        path: 'ol',
-        component: AddOLresultsComponent,
-      },
-      {
-        path: 'al',
-        component: AddALresultsComponent,
-      },
-      {
-        path: 'exam-layout',
-        component: ExamLayoutComponent,
-      }, {
-        path: 'register-ol',
-        component: RegisterForOLComponent,
-      }, {
-        path: 'register-al',
-        component: RegisterForALComponent,
       },
       //to remove end
     ],
