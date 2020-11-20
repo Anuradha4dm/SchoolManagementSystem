@@ -10,7 +10,7 @@ import { TeacherService } from '../teacher.service';
   styleUrls: ['./teacher-profile.component.css'],
 })
 export class TeacherProfileComponent implements OnInit {
-  teacherProfileData: TeacherProfileData;
+  teacherProfileData;
   loggedTeacherID: string;
 
   constructor(
@@ -25,9 +25,10 @@ export class TeacherProfileComponent implements OnInit {
     });
 
     this.teacherService
-      .getTeacherProfileData(this.loggedTeacherID)
+      .getTeacherProfileData("AC_2")
       .subscribe((data) => {
-        this.teacherProfileData = data;
+        console.log(data);
+        //this.teacherProfileData = data;
       });
   }
 

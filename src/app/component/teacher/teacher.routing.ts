@@ -67,6 +67,7 @@ const routes: Routes = [
         path: 'tsend-noti',
         component: TsendNotificationComponent,
       },
+      //to remove end
     ],
   },
 ];

@@ -1,0 +1,91 @@
+<div class="row">
+    <!--O/L student list here-->
+    <div class="col">
+        <div class="card card-body">
+            <h4 class="font-italic mb-4">Student Registration for G.C.E. O/L {{year}}</h4>
+            <table class="table table-hover text-center">
+                <tr class="bg-info">
+                    <th>Number</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Class</th>
+                </tr>
+                <tbody>
+                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7]| paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick()">
+                        <td>{{student}}</td>
+                        <td>ST_1</td>
+                        <td>My name</td>
+                        <td>My Class</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!--Pagination here-->
+            <div class="row mx-auto">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+
+    <!--Result of one student here-->
+    <div *ngIf="show" class="col-md-5">
+        <div class="card card-body border border-dark">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input type="text" [value]="year" class="form-control" disabled>
+                    </div>
+                </div>
+             
+                <div class="col">
+                    <div class="form-group">
+                        <label>Student ID</label>
+                        <input type="text" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Student Name</label>
+                <input type="text" class="form-control" disabled>
+            </div>
+
+            <!--Student subject list here-->
+            <form>
+                <div class="row">
+                    <!--Student subject list here-->
+                    <div class="col">
+                        <h6 class="text-muted font-italic">Subject List</h6>
+                        <table>
+                            <tr *ngFor="let number of [0,1,2,3,4,5,6,7,8]"><!--loop here-->
+                                <td>
+                                    <input type="text" class="form-control mb-1" disabled>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div class="col v-center">
+                        <!--Index number insertion here-->
+                        <div class="card card-body border border-dark">
+                            <div class="form-group">
+                                <label>Index Number</label>
+                                <input type="text" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label>Verify Index Number</label>
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-info btn-sm">Register</button>
+                    <button type="button" class="btn btn-danger btn-sm">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
