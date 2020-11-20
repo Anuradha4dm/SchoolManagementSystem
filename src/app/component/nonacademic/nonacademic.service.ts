@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
 
@@ -168,6 +168,19 @@ export class NonAcademicService {
         stream: stream,
         zscore: zscore,
         results: results,
+      }
+    );
+  }
+
+  getSubjectDataForResultAddition(studentid: string, year: number) {
+    const paramsSet = new HttpParams().set('year', year.toString());
+
+    return this.httpClient.get<{
+      responsedata: { mesubjectis: number; mesubjectname: string };
+    }>(
+      'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
+      {
+        params: paramsSet,
       }
     );
   }
