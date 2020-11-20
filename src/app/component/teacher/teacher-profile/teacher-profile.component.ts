@@ -25,10 +25,10 @@ export class TeacherProfileComponent implements OnInit {
     });
 
     this.teacherService
-      .getTeacherProfileData("AC_2")
+      .getTeacherProfileData(this.loggedTeacherID)
       .subscribe((data) => {
-        console.log(data);
-        //this.teacherProfileData = data;
+        // console.log(data);
+        this.teacherProfileData = data;
       });
   }
 
