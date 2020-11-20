@@ -1,0 +1,35 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <!--Selection part here-->
+    <div class="card card-body">
+        <div class="row">
+            <div class="col">
+                <label>Select Option</label>
+                <select [(ngModel)]="selection" (change)="onSelectChange()" class="form-control">
+                    <option value="1">Add A/L Results</option>
+                    <option value="2">Add O/L Results</option>
+                    <option value="3">Registration for A/L</option>
+                    <option value="4">Registration for O/L</option>
+                </select>
+            </div>
+
+            <div class="col">
+                <label>Exam</label>
+                <input type="text" [value]="exam" class="form-control" disabled>
+            </div>
+
+            <div class="col">
+                <label>Year</label>
+                <input type="number" [(ngModel)]="selectedYear" class="form-control">
+            </div>
+        </div>
+    </div>
+
+    <!--Body content related to the selection here-->
+    <app-add-alresults *ngIf="selection==1" [year]="selectedYear"></app-add-alresults>
+    <app-add-olresults *ngIf="selection==2" [year]="selectedYear"></app-add-olresults>
+    <app-register-for-al *ngIf="selection==3" [year]="selectedYear"></app-register-for-al>
+    <app-register-for-ol *ngIf="selection==4" [year]="selectedYear"></app-register-for-ol>
+
+</div>

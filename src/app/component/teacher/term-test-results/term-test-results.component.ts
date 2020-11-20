@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ThemeService } from 'ng2-charts';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
 import { TermResults } from 'src/app/models/teacher.model';
@@ -18,8 +19,7 @@ export class TermTestResultsComponent implements OnInit {
   termResult = new TermResults();
   subjectList = [];
   fullname: string;
-
-  element: string = '';
+  show: boolean = false;
 
   constructor(
     private userLoginService: UserLogInService,
@@ -31,17 +31,20 @@ export class TermTestResultsComponent implements OnInit {
     this.userLoginService.userAuthData.subscribe((userData) => {
       this.loginUserData = userData;
     });
-    console.log("this is the data");
+    console.log('this is the data');
 
     this.teacherService
-      .getStudentListForAddResult(this.loginUserData.getUserId)
-      .subscribe((data) => {
-        console.log(data);
-        this.studentList = data.studentListData;
-        this.termResult.grade = data.grade;
-      },error=>{
-        console.log(error);
-      });
+      .getClassStudentList(this.loginUserData.getUserId)
+      .subscribe(
+        (data) => {
+          console.log(data);
+          this.studentList = data.studentListData;
+          this.termResult.grade = data.grade;
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   onAddResultsClick(id, fname, lname) {
@@ -65,6 +68,7 @@ export class TermTestResultsComponent implements OnInit {
       );
     this.termResult.studentid = id;
     this.fullname = fname + ' ' + lname;
+    this.show = true;
   }
 
   onSubmitClick(value) {
@@ -85,6 +89,20 @@ export class TermTestResultsComponent implements OnInit {
         this.alterMessageService.competeAlert('Result Added Successfully');
       }
     );
-    this.element = 'modal';
+  }
+
+  onCancelClick() {
+    this.show = false;
+  }
+
+  onFileChange(event) {
+    this.teacherService.xlsxFileReader(event);
+  }
+
+  //this methos is used to read the data from the specific student
+  onReadStudentResult() {
+    //need to pass the data of the studentis => who is the results need to read =>ST_1
+    //need to pass the subjectid => array which contains the subjects , done by the student  =>[id1,id2,id3.....]
+    this.teacherService.mapDataFormTheServiceToStudent('ST_1', [65, 66]);
   }
 }

@@ -25,13 +25,15 @@
                 <label>Surname</label>
                 <input name="surname" [(ngModel)]="teacherProfileData.surname" type="text" class="form-control">
             </div>
-            
-            <div class="form-group">
-                <label>Username</label>
-                <input type="text" class="form-control" [value]="teacherProfileData.username" disabled>
-            </div>
-
+    
             <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" name="username" class="form-control" [(ngModel)]="teacherProfileData.username" >
+                    </div>
+                </div>
+
                 <div class="col">
                     <div class="form-group">
                         <label>Subject</label>
@@ -45,15 +47,8 @@
                         <input type="text" class="form-control" [value]="teacherProfileData.startyear" disabled>
                     </div>
                 </div>
-
-                <div class="col">
-                    <div class="form-group">
-                        <label>Class</label>
-                        <input type="text" class="form-control" disabled>
-                    </div>
-                </div>
-
             </div>
+
             <!--Profile pic upload here-->
             <div class="row my-3">
                 <div class="col-auto">
