@@ -147,6 +147,7 @@ export class NonAcademicService {
     );
   }
 
+  //this method is used to add result of the advance level examination
   addAdvanceLevelResults(
     nonacademicid: string,
     indexnumber: number,

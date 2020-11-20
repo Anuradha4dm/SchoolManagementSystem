@@ -25,7 +25,7 @@ export class EditTeacherProfileComponent implements OnInit {
 
     this.teacherService.getTeacherProfileData(this.loggedTeacherID).subscribe(
       (data) => {
-        this.teacherProfileData = data;
+        //this.teacherProfileData = data;
       },
       (error) => {
         console.log(error);
