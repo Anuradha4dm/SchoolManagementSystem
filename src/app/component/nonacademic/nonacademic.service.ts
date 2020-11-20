@@ -124,4 +124,51 @@ export class NonAcademicService {
       subjectnames: subjectnames,
     });
   }
+
+  //this methos is used to add results of the ordinary level
+  addOrdinaryLevelResults(
+    nonacademicid: string,
+    indexnumber: number,
+    year: number,
+    islandrank: number,
+    districtrank: number,
+    results: { mesubjectid: number; meresult: string }[]
+  ) {
+    return this.httpClient.post<{ resultaddtion: boolean }>(
+      'http://localhost:3000/nonacademic/add-ordinary-level-results',
+      {
+        nonacademicid: nonacademicid,
+        indexnumber: indexnumber,
+        year: year,
+        islandrank: islandrank,
+        districtrank: districtrank,
+        results: results,
+      }
+    );
+  }
+
+  addAdvanceLevelResults(
+    nonacademicid: string,
+    indexnumber: number,
+    year: number,
+    islandrank: number,
+    districtrank: number,
+    stream: string,
+    zscore: number,
+    results: { mesubjectid: number; meresult: string }[]
+  ) {
+    return this.httpClient.post<{ resultaddtion: boolean }>(
+      'http://localhost:3000/nonacademic/add-advance-lavel-result',
+      {
+        nonacademicid: nonacademicid,
+        indexnumber: indexnumber,
+        year: year,
+        islandrank: islandrank,
+        districtrank: districtrank,
+        stream: stream,
+        zscore: zscore,
+        results: results,
+      }
+    );
+  }
 }
