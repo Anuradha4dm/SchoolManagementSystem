@@ -53,7 +53,7 @@ export class ViewResultComponent implements OnInit, OnDestroy {
     });
 
     this.webSocketService.emit('getYear', {
-      data: this.loginuserData.getUserId,
+      studentid: this.loginuserData.getUserId,
     });
 
     this.subscrible1 = this.webSocketService.listen('years').subscribe(

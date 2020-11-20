@@ -1,0 +1,169 @@
+<div class="row">
+    <!--A/L student list here-->
+    <div class="col">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h4 class="font-italic mb-4">{{year}} A/L Student List</h4>
+                </div>
+                <div class="col-sm-5 text-right">
+                    <select class="form-control">
+                        <option>All</option>
+                        <option>Maths Stream</option>
+                        <option>Bio Stream</option>
+                        <option>Commerce Stream</option>
+                        <option>Art Stream</option>
+                        <option>Tech Stream</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="table table-hover text-center">
+                <tr class="bg-info">
+                    <th>Number</th>
+                    <th>Index Number</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    <th>Stream</th>
+                </tr>
+                <tbody>
+                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7,8,9,10,11]|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick()">
+                        <td>{{student}}</td>
+                        <td>145344</td>
+                        <td>ST_1</td>
+                        <td>My name</td>
+                        <td>Maths</td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--pagination here-->            
+            <div class="row mx-auto">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+
+    <!--Result of one student here-->
+    <div *ngIf="show" class="col-md-5">
+        <div class="card card-body border border-dark">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label>Year</label>
+                        <input type="text" [value]="year" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Index Number</label>
+                        <input type="text" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label>Student ID</label>
+                        <input type="text" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Student Name</label>
+                <input type="text" class="form-control" disabled>
+            </div>
+
+            <!--Student subject list here-->
+            <form>
+                <div class="row">
+        
+                    <!--Student subject list here-->
+                    <div class="col">
+                        <table>
+                            <tr *ngFor="let number of ['e','r','f'];let i=index"><!--loop here-->
+                                <td>
+                                    <label>Subject name</label>
+                                </td>
+                                <td>
+                                    <select [name]="number" ngModel (change)="onChange($event.target.value,i)" class="form-control">
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="S">S</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>General English</label>
+                                </td>
+                                <td>
+                                    <select class="form-control" ngModel>
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="S">S</option>
+                                        <option value="W">W</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Common Genaral Test</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                    
+                <!--Island rank and Z score here-->
+                <div class="row my-3">
+                    <div class="col">
+                        <label>Z Score</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label>Distric Rank</label>
+                        <input type="text" class="form-control">
+                    </div>
+                    <div class="col">
+                        <label>Island Rank</label>
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <!--Result stats here-->
+                <div class="row border border-dark m-2 p-2">
+                    <div class="col">
+                        <label>A 's</label>
+                        <input type="text" [value]="Acount" class="form-control" disabled>
+                    </div>
+                    <div class="col">
+                        <label>B 's</label>
+                        <input type="text" [value]="Bcount" class="form-control" disabled>
+                    </div>
+                    <div class="col">
+                        <label>C 's</label>
+                        <input type="text" [value]="Ccount" class="form-control" disabled>
+                    </div>
+                    <div class="col">
+                        <label>S 's</label>
+                        <input type="text" [value]="Scount" class="form-control" disabled>
+                    </div>
+                    <div class="col">
+                        <label>W 's</label>
+                        <input type="text" [value]="Wcount" class="form-control" disabled>
+                    </div>  
+                </div>
+
+                <div class="form-group text-right">
+                    <button class="btn btn-info btn-sm">Submit</button>
+                    <button class="btn btn-danger btn-sm">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
