@@ -101,7 +101,7 @@ export class ClassHandlerComponent implements OnInit, OnDestroy {
     '13_TEC',
   ];
 
-  subjectidListenerSubscription: Subscription;
+  subjectidListenerSubscription: Subscription = null;
 
   constructor(
     private nonAcademicService: NonAcademicService,
