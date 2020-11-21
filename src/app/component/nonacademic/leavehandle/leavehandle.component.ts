@@ -21,7 +21,7 @@ export class LeavehandleComponent implements OnInit {
   constructor(private nonAcademicService: NonAcademicService) {}
 
   ngOnInit(): void {
-    this.nonAcademicService.getPendingRequest().subscribe((data) => {
+    this.nonAcademicService.getPendingLeaveData().subscribe((data) => {
       //this is the palce leave comes
       console.log(data);
     });

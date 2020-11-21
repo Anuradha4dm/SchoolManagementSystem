@@ -40,6 +40,12 @@ export interface ClassStudentList{
   }[];
 }
 
+export interface ITermResults{
+  subjectid: string;
+  subjectname: string;
+  mark?: number;
+}
+
 export class TermResults {
   year = new Date().getFullYear();
   term = 1;

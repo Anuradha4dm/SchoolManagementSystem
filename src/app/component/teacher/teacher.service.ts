@@ -47,7 +47,6 @@ export class TeacherService {
     });
   }
 
-  //return students past results with marks
   //submit student results to the database
   addStudentResult(studentResult) {
     return this.httpClient.post(
@@ -56,6 +55,7 @@ export class TeacherService {
     );
   }
 
+  //return students past results with marks
   getStudentPastResultForEdit(year: number, term: number, studentid: string) {
     return this.httpClient.post<{
       result: { subjectid: number; subjectname: string; mark: number }[];

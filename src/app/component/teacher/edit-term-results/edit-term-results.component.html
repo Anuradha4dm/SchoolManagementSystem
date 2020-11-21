@@ -41,7 +41,7 @@
 
                     <tbody>
                         <!--this should repeat-->
-                        <tr *ngFor="let student of classStudentList.studentListData" (click)="onRowClick()">
+                        <tr *ngFor="let student of classStudentList.studentListData" (click)="onRowClick(student._id)">
                             <td>{{student._id}}</td>
                             <td>{{student.firstname +" "+ student.lastname| titlecase}}</td>
                             <td>average</td>
@@ -53,9 +53,9 @@
         </div>
 
         <!--Edit results form here-->
-        <div class="col-md-5">
-            <div class="card card-body border border-dark p-3" *ngIf="show">
-                <form>
+        <div class="col-md-5" *ngIf="show">
+            <div class="card card-body border border-dark p-3">
+                <form #EditResultForm="ngForm" (ngSubmit)="onUpdateResultsClick(EditResultForm.value)">
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
@@ -80,19 +80,19 @@
 
                     <div class="form-group">
                         <table class="table">
-                            <tr *ngFor="let student of studentsResult">
+                            <tr *ngFor="let result of studentPastResults">
                                 <td>
-                                    <label>{{student.subjectname}}</label>
+                                    <label>{{result.subjectname| titlecase}}</label>
                                 </td>
                                 <td>
-                                    <input [name]="student.subjectid" type="text" [ngModel]="student.mark" class="w-50" disabled>
+                                    <input [name]="result.subjectid" type="text" [ngModel]="result.mark" class="w-50">
                                 </td>
                             </tr>
                        </table>
                     </div>
 
                     <div class="form-group pull-right">
-                        <button class="btn btn-info btn-sm">Edit Results</button>
+                        <button type="submit" class="btn btn-info btn-sm">Update Results</button>
                         <button class="btn btn-danger btn-sm">Cancel</button>
                     </div>
                 </form>

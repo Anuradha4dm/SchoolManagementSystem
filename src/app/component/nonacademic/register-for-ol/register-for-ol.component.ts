@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserLogInService } from '../../homepage/login/user-login.service';
 import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
@@ -8,21 +9,31 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class RegisterForOLComponent implements OnInit {
   @Input() year;
+  loggedUserID: string;
   show:boolean = false;
   page:number = 1;
 
   constructor(
+    private userLoginService: UserLogInService,
     private nonService: NonAcademicService
   ) { }
 
   ngOnInit(): void {
-    this.nonService.addOrdinaryLevelResults("NAC_1",176524,2020,23,245,[{mesubjectid:3,meresult:"A"}]).subscribe((data)=>{
-      console.log(data);
+    this.userLoginService.userAuthData.subscribe((userData) => {
+      this.loggedUserID = userData.getUserId;
     });
   }
 
   onRowClick(){
     this.show = true;
+  }
+
+  //Executes when form submitted
+  onSubmit(){
+    this.nonService.registerStudentsForExams(this.loggedUserID,this.year,343134,"ST_1",2,false,["add","as"]
+    ).subscribe((data)=>{
+      console.log(data);
+    });
   }
 
 }

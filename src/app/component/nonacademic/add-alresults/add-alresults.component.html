@@ -73,12 +73,12 @@
             </div>
 
             <!--Student subject list here-->
-            <form>
+            <form #addALForm="ngForm" (ngSubmit)="onSubmit(addALForm.value)">
                 <div class="row">
                     <!--Student subject list here-->
                     <div class="col">
                         <table>
-                            <tr *ngFor="let number of [0,1,2],let i=index"><!--loop here-->
+                            <tr *ngFor="let number of [1,2,3],let i=index"><!--loop here-->
                                 <td>
                                     <label>Subject name</label>
                                 </td>
