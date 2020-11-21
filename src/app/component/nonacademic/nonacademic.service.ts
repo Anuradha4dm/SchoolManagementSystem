@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
 
@@ -123,5 +123,66 @@ export class NonAcademicService {
       type: type,
       subjectnames: subjectnames,
     });
+  }
+
+  //this methos is used to add results of the ordinary level
+  addOrdinaryLevelResults(
+    nonacademicid: string,
+    indexnumber: number,
+    year: number,
+    islandrank: number,
+    districtrank: number,
+    results: { mesubjectid: number; meresult: string }[]
+  ) {
+    return this.httpClient.post<{ resultaddtion: boolean }>(
+      'http://localhost:3000/nonacademic/add-ordinary-level-results',
+      {
+        nonacademicid: nonacademicid,
+        indexnumber: indexnumber,
+        year: year,
+        islandrank: islandrank,
+        districtrank: districtrank,
+        results: results,
+      }
+    );
+  }
+
+  //this method is used to add result of the advance level examination
+  addAdvanceLevelResults(
+    nonacademicid: string,
+    indexnumber: number,
+    year: number,
+    islandrank: number,
+    districtrank: number,
+    stream: string,
+    zscore: number,
+    results: { mesubjectid: number; meresult: string }[]
+  ) {
+    return this.httpClient.post<{ resultaddtion: boolean }>(
+      'http://localhost:3000/nonacademic/add-advance-lavel-result',
+      {
+        nonacademicid: nonacademicid,
+        indexnumber: indexnumber,
+        year: year,
+        islandrank: islandrank,
+        districtrank: districtrank,
+        stream: stream,
+        zscore: zscore,
+        results: results,
+      }
+    );
+  }
+
+  getSubjectDataForResultAddition(studentid: string, year: number) {
+    const paramsSet = new HttpParams().set('year', year.toString());
+
+    return this.httpClient.get<{
+      responsedata: { mesubjectis: number; mesubjectname: string };
+    }>(
+      'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
+      {
+        params: paramsSet,
+      }
+    );
   }
 }
