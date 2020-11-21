@@ -1,246 +1,140 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-    <!--Teacher personal details-->
-    <div class="card card-user">
-        <div class="image">
-            <img src="./assets/img/header.jpg" alt="background_image"/>
+    <div class="row">
+        <!--Teacher personal details here-->
+        <div class="col-md-8">
+            <div class="card card-user">
+                <div class="image">
+                    <img src="./assets/img/header.jpg" alt="background_image"/>
+                </div>
+
+                <div class="card-body">
+                    <div class="author">
+                        <a href="">
+                            <img class="avatar border-black" src="./assets/img/mike.jpg" alt="profile picture" />
+                        </a>
+                        <p class="description">
+                            {{teacherProfileData.username}}
+                        </p>
+                    </div>
+
+                    <div class="card-container">
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons users_single-02"></i>
+                                Surname: {{teacherProfileData.surname| titlecase}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons users_single-02"></i>
+                                First Name: {{teacherProfileData.firstname| titlecase}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons users_single-02"></i>
+                                Last Name: {{teacherProfileData.lastname| titlecase}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons ui-1_email-85"></i>
+                                Email: {{teacherProfileData.email}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons tech_mobile"></i>
+                                Mobile: {{teacherProfileData.mobile}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons shopping_tag-content"></i>
+                                Age: {{teacherProfileData.age}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons shopping_tag-content"></i>
+                                Role: {{teacherProfileData.role| titlecase}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                            <i class="now-ui-icons ui-1_send"></i>
+                            address:<br>
+                                {{teacherProfileData.addressline1}},<br>
+                                {{teacherProfileData.addressline2}},<br>
+                                {{teacherProfileData.addressline3}},<br>
+                                {{teacherProfileData.city}}
+                            </h5>
+                        </div>
+
+                        <div class="card-content">
+                            <h5 class="text-des cont-text">
+                                <i class="now-ui-icons shopping_tag-content"></i>
+                                Description: {{teacherProfileData.description}}
+                            </h5>
+                        </div>
+
+                        <!--Bottom button group here-->
+                        <div class="btn-group my-btn-group" role="group" >
+                            <button href="#" type="button" class="btn btn-dark" (click)="onEditClick()">
+                                Edit Profile
+                            </button>
+                            <button href="#" type="button" class="btn btn-dark">
+                                View Time Table
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="card-body">
-            <div class="author">
-                <a href="">
-                    <img class="avatar border-black" src="./assets/img/mike.jpg" alt="profile picture" />
-                </a>
-                <p class="description">
-                    {{teacherProfileData.username}}
-                </p>
+        <!--Teacher Qualification and Subjects-->
+        <div class="col-md-4">
+            <div class="row">
+                <!--Subject section here-->
+                <div class="card card-body">
+                    <div *ngIf="teacherProfileData.class!='No Class...'" class="form-group">
+                        <label>Class Teacher of</label>
+                        <input type="text" [value]="teacherProfileData.class" class="form-control w-50" disabled>
+                    </div>
+
+                    <table class="table text-center">
+                        <tr class="bg-secondary">
+                            <th>Subject</th>
+                            <th>Class</th>
+                        </tr>
+                        <tbody>
+                            <tr *ngFor="let subject of teacherProfileData.subjects">
+                                <td>{{subject.subjectname| titlecase}}</td>
+                                <td>{{subject.grade}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <div class="card-container">
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons users_single-02"></i>
-                        Surname: {{teacherProfileData.surname}}
-                    </h5>
+            <div class="row">
+                <!--Qualification here-->
+                <div class="card card-body">
+                    <h6 class="text-muted font-italic">Qualifications</h6>
+                    <p>{{teacherProfileData.qualifications}}</p>
                 </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons users_single-02"></i>
-                        First Name: {{teacherProfileData.firstname}}
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons users_single-02"></i>
-                        Last Name: {{teacherProfileData.lastname}}
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons ui-1_email-85"></i>
-                        Email: {{teacherProfileData.email}}
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons tech_mobile"></i>
-                        Mobile: {{teacherProfileData.mobile}}
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons shopping_tag-content"></i>
-                        Age: {{teacherProfileData.age}}
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons objects_globe"></i>
-                        Subject: {{teacherProfileData.subjects}}
-                    </h5>
-                </div>
-                
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                    <i class="now-ui-icons ui-1_send"></i>
-                    address:<br>
-                        Teacher.addressLine1,<br>
-                        Teacher.addressLine2,<br>
-                        Teacher.addressLine3,<br>
-                        Teacher.city
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons objects_globe"></i>
-                        Qualifications: {{teacherProfileData.qualifications}}
-                    </h5>
-                </div>
-
-                <div class="card-content">
-                    <h5 class="text-des cont-text">
-                        <i class="now-ui-icons shopping_tag-content"></i>
-                        Description: {{teacherProfileData.description}}
-                    </h5>
-                </div>
-
-                <!--Bottom button group here-->
-                <div class="btn-group my-btn-group" role="group" >
-                    <button href="#" type="button" class="btn btn-dark" (click)="onEditClick()">
-                        Edit Profile
-                    </button>
-                    <button href="#" type="button" class="btn btn-dark">
-                        View Time Table
-                    </button>
-                    <button href="#" type="button" class="btn btn-dark">
-                        Send Email
-                    </button>
-                </div>
+            </div>
         </div>
     </div>
+   
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--div class="main-content">
-    <div class="card card-user">
-        
-        <div class="image">
-            <img src="assets/img/header.jpg" alt="image1">
-        </div>
-      
-        <div class="card-body">
-            <div class="author">
-                <img class="avatar" src="assets/img/mike.jpg" alt="photo">
-                <h4>Teacher Name</h4>
-                <p class="description">username: abcdeg_1234</p>
-            </div>
-
-        <mat-accordion>
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header class="bg-warning">
-                        <mat-panel-title>Personal Information</mat-panel-title>
-                    </mat-expansion-panel-header>
-
-                    <div class="card-body">
-                        <h6 class="text-des cont-text">
-                          <i class="now-ui-icons users_single-02"></i>
-                          Surname: Jayalath
-                        </h6>
-
-                        <h6 class="text-des cont-text">
-                            <i class="now-ui-icons users_single-02"></i>
-                            Last name: Himaruwan
-                        </h6>
-
-                        <h6 class="text-des cont-text">
-                            <i class="now-ui-icons users_single-02"></i>
-                            First name: Shashika
-                        </h6>
-
-                        <h6 class="text-des cont-text">
-                            <i class="now-ui-icons users_single-02"></i>
-                            Email: sashkia1996@gmail.com
-                        </h6>
-
-                        <h6 class="text-des cont-text">
-                            <i class="now-ui-icons users_single-02"></i>
-                            Phone name: 077-1234567
-                        </h6>
-
-                        <h6 class="text-des cont-text">
-                            <i class="now-ui-icons users_single-02"></i>
-                            Age: 24 yr
-                        </h6>
-
-                        <h6 class="card-title">
-                            <i class="now-ui-icons users_single-02"></i>
-                            Role: Maths Teacher
-                        </h6>
-                    </div>
-                </mat-expansion-panel>
-
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header class="bg-primary">
-                        <mat-panel-title>Educational Qualifications</mat-panel-title>
-                    </mat-expansion-panel-header>
-
-                    <div class="card-body bg-secondary">
-                        <p>Qualifications here</p>
-                    </div>
-                </mat-expansion-panel>
-
-                <mat-expansion-panel>
-                    <mat-expansion-panel-header class="bg-success">
-                        <mat-panel-title>Timetable and Classes</mat-panel-title>
-                    </mat-expansion-panel-header>
-
-                    <div class="card-body bg-secondary">
-                        <table class="table">
-                            <thead class="text-center">
-                                <th>Class</th>
-                                <th>Time</th>
-                                <th>Subject</th>
-                            </thead>
-
-                            <tbody class="text-center">
-                                <tr>
-                                    <td>9B</td>
-                                    <td>08-10</td>
-                                    <td>Maths</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td>11A</td>
-                                    <td>10-12</td>
-                                    <td>Maths</td>
-                                </tr>
-
-                                <tr>
-                                    <td>11D</td>
-                                    <td>12-1</td>
-                                    <td>Maths</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </mat-expansion-panel>
-        </mat-accordion>
-
-        </div>
-            
-    </div>
-</div-->
+{{teacherProfileData|json}}

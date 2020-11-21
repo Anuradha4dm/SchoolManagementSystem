@@ -14,7 +14,7 @@ export class TeacherService {
 
   //return teacher profile data
   getTeacherProfileData(teacherid: string) {
-    return this.httpClient.get(
+    return this.httpClient.get<TeacherProfileData>(
       'http://localhost:3000/teacher/get-teacher-profile/' + teacherid
     );
   }

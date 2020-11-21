@@ -12,11 +12,11 @@ export class AddALresultsComponent implements OnInit {
   results:string[]=[];
 
   //to contain grade count
-  Acount:number =0;
-  Bcount:number =0;
-  Ccount:number =0;
-  Scount:number =0;
-  Wcount:number =0;
+  Acount:number = 0;
+  Bcount:number = 0;
+  Ccount:number = 0;
+  Scount:number = 0;
+  Wcount:number = 0;
 
   constructor() { }
 

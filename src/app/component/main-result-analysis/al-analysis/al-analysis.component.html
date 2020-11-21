@@ -1,0 +1,149 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <div class="row">
+        <!--First main column here-->
+        <div class="col-md-7">
+            <!--Year by year analysis-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <h3 class="font-italic">G.C.E. A/L Examination Results Analysis</h3>
+                    <h4 class="text-muted font-italic text-center">year by year analysis</h4>
+                    <!--Result selection here to get student list-->
+                    <div class="row">
+                            <div class="col">
+                                <label>Select Grade for Analysis</label>
+                                <select name="grade" class="form-control p-1">
+                                    <option [value]="grade" *ngFor="let grade of grades">{{grade}}</option>
+                                </select>
+                            </div>
+
+                            <div class="col">
+                                <label>Select Count</label>
+                                <select name="count" class="form-control p-1">
+                                    <option [value]="count" *ngFor="let count of counter">{{count}}</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col">
+                                <label>Select Stream</label>
+                                <select name="count" class="form-control p-1">
+                                    <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
+                                </select>
+                            </div>
+                    </div>
+                     
+                    <!--Year by year analysis chart here-->
+                    <div class="form-group mt-4">
+                        <canvas class="bg-dark" baseChart [options]="myOption" [data]="resultCount" [labels]="resultLabel" chartType="line"></canvas>
+                    </div> 
+                </div>
+            </div>
+
+            <!--Past year stat count analysis-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <h4 class="font-italic text-center text-muted">{{year}} G.C.E. A/L Stats</h4>
+                    
+                    <!--Result selection here to get student list-->
+                    <div class="row">
+                        <div class="col">
+                            <label>Select Grade for Analysis</label>
+                            <select name="grade" class="form-control p-1">
+                                <option [value]="grade" *ngFor="let grade of grades">{{grade}}</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label>Select Count</label>
+                            <select name="count" class="form-control p-1">
+                                <option [value]="count" *ngFor="let count of counter">{{count}}</option>
+                            </select>
+                        </div>
+                        
+                        <div class="col">
+                            <label>Select Stream</label>
+                            <select name="count" class="form-control p-1">
+                                <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
+                            </select>
+                        </div>
+                    </div>
+                
+                    <div class="form-group text-center">
+                        <button type="button" class="btn btn-success btn-sm" (click)="onAnalysisClick()">Analysis</button>
+                        <button type="button" class="btn btn-success btn-sm" (click)="getStudents()">{{show? 'Hide': 'Show'}} Students</button>
+                    </div>
+    
+                    <!--Past year details analysis pie chart here-->
+                    <div class="form-group">
+                        <canvas class="bg-dark p-2" baseChart [data]="resultCount" [options]="myOption" [labels]="resultLabel" chartType="pie"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Second main column here-->
+        <div class="col-md-5">
+            <!--Subject wise analysis here-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <h4 class="font-italic text-muted text-center">subject analysis</h4>
+                    <!--subject and year selection here-->
+                    <div class="row">
+                        <div class="col">
+                            <label>Year</label>
+                            <input type="number" [value]="year" class="form-control">
+                        </div>
+    
+                        <div class="col">
+                            <label>Subject</label>
+                            <select class="form-control">
+                                <option>Maths</option>
+                                <option>Science</option>
+                                <option>Buddhism</option>
+                                <option>English</option>
+                                <option>Hitory</option>
+                                <option>Sinhala</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Subject dougnut chart here-->
+                    <div class="form-group mt-4">
+                        <canvas class="bg-dark p-2" baseChart [data]="gradeCount" [labels]="gradeLabel" [options]="myOption" chartType="doughnut"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!--Student list or total count details here-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <table class="table table-hover text-center">
+                        <tr class="bg-info">
+                            <th>Index</th>
+                            <th>Sudent ID</th>
+                            <th>Name</th>
+                            <th>Distric Rank</th>
+                            <th>Island Rank</th>
+                            <th>Z score</th>
+                        </tr>
+    
+                        <tbody>
+                            <tr *ngFor="let number of [1,2,3,4,5,6,7,8,9,10,11,12,13,14]| paginate: {currentPage: page,itemsPerPage: 10}">
+                                <td>{{number}}</td>
+                                <td>Sudent ID</td>
+                                <td>Name</td>
+                                <td>67</td>
+                                <td>267</td>
+                                <td>1.67</td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                    <div class="row mx-auto">
+                        <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
