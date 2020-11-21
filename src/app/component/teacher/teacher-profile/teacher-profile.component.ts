@@ -12,6 +12,7 @@ import { TeacherService } from '../teacher.service';
 export class TeacherProfileComponent implements OnInit {
   loggedTeacherID: string;
   teacherProfileData: TeacherProfileData;
+  qualifications:string[];
 
   constructor(
     private userLoginService: UserLogInService,
@@ -27,6 +28,7 @@ export class TeacherProfileComponent implements OnInit {
     this.teacherService.getTeacherProfileData(this.loggedTeacherID)
       .subscribe((data) => {
         this.teacherProfileData = data;
+        this.qualifications = data.qualifications.split(',');
       });
   }
 

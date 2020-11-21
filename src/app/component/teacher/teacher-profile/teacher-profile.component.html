@@ -130,11 +130,12 @@
                 <!--Qualification here-->
                 <div class="card card-body">
                     <h6 class="text-muted font-italic">Qualifications</h6>
-                    <p>{{teacherProfileData.qualifications}}</p>
+                    <ul class="list-group">
+                        <li class="list-group-item font-weight-bold" *ngFor="let qualification of qualifications">{{qualification}}</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
    
 </div>
-{{teacherProfileData|json}}

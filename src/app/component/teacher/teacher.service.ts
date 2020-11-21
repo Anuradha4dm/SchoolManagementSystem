@@ -26,6 +26,17 @@ export class TeacherService {
     );
   }
 
+  //add students attendance to database
+  markStudentAttendence(teacherid: string, submitdata: string) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/mark-attendence',
+      {
+        teahcerid: teacherid,
+        submitdata: submitdata,
+      }
+    );
+  }
+
   //return subject list of student when parse id and grade
   getSubjectsOfSpecificStudent(studentid: string, grade: string) {
     return this.httpClient.post<{
@@ -74,15 +85,7 @@ export class TeacherService {
     );
   }
 
-  markStudentAttendence(teacherid: string, submitdata: string) {
-    return this.httpClient.post<{ update: boolean }>(
-      'http://localhost:3000/teacher/mark-attendence',
-      {
-        teahcerid: teacherid,
-        submitdata: submitdata,
-      }
-    );
-  }
+  
 
   xlsxFileReader(event) {
     const target: DataTransfer = <DataTransfer>event.target;

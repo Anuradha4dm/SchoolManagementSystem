@@ -17,8 +17,8 @@ export class OlAnalysisComponent implements OnInit {
   public gradeLabel = ['A','B','C','S','W'];
 
   //Count wise analysis details here
-  resultCount=[30,100];
-  resultLabel=['count','total'];
+  resultCount=[20,50,5];
+  resultLabel=['2019','2018','2017'];
 
 
   public myLegend="helo";
