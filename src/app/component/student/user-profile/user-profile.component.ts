@@ -65,7 +65,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
           this.gradeupdate =
             this.studentProfileData.graderegistration <
-            new Date().getFullYear();
+              new Date(2021, 1, 3).getFullYear() &&
+            parseInt(this.studentProfileData.grade.split('_')[0]) === 11;
 
           this.imagePath =
             'http://localhost:3000/' + this.studentProfileData.imagePath;

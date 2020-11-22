@@ -185,4 +185,53 @@ export class NonAcademicService {
       }
     );
   }
+
+  onSwitchClassOfStudentForTheYear(switchtype: string) {
+    return this.httpClient.post<{ gradeUpdate: boolean }>(
+      'http://localhost:3000/nonacademic/switch-class-students',
+      {
+        type: switchtype,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartOne(result: string, count: number) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('result', result.toUpperCase());
+    parameterSet = parameterSet.append('count', result.toUpperCase());
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-one',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartTwo(year: string, subjectid: string) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('year', year);
+    parameterSet = parameterSet.append('subjectid', subjectid);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-two',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartThree(year: string, result: string, count: string) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('year', year);
+    parameterSet = parameterSet.append('result', result);
+    parameterSet = parameterSet.append('count', count);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-two',
+      {
+        params: parameterSet,
+      }
+    );
+  }
 }
