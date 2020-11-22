@@ -184,4 +184,13 @@ export class NonAcademicService {
       }
     );
   }
+
+  onSwitchClassOfStudentForTheYear(switchtype: string) {
+    return this.httpClient.post<{ gradeUpdate: boolean }>(
+      'http://localhost:3000/nonacademic/switch-class-students',
+      {
+        type: switchtype,
+      }
+    );
+  }
 }

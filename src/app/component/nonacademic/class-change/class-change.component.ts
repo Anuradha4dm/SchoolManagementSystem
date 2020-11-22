@@ -12,6 +12,11 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class ClassChangeComponent implements OnInit {
   @ViewChild('formData', { static: true }) formDataRef: NgForm;
+  @ViewChild('classSwitchFormData', { static: true })
+  classSwitchFormData: NgForm;
+
+  progressbar: number = 0;
+  progressBarShow: boolean = false;
 
   currentGradeData: { grade: string; gradeid: number } = {
     grade: '',
@@ -83,5 +88,30 @@ export class ClassChangeComponent implements OnInit {
         this.alertMessageService.errorAlert(error.error.message);
       }
     );
+  }
+
+  onSubmitSwitchClass(classSwitchFormData: NgForm) {
+    this.progressBarShow = true;
+    const interval = setInterval(() => {
+      this.progressbar += 5;
+    }, 1000);
+
+    this.nonacademicService
+      .onSwitchClassOfStudentForTheYear(classSwitchFormData.value.switchtype)
+      .subscribe(
+        (data) => {
+          if (data.gradeUpdate) {
+            this.alertMessageService.competeAlert('Grape upadte is Done...');
+          }
+        },
+        (error) => {
+          this.alertMessageService.errorAlert(error.error.messsage);
+        },
+        () => {
+          clearInterval(interval);
+          this.progressbar = 100;
+          this.classSwitchFormData.reset();
+        }
+      );
   }
 }
