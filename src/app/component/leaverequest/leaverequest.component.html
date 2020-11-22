@@ -1,128 +1,105 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-  <div class="card">
-    <!--leave stats here-->
-    <div class="card-header">
-      <div class="row">
-        <div class="col bg-success text-center">
-          <h5>Leaves Available</h5>
-          <h5 class="bg-secondary">{{41-prevLeaveData.numberdflevestaken}}</h5>
-        </div>
+  <div class="row">
+    <!--Leave Request form here-->
+    <div class="col-md-7">
+        <div class="card card-body border border-dark">
+            <h4 class="text-center text-muted mb-4">Leave Request Form</h4>
+            <form #leaveForm="ngForm" (ngSubmit)="onLeaveSubmit(leaveForm.value)">
+              <div class="row">
 
-        <div class="col bg-danger text-center">
-          <h5>Leaves Taken</h5>
-          <h5 class="bg-secondary">{{prevLeaveData.numberdflevestaken}}</h5>
+                <div class="col">
+                  <label>User ID</label>
+                  <input type="text" [value]="loggedUserID" class="form-control" disabled />
+                </div>
+
+                <div class="col">
+                  <label>Date for the Leave</label>
+                  <input type="date" #date="ngModel" name="date" class="form-control" required ngModel/>
+                  <small class="error" *ngIf="date.touched && date.invalid">
+                    Date field is required
+                  </small>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Name</label>
+                  <input type="text" [value]="profile.firstname+' '+profile.lastname| titlecase" class="form-control" disabled />
+              </div>
+
+              <div class="form-group">
+                <label>Leave Type</label>
+                <select class="form-control w-50 p-1" name="type" [ngModel]="leaveType">
+                  <option value="0">Half-day</option>
+                  <option value="1">Short-leave</option>
+                  <option value="2">Full-day</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" [value]="profile.email" class="form-control" disabled />
+              </div>
+
+              <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" #description="ngModel" class="form-control" required ngModel></textarea>
+                <small class="error" *ngIf="description.touched && description.invalid">
+                  Description field is required
+                  </small>
+              </div>
+
+              <div class="form-group text-right">
+                <button type="submit" class="btn btn-success btn-sm" [disabled]="leaveForm.invalid">
+                  Submit
+                </button>
+
+                <button type="button" (click)="onCancelClick()" class="btn btn-danger btn-sm">
+                  Cancel
+                </button>
+              </div>
+            </form>
         </div>
-      </div>
     </div>
 
-    <div class="card-body">
-      <div class="row">
-        <!--leave form here-->
-        <div class="col border border-dark p-3 m-3">
-          <h5 class="text-center text-muted mb-4">Leave Request Form</h5>
-          <form
-            #leaveForm="ngForm"
-            (ngSubmit)="onLeaveSubmit(leaveForm.value)"
-          >
-            <div class="row">
-              <div class="col">
-                <label>User ID</label>
-                <input type="text" [value]="userID" class="form-control" disabled />
-              </div>
-              <div class="col">
-                <label>Date for the Leave</label>
-                <input
-                  type="date"
-                  #date="ngModel"
-                  name="date"
-                  class="form-control"
-                  required
-                  ngModel
-                />
-                <small class="error" *ngIf="date.touched && date.invalid"
-                  >Date field is required</small
-                >
-              </div>
-            </div>
-
-            <div class="form-group">
-              <label>Name</label>
-                <input type="text" [value]="profileData.fullname| titlecase" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
-              <label>Leave Type</label>
-              <select
-                class="form-control w-50 p-1"
-                name="type"
-                [ngModel]="leaveType"
-              >
-                <option value="0">Half-day</option>
-                <option value="1">Short-leave</option>
-                <option value="2">Full-day</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label>Mobile</label>
-              <input type="text" [value]="profileData.mobile" class="form-control" disabled />
-            </div>
-
-            <div class="form-group">
-              <label>Description</label>
-              <textarea
-                name="description"
-                #description="ngModel"
-                class="form-control"
-                required
-                ngModel
-              ></textarea>
-              <small
-                class="error"
-                *ngIf="description.touched && description.invalid"
-                >Description field is required</small
-              >
-            </div>
-
-            <div class="form-group text-right">
-              <button
-                type="submit"
-                class="btn btn-success btn-sm"
-                [disabled]="leaveForm.invalid"
-              >
-                Submit
-              </button>
-              <button type="button" (click)="onCancelClick()" class="btn btn-danger btn-sm">
-                Cancel
-              </button>
-            </div>
-          </form>
+    <!--Pending leave data here-->
+    <div class="col-md-5" *ngIf="pendingLeaves.length>0">
+        <!--Leave description here-->
+        <div class="row">
+          <div class="card card-body">
+            <h4 class="text-muted font-italic mb-3">Pending Leave data</h4>
+            <table class="table text-center">
+              <tr class="bg-info">
+                <th>Leave ID</th>
+                <th>Date for Leave</th>
+                <th>Type</th>
+              </tr>
+          
+              <tbody>
+                  <tr *ngFor="let leave of pendingLeaves">
+                    <td>{{leave.leaveid}}</td>
+                    <td>{{leave.leavedate}}</td>
+                    <td>{{leave.leavetype}}</td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <!--previous leave details here>
-        <div class="col mt-3">
-          <h5 class="text-center text-muted mb-3">Previous Leave Details</h5>
-
-          <table class="table text-center">
-            <tr>
-              <th>Leave Number</th>
-              <th>Date for Leave</th>
-              <th>Type</th>
-              <th>Status</th>
-            </tr>
-            <tbody>
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-            </tbody>
-          </table>
-        </div-->
-      </div>
+        <!--Available Leave stats here-->
+        <div class="row">
+          <div class="card card-body">
+            <h4 class="text-muted font-italic mb-5">Leave Stats</h4>
+            <canvas baseChart 
+              [data]="chartData" 
+              [labels]="chartLabel"
+              [options]="chartOption"
+              [colors]="chartColor" 
+              chartType="bar">
+            </canvas>
+        </div>
+  
     </div>
   </div>
 </div>

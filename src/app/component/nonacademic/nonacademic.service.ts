@@ -1,15 +1,44 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { LeadingComment } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
+import { LeaveData } from 'src/app/models/leavedata';
 
 @Injectable({ providedIn: 'root' })
 export class NonAcademicService {
   constructor(private httpClient: HttpClient) {}
 
+  //Return pending leave data 
   getPendingRequest() {
-    return this.httpClient.get(
+    return this.httpClient.get<LeaveData>(
       'http://localhost:3000/nonacademic/get-pending-request'
     );
+  }
+
+/*
+  getPendingLeaveData() {
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/get-pending-leaves'
+    );
+  }
+*/
+  getListOfSubjectsTeachedByTeacher(teacherid: string) {
+    return this.httpClient.get<{
+      subjectlist: {
+        subjectid: number;
+        subjectname: string;
+        assigndate: Date;
+        grade: string;
+      }[];
+    }>(
+      'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
+    );
+  }
+  
+  findFreeClassTeachers() {
+    return this.httpClient.get<{
+      teachers: { teacherid: string; username: string }[];
+    }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
   getClassTeacherForClassHandler(className: string) {
@@ -22,11 +51,6 @@ export class NonAcademicService {
     }>('http://localhost:3000/nonacademic/get-class-teacher/' + className);
   }
 
-  findFreeClassTeachers() {
-    return this.httpClient.get<{
-      teachers: { teacherid: string; username: string }[];
-    }>('http://localhost:3000/nonacademic/get-free-class-teacher');
-  }
 
   updateClassProperties(submitData: FormData) {
     return this.httpClient.post<{ success: boolean }>(
@@ -69,24 +93,7 @@ export class NonAcademicService {
     );
   }
 
-  getPendingLeaveData() {
-    return this.httpClient.get(
-      'http://localhost:3000/nonacademic/get-pending-leaves'
-    );
-  }
 
-  getListOfSubjectsTeachedByTeacher(teacherid: string) {
-    return this.httpClient.get<{
-      subjectlist: {
-        subjectid: number;
-        subjectname: string;
-        assigndate: Date;
-        grade: string;
-      }[];
-    }>(
-      'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
-    );
-  }
 
   updateTeacherSubjectList(submitData: {
     teacherid: string;
