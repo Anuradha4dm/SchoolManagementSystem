@@ -278,12 +278,31 @@ export class NonAcademicService {
     );
   }
 
+  //this gives the list of student for registred
   getRegisteredStudentListOfBothExams(year: number, type: boolean) {
     return this.httpClient.post(
       'http://localhost:3000/nonacademic/get-student-list-main-exam',
       {
         type: type,
         year: year,
+      }
+    );
+  }
+
+  //this will give th answer to the pending leaves
+  answerForPensdingLeaves(
+    answer: boolean,
+    nonacademicid: string,
+    leaveid: number,
+    message: string
+  ) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/answer-pending-leave',
+      {
+        nonacademicid: nonacademicid,
+        leaveid: leaveid,
+        answer: answer,
+        message: message, //message need to pass only for rejecting the request otherwise pass null empty string
       }
     );
   }
