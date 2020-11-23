@@ -1,4 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
 
@@ -228,9 +229,47 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('count', count);
 
     return this.httpClient.get(
-      'http://localhost:3000/nonacademic/ol-chart-two',
+      'http://localhost:3000/nonacademic/ol-chart-three',
       {
         params: parameterSet,
+      }
+    );
+  }
+
+  getAdvanceLevelChartOne(result: string, stream: string, count: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-one',
+      {
+        result: result,
+        count: count,
+        stream: stream,
+      }
+    );
+  }
+
+  getAdvanceLevelChartTwo(year: number, subjectid: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-two',
+      {
+        year: year,
+        subjectid: subjectid,
+      }
+    );
+  }
+
+  getAdvanceLevelChartThree(
+    year: number,
+    result: string,
+    count: number,
+    stream: string
+  ) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-three',
+      {
+        result: result,
+        year: year,
+        stream: stream,
+        count: count,
       }
     );
   }
