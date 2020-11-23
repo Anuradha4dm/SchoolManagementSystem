@@ -277,4 +277,14 @@ export class NonAcademicService {
       }
     );
   }
+
+  getRegisteredStudentListOfBothExams(year: number, type: boolean) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/get-student-list-main-exam',
+      {
+        type: type,
+        year: year,
+      }
+    );
+  }
 }
