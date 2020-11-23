@@ -2,7 +2,7 @@
 
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-6">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Notification</h4>
@@ -15,7 +15,7 @@
                 <tr>
                   <td>
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label> Select Category </label>
                         <select
                           name="category"
@@ -43,7 +43,7 @@
                 >
                   <td>
                     <div class="form-group">
-                      <div class="col-md-5">
+                      <div class="col-md-12">
                         <label *ngIf="catRef.value == 2"
                           >Number Of Teachers
                         </label>
@@ -88,7 +88,7 @@
                 <tr>
                   <td>
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label>From</label>
                         <input
                           type="text"
@@ -100,7 +100,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label>title</label>
                         <input
                           type="text"
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label>Remove At</label>
                         <input
                           type="date"
@@ -125,7 +125,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-md-11">
+                      <div class="col-md-12">
                         <label>Message</label>
                         <textarea
                           name="description"
@@ -140,14 +140,30 @@
                     </div>
 
                     <div class="col-md-8">
-                      <label>Attachment</label><br />
-                      <input
-                        type="file"
-                        name="attachement"
-                        id=""
-                        ngModel
-                        (change)="onFileSelect($event)"
-                      />
+                      <div class="col-auto">
+                        <div class="form-group">
+                          <label class="btn btn-outline-info">
+                            Add Attachement
+                            <input
+                              type="file"
+                              name="attachement"
+                              id=""
+                              ngModel
+                              (change)="onFileSelect($event)"
+                            />
+                          </label>
+                        </div>
+                      </div>
+
+                      <!-- <label class="btn btn btn-danger">
+                        <input
+                          type="file"
+                          name="attachement"
+                          id=""
+                          ngModel
+                          (change)="onFileSelect($event)"
+                        />
+                      </label> -->
                     </div>
                   </td>
                 </tr>
@@ -186,6 +202,26 @@
             <p>check notification before sending</p>
             <hr />
           </ng-template>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">Posted Notifications</h1>
+        </div>
+        <div class="card-body">
+          <div class="description">
+            <p>Here is the posts which posted by you</p>
+          </div>
+          <div>
+            <a style="cursor: pointer">
+              <div class="alert alert-info alert-with-icon">
+                <span data-notify="message"> data </span>
+              </div>
+            </a>
+          </div>
         </div>
       </div>
     </div>

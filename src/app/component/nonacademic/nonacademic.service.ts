@@ -1,4 +1,5 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
 
@@ -182,6 +183,93 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
       {
         params: paramsSet,
+      }
+    );
+  }
+
+  onSwitchClassOfStudentForTheYear(switchtype: string) {
+    return this.httpClient.post<{ gradeUpdate: boolean }>(
+      'http://localhost:3000/nonacademic/switch-class-students',
+      {
+        type: switchtype,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartOne(result: string, count: number) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('result', result.toUpperCase());
+    parameterSet = parameterSet.append('count', result.toUpperCase());
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-one',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartTwo(year: string, subjectid: string) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('year', year);
+    parameterSet = parameterSet.append('subjectid', subjectid);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-two',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartThree(year: string, result: string, count: string) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('year', year);
+    parameterSet = parameterSet.append('result', result);
+    parameterSet = parameterSet.append('count', count);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-three',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getAdvanceLevelChartOne(result: string, stream: string, count: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-one',
+      {
+        result: result,
+        count: count,
+        stream: stream,
+      }
+    );
+  }
+
+  getAdvanceLevelChartTwo(year: number, subjectid: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-two',
+      {
+        year: year,
+        subjectid: subjectid,
+      }
+    );
+  }
+
+  getAdvanceLevelChartThree(
+    year: number,
+    result: string,
+    count: number,
+    stream: string
+  ) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-three',
+      {
+        result: result,
+        year: year,
+        stream: stream,
+        count: count,
       }
     );
   }
