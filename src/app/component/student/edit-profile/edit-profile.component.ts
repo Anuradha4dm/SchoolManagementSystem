@@ -92,6 +92,7 @@ export class EditProfileComponent implements OnInit {
 
     if (this.gradeupdate) {
       form.append('grade', formData.value.Grade);
+      form.append('gradeRequest', 'true');
     } else {
       form.append('grade', this.studentData.grade);
     }
