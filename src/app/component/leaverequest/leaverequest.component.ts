@@ -23,9 +23,7 @@ export class LeaverequestComponent implements OnInit {
 
   public chartData = [];
   public chartLabel = ['Leaves Available','Leaves Taken'];
-  public chartColor: Colors[] = [{
-    backgroundColor: 'green',
-  }];
+
   public chartOption = {
     responsive: true,
     legend: false
@@ -66,12 +64,6 @@ export class LeaverequestComponent implements OnInit {
             return data.userid == this.loggedUserID;
         });
       });
-
-      this.nonService.findFreeClassTeachers().subscribe((data)=>{console.log("free class teachers",data)});
-
-      this.nonService.getListOfSubjectsTeachedByTeacher("AC_1").subscribe((data)=>{console.log("teacher subjects",data)});
-      //this.nonService.getPendingLeaveData().subscribe((data)=>{console.log("pending leave data",data)});
-      this.nonService.getPendingRequest().subscribe((data)=>{console.log("pending request",data)});
   }
 
   //Execute when fom submitted

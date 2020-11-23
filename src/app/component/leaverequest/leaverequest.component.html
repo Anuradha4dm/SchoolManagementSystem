@@ -64,9 +64,9 @@
     </div>
 
     <!--Pending leave data here-->
-    <div class="col-md-5" *ngIf="pendingLeaves.length>0">
+    <div class="col-md-5">
         <!--Leave description here-->
-        <div class="row">
+        <div class="row" *ngIf="pendingLeaves.length>0">
           <div class="card card-body">
             <h4 class="text-muted font-italic mb-3">Pending Leave data</h4>
             <table class="table text-center">
@@ -79,7 +79,7 @@
               <tbody>
                   <tr *ngFor="let leave of pendingLeaves">
                     <td>{{leave.leaveid}}</td>
-                    <td>{{leave.leavedate}}</td>
+                    <td>{{leave.leavedate| date}}</td>
                     <td>{{leave.leavetype}}</td>
                   </tr>
               </tbody>
@@ -91,14 +91,29 @@
         <div class="row">
           <div class="card card-body">
             <h4 class="text-muted font-italic mb-5">Leave Stats</h4>
-            <canvas baseChart 
+            <canvas class="bg-dark p-2" baseChart 
               [data]="chartData" 
               [labels]="chartLabel"
               [options]="chartOption"
-              [colors]="chartColor" 
-              chartType="bar">
+              chartType="doughnut">
             </canvas>
+
+            <div class="row">
+              <div class="col">
+                <label>Leaves Available</label>
+                <input type="text" class="form-control" [value]="profile.numberofleaves" disabled>
+              </div>
+      
+              <div class="col">
+                <label>Leaves Taken</label>
+                <input type="text" class="form-control" [value]="41-profile.numberofleaves" disabled>
+              </div>
+            </div>
+          </div>
         </div>
+
+
+
   
     </div>
   </div>

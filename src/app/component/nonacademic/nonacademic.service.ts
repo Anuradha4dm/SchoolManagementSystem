@@ -8,7 +8,7 @@ import { LeaveData } from 'src/app/models/leavedata';
 export class NonAcademicService {
   constructor(private httpClient: HttpClient) {}
 
-  //Return pending leave data 
+  //Return all pending leave requests data 
   getPendingRequest() {
     return this.httpClient.get<LeaveData>(
       'http://localhost:3000/nonacademic/get-pending-request'
