@@ -6,8 +6,8 @@ import {
   ViewChild,
 } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ThemeService } from 'ng2-charts';
-import { element } from 'protractor';
 import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
@@ -22,6 +22,34 @@ import { NonAcademicService } from '../nonacademic.service';
 export class SendNotificationComponent implements OnInit, OnDestroy {
   @ViewChild('formData', { static: false }) formDataRef: NgForm;
 
+  closeResult: string;
+
+  selectedNotification: {
+    notificationid: string;
+    from: string;
+    expire: Date;
+    message: string;
+    publisher: string;
+    to: string;
+    title: string;
+    attachmentpath: string;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+
+  allNotificationList: {
+    notificationid: string;
+    from: string;
+    expire: Date;
+    message: string;
+    publisher: string;
+    to: string;
+    title: string;
+    attachmentpath: string;
+    createdAt: Date;
+    updatedAt: Date;
+  }[] = [];
+
   selectedFile: File = null;
 
   userLoginData: LogInUserModel;
@@ -33,7 +61,8 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
   constructor(
     private userLoginService: UserLogInService,
     private nonacademicService: NonAcademicService,
-    private alertMessageService: AlertMessageService
+    private alertMessageService: AlertMessageService,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -42,6 +71,12 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
         this.userLoginData = userData;
       }
     );
+
+    this.nonacademicService.getAllNotifications().subscribe((data) => {
+      this.allNotificationList = data.notificationList;
+
+      console.log(this.allNotificationList);
+    });
   }
 
   onSubmit(formData: NgForm) {
@@ -187,5 +222,64 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.userLoginSubscription.unsubscribe();
+  }
+
+  open(content, index: number) {
+    this.selectedNotification = this.allNotificationList[index];
+    this.selectedFile = null;
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'lg',
+        windowClass: 'modal-xl',
+      })
+      .result.then(
+        (result) => {
+          this.closeResult = `Closed with: ${result}`;
+
+          if (result.expire === '') {
+            result.expire = this.selectedNotification.expire;
+          }
+
+          this.onUpdatePostData(
+            result,
+            this.selectedNotification.notificationid
+          );
+        },
+        (reason) => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+          console.log(reason);
+        }
+      );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
+  }
+
+  onUpdatePostData(updatePostData, notificationid) {
+    var formDataField = new FormData();
+
+    formDataField.append('notificationid', notificationid);
+    formDataField.append('nonacademicid', this.userLoginData.getUserId);
+    formDataField.append('from', updatePostData.from);
+    formDataField.append('expire', updatePostData.expire);
+    formDataField.append('message', updatePostData.message);
+    formDataField.append('title', updatePostData.title);
+    if (this.selectedFile != null) {
+      formDataField.append('attachment', this.selectedFile);
+    }
+
+    this.nonacademicService
+      .updateNotification(formDataField)
+      .subscribe((data) => {
+        console.log(data);
+      });
   }
 }

@@ -43,6 +43,23 @@ export class NonAcademicService {
     );
   }
 
+  getAllNotifications() {
+    return this.httpClient.get<{
+      notificationList: {
+        notificationid: string;
+        from: string;
+        expire: Date;
+        message: string;
+        publisher: string;
+        to: string;
+        title: string;
+        attachmentpath: string;
+        createdAt: Date;
+        updatedAt: Date;
+      }[];
+    }>('http://localhost:3000/nonacademic/get-all-notifications');
+  }
+
   getClassOfTheStudent(studentid: string) {
     return this.httpClient.get<{ grade: string; gradeid: number }>(
       'http://localhost:3000/nonacademic/get-class-student/' + studentid
@@ -198,7 +215,7 @@ export class NonAcademicService {
   getOrdinaryLeveChartOne(result: string, count: number) {
     var parameterSet = new HttpParams();
     parameterSet = parameterSet.append('result', result.toUpperCase());
-    parameterSet = parameterSet.append('count', result.toUpperCase());
+    parameterSet = parameterSet.append('count', count.toString());
 
     return this.httpClient.get(
       'http://localhost:3000/nonacademic/ol-chart-one',
@@ -270,6 +287,14 @@ export class NonAcademicService {
         stream: stream,
         count: count,
       }
+    );
+  }
+
+  updateNotification(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/update-notification',
+
+      formData
     );
   }
 }
