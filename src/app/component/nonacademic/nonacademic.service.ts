@@ -3,6 +3,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
 import { LeaveData } from 'src/app/models/leavedata';
+import { LastYearData, SubjectAnalysis } from 'src/app/models/teacher.model';
 
 @Injectable({ providedIn: 'root' })
 export class NonAcademicService {
@@ -92,8 +93,6 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/reset-student-subjects/' + studentid
     );
   }
-
-
 
   updateTeacherSubjectList(submitData: {
     teacherid: string;
@@ -202,12 +201,13 @@ export class NonAcademicService {
     );
   }
 
+  //Return year by year student count related to grade and count
   getOrdinaryLeveChartOne(result: string, count: number) {
     var parameterSet = new HttpParams();
     parameterSet = parameterSet.append('result', result.toUpperCase());
-    parameterSet = parameterSet.append('count', result.toUpperCase());
+    parameterSet = parameterSet.append('count', count.toString());
 
-    return this.httpClient.get(
+    return this.httpClient.get<{meyear: number,count: number}[]>(
       'http://localhost:3000/nonacademic/ol-chart-one',
       {
         params: parameterSet,
@@ -215,12 +215,12 @@ export class NonAcademicService {
     );
   }
 
-  getOrdinaryLeveChartTwo(year: string, subjectid: string) {
+  getOrdinaryLeveChartTwo(year: number, subjectid: number) {
     var parameterSet = new HttpParams();
-    parameterSet = parameterSet.append('year', year);
-    parameterSet = parameterSet.append('subjectid', subjectid);
+    parameterSet = parameterSet.append('year', year.toString());
+    parameterSet = parameterSet.append('subjectid', subjectid.toString());
 
-    return this.httpClient.get(
+    return this.httpClient.get<SubjectAnalysis>(
       'http://localhost:3000/nonacademic/ol-chart-two',
       {
         params: parameterSet,
@@ -228,13 +228,14 @@ export class NonAcademicService {
     );
   }
 
-  getOrdinaryLeveChartThree(year: string, result: string, count: string) {
+  //Return past year student grade and count total
+  getOrdinaryLeveChartThree(year: number, result: string, count: number) {
     var parameterSet = new HttpParams();
-    parameterSet = parameterSet.append('year', year);
+    parameterSet = parameterSet.append('year', year.toString());
     parameterSet = parameterSet.append('result', result);
-    parameterSet = parameterSet.append('count', count);
+    parameterSet = parameterSet.append('count', count.toString());
 
-    return this.httpClient.get(
+    return this.httpClient.get<LastYearData[]>(
       'http://localhost:3000/nonacademic/ol-chart-three',
       {
         params: parameterSet,
@@ -242,8 +243,9 @@ export class NonAcademicService {
     );
   }
 
+  //return student count year by year releted to grade and stream
   getAdvanceLevelChartOne(result: string, stream: string, count: number) {
-    return this.httpClient.post(
+    return this.httpClient.post<{meyear: number,count: number}[]>(
       'http://localhost:3000/nonacademic/al-chart-one',
       {
         result: result,
@@ -253,8 +255,9 @@ export class NonAcademicService {
     );
   }
 
+  //return grade count related to subject and year
   getAdvanceLevelChartTwo(year: number, subjectid: number) {
-    return this.httpClient.post(
+    return this.httpClient.post<SubjectAnalysis>(
       'http://localhost:3000/nonacademic/al-chart-two',
       {
         year: year,
@@ -263,13 +266,14 @@ export class NonAcademicService {
     );
   }
 
+  //return student details related to given result
   getAdvanceLevelChartThree(
     year: number,
     result: string,
     count: number,
     stream: string
   ) {
-    return this.httpClient.post(
+    return this.httpClient.post<LastYearData[]>(
       'http://localhost:3000/nonacademic/al-chart-three',
       {
         result: result,

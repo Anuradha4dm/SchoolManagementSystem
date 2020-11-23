@@ -13,21 +13,21 @@
                     <div class="row">
                             <div class="col">
                                 <label>Select Grade for Analysis</label>
-                                <select name="grade" class="form-control p-1">
+                                <select (change)="yearAnalysis(yearGrade=$event.target.value)" class="form-control p-1">
                                     <option [value]="grade" *ngFor="let grade of grades">{{grade}}</option>
                                 </select>
                             </div>
 
                             <div class="col">
                                 <label>Select Count</label>
-                                <select name="count" class="form-control p-1">
+                                <select (change)="yearAnalysis(yearCount=$event.target.value)" class="form-control p-1">
                                     <option [value]="count" *ngFor="let count of counter">{{count}}</option>
                                 </select>
                             </div>
                             
                             <div class="col">
                                 <label>Select Stream</label>
-                                <select name="count" class="form-control p-1">
+                                <select (change)="yearAnalysis(yearStream=$event.target.value)" class="form-control p-1">
                                     <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
                                 </select>
                             </div>
@@ -35,7 +35,13 @@
                      
                     <!--Year by year analysis chart here-->
                     <div class="form-group mt-4">
-                        <canvas class="bg-dark" baseChart [options]="myOption" [data]="resultCount" [labels]="resultLabel" chartType="line"></canvas>
+                        <canvas class="bg-dark" baseChart 
+                            [data]="yearStudentCount" 
+                            [labels]="yearLabels" 
+                            [options]="myOption"
+                            chartType="line"
+                            [legend]="false">
+                        </canvas>
                     </div> 
                 </div>
             </div>
@@ -49,21 +55,21 @@
                     <div class="row">
                         <div class="col">
                             <label>Select Grade for Analysis</label>
-                            <select name="grade" class="form-control p-1">
+                            <select (change)="lastGrade=$event.target.value" class="form-control p-1">
                                 <option [value]="grade" *ngFor="let grade of grades">{{grade}}</option>
                             </select>
                         </div>
 
                         <div class="col">
                             <label>Select Count</label>
-                            <select name="count" class="form-control p-1">
+                            <select (change)="lastCount=$event.target.value" class="form-control p-1">
                                 <option [value]="count" *ngFor="let count of counter">{{count}}</option>
                             </select>
                         </div>
                         
                         <div class="col">
                             <label>Select Stream</label>
-                            <select name="count" class="form-control p-1">
+                            <select (change)="lastStream=$event.target.value" class="form-control p-1">
                                 <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
                             </select>
                         </div>
@@ -71,12 +77,17 @@
                 
                     <div class="form-group text-center">
                         <button type="button" class="btn btn-success btn-sm" (click)="onAnalysisClick()">Analysis</button>
-                        <button type="button" class="btn btn-success btn-sm" (click)="getStudents()">{{show? 'Hide': 'Show'}} Students</button>
+                        <button type="button" class="btn btn-success btn-sm" (click)="getStudents()" [disabled]="!analysis">{{show? 'Hide': 'Show'}} Students</button>
                     </div>
     
                     <!--Past year details analysis pie chart here-->
                     <div class="form-group">
-                        <canvas class="bg-dark p-2" baseChart [data]="resultCount" [options]="myOption" [labels]="resultLabel" chartType="pie"></canvas>
+                        <canvas class="bg-dark p-2" 
+                            baseChart
+                            [data]="lastYearCount"
+                            [labels]="lastYearLabels"
+                            chartType="doughnut">
+                        </canvas>
                     </div>
                 </div>
             </div>
@@ -92,12 +103,12 @@
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
-                            <input type="number" [value]="year" class="form-control">
+                            <input type="number" [(ngModel)]="subjectYear" class="form-control">
                         </div>
     
                         <div class="col">
                             <label>Subject</label>
-                            <select class="form-control">
+                            <select (change)="subjectAnalysis(subjectId=$event.target.value)" class="form-control">
                                 <option>Maths</option>
                                 <option>Science</option>
                                 <option>Buddhism</option>
@@ -109,30 +120,43 @@
                     </div>
                     <!--Subject dougnut chart here-->
                     <div class="form-group mt-4">
-                        <canvas class="bg-dark p-2" baseChart [data]="gradeCount" [labels]="gradeLabel" [options]="myOption" chartType="doughnut"></canvas>
+                        <canvas class="bg-dark p-2"
+                            baseChart
+                            [data]="subjectCount"
+                            [labels]="subjectLabels"
+                            chartType="doughnut">
+                        </canvas>
                     </div>
                 </div>
             </div>
 
             <!--Student list or total count details here-->
             <div class="row">
-                <div class="card card-body m-2">
-                    <table class="table table-hover text-center">
+                <div class="card card-body m-2" *ngIf="show">
+                    <!--Cutoff section here-->
+                    <div class="form-group">
+                        <label>Enter Cuttoff Mark:</label>
+                        <input type="text" [(ngModel)]="cutoff" class="form-control w-50">
+                    </div>
+
+                    <table class="table text-center">
                         <tr class="bg-info">
                             <th>Index</th>
                             <th>Sudent ID</th>
                             <th>Distric Rank</th>
                             <th>Island Rank</th>
                             <th>Z score</th>
+                            <th>Class</th>
                         </tr>
     
                         <tbody>
-                            <tr *ngFor="let number of [1,2,3,4,5,6,7,8,9,10,11,12,13,14]| paginate: {currentPage: page,itemsPerPage: 10}">
-                                <td>{{number}}</td>
-                                <td>Sudent ID</td>
-                                <td>67</td>
-                                <td>267</td>
-                                <td>1.67</td>
+                            <tr *ngFor="let student of pastYearData| paginate: {currentPage: page,itemsPerPage: 10}" [class.bg]="student.islandrank>cutoff">
+                                <td>{{student.indexnumber}}</td>
+                                <td>{{student.studentid}}</td>
+                                <td>{{student.districtrank}}</td>
+                                <td>{{student.islandrank}}</td>
+                                <td>3</td>
+                                <td>{{student.class}}</td>
                             </tr>
                         </tbody>
                     </table>

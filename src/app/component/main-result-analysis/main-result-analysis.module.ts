@@ -6,6 +6,7 @@ import { OlAnalysisComponent } from './ol-analysis/ol-analysis.component';
 import { AlAnalysisComponent } from './al-analysis/al-analysis.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ChartsModule } from 'ng2-charts';
     CommonModule,
     MainResultAnalysisRoutingModule,
     NgxPaginationModule,
-    ChartsModule
+    ChartsModule,
+    FormsModule
   ]
 })
 export class MainResultAnalysisModule { }

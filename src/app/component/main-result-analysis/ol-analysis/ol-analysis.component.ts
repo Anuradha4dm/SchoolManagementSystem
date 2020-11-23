@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LastYearData } from 'src/app/models/teacher.model';
+import { NonAcademicService } from '../../nonacademic/nonacademic.service';
 
 @Component({
   selector: 'app-ol-analysis',
@@ -7,19 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OlAnalysisComponent implements OnInit {
   page: number =1; //for pagination
-  show: boolean =false; //for student list hide and show
+  show: boolean=false //to show and hide student list;
+  analysis: boolean = false; //to check done the analysis
   year: number =new Date().getFullYear()-1;
   grades: string[] = ['A','B','C','S','W'];
   counter: number[] = [0,1,2,3,4,5,6,7,8,9];
 
+  //Year by year analysis chart data here
+  allYearData=[];
+  allYearLabels=[];
+    allYearGrade="A";
+    allYearCount=0;
+
+  //Past yaer count wise analysis chart data here
+  pastYearData=[0,0];
+  pastYearLabels=["Student Count of the result","Total student of the year"];
+    pastYearGrade="A";
+    pastYearCount=0;
+    pastYearStudentData: LastYearData[];
+
+
+  //Subject analysis chart data here
+  subjectData=[];
+  subjectLabels=[];
+    subjectYear=this.year;
+    subjectId;
   //Subject wise analysis details here
-  public gradeCount = [10,20,30,40,50];
-  public gradeLabel = ['A','B','C','S','W'];
-
-  //Count wise analysis details here
-  resultCount=[20,50,5];
-  resultLabel=['2019','2018','2017'];
-
+ 
 
   public myLegend="helo";
   public myLabel=['A','B','C'];
@@ -41,20 +57,51 @@ export class OlAnalysisComponent implements OnInit {
   ];*/
 
 
-
-
-  constructor() { }
+  constructor(
+    private nonService: NonAcademicService
+  ) { }
 
   ngOnInit(): void {
+    this.allYearAnalysis(1);
   }
 
-  //Execute when analysis button click
-  onAnalysisClick(){
+  //Execute when year by year select box changes
+  allYearAnalysis(value){
+    this.allYearData=[];
+    this.allYearLabels=[];
 
+    this.nonService.getOrdinaryLeveChartOne(this.allYearGrade,this.allYearCount)
+      .subscribe((data)=>{
+        for(let i=0;i<data.length;i++){
+          this.allYearData.push(data[i].count);
+          this.allYearLabels.push(data[i].meyear);
+        }
+      });
   }
 
-  //Execute when students button click
-  getStudents(){
-    this.show = !this.show;
+  //Execute when analysis button clicks
+  pastYearAnalysis(){
+    this.pastYearData=[];
+    this.analysis = true;
+    this.nonService.getOrdinaryLeveChartThree(this.year,this.pastYearGrade,this.pastYearCount)
+      .subscribe((data)=>{
+        this.pastYearStudentData=data;
+        this.pastYearData.push(data.length);
+        //this.pastYearData.push(totalcount);
+      });
   }
+
+  subjectAnalysis(value){
+    this.subjectData=[];
+
+    this.nonService.getOrdinaryLeveChartTwo(this.subjectYear,2)
+      .subscribe((data)=>{
+        this.subjectData.push(data.acount);
+        this.subjectData.push(data.bcount);
+        this.subjectData.push(data.ccount);
+        this.subjectData.push(data.Scount);
+        this.subjectData.push(data.wcount);
+      });
+  }
+
 }
