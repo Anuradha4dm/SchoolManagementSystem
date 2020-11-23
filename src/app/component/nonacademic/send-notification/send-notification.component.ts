@@ -235,16 +235,40 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
       })
       .result.then(
         (result) => {
-          this.closeResult = `Closed with: ${result}`;
+          console.log(result === 'delete');
 
-          if (result.expire === '') {
-            result.expire = this.selectedNotification.expire;
+          if (result === 'delete') {
+            this.nonacademicService
+              .deletePostedNotification(
+                parseInt(this.selectedNotification.notificationid)
+              )
+              .subscribe(
+                (data) => {
+                  if (data.delete) {
+                    this.alertMessageService.competeAlert(
+                      'Post Delete Successfully'
+                    );
+                  }
+                },
+                (error) => {
+                  this.alertMessageService.errorAlert(error.error.message);
+                },
+                () => {
+                  this.allNotificationList.splice(index, 1);
+                }
+              );
+          } else {
+            this.closeResult = `Closed with: ${result}`;
+
+            if (result.expire === '') {
+              result.expire = this.selectedNotification.expire;
+            }
+
+            this.onUpdatePostData(
+              result,
+              this.selectedNotification.notificationid
+            );
           }
-
-          this.onUpdatePostData(
-            result,
-            this.selectedNotification.notificationid
-          );
         },
         (reason) => {
           this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

@@ -297,4 +297,11 @@ export class NonAcademicService {
       formData
     );
   }
+
+  deletePostedNotification(notificationid: number) {
+    console.log(notificationid);
+    return this.httpClient.get<{ delete: boolean }>(
+      'http://localhost:3000/nonacademic/delete-notification/' + notificationid
+    );
+  }
 }
