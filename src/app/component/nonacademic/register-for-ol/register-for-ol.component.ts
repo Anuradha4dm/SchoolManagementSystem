@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserLogInService } from '../../homepage/login/user-login.service';
+import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
   selector: 'app-register-for-ol',
@@ -7,16 +9,31 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class RegisterForOLComponent implements OnInit {
   @Input() year;
+  loggedUserID: string;
   show:boolean = false;
   page:number = 1;
 
-  constructor() { }
+  constructor(
+    private userLoginService: UserLogInService,
+    private nonService: NonAcademicService
+  ) { }
 
   ngOnInit(): void {
+    this.userLoginService.userAuthData.subscribe((userData) => {
+      this.loggedUserID = userData.getUserId;
+    });
   }
 
   onRowClick(){
     this.show = true;
+  }
+
+  //Executes when form submitted
+  onSubmit(){
+    this.nonService.registerStudentsForExams(this.loggedUserID,this.year,343134,"ST_1",2,false,["add","as"]
+    ).subscribe((data)=>{
+      console.log(data);
+    });
   }
 
 }

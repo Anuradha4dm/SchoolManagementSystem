@@ -9,35 +9,35 @@
                 <div class="col">
                     <div class="form-group">
                         <label>First Name</label>
-                        <input name="firstname" [(ngModel)]="teacherProfileData.firstname" type="text" class="form-control">
+                        <input name="firstname" [ngModel]="teacherProfileData.firstname| titlecase" type="text" class="form-control">
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input name="lastname" [(ngModel)]="teacherProfileData.lastname" type="text" class="form-control">
+                        <input name="lastname" [ngModel]="teacherProfileData.lastname| titlecase" type="text" class="form-control">
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Surname</label>
-                <input name="surname" [(ngModel)]="teacherProfileData.surname" type="text" class="form-control">
+                <input name="surname" [ngModel]="teacherProfileData.surname| titlecase" type="text" class="form-control">
             </div>
     
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name="username" class="form-control" [(ngModel)]="teacherProfileData.username" >
+                        <input type="text" name="username" class="form-control" [ngModel]="teacherProfileData.username" >
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="form-group">
-                        <label>Subject</label>
-                        <input type="text" class="form-control" [value]="teacherProfileData.subjects" disabled>
+                        <label>Age</label>
+                        <input type="text" name="age" class="form-control" [ngModel]="teacherProfileData.age" >
                     </div>
                 </div>
 
@@ -47,19 +47,26 @@
                         <input type="text" class="form-control" [value]="teacherProfileData.startyear" disabled>
                     </div>
                 </div>
+
+                <div *ngIf="teacherProfileData.class!='No Class...'" class="col">
+                    <div class="form-group">
+                        <label>Class</label>
+                        <input name="class" type="text" class="form-control" [value]="teacherProfileData.class">
+                    </div>
+                </div>
             </div>
 
             <!--Profile pic upload here-->
             <div class="row my-3">
                 <div class="col-auto">
-                    <img src="assets/img/mike.jpg" alt="profile pic">
+                    <img src="{{profilePic}}" alt="profile pic">
                 </div>
 
                 <div class="col-auto">
                     <div class="form-group">
                         <label class="btn btn-dark">
                             Select Profile Picture
-                            <input type="file">
+                            <input type="file" (change)="onChange($event)">
                         </label>
                     </div>
                 </div>
@@ -68,47 +75,41 @@
             <!--Personal details here-->
             <div class="form-group">
                 <label>Email</label>
-                <input name="email" [(ngModel)]="teacherProfileData.email" type="email" class="form-control">
+                <input name="email" [ngModel]="teacherProfileData.email" type="email" class="form-control">
             </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label>Mobile</label>
-                        <input name="mobile" [(ngModel)]="teacherProfileData.mobile" type="text" class="form-control">
-                    </div>
-                </div>
+            <div class="form-group">
+                <label>Mobile</label>
+                <input name="mobile" [ngModel]="teacherProfileData.mobile" type="text" class="form-control">
+            </div>
 
-                <div class="col">
-                    <div class="form-group">
-                        <label>Birth Date</label>
-                        <input name="birthdate" ngModel type="date" class="form-control">
-                    </div>
-                </div>
+            <div class="form-group">
+                <label>Qualifications (Enter by separating comma)</label>
+                <textarea name="qualifications" [ngModel]="teacherProfileData.qualifications" class="border border-primary-1 form-control"></textarea>
             </div>
 
             <div class="form-group">
                 <label>Address Line 1</label>
-                <input name="address1" ngModel type="text" class="form-control">
+                <input name="addressline1" [ngModel]="teacherProfileData.addressline1| titlecase" type="text" class="form-control">
             </div>
 
             <div class="form-group">
                 <label>Address Line 2</label>
-                <input name="address2" ngModel type="text" class="form-control">
+                <input name="addressline2" [ngModel]="teacherProfileData.addressline2| titlecase" type="text" class="form-control">
             </div>
 
             <div class="form-group">
                 <label>Address Line 3</label>
-                <input name="address3" ngModel type="text" class="form-control">
+                <input name="addressline3" [ngModel]="teacherProfileData.addressline3| titlecase" type="text" class="form-control">
             </div>
 
             <div class="form-group">
                 <label>City</label>
-                <input name="city" ngModel type="text" class="form-control w-50">
+                <input name="city" [ngModel]="teacherProfileData.city| titlecase" type="text" class="form-control w-50">
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-info" [disabled]="editTeacherForm.pristine">Update</button>
+                <button type="submit" class="btn btn-info">Update</button>
                 <button type="button" class="btn btn-danger" (click)="onResetClick()">Reset</button>
             </div>
         </form>

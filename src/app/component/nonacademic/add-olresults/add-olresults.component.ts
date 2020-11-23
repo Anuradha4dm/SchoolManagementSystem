@@ -24,7 +24,7 @@ export class AddOLresultsComponent implements OnInit {
   }
 
   //Execute when result change
-  onCange(value,i){
+  onChange(value,i){
     this.results[i]=value;
 
     this.Acount=this.results.filter((data)=>data=='A').length;

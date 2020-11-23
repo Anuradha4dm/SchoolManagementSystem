@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { UserLogInService } from '../../homepage/login/user-login.service';
+import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
   selector: 'app-add-alresults',
@@ -7,20 +9,27 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class AddALresultsComponent implements OnInit {
   @Input() year;
+  loggedUserID:string;
   show:boolean = false;
   page:number = 1; //for pagination
   results:string[]=[];
 
   //to contain grade count
-  Acount:number =0;
-  Bcount:number =0;
-  Ccount:number =0;
-  Scount:number =0;
-  Wcount:number =0;
+  Acount:number = 0;
+  Bcount:number = 0;
+  Ccount:number = 0;
+  Scount:number = 0;
+  Wcount:number = 0;
 
-  constructor() { }
+  constructor(
+    private userLoginService: UserLogInService,
+    private nonService: NonAcademicService
+  ) { }
 
   ngOnInit(): void {
+    this.userLoginService.userAuthData.subscribe((userData) => {
+      this.loggedUserID = userData.getUserId;
+    });
   }
 
   //Execute when result change
@@ -36,5 +45,15 @@ export class AddALresultsComponent implements OnInit {
 
   onRowClick(){
     this.show = true;
+    this.nonService.getSubjectDataForResultAddition("ST_1",2020)
+      .subscribe((data)=>{
+        console.log(data);
+      });
+  }
+
+  onSubmit(value){
+    this.nonService.addAdvanceLevelResults("NAC_1",123456,2020,23,43,"Maths",2,value)
+      .subscribe();
+      console.log(value);
   }
 }

@@ -1,11 +1,13 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
-import { ThemeService } from 'ng2-charts';
-import { map } from 'rxjs/operators';
-import { LogInUserModel } from 'src/app/models/login-user.model';
+import { Colors, ThemeService } from 'ng2-charts';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { LeaveService } from 'src/app/services/leave.service';
 import { UserLogInService } from '../homepage/login/user-login.service';
+import { NonAcademicService } from '../nonacademic/nonacademic.service';
+import { TeacherService } from '../teacher/teacher.service';
+import { ChartsModule } from 'ng2-charts';
+          
 
 @Component({
   selector: 'app-leaverequest',
@@ -13,51 +15,61 @@ import { UserLogInService } from '../homepage/login/user-login.service';
   styleUrls: ['./leaverequest.component.css'],
 })
 export class LeaverequestComponent implements OnInit {
-  loginUserData: LogInUserModel;
-  userLeaveData;
-  profileData;
-  prevLeaveData;
+  loggedUserID:string;
+  role: string;
+  profile;
+  pendingLeaves; //to contain logged user pending data
   leaveType: number =2;
-  userID: string;
+
+  public chartData = [];
+  public chartLabel = ['Leaves Available','Leaves Taken'];
+
+  public chartOption = {
+    responsive: true,
+    legend: false
+  };
+
 
   constructor(
     private userLoginService: UserLogInService,
+    private teacherService: TeacherService,
+    private nonService: NonAcademicService,
     private leaveService: LeaveService,
-    private alertService: AlertMessageService
+    private alertService: AlertMessageService,
   ) {}
 
   ngOnInit(): void {
     this.userLoginService.userAuthData.subscribe(
       (loginData) => {
-        this.loginUserData = loginData;
+        this.loggedUserID = loginData.getUserId;
+        this.role = loginData.role;
       },
       (error) => {
         console.log(error); //getting the data form the server side
       }
     );
 
-    this.leaveService
-      .getStaffData(this.loginUserData.getUserId, new Date().getFullYear())
-      .subscribe(
-        (data) => {
-          console.log(data); //lock data in the console
-          this.userLeaveData = data;
-        },
-        (error) => {},
-        () => {
-          //this is the place u can assign value
-          this.profileData = this.userLeaveData.profileData;
-          this.prevLeaveData = this.profileData.leaveData;
-          this.userID = this.loginUserData.getUserId; 
-        }
-      );
+    //Check logged user non academic or academic
+    if(this.role.toLowerCase()=="teacher"){
+      this.teacherService.getTeacherProfileData(this.loggedUserID)
+        .subscribe((data)=>{
+          this.profile = data;
+          this.chartData=[data.numberofleaves,41-data.numberofleaves];
+        });
+    }
+
+    this.nonService.getPendingRequest()
+      .subscribe((data)=>{
+          this.pendingLeaves=data.pendingLeaveData.filter((data)=>{
+            return data.userid == this.loggedUserID;
+        });
+      });
   }
 
-  //execute when fom submitted
+  //Execute when fom submitted
   onLeaveSubmit(formData) {
-    this.leaveService
-      .makeNewLeaveRequest(
-        this.loginUserData.getUserId,
+    this.leaveService.makeNewLeaveRequest(
+        this.loggedUserID,
         formData.date,
         formData.type,
         formData.description
@@ -70,12 +82,14 @@ export class LeaverequestComponent implements OnInit {
         },
         () => {
           this.alertService.competeAlert('Leave Requsest Is In Progress....');
+          this.ngOnInit();
         }
       );
   }
 
+  //Execute when cancel button click
   onCancelClick(){
-    window.location.reload();
+    this.ngOnInit();
   }
 
 }

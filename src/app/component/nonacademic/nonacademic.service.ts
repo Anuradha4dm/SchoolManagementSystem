@@ -1,16 +1,45 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { LeadingComment } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
+import { LeaveData } from 'src/app/models/leavedata';
 
 @Injectable({ providedIn: 'root' })
 export class NonAcademicService {
   constructor(private httpClient: HttpClient) {}
 
+  //Return all pending leave requests data
   getPendingRequest() {
-    return this.httpClient.get(
+    return this.httpClient.get<LeaveData>(
       'http://localhost:3000/nonacademic/get-pending-request'
     );
+  }
+
+  /*
+  getPendingLeaveData() {
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/get-pending-leaves'
+    );
+  }
+*/
+  getListOfSubjectsTeachedByTeacher(teacherid: string) {
+    return this.httpClient.get<{
+      subjectlist: {
+        subjectid: number;
+        subjectname: string;
+        assigndate: Date;
+        grade: string;
+      }[];
+    }>(
+      'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
+    );
+  }
+
+  findFreeClassTeachers() {
+    return this.httpClient.get<{
+      teachers: { teacherid: string; username: string }[];
+    }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
   getClassTeacherForClassHandler(className: string) {
@@ -21,12 +50,6 @@ export class NonAcademicService {
       qualifications: string;
       image: string;
     }>('http://localhost:3000/nonacademic/get-class-teacher/' + className);
-  }
-
-  findFreeClassTeachers() {
-    return this.httpClient.get<{
-      teachers: { teacherid: string; username: string }[];
-    }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
   updateClassProperties(submitData: FormData) {
@@ -67,25 +90,6 @@ export class NonAcademicService {
   subjectReset(studentid: string) {
     return this.httpClient.get<{ update: boolean }>(
       'http://localhost:3000/nonacademic/reset-student-subjects/' + studentid
-    );
-  }
-
-  getPendingLeaveData() {
-    return this.httpClient.get(
-      'http://localhost:3000/nonacademic/get-pending-leaves'
-    );
-  }
-
-  getListOfSubjectsTeachedByTeacher(teacherid: string) {
-    return this.httpClient.get<{
-      subjectlist: {
-        subjectid: number;
-        subjectname: string;
-        assigndate: Date;
-        grade: string;
-      }[];
-    }>(
-      'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
     );
   }
 

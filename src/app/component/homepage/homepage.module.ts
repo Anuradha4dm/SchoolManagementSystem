@@ -10,6 +10,7 @@ import { DownloadsComponent } from './downloads/downloads.component';
 import { HomeComponent } from './home/home.component';
 import { HomelayoutComponent } from './homelayout/homelayout.component';
 import { StaffComponent } from './staff/staff.component';
+import { PasswordResetComponent } from './password-reset/password-reset.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, RouterModule],
@@ -28,6 +29,7 @@ import { StaffComponent } from './staff/staff.component';
     AboutComponent,
     LoginComponent,
     DownloadsComponent,
+    PasswordResetComponent,
   ],
   providers: [],
 })

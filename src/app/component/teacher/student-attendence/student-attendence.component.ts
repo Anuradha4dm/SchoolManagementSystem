@@ -1,11 +1,9 @@
-import { isNull } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ClassStudentList } from 'src/app/models/teacher.model';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 
 import { UserLogInService } from '../../homepage/login/user-login.service';
-import { StudentListService } from '../student-list.service';
 import { TeacherService } from '../teacher.service';
 
 @Component({
@@ -30,7 +28,6 @@ export class StudentAttendenceComponent implements OnInit {
     private teacherService: TeacherService,
     private confirmationDialogService: ConfirmationDialogService,
     private toastr: ToastrService,
-    private studentListService: StudentListService
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +35,7 @@ export class StudentAttendenceComponent implements OnInit {
       this.teacherID = userData.getUserId;
     });
 
-    this.teacherService
-      .getClassStudentList(this.teacherID)
+    this.teacherService.getClassStudentList(this.teacherID)
       .subscribe((data) => {
         this.classStudentList = data;
       });
@@ -47,8 +43,10 @@ export class StudentAttendenceComponent implements OnInit {
 
   //execute when change the slider state
   onSliderChange(event) {
-    if (event.checked) this.absent -= 1;
-    else this.absent += 1;
+    if (event.checked)
+      this.absent -= 1;
+    else
+      this.absent += 1;
   }
 
   //execute when enter button click
@@ -69,9 +67,10 @@ export class StudentAttendenceComponent implements OnInit {
 
   //execute when form submit
   onAttendanceSubmit(formValue) {
-    this.studentListService.setDayAttendenceSubmit(true, new Date());
+    this.teacherService.markStudentAttendence(this.teacherID,formValue)
+      .subscribe();
 
-    this.toastr.info(
+      this.toastr.info(
       '<span class="now-ui-icons ui-1_bell-53"></span> Done Submition For ' +
         this.date,
       '',
@@ -84,10 +83,12 @@ export class StudentAttendenceComponent implements OnInit {
       }
     );
     this.doneSubmition = true;
-    console.log(this.date, this.classStudentList.grade, formValue);
   }
 
   onReSubmitbtnClick(formValue) {
+    this.teacherService.markStudentAttendence(this.teacherID,formValue)
+      .subscribe();
+
     this.confirmationDialogService
       .confirm(
         'Please confirm...',
@@ -96,10 +97,6 @@ export class StudentAttendenceComponent implements OnInit {
       .then((confirmed) => {
         if (confirmed) {
           this.doneSubmition = true;
-          ////sent directly this onbect
-          console.log(formValue);
-
-          this.studentListService.updateStudentOnline(formValue);
         }
       })
       .catch(() =>

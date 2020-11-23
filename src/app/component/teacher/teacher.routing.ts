@@ -15,6 +15,8 @@ import { TermTestResultsComponent } from './term-test-results/term-test-results.
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
+import { OlAnalysisComponent } from '../main-result-analysis/ol-analysis/ol-analysis.component';
+import { AlAnalysisComponent } from '../main-result-analysis/al-analysis/al-analysis.component';
 
 const routes: Routes = [
   {
@@ -67,6 +69,14 @@ const routes: Routes = [
         path: 'tsend-noti',
         component: TsendNotificationComponent,
       },
+      {
+        path: 'ol-analysis',
+        component: OlAnalysisComponent,
+      },
+      {
+        path: 'al-analysis',
+        component: AlAnalysisComponent,
+      }
       //to remove end
     ],
   },

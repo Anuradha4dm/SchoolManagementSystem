@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LogInUserModel } from 'src/app/models/login-user.model';
-import { ClassStudentList } from 'src/app/models/teacher.model';
+import { ClassStudentList, ITermResults } from 'src/app/models/teacher.model';
 import { idText } from 'typescript';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { TeacherService } from '../teacher.service';
@@ -12,13 +12,15 @@ import { TeacherService } from '../teacher.service';
 })
 export class EditTermResultsComponent implements OnInit {
   loginUserData: LogInUserModel;
+  studentPastResults: any[];
+
   classStudentList: ClassStudentList;
   studentsResult;
+  res;
   year: number = new Date().getFullYear();
   term: number = 1;
 
   show:boolean = false;
-
   selectedTerm: number;
 
   constructor(
@@ -54,13 +56,20 @@ export class EditTermResultsComponent implements OnInit {
       });
   }
 
-  onRowClick(){
-    //should pass idText,term and year
-    this.show=!this.show;
+  //Execute when click one row
+  onRowClick(studentid){
+    this.teacherService.getStudentPastResultForEdit(this.year-1,this.term,studentid)
+      .subscribe((data)=>{
+        this.studentPastResults = data.result}
+      );
+    this.show=true;
   }
 
-  onEditResultsClick(){
-    //need to parse edited subject list
+  onUpdateResultsClick(formvalue){
+    this.res=this.studentPastResults.map(formvalue);
+    this.teacherService.updateStudentResultAfterEdit(this.year,this.term,"ST_1",this.res)
+      .subscribe((data)=>{
+      });
   }
 
 }
