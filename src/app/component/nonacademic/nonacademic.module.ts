@@ -16,6 +16,7 @@ import { ClassChangeComponent } from './class-change/class-change.component';
 import { AddOLresultsComponent } from './add-olresults/add-olresults.component';
 import { AddALresultsComponent } from './add-alresults/add-alresults.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
     ClassChangeComponent,
     AddOLresultsComponent,
     AddALresultsComponent,
+    RegisterAlSubjectsComponent,
   ],
   imports: [
     CommonModule,

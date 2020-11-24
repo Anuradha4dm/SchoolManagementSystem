@@ -1,0 +1,8 @@
+td {
+  cursor: pointer;
+}
+
+.my-wanning {
+  color: red;
+  border-bottom: red solid 2px;
+}

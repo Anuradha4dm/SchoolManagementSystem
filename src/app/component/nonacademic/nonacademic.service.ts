@@ -2,6 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class NonAcademicService {
@@ -303,5 +304,42 @@ export class NonAcademicService {
     return this.httpClient.get<{ delete: boolean }>(
       'http://localhost:3000/nonacademic/delete-notification/' + notificationid
     );
+  }
+
+  getPendingAdvanceLevelRequest() {
+    return this.httpClient
+      .get<{
+        dataset: {
+          requestid: number;
+          stream: string;
+          allcount: boolean;
+          mathresult: boolean;
+          sinhalaresult: boolean;
+          viewcount: number;
+          state: number;
+          createdAt: Date;
+          studentId: string;
+          stateString: String;
+        }[];
+      }>('http://localhost:3000/nonacademic/get-advance-level-stream-register')
+      .pipe(
+        map((dataArray) => {
+          const dataHandler = dataArray.dataset.map((data) => {
+            if (data.state === 0) {
+              data.stateString = 'Reject';
+            }
+            if (data.state === 1) {
+              data.stateString = 'Allowed';
+            }
+            if (data.state === 2) {
+              data.stateString = 'Pending...';
+            }
+
+            return data;
+          });
+
+          return { dataset: dataHandler };
+        })
+      );
   }
 }
