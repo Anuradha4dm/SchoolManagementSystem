@@ -14,7 +14,11 @@ export class LeavehandleComponent implements OnInit {
   pendingLeaves: LeaveData;  //contain all pending leave request data
   selectedLeave;
   teacherProfileData: TeacherProfileData;
-  show = false;
+  show: boolean =false;
+  message: boolean =false;
+  accept: boolean =false;
+  title: string;
+  reason: string; //contain the reason to reject leave
 
   constructor(
     private nonAcademicService: NonAcademicService,
@@ -45,20 +49,39 @@ export class LeavehandleComponent implements OnInit {
     this.show = true;
   }
 
-  //Execute when allow button click 
-  handleLeave(text){
-    if(text=='allow')
-      this.alertService.competeAlert('Leave Accepted Successfully...');
+  //Execute when allow or reject button click 
+  handleLeave(value){
+    if(this.accept)
+      this.title = "Your request on " + this.selectedLeave.leavedate + " accepted";
     else
-      this.alertService.errorAlert('Leave Rejected Successfully...');
-      
-    this.show = false;
-    this.ngOnInit();
-    console.log(text);
+      this.title = "Your request on " + this.selectedLeave.leavedate + " rejected";
+
+    /*
+    
+*/      
+    this.message= true;
+   // this.ngOnInit();
   }
 
   //Execute when back button click 
   onBackClick(){
     this.show = false;
+    this.message =false;
   }
+
+  onSendClick(){
+    this.nonAcademicService.handleLeaves(
+      this.selectedLeave.leaveid,
+      this.accept,
+      this.selectedLeave.leavetype,
+      this.title+" "+this.reason
+    ).subscribe((data)=>{
+      console.log(data);
+        if(this.accept)
+          this.alertService.competeAlert('Leave Accepted Successfully...');
+        else
+          this.alertService.errorAlert('Leave Rejected Successfully...');
+      });
+      this.ngOnInit();
+    }
 }

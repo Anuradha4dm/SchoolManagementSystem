@@ -63,8 +63,8 @@
     
         <div class="form-group text-center">
           <button type="button" (click)="onBackClick()" class="btn btn-sm btn-info">Back</button>
-          <button type="button" (click)="handleLeave('allow')" class="btn btn-sm btn-success">Allow</button>
-          <button type="button" (click)="handleLeave('reject')" class="btn btn-sm btn-danger">Reject</button>
+          <button type="button" (click)="handleLeave(accept=true)" class="btn btn-sm btn-success">Allow</button>
+          <button type="button" (click)="handleLeave(accept=false)" class="btn btn-sm btn-danger">Reject</button>
         </div>
       </div>
     </div>
@@ -98,6 +98,27 @@
             <input type="text" [value]="teacherProfileData.numberofleaves" class="form-control" disabled> 
           </div>
         </div>
+    </div>
+  </div>
+
+  <!--Message field here-->
+  <div class="row w-75 mx-auto" *ngIf="message">
+    <div class="card card-body">
+      <h4 class="text-center p-2" [class.green]="accept" [class.red]="!accept">You are about to {{accept? 'accept':'reject'}} the leave request</h4>
+      <div class="form-group">
+        <label>Message</label>
+        <input type="text" [value]="title" class="form-control" disabled>
+      </div>
+
+      <div class="form-group" *ngIf="!accept">
+        <label>Reason:</label>
+        <textarea class="form-control border border-dark-1" [(ngModel)]="reason"></textarea>
+      </div>
+
+      <div class="form-group text-center">
+        <button class="btn btn-sm btn-info" (click)="onSendClick()">Send Message</button>
+        <button class="btn btn-sm btn-danger" (click)="message=false">Cancel</button>
+      </div>
     </div>
   </div>
 </div>

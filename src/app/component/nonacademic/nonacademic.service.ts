@@ -215,6 +215,7 @@ export class NonAcademicService {
     );
   }
 
+  //Return subject's A,B,C,S,W count related to year and subject
   getOrdinaryLeveChartTwo(year: number, subjectid: number) {
     var parameterSet = new HttpParams();
     parameterSet = parameterSet.append('year', year.toString());
@@ -280,6 +281,19 @@ export class NonAcademicService {
         year: year,
         stream: stream,
         count: count,
+      }
+    );
+  }
+
+  //update the leave status in leave table
+  handleLeaves(leaveid: number,answer: boolean,leavetype: number,message: string){
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/answer-pending-leave',
+      {
+        leaveid: leaveid,
+        answer: answer,
+        leavetype: leavetype,
+        message: message
       }
     );
   }
