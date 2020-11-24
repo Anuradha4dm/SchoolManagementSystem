@@ -319,7 +319,7 @@ export class NonAcademicService {
           state: number;
           createdAt: Date;
           studentId: string;
-          stateString: String;
+          stateString: string;
         }[];
       }>('http://localhost:3000/nonacademic/get-advance-level-stream-register')
       .pipe(
@@ -341,5 +341,26 @@ export class NonAcademicService {
           return { dataset: dataHandler };
         })
       );
+  }
+
+  responseForTheRequestedAdvanceLevelClass(
+    answer: number,
+    requestid: number,
+    nonacademicid: string,
+    studentid: string,
+    message?: string,
+    classname?: string
+  ) {
+    return this.httpClient.post<{ udpaterecode: boolean }>(
+      'http://localhost:3000/nonacademic/respose-advance-levl-registration',
+      {
+        answer: answer,
+        requestid: requestid,
+        nonacademicid: nonacademicid,
+        studentid: studentid,
+        message: message,
+        classname: classname,
+      }
+    );
   }
 }
