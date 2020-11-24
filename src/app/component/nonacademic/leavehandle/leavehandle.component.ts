@@ -18,8 +18,9 @@ export class LeavehandleComponent implements OnInit {
   show: boolean;
   message: boolean =false;
   accept: boolean =false;
+  leavetype:number;
   title: string;
-  reason: string; //contain the reason to reject leave
+  reason: string='.'; //contain the reason to reject leave
 
   constructor(
     private nonAcademicService: NonAcademicService,
@@ -51,11 +52,16 @@ export class LeavehandleComponent implements OnInit {
   }
 
   //Execute when allow or reject button click 
-  handleLeave(value){
+  handleLeave(value,type){
     if(this.accept)
       this.title = "Your request on " + this.selectedLeave.leavedate + " accepted";
     else
       this.title = "Your request on " + this.selectedLeave.leavedate + " rejected";
+
+    if(type=="Full Day")
+      this.leavetype=2;
+    else
+      this.leavetype=1;  
   
     this.message= true;
    // this.ngOnInit();
@@ -71,10 +77,10 @@ export class LeavehandleComponent implements OnInit {
     this.nonAcademicService.handleLeaves(
       this.selectedLeave.leaveid,
       this.accept,
-      this.selectedLeave.leavetype,
+      this.leavetype,
       this.title+" "+this.reason
     ).subscribe(
-      (data)=>{console.log(data)},
+      (data)=>{console.log(this.selectedLeave.leavetype)},
       (error)=>{console.log(error)},
       ()=>{
         if(this.accept)
