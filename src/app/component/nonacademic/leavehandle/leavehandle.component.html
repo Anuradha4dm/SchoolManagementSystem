@@ -4,8 +4,7 @@
   <!--All pending leaves here-->
   <div class="card card-body" *ngIf="!show">
     <h4 class="font-italic mb-4">Manage Leave Requests</h4>
-    <h5 class="text-muted text-center">Pending Leave Requests...</h5>
-    <table class="table table-hover text-center">
+    <table class="table table-hover text-center" *ngIf="pendingLeaves.pendingLeaveData.length>0">
       <tr class="bg-info">
         <th>Leave ID</th>
         <th>User ID</th>
@@ -22,6 +21,8 @@
         </tr>
       </tbody>
     </table>
+
+    <h3 class="text-center font-italic mt-4" *ngIf="pendingLeaves.pendingLeaveData.length==0">All leave requests are handled...</h3>
   </div>
 
   <!--Specific one leave here-->
@@ -102,7 +103,7 @@
   </div>
 
   <!--Message field here-->
-  <div class="row w-75 mx-auto" *ngIf="message">
+  <div class="row w-75 mx-auto" *ngIf="show && message">
     <div class="card card-body">
       <h4 class="text-center p-2" [class.green]="accept" [class.red]="!accept">You are about to {{accept? 'accept':'reject'}} the leave request</h4>
       <div class="form-group">
@@ -121,4 +122,5 @@
       </div>
     </div>
   </div>
+  
 </div>

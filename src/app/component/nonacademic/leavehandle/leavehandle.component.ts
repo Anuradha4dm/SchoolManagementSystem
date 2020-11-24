@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { windowWhen } from 'rxjs/operators';
 import { LeaveData } from 'src/app/models/leavedata';
 import { TeacherProfileData } from 'src/app/models/teacher.model';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
@@ -14,7 +15,7 @@ export class LeavehandleComponent implements OnInit {
   pendingLeaves: LeaveData;  //contain all pending leave request data
   selectedLeave;
   teacherProfileData: TeacherProfileData;
-  show: boolean =false;
+  show: boolean;
   message: boolean =false;
   accept: boolean =false;
   title: string;
@@ -55,10 +56,7 @@ export class LeavehandleComponent implements OnInit {
       this.title = "Your request on " + this.selectedLeave.leavedate + " accepted";
     else
       this.title = "Your request on " + this.selectedLeave.leavedate + " rejected";
-
-    /*
-    
-*/      
+  
     this.message= true;
    // this.ngOnInit();
   }
@@ -75,13 +73,16 @@ export class LeavehandleComponent implements OnInit {
       this.accept,
       this.selectedLeave.leavetype,
       this.title+" "+this.reason
-    ).subscribe((data)=>{
-      console.log(data);
+    ).subscribe(
+      (data)=>{console.log(data)},
+      (error)=>{console.log(error)},
+      ()=>{
         if(this.accept)
           this.alertService.competeAlert('Leave Accepted Successfully...');
         else
           this.alertService.errorAlert('Leave Rejected Successfully...');
+        this.show=false;
+        this.ngOnInit();
       });
-      this.ngOnInit();
-    }
+  }
 }
