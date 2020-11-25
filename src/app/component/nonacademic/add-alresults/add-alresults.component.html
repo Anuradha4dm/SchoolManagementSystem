@@ -27,12 +27,12 @@
                     <th>Stream</th>
                 </tr>
                 <tbody>
-                    <tr *ngFor="let student of [0,1,2,3,4,5,6,7,8,9,10,11]|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick()">
-                        <td>{{student}}</td>
-                        <td>145344</td>
-                        <td>ST_1</td>
-                        <td>My name</td>
-                        <td>Maths</td>
+                    <tr *ngFor="let i=index;let student of studentList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(student)">
+                        <td>{{i+1}}</td>
+                        <td>{{student.index}}</td>
+                        <td>{{student.studentid}}</td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.stream}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -56,20 +56,20 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Index Number</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="selectedStudent.index" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label>Student ID</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="selectedStudent.studentid" class="form-control" disabled>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Student Name</label>
-                <input type="text" class="form-control" disabled>
+                <input type="text" [value]="selectedStudent.name" class="form-control" disabled>
             </div>
 
             <!--Student subject list here-->
@@ -78,12 +78,12 @@
                     <!--Student subject list here-->
                     <div class="col">
                         <table>
-                            <tr *ngFor="let number of [1,2,3],let i=index"><!--loop here-->
+                            <tr *ngFor="let subject of subjectList,let i=index"><!--loop here-->
                                 <td>
-                                    <label>Subject name</label>
+                                    <label>{{subject.mesubjectname}}</label>
                                 </td>
                                 <td>
-                                    <select [name]="number" ngModel (change)="onChange($event.target.value,i)" class="form-control">
+                                    <select ngModel [name]="subject.mesubjectid" (change)="onChange($event.target.value,i)" class="form-control">
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -122,15 +122,15 @@
                 <div class="row my-3">
                     <div class="col">
                         <label>Z Score</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="zscore" [(ngModel)]="zscore" class="form-control">
                     </div>
                     <div class="col">
                         <label>Distric Rank</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="district" [(ngModel)]="district" class="form-control">
                     </div>
                     <div class="col">
                         <label>Island Rank</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="island" [(ngModel)]="island" class="form-control">
                     </div>
                 </div>
 
