@@ -2,7 +2,7 @@
 
 <div class="main-content">
   <div class="row">
-    <div class="col-md-10">
+    <div class="col-md-8">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Notification</h4>
@@ -15,7 +15,7 @@
                 <tr>
                   <td>
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label> Select Category </label>
                         <select
                           name="category"
@@ -43,7 +43,7 @@
                 >
                   <td>
                     <div class="form-group">
-                      <div class="col-md-5">
+                      <div class="col-md-12">
                         <label *ngIf="catRef.value == 2"
                           >Number Of Teachers
                         </label>
@@ -88,7 +88,7 @@
                 <tr>
                   <td>
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label>From</label>
                         <input
                           type="text"
@@ -100,7 +100,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label>title</label>
                         <input
                           type="text"
@@ -113,7 +113,7 @@
                     </div>
 
                     <div class="form-group">
-                      <div class="col-md-8">
+                      <div class="col-md-12">
                         <label>Remove At</label>
                         <input
                           type="date"
@@ -125,7 +125,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <div class="col-md-11">
+                      <div class="col-md-12">
                         <label>Message</label>
                         <textarea
                           name="description"
@@ -140,14 +140,30 @@
                     </div>
 
                     <div class="col-md-8">
-                      <label>Attachment</label><br />
-                      <input
-                        type="file"
-                        name="attachement"
-                        id=""
-                        ngModel
-                        (change)="onFileSelect($event)"
-                      />
+                      <div class="col-auto">
+                        <div class="form-group">
+                          <label class="btn btn-outline-info">
+                            Add Attachement
+                            <input
+                              type="file"
+                              name="attachement"
+                              id=""
+                              ngModel
+                              (change)="onFileSelect($event)"
+                            />
+                          </label>
+                        </div>
+                      </div>
+
+                      <!-- <label class="btn btn btn-danger">
+                        <input
+                          type="file"
+                          name="attachement"
+                          id=""
+                          ngModel
+                          (change)="onFileSelect($event)"
+                        />
+                      </label> -->
                     </div>
                   </td>
                 </tr>
@@ -189,5 +205,154 @@
         </div>
       </div>
     </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header">
+          <h1 class="title">Posted Notifications</h1>
+        </div>
+        <div class="card-body">
+          <div class="description">
+            <p>Here is the posts which posted by you</p>
+          </div>
+          <div *ngFor="let notification of allNotificationList; let i = index">
+            <a style="cursor: pointer" (click)="open(content, i)">
+              <div class="alert alert-info alert-with-icon">
+                <span data-notify="message"> {{ notification.title }} </span>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">
+      # Id : {{ selectedNotification.notificationid }}
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #updatePostData="ngForm">
+      <div class="row">
+        <div class="form-group">
+          <div class="col-md-9">
+            <label>Title</label>
+            <input
+              id="firstname"
+              class="form-control"
+              name="title"
+              [ngModel]="selectedNotification.title"
+              ngModel
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <div class="col-sm-12">
+            <label>From</label>
+            <input
+              id="firstname"
+              class="form-control"
+              name="from"
+              [ngModel]="selectedNotification.from"
+              ngModel
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-12">
+            <label>To</label>
+            <input
+              id="firstname"
+              class="form-control"
+              name="To"
+              [ngModel]="selectedNotification.to"
+              disabled
+            />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-12">
+            <label
+              >Expire In :{{
+                selectedNotification.expire | date: shortDate
+              }}</label
+            >
+            <input
+              type="date"
+              id="firstname"
+              class="form-control"
+              name="expire"
+              ngModel
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="form-group">
+          <div class="col-md-11">
+            <label>Message</label>
+            <textarea
+              name="message"
+              cols="60"
+              rows="20"
+              class="form-control"
+              [ngModel]="selectedNotification.message"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-7">
+          <input
+            type="file"
+            name="attachement"
+            (change)="onFileSelect($event)"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div style="float: left">
+    <div class="row">
+      <div class="col-md-12">
+        Published By {{ selectedNotification.publisher }} <br />
+        <i class="now-ui-icons loader_refresh spin"></i>
+        Updated At :{{ selectedNotification.createdAt | date: shortDate }}
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-success"
+      (click)="modal.close(updatePostData.value)"
+    >
+      Update
+    </button>
+
+    <button
+      type="button"
+      class="btn btn-outline-danger"
+      (click)="modal.close('delete')"
+    >
+      Delete
+    </button>
+  </div>
+</ng-template>

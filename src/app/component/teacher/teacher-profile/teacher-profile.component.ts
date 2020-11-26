@@ -10,8 +10,9 @@ import { TeacherService } from '../teacher.service';
   styleUrls: ['./teacher-profile.component.css'],
 })
 export class TeacherProfileComponent implements OnInit {
-  teacherProfileData;
   loggedTeacherID: string;
+  teacherProfileData: TeacherProfileData;
+  qualifications: string[];
 
   constructor(
     private userLoginService: UserLogInService,
@@ -24,12 +25,12 @@ export class TeacherProfileComponent implements OnInit {
       this.loggedTeacherID = data.getUserId;
     });
 
-    this.teacherService
-      .getTeacherProfileData(this.loggedTeacherID)
+    this.teacherService.getTeacherProfileData(this.loggedTeacherID)
       .subscribe((data) => {
-        // console.log(data);
         this.teacherProfileData = data;
+        this.qualifications=this.teacherProfileData.qualifications.toString().split(',');
       });
+    
   }
 
   //execute when edit profile click

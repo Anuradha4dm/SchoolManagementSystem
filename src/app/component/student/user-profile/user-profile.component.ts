@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Console } from 'console';
-import { ThemeService } from 'ng2-charts';
+
 import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
@@ -65,7 +64,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
           this.gradeupdate =
             this.studentProfileData.graderegistration <
-            new Date().getFullYear();
+              new Date(2021, 1, 3).getFullYear() &&
+            parseInt(this.studentProfileData.grade.split('_')[0]) === 11;
 
           this.imagePath =
             'http://localhost:3000/' + this.studentProfileData.imagePath;

@@ -2,6 +2,10 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LeavehandleComponent } from './leavehandle/leavehandle.component';
 import { HttpClientModule } from '@angular/common/http';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 import { NonAcademicRoutingModule } from './nonacademic.routing';
 import { AddEventComponent } from './add-event/add-event.component';
@@ -15,6 +19,8 @@ import { ExamLayoutComponent } from './exam-layout/exam-layout.component';
 import { RegisterForALComponent } from './register-for-al/register-for-al.component';
 import { RegisterForOLComponent } from './register-for-ol/register-for-ol.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
 
 @NgModule({
   declarations: [
@@ -27,15 +33,28 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AddALresultsComponent,
     ExamLayoutComponent,
     RegisterForALComponent,
-    RegisterForOLComponent
+    RegisterForOLComponent,
+    RegisterAlSubjectsComponent,
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     NonAcademicRoutingModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatCheckboxModule,
   ],
-  exports: [LeavehandleComponent, FormsModule, HttpClientModule],
+  exports: [
+    LeavehandleComponent,
+    FormsModule,
+    HttpClientModule,
+    MatRadioModule,
+    MatProgressBarModule,
+    MatTabsModule,
+    MatCheckboxModule,
+  ],
 })
 export class NonacademicModule {}

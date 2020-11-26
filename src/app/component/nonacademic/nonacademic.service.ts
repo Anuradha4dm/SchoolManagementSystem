@@ -1,15 +1,46 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { LeadingComment } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
+import { LeaveData } from 'src/app/models/leavedata';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class NonAcademicService {
   constructor(private httpClient: HttpClient) {}
 
+  //Return all pending leave requests data
   getPendingRequest() {
-    return this.httpClient.get(
+    return this.httpClient.get<LeaveData>(
       'http://localhost:3000/nonacademic/get-pending-request'
     );
+  }
+
+  /*
+  getPendingLeaveData() {
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/get-pending-leaves'
+    );
+  }
+*/
+  getListOfSubjectsTeachedByTeacher(teacherid: string) {
+    return this.httpClient.get<{
+      subjectlist: {
+        subjectid: number;
+        subjectname: string;
+        assigndate: Date;
+        grade: string;
+      }[];
+    }>(
+      'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
+    );
+  }
+
+  findFreeClassTeachers() {
+    return this.httpClient.get<{
+      teachers: { teacherid: string; username: string }[];
+    }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
   getClassTeacherForClassHandler(className: string) {
@@ -20,12 +51,6 @@ export class NonAcademicService {
       qualifications: string;
       image: string;
     }>('http://localhost:3000/nonacademic/get-class-teacher/' + className);
-  }
-
-  findFreeClassTeachers() {
-    return this.httpClient.get<{
-      teachers: { teacherid: string; username: string }[];
-    }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
   updateClassProperties(submitData: FormData) {
@@ -40,6 +65,23 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/add-notification',
       formData
     );
+  }
+
+  getAllNotifications() {
+    return this.httpClient.get<{
+      notificationList: {
+        notificationid: string;
+        from: string;
+        expire: Date;
+        message: string;
+        publisher: string;
+        to: string;
+        title: string;
+        attachmentpath: string;
+        createdAt: Date;
+        updatedAt: Date;
+      }[];
+    }>('http://localhost:3000/nonacademic/get-all-notifications');
   }
 
   getClassOfTheStudent(studentid: string) {
@@ -66,25 +108,6 @@ export class NonAcademicService {
   subjectReset(studentid: string) {
     return this.httpClient.get<{ update: boolean }>(
       'http://localhost:3000/nonacademic/reset-student-subjects/' + studentid
-    );
-  }
-
-  getPendingLeaveData() {
-    return this.httpClient.get(
-      'http://localhost:3000/nonacademic/get-pending-leaves'
-    );
-  }
-
-  getListOfSubjectsTeachedByTeacher(teacherid: string) {
-    return this.httpClient.get<{
-      subjectlist: {
-        subjectid: number;
-        subjectname: string;
-        assigndate: Date;
-        grade: string;
-      }[];
-    }>(
-      'http://localhost:3000/nonacademic/get-teacher-subject-list/' + teacherid
     );
   }
 
@@ -182,6 +205,196 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
       {
         params: paramsSet,
+      }
+    );
+  }
+
+  onSwitchClassOfStudentForTheYear(switchtype: string) {
+    return this.httpClient.post<{ gradeUpdate: boolean }>(
+      'http://localhost:3000/nonacademic/switch-class-students',
+      {
+        type: switchtype,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartOne(result: string, count: number) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('result', result.toUpperCase());
+    parameterSet = parameterSet.append('count', count.toString());
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-one',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartTwo(year: string, subjectid: string) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('year', year);
+    parameterSet = parameterSet.append('subjectid', subjectid);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-two',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getOrdinaryLeveChartThree(year: string, result: string, count: string) {
+    var parameterSet = new HttpParams();
+    parameterSet = parameterSet.append('year', year);
+    parameterSet = parameterSet.append('result', result);
+    parameterSet = parameterSet.append('count', count);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/ol-chart-three',
+      {
+        params: parameterSet,
+      }
+    );
+  }
+
+  getAdvanceLevelChartOne(result: string, stream: string, count: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-one',
+      {
+        result: result,
+        count: count,
+        stream: stream,
+      }
+    );
+  }
+
+  getAdvanceLevelChartTwo(year: number, subjectid: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-two',
+      {
+        year: year,
+        subjectid: subjectid,
+      }
+    );
+  }
+
+  getAdvanceLevelChartThree(
+    year: number,
+    result: string,
+    count: number,
+    stream: string
+  ) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/al-chart-three',
+      {
+        result: result,
+        year: year,
+        stream: stream,
+        count: count,
+      }
+    );
+  }
+
+  //this gives the list of student for registred
+  getRegisteredStudentListOfBothExams(year: number, type: boolean) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/get-student-list-main-exam',
+      {
+        type: type,
+        year: year,
+      }
+    );
+  }
+
+  //this will give th answer to the pending leaves
+  answerForPensdingLeaves(
+    answer: boolean,
+    nonacademicid: string,
+    leaveid: number,
+    message: string
+  ) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/answer-pending-leave',
+      {
+        nonacademicid: nonacademicid,
+        leaveid: leaveid,
+        answer: answer,
+        message: message,
+      }
+    );
+  }
+
+  //message need to pass only for rejecting the request otherwise pass null empty string
+  updateNotification(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/update-notification',
+
+      formData
+    );
+  }
+
+  deletePostedNotification(notificationid: number) {
+    console.log(notificationid);
+    return this.httpClient.get<{ delete: boolean }>(
+      'http://localhost:3000/nonacademic/delete-notification/' + notificationid
+    );
+  }
+
+  getPendingAdvanceLevelRequest() {
+    return this.httpClient
+      .get<{
+        dataset: {
+          requestid: number;
+          stream: string;
+          allcount: boolean;
+          mathresult: boolean;
+          sinhalaresult: boolean;
+          viewcount: number;
+          state: number;
+          createdAt: Date;
+          studentId: string;
+          stateString: string;
+        }[];
+      }>('http://localhost:3000/nonacademic/get-advance-level-stream-register')
+      .pipe(
+        map((dataArray) => {
+          const dataHandler = dataArray.dataset.map((data) => {
+            if (data.state === 0) {
+              data.stateString = 'Reject';
+            }
+            if (data.state === 1) {
+              data.stateString = 'Allowed';
+            }
+            if (data.state === 2) {
+              data.stateString = 'Pending...';
+            }
+
+            return data;
+          });
+
+          return { dataset: dataHandler };
+        })
+      );
+  }
+
+  responseForTheRequestedAdvanceLevelClass(
+    answer: number,
+    requestid: number,
+    nonacademicid: string,
+    studentid: string,
+    message?: string,
+    classname?: string
+  ) {
+    return this.httpClient.post<{ udpaterecode: boolean }>(
+      'http://localhost:3000/nonacademic/respose-advance-levl-registration',
+      {
+        answer: answer,
+        requestid: requestid,
+        nonacademicid: nonacademicid,
+        studentid: studentid,
+        message: message,
+        classname: classname,
       }
     );
   }

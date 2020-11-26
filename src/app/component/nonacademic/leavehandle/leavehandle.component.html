@@ -1,81 +1,103 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-  <div class="card card-body">
+  <!--All pending leaves here-->
+  <div class="card card-body" *ngIf="!show">
     <h4 class="font-italic mb-4">Manage Leave Requests</h4>
+    <h5 class="text-muted text-center">Pending Leave Requests...</h5>
+    <table class="table table-hover text-center">
+      <tr class="bg-info">
+        <th>Leave ID</th>
+        <th>User ID</th>
+        <th>Date for Leave</th>
+        <th>Type</th>
+      </tr>
 
-    <h5 class="text-center text-muted mb-5">Pending Leave Request List</h5>
+      <tbody>
+        <tr *ngFor="let leave of pendingLeaves.pendingLeaveData" (click)="onRowClick(leave)">
+          <td>{{leave.leaveid}}</td>
+          <td>{{leave.userid}}</td>
+          <td>{{leave.leavedate| date}}</td>
+          <td>{{leave.leavetype}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
-    <div class="row">
-      <!--All leave requests are here-->
-      <div class="col">
-        <table class="table text-center table-hover">
-          <tr>
-            <th>Leave Number</th>
-            <th>User ID</th>
-            <th>Date for Leave</th>
-          </tr>
-          <tbody>
-            <tr>
-              <td>{{ leaveNumber }}</td>
-              <td>{{ leaveuserID }}</td>
-              <td>{{ leaveDate }}</td>
-              <td>
-                <button
-                  (click)="onHandleClick()"
-                  class="btn btn-primary btn-sm"
-                >
-                  Handle
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+  <!--Specific one leave here-->
+  <div class="row" *ngIf="show">
+    <div class="col-md-6">
+      <div class="card card-body">
+        <h5 class="text-muted text-center mb-3">Leave Details</h5>
+        <!--Selected Leave main details here-->
+        <div class="row">
+          <div class="col">
+            <label>Leave ID</label>
+            <input type="text" [value]="selectedLeave.leaveid" class="form-control" disabled>
+          </div>
+      
+          <div class="col">
+            <label>User ID</label>
+            <input type="text" [value]="selectedLeave.userid" class="form-control" disabled>
+          </div>
+      
+          <div class="col">
+            <label>Leave Date</label>
+            <input type="text" [value]="selectedLeave.leavedate|date" class="form-control" disabled>
+          </div>
+      
+          <div class="col">
+            <label>Type</label>
+            <input type="text" [value]="selectedLeave.leavetype" class="form-control" disabled>
+          </div>
+        </div>
+        
+        <!--Description of leave-->
+        <div class="form-group">
+          <ul class="list-group mt-4">
+            <li class="list-group-item">Fulname: {{selectedLeave.fullname|titlecase}}</li>
+            <li class="list-group-item">Role: {{selectedLeave.roll|titlecase}}</li>
+            <li class="list-group-item">Description: {{selectedLeave.leavedescription|titlecase}}</li>
+          </ul>
+        </div>
+    
+        <div class="form-group text-center">
+          <button type="button" (click)="onBackClick()" class="btn btn-sm btn-info">Back</button>
+          <button type="button" (click)="handleLeave('allow')" class="btn btn-sm btn-success">Allow</button>
+          <button type="button" (click)="handleLeave('reject')" class="btn btn-sm btn-danger">Reject</button>
+        </div>
       </div>
+    </div>
 
-      <!--full detail of one leave-->
-      <div class="col border border-dark" *ngIf="show">
-        <table class="table">
-          <tbody>
-            <tr>
-              <th>Leave Number</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Date for Leave</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Leave Type</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>User ID</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Full Name</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Role</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Description</th>
-              <td></td>
-            </tr>
-            <tr>
-              <th>Leaves Left</th>
-              <td></td>
-            </tr>
-            <tr class="text-center">
-              <button class="btn btn-success">Accept</button>
-              <button class="btn btn-danger">Reject</button>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <!--Teacher class and subject details here-->
+    <div class="col-md-6">
+       <!--Subject section here-->
+       <div class="card card-body">
+          <h5 class="text-muted text-center mb-3">Teacher Details</h5>
+          <div *ngIf="teacherProfileData.class!='No Class...'" class="form-group">
+              <label>Class Teacher of</label>
+              <input type="text" [value]="teacherProfileData.class" class="form-control w-50" disabled>
+          </div>
+
+          <table class="table text-center">
+              <tr class="bg-secondary">
+                  <th>Subject</th>
+                  <th>Class</th>
+              </tr>
+              <tbody>
+                  <tr *ngFor="let subject of teacherProfileData.subjects">
+                      <td>{{subject.subjectname| titlecase}}</td>
+                      <td>{{subject.grade}}</td>
+                  </tr>
+              </tbody>
+          </table>
+
+          <!--Leave stats here-->
+          <div class="form-group w-25">
+            <label>Leaves Available</label>
+            <input type="text" [value]="teacherProfileData.numberofleaves" class="form-control" disabled> 
+          </div>
+        </div>
     </div>
   </div>
 </div>

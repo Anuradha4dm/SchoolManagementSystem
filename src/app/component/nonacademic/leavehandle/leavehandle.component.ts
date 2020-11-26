@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LeaveData } from 'src/app/models/leavedata';
+import { TeacherProfileData } from 'src/app/models/teacher.model';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
+import { TeacherService } from '../../teacher/teacher.service';
 import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
@@ -7,27 +11,54 @@ import { NonAcademicService } from '../nonacademic.service';
   styleUrls: ['./leavehandle.component.css'],
 })
 export class LeavehandleComponent implements OnInit {
-  leaveNumber = 92;
-  leaveDate = '21-04-2020';
-  leaveuserID = 'TC 1';
-  leaveType = 'full-day';
-  fname = 'damit';
-  lname = 'anurada';
-  description = 'kbfjhbjfhvbhfkwd';
-  leavesLeft = 41;
-  role = 'teacher';
+  pendingLeaves: LeaveData;  //contain all pending leave request data
+  selectedLeave;
+  teacherProfileData: TeacherProfileData;
   show = false;
 
-  constructor(private nonAcademicService: NonAcademicService) {}
+  constructor(
+    private nonAcademicService: NonAcademicService,
+    private teacherService: TeacherService,
+    private alertService: AlertMessageService
+  ) {}
 
   ngOnInit(): void {
-    this.nonAcademicService.getPendingRequest().subscribe((data) => {
-      //this is the palce leave comes
-      console.log(data);
+    this.nonAcademicService.getPendingRequest()
+      .subscribe((data) => {
+      this.pendingLeaves = data;
+      console.log(this.pendingLeaves);
     });
   }
 
-  onHandleClick() {
+  //Execute when click on row 
+  onRowClick(leave){
+    this.selectedLeave=this.pendingLeaves.pendingLeaveData
+      .find((data)=>{
+        return data.leaveid==leave.leaveid;
+      });
+
+    this.teacherService.getTeacherProfileData(leave.userid)
+    .subscribe((data) => {
+      this.teacherProfileData = data;
+    });
+    
     this.show = true;
+  }
+
+  //Execute when allow button click 
+  handleLeave(text){
+    if(text=='allow')
+      this.alertService.competeAlert('Leave Accepted Successfully...');
+    else
+      this.alertService.errorAlert('Leave Rejected Successfully...');
+      
+    this.show = false;
+    this.ngOnInit();
+    console.log(text);
+  }
+
+  //Execute when back button click 
+  onBackClick(){
+    this.show = false;
   }
 }

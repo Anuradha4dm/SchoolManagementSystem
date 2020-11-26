@@ -14,7 +14,7 @@ export class TeacherService {
 
   //return teacher profile data
   getTeacherProfileData(teacherid: string) {
-    return this.httpClient.get(
+    return this.httpClient.get<TeacherProfileData>(
       'http://localhost:3000/teacher/get-teacher-profile/' + teacherid
     );
   }
@@ -23,6 +23,17 @@ export class TeacherService {
   getClassStudentList(teacherid: string) {
     return this.httpClient.get<ClassStudentList>(
       'http://localhost:3000/teacher/class-student-list/' + teacherid
+    );
+  }
+
+  //add students attendance to database
+  markStudentAttendence(teacherid: string, submitdata: string) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/mark-attendence',
+      {
+        teahcerid: teacherid,
+        submitdata: submitdata,
+      }
     );
   }
 
@@ -36,7 +47,6 @@ export class TeacherService {
     });
   }
 
-  //return students past results with marks
   //submit student results to the database
   addStudentResult(studentResult) {
     return this.httpClient.post(
@@ -45,6 +55,7 @@ export class TeacherService {
     );
   }
 
+  //return students past results with marks
   getStudentPastResultForEdit(year: number, term: number, studentid: string) {
     return this.httpClient.post<{
       result: { subjectid: number; subjectname: string; mark: number }[];
@@ -74,15 +85,7 @@ export class TeacherService {
     );
   }
 
-  markStudentAttendence(teacherid: string, submitdata: string) {
-    return this.httpClient.post<{ update: boolean }>(
-      'http://localhost:3000/teacher/mark-attendence',
-      {
-        teahcerid: teacherid,
-        submitdata: submitdata,
-      }
-    );
-  }
+  
 
   xlsxFileReader(event) {
     const target: DataTransfer = <DataTransfer>event.target;
