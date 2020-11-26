@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { LastYearData } from 'src/app/models/teacher.model';
+import { sortAndDeduplicateDiagnostics } from 'typescript';
 import { NonAcademicService } from '../../nonacademic/nonacademic.service';
 
 @Component({
@@ -59,12 +60,13 @@ export class AlAnalysisComponent implements OnInit {
         for(let i=0;i<data.length;i++){
           this.yearStudentCount.push(data[i].count);
           this.yearLabels.push(data[i].meyear);
+          this.yearLabels.sort();
         }
       });
 
-    this.nonService.getMainExamResults(this.year,false).subscribe((data)=>{
+    this.nonService.getMainExamResults(this.year,true).subscribe((data)=>{
       this.pastYearALData=data;
-      console.log(this.pastYearALData)
+      console.log(this.pastYearALData.length)
     });
   }
 

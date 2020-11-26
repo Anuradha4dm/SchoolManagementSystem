@@ -65,7 +65,7 @@ export class OlAnalysisComponent implements OnInit {
   ngOnInit(): void {
     this.allYearAnalysis(1);
     
-    this.nonService.getMainExamResults(this.year,true).subscribe((data)=>{
+    this.nonService.getMainExamResults(this.year,false).subscribe((data)=>{
       this.pastYearOLData=data;
     });
   }

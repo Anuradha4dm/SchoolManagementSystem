@@ -20,7 +20,7 @@ export class LeavehandleComponent implements OnInit {
   accept: boolean =false;
   leavetype:number;
   title: string;
-  reason: string='.'; //contain the reason to reject leave
+  reason: string=' '; //contain the reason to reject leave
 
   constructor(
     private nonAcademicService: NonAcademicService,
@@ -54,9 +54,9 @@ export class LeavehandleComponent implements OnInit {
   //Execute when allow or reject button click 
   handleLeave(value,type){
     if(this.accept)
-      this.title = "Your request on " + this.selectedLeave.leavedate + " accepted";
+      this.title = "Your request on " + this.selectedLeave.leavedate+ " is accepted.";
     else
-      this.title = "Your request on " + this.selectedLeave.leavedate + " rejected";
+      this.title = "Your request on " + this.selectedLeave.leavedate + " is rejected.";
 
     if(type=="Full Day")
       this.leavetype=2;
