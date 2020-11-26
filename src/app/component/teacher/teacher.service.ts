@@ -19,6 +19,16 @@ export class TeacherService {
     );
   }
 
+  //need to create a route for this
+  updateTeacherProfile(teacherid: string,profileData){
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/update-teacher-profile',{
+        teacherid: teacherid,
+        data: profileData
+      }
+    );
+  }
+
   //return class students list of data when give teacher's id
   getClassStudentList(teacherid: string) {
     return this.httpClient.get<ClassStudentList>(
@@ -66,13 +76,12 @@ export class TeacherService {
     });
   }
 
-  //submit student results to the database
-
+  //submit student edited results to the database
   updateStudentResultAfterEdit(
     year: number,
     term: number,
     studentid: string,
-    result: { subjectid: number; mark: number }
+    result: { subjectid: number; mark: number }[]
   ) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/teacher/update-student-result',
@@ -85,7 +94,23 @@ export class TeacherService {
     );
   }
 
-  
+  //return students avarage related to grade and term
+  postGetAverageDataWithStudent(year: number, term: number, grade: string) {
+    return this.httpClient.post<{avarageData:{
+      average: number,
+      grade: string,
+      place: number,
+      term: number,
+      year: number,
+      _id: string}[]}>(
+      'http://localhost:3000/teacher/get-average-data',
+      {
+        year: year,
+        term: term,
+        grade: grade,
+      }
+    );
+  }
 
   xlsxFileReader(event) {
     const target: DataTransfer = <DataTransfer>event.target;
@@ -112,17 +137,6 @@ export class TeacherService {
     };
 
     reader.readAsBinaryString(target.files[0]);
-  }
-
-  postGetAverageDataWithStudent(year: number, term: number, grade: string) {
-    return this.httpClient.post(
-      'http://localhost:3000/teacher/get-average-data',
-      {
-        year: year,
-        term: term,
-        grade: grade,
-      }
-    );
   }
 
   mapDataFormTheServiceToStudent(studentid: string, subjectidArray: number[]) {

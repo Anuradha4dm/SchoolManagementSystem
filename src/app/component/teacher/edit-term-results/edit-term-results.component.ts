@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LogInUserModel } from 'src/app/models/login-user.model';
-import { ClassStudentList, ITermResults } from 'src/app/models/teacher.model';
-import { idText } from 'typescript';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { TeacherService } from '../teacher.service';
 
@@ -11,64 +9,77 @@ import { TeacherService } from '../teacher.service';
   styleUrls: ['./edit-term-results.component.css']
 })
 export class EditTermResultsComponent implements OnInit {
-  loginUserData: LogInUserModel;
-  studentPastResults: any[];
-
-  classStudentList: ClassStudentList;
-  studentsResult;
-  res;
+  loggedUserID: string;
+  classID: string;
   year: number = new Date().getFullYear();
-  term: number = 1;
+  selectedTerm: number=1;
+  selectedID: string; //to contain selected student id
+  avarageData=[]; //contain students avarage and position data of the term
+  studentPastResults;
 
+  page: number; //for pagination current page
   show:boolean = false;
-  selectedTerm: number;
+
+
 
   constructor(
     private userLoginService: UserLogInService,
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private alertService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
     this.userLoginService.userAuthData.subscribe((userData) => {
-      this.loginUserData = userData;
+      this.loggedUserID = userData.getUserId;
     });
 
-    this.teacherService.getClassStudentList(this.loginUserData.getUserId)
+    this.teacherService.getTeacherProfileData(this.loggedUserID)
       .subscribe((data)=>{
-        this.classStudentList = data;
-      });
+        this.classID = data.class;
+        this.onTermChange();
+      }); 
 
-    this.teacherService.getStudentPastResultForEdit(2019,1,"ST_1")
-      .subscribe((data)=>{
-        console.log(data);
-      });
-
-    this.selectedTerm=1; 
-
-    //to remove end
   }
 
+  //Execute when select box change,gives students avarage data
   onTermChange(){
-    this.teacherService.getStudentPastResultForEdit(2020,this.term,"ST_2")
+    this.teacherService.postGetAverageDataWithStudent(this.year,this.selectedTerm,this.classID)
       .subscribe((data)=>{
-        this.studentsResult = data;
-        console.log(this.studentsResult);
+        this.avarageData = data.avarageData;
       });
   }
 
   //Execute when click one row
   onRowClick(studentid){
-    this.teacherService.getStudentPastResultForEdit(this.year-1,this.term,studentid)
+    this.selectedID = studentid;
+
+    this.teacherService.getStudentPastResultForEdit(this.year,this.selectedTerm,studentid)
       .subscribe((data)=>{
-        this.studentPastResults = data.result}
-      );
+        this.studentPastResults = data;
+      });
     this.show=true;
   }
 
-  onUpdateResultsClick(formvalue){
-    this.res=this.studentPastResults.map(formvalue);
-    this.teacherService.updateStudentResultAfterEdit(this.year,this.term,"ST_1",this.res)
+  updateResults(formData){
+    let results = [];
+    
+    for(let key in formData){
+      results.push({subjectid: Number.parseInt(key), mark: formData[key] as number});
+    }
+    
+    this.teacherService.updateStudentResultAfterEdit(
+      this.year,
+      this.selectedTerm,
+      this.selectedID,
+      results)
       .subscribe((data)=>{
+        this.alertService.competeAlert("Results updated successfully..");
+      },
+      (error)=>{
+        console.log(error);
+      },
+      ()=>{
+        this.ngOnInit();
       });
   }
 

@@ -12,6 +12,7 @@ export class OlAnalysisComponent implements OnInit {
   show: boolean=false //to show and hide student list;
   analysis: boolean = false; //to check done the analysis
   year: number =new Date().getFullYear()-1;
+  pastYearOLData;
   grades: string[] = ['A','B','C','S','W'];
   counter: number[] = [0,1,2,3,4,5,6,7,8,9];
 
@@ -63,6 +64,10 @@ export class OlAnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     this.allYearAnalysis(1);
+    
+    this.nonService.getMainExamResults(this.year,true).subscribe((data)=>{
+      this.pastYearOLData=data;
+    });
   }
 
   //Execute when year by year select box changes
@@ -77,6 +82,7 @@ export class OlAnalysisComponent implements OnInit {
           this.allYearLabels.push(data[i].meyear);
         }
       });
+
   }
 
   //Execute when analysis button clicks
@@ -87,7 +93,8 @@ export class OlAnalysisComponent implements OnInit {
       .subscribe((data)=>{
         this.pastYearStudentData=data;
         this.pastYearData.push(data.length);
-        //this.pastYearData.push(totalcount);
+        this.pastYearData.push(this.pastYearOLData.length);
+        console.log(this.pastYearOLData.length);
       });
   }
 

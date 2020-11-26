@@ -7,7 +7,7 @@
             <!--Year by year analysis-->
             <div class="row">
                 <div class="card card-body m-2">
-                    <h3 class="font-italic">G.C.E. A/L Examination Results Analysis</h3>
+                    <h3 class="font-italic mb-4">G.C.E. A/L Examination Results Analysis</h3>
                     <h4 class="text-muted font-italic text-center">year by year analysis</h4>
                     <!--Result selection here to get student list-->
                     <div class="row">
@@ -89,12 +89,81 @@
                             chartType="doughnut">
                         </canvas>
                     </div>
+
+                    <!--Past year perfomance related students here-->
+                    <div class="form-group" *ngIf="show">
+                        <table class="table text-center">
+                            <tr class="bg-info">
+                                <th>Index</th>
+                                <th>Sudent ID</th>
+                                <th>Distric Rank</th>
+                                <th>Island Rank</th>
+                                <th>Z score</th>
+                                <th>Class</th>
+                            </tr>
+        
+                            <tbody>
+                                <tr *ngFor="let student of pastYearData| paginate: {currentPage: page,itemsPerPage: 10}">
+                                    <td>{{student.indexnumber}}</td>
+                                    <td>{{student.studentid}}</td>
+                                    <td>{{student.districtrank}}</td>
+                                    <td>{{student.islandrank}}</td>
+                                    <td>3</td>
+                                    <td>{{student.class}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!--Second main column here-->
         <div class="col-md-5">
+
+            <!--Past year A/L Student details here-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <h4 class="text-center text-muted mb-3 font-italic">Check Students for University Addmission</h4>
+                    <!--Cutoff section here-->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Enter Cuttoff Mark:</label>
+                            <input type="text" [(ngModel)]="cutoff" class="form-control w-50">
+                        </div>
+                        <div class="col">
+                            <label>Select Stream</label>
+                            <select (change)="yearAnalysis(yearStream=$event.target.value)" class="form-control p-1">
+                                <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <table class="table text-center">
+                       <tr class="bg-info">
+                            <th>Index</th>
+                            <th>Student ID</th>
+                            <th>District Rank</th>
+                            <th>Island Rank</th>
+                            <th>Z score</th>
+                       </tr>
+                       <tbody>
+                           <tr *ngFor="let result of pastYearALData|paginate: {currentPage: page,itemsPerPage: 15}"  [class.bg]="result.zscore>=cutoff">
+                               <td>{{result.indexnumber}}</td>
+                               <td>{{result.studentid}}</td>
+                               <td>{{result.districtrank}}</td>
+                               <td>{{result.islandrank}}</td>
+                               <td>{{result.zscore}}</td>
+                           </tr>
+                       </tbody>
+                    </table>
+                    
+                    <div class="form-group mx-auto">
+                        <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                    </div>
+                </div>
+            </div>
+
             <!--Subject wise analysis here-->
             <div class="row">
                 <div class="card card-body m-2">
@@ -105,7 +174,7 @@
                             <label>Year</label>
                             <input type="number" [(ngModel)]="subjectYear" class="form-control">
                         </div>
-    
+
                         <div class="col">
                             <label>Subject</label>
                             <select (change)="subjectAnalysis(subjectId=$event.target.value)" class="form-control">
@@ -129,43 +198,7 @@
                     </div>
                 </div>
             </div>
-
-            <!--Student list or total count details here-->
-            <div class="row">
-                <div class="card card-body m-2" *ngIf="show">
-                    <!--Cutoff section here-->
-                    <div class="form-group">
-                        <label>Enter Cuttoff Mark:</label>
-                        <input type="text" [(ngModel)]="cutoff" class="form-control w-50">
-                    </div>
-
-                    <table class="table text-center">
-                        <tr class="bg-info">
-                            <th>Index</th>
-                            <th>Sudent ID</th>
-                            <th>Distric Rank</th>
-                            <th>Island Rank</th>
-                            <th>Z score</th>
-                            <th>Class</th>
-                        </tr>
-    
-                        <tbody>
-                            <tr *ngFor="let student of pastYearData| paginate: {currentPage: page,itemsPerPage: 10}" [class.bg]="student.islandrank>cutoff">
-                                <td>{{student.indexnumber}}</td>
-                                <td>{{student.studentid}}</td>
-                                <td>{{student.districtrank}}</td>
-                                <td>{{student.islandrank}}</td>
-                                <td>3</td>
-                                <td>{{student.class}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-    
-                    <div class="row mx-auto">
-                        <pagination-controls (pageChange)="page=$event"></pagination-controls>
-                    </div>
-                </div>
-            </div>
+        
         </div>
     </div>
 </div>

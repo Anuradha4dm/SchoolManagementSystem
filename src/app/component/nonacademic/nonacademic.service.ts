@@ -288,6 +288,17 @@ export class NonAcademicService {
       );
     }
   
+     //return ol and al results related to any year
+     getMainExamResults(year: number, type: boolean){
+      return this.httpClient.post(
+        'http://localhost:3000/nonacademic/get-main-exam-results',{
+          year: year,
+          type: type
+        }
+      );
+    }
+
+    //get subject data of al and ol when give student
     getSubjectDataForResultAddition(studentid: string, year: number) {
       const paramsSet = new HttpParams().set('year', year.toString());
   
@@ -300,6 +311,5 @@ export class NonAcademicService {
         }
       );
     }
-
 
 }

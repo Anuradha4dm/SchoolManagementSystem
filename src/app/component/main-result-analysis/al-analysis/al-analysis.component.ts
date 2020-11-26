@@ -11,8 +11,9 @@ export class AlAnalysisComponent implements OnInit {
   page: number =1; //for pagination
   show: boolean =false; //for student list hide and show
   analysis: boolean=false; //for past year chart hide and show
-  cutoff=1.3;
+  cutoff: number=1.3;
   year: number =new Date().getFullYear()-1;
+  pastYearALData; //contain past year al data of students
   grades: string[] = ['A','B','C','S','W'];
   counter: number[] = [3,2,1,0];
   streams=["MATH"]
@@ -60,6 +61,11 @@ export class AlAnalysisComponent implements OnInit {
           this.yearLabels.push(data[i].meyear);
         }
       });
+
+    this.nonService.getMainExamResults(this.year,false).subscribe((data)=>{
+      this.pastYearALData=data;
+      console.log(this.pastYearALData)
+    });
   }
 
   //Execute when year analysis selection change
@@ -73,7 +79,6 @@ export class AlAnalysisComponent implements OnInit {
           this.yearStudentCount.push(data[i].count);
           this.yearLabels.push(data[i].meyear);
           console.log(this.yearLabels);
-          console.log(this.yearStudentCount);
         }
       });
   }
@@ -87,6 +92,7 @@ export class AlAnalysisComponent implements OnInit {
     .subscribe((data)=>{
       this.pastYearData=data;
       this.lastYearCount.push(this.pastYearData.length);
+      this.lastYearCount.push(this.pastYearALData.length);
       //this.lastYearCount.push(totalcount);
     });
   }

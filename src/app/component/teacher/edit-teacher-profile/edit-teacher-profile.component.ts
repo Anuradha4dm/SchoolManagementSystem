@@ -18,7 +18,8 @@ export class EditTeacherProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private alertMessage: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -72,6 +73,17 @@ export class EditTeacherProfileComponent implements OnInit {
     } else {
       form.append('imageData', this.selectedFile, this.imageFile);
     }
+
+    this.teacherService.updateTeacherProfile(this.loggedTeacherID,form)
+      .subscribe((data)=>{
+        console.log(value);
+      },
+      (error)=>{
+        console.log(error);
+      },
+      ()=>{
+        this.alertMessage.competeAlert("You have updated profile data successfully..");
+      });
 
     console.log(value);
   }
