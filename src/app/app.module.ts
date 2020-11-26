@@ -25,6 +25,7 @@ import { LeaverequestComponent } from './component/leaverequest/leaverequest.com
 import { NonacademicModule } from './component/nonacademic/nonacademic.module';
 import { SendEmilComponent } from './component/send-emil/send-emil.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
     LeaverequestComponent,
     SendEmilComponent,
     ResetPasswordComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,
