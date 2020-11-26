@@ -8,6 +8,7 @@ import { ClassChangeComponent } from './class-change/class-change.component';
 import { ClassHandlerComponent } from './class-handler/class-handler.component';
 import { ExamLayoutComponent } from './exam-layout/exam-layout.component';
 import { LeavehandleComponent } from './leavehandle/leavehandle.component';
+import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 
 const routes: Routes = [
@@ -22,7 +23,11 @@ const routes: Routes = [
       { path: 'student-class-change', component: ClassChangeComponent },
       { path: 'add-advance-level-result', component: AddALresultsComponent },
       { path: 'add-ordinary-level-result', component: AddOLresultsComponent },
-      {path: 'exams', component: ExamLayoutComponent},
+      { path: 'exams', component: ExamLayoutComponent },
+      {
+        path: 'register-advance-level-stream',
+        component: RegisterAlSubjectsComponent,
+      },
     ],
   },
 ];

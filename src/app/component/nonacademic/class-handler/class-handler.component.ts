@@ -109,7 +109,28 @@ export class ClassHandlerComponent implements OnInit, OnDestroy {
     private webSocketService: WebSocketService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subjectidListenerSubscription = this.webSocketService
+      .listen('subjectIdRes')
+      .subscribe(
+        (data) => {
+          console.log(data.subjectid);
+          this.newlyAddedSubject.subjectid = data.subjectid;
+        },
+        (error) => {
+          this.alertMessageService.errorAlert('Can Not Find Details....');
+        },
+        () => {
+          this.subjectList.push(this.newlyAddedSubject);
+          this.newlyAddedSubject = {
+            subjectid: 0,
+            subjectname: '',
+            assigndate: new Date(),
+            grade: '',
+          };
+        }
+      );
+  }
 
   onSubmit(formData: NgForm) {
     const form = new FormData();
@@ -210,27 +231,6 @@ export class ClassHandlerComponent implements OnInit, OnDestroy {
     this.newlyAddedSubject.subjectname = subjectname.toLocaleLowerCase();
     this.newlyAddedSubject.grade = classname.toUpperCase();
     this.newlyAddedSubject.assigndate = new Date();
-
-    this.subjectidListenerSubscription = this.webSocketService
-      .listen('subjectIdRes')
-      .subscribe(
-        (data) => {
-          console.log(data.subjectid);
-          this.newlyAddedSubject.subjectid = data.subjectid;
-        },
-        (error) => {
-          this.alertMessageService.errorAlert('Can Not Find Details....');
-        },
-        () => {
-          this.subjectList.push(this.newlyAddedSubject);
-          this.newlyAddedSubject = {
-            subjectid: 0,
-            subjectname: '',
-            assigndate: new Date(),
-            grade: '',
-          };
-        }
-      );
   }
 
   ngOnDestroy() {

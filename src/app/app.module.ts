@@ -26,6 +26,7 @@ import { NonacademicModule } from './component/nonacademic/nonacademic.module';
 import { SendEmilComponent } from './component/send-emil/send-emil.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { MainResultAnalysisModule } from './component/main-result-analysis/main-result-analysis.module';
+import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MainResultAnalysisModule } from './component/main-result-analysis/main-
     LeaverequestComponent,
     SendEmilComponent,
     ResetPasswordComponent,
+    ForgetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -54,7 +56,7 @@ import { MainResultAnalysisModule } from './component/main-result-analysis/main-
     NonacademicModule,
     NotificationModule,
     HomePageModule,
-    MainResultAnalysisModule
+    MainResultAnalysisModule,
   ],
   providers: [
     NotificationResolver,

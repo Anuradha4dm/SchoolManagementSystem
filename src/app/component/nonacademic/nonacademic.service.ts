@@ -4,6 +4,7 @@ import { LeadingComment } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
 import { LeaveData } from 'src/app/models/leavedata';
+import { map } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class NonAcademicService {
@@ -64,6 +65,23 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/add-notification',
       formData
     );
+  }
+
+  getAllNotifications() {
+    return this.httpClient.get<{
+      notificationList: {
+        notificationid: string;
+        from: string;
+        expire: Date;
+        message: string;
+        publisher: string;
+        to: string;
+        title: string;
+        attachmentpath: string;
+        createdAt: Date;
+        updatedAt: Date;
+      }[];
+    }>('http://localhost:3000/nonacademic/get-all-notifications');
   }
 
   getClassOfTheStudent(studentid: string) {
@@ -203,7 +221,7 @@ export class NonAcademicService {
   getOrdinaryLeveChartOne(result: string, count: number) {
     var parameterSet = new HttpParams();
     parameterSet = parameterSet.append('result', result.toUpperCase());
-    parameterSet = parameterSet.append('count', result.toUpperCase());
+    parameterSet = parameterSet.append('count', count.toString());
 
     return this.httpClient.get(
       'http://localhost:3000/nonacademic/ol-chart-one',
@@ -302,7 +320,81 @@ export class NonAcademicService {
         nonacademicid: nonacademicid,
         leaveid: leaveid,
         answer: answer,
-        message: message, //message need to pass only for rejecting the request otherwise pass null empty string
+        message: message,
+      }
+    );
+  }
+
+  //message need to pass only for rejecting the request otherwise pass null empty string
+  updateNotification(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/update-notification',
+
+      formData
+    );
+  }
+
+  deletePostedNotification(notificationid: number) {
+    console.log(notificationid);
+    return this.httpClient.get<{ delete: boolean }>(
+      'http://localhost:3000/nonacademic/delete-notification/' + notificationid
+    );
+  }
+
+  getPendingAdvanceLevelRequest() {
+    return this.httpClient
+      .get<{
+        dataset: {
+          requestid: number;
+          stream: string;
+          allcount: boolean;
+          mathresult: boolean;
+          sinhalaresult: boolean;
+          viewcount: number;
+          state: number;
+          createdAt: Date;
+          studentId: string;
+          stateString: string;
+        }[];
+      }>('http://localhost:3000/nonacademic/get-advance-level-stream-register')
+      .pipe(
+        map((dataArray) => {
+          const dataHandler = dataArray.dataset.map((data) => {
+            if (data.state === 0) {
+              data.stateString = 'Reject';
+            }
+            if (data.state === 1) {
+              data.stateString = 'Allowed';
+            }
+            if (data.state === 2) {
+              data.stateString = 'Pending...';
+            }
+
+            return data;
+          });
+
+          return { dataset: dataHandler };
+        })
+      );
+  }
+
+  responseForTheRequestedAdvanceLevelClass(
+    answer: number,
+    requestid: number,
+    nonacademicid: string,
+    studentid: string,
+    message?: string,
+    classname?: string
+  ) {
+    return this.httpClient.post<{ udpaterecode: boolean }>(
+      'http://localhost:3000/nonacademic/respose-advance-levl-registration',
+      {
+        answer: answer,
+        requestid: requestid,
+        nonacademicid: nonacademicid,
+        studentid: studentid,
+        message: message,
+        classname: classname,
       }
     );
   }

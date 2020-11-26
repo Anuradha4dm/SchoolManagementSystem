@@ -19,6 +19,8 @@ import { ExamLayoutComponent } from './exam-layout/exam-layout.component';
 import { RegisterForALComponent } from './register-for-al/register-for-al.component';
 import { RegisterForOLComponent } from './register-for-ol/register-for-ol.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ExamLayoutComponent,
     RegisterForALComponent,
     RegisterForOLComponent,
+    RegisterAlSubjectsComponent,
   ],
   imports: [
     CommonModule,
