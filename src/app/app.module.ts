@@ -27,6 +27,8 @@ import { SendEmilComponent } from './component/send-emil/send-emil.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { MainResultAnalysisModule } from './component/main-result-analysis/main-result-analysis.module';
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
+import { MarkAttendenceTeacherComponent } from './component/mark-attendence-teacher/mark-attendence-teacher.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
     SendEmilComponent,
     ResetPasswordComponent,
     ForgetPasswordComponent,
+    MarkAttendenceTeacherComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +60,7 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
     NotificationModule,
     HomePageModule,
     MainResultAnalysisModule,
+    NgxQRCodeModule,
   ],
   providers: [
     NotificationResolver,

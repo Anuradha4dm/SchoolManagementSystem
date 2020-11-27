@@ -14,6 +14,7 @@ import { TermTestResultsComponent } from './term-test-results/term-test-results.
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { TsendNotificationComponent } from './tsend-notification/tsend-notificat
     MatSlideToggleModule,
     RouterModule,
     TeacherRoutingModule,
+    NgxPaginationModule
   ],
   exports: [
     StudentListComponent,

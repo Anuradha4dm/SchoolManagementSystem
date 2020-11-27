@@ -111,6 +111,7 @@ export class EditProfileComponent implements OnInit {
         }, 1000);
       }
     );
+    console.log(form)
   }
 
   onReset() {

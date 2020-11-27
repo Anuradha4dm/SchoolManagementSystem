@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NonAcademicService } from '../../nonacademic/nonacademic.service';
 import { StudentProfileService } from '../../student/student-profile.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class TsendNotificationComponent implements OnInit {
  
   selectedList: string[]=["s"];
 
-  constructor(private ser: StudentProfileService) { }
+  constructor(
+  ) { }
 
   ngOnInit(): void {
   }
@@ -28,5 +30,6 @@ export class TsendNotificationComponent implements OnInit {
 
   //execute when send button click
   onSendClick(){
+    
   }
 }

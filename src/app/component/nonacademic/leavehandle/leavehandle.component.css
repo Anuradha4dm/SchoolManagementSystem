@@ -3,3 +3,13 @@ tbody tr:hover{
     color: white;
     cursor: pointer;
 }
+
+.green{
+    color: white;
+    background-color: green;
+}
+
+.red{
+    color: white;
+    background-color: crimson;
+}

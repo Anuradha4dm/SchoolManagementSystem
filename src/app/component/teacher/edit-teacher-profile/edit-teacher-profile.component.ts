@@ -18,7 +18,8 @@ export class EditTeacherProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private teacherService: TeacherService
+    private teacherService: TeacherService,
+    private alertMessage: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -50,21 +51,21 @@ export class EditTeacherProfileComponent implements OnInit {
     };
   }
 
-  onFormSubmit(value) {
+  onFormSubmit(formData) {
     const form = new FormData();
-    form.append('firstname', value.firstname);
-    form.append('lastname', value.lastname);
-    form.append('surname', value.surname);
-    form.append('username', value.username);
-    form.append('email', value.email);
-    form.append('mobile', value.mobile);
-    form.append('age', value.age);
+    form.append('firstname', formData.value.firstname);
+    form.append('lastname', formData.value.lastname);
+    form.append('surname', formData.value.surname);
+    form.append('username', formData.value.username);
+    form.append('email', formData.value.email);
+    form.append('mobile', formData.value.mobile);
+    form.append('age', formData.value.age);
 
 
-    form.append('addressline1', value.addressline1);
-    form.append('addressline2', value.addressline2);
-    form.append('addressline3', value.addressline3);
-    form.append('city', value.city);
+    form.append('addressline1', formData.value.addressline1);
+    form.append('addressline2', formData.value.addressline2);
+    form.append('addressline3', formData.value.addressline3);
+    form.append('city', formData.value.city);
 
 
     if (!this.selectedFile) {
@@ -73,7 +74,14 @@ export class EditTeacherProfileComponent implements OnInit {
       form.append('imageData', this.selectedFile, this.imageFile);
     }
 
-    console.log(value);
+    this.teacherService.updateTeacherProfile(this.loggedTeacherID,form)
+      .subscribe(
+      (data)=>{},
+      (error)=>{console.log(error)},
+      ()=>{
+        this.alertMessage.competeAlert("You have updated profile successfully");
+      });
+
   }
 
   //execute when reset click
