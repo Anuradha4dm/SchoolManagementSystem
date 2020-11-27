@@ -55,18 +55,10 @@ export class AlAnalysisComponent implements OnInit {
 
   ngOnInit(): void {
     //Return student count related to strem and grade year by year
-    this.nonService.getAdvanceLevelChartOne("A","MATH",3)
-      .subscribe((data)=>{
-        for(let i=0;i<data.length;i++){
-          this.yearStudentCount.push(data[i].count);
-          this.yearLabels.push(data[i].meyear);
-          this.yearLabels.sort();
-        }
-      });
+    this.yearAnalysis(1);
 
-    this.nonService.getMainExamResults(this.year,true).subscribe((data)=>{
-      this.pastYearALData=data;
-      console.log(this.pastYearALData.length)
+    this.nonService.getMainExamResults(this.year,1).subscribe((data)=>{
+      this.pastYearALData=data.result;
     });
   }
 
@@ -80,7 +72,6 @@ export class AlAnalysisComponent implements OnInit {
         for(let i=0;i<data.length;i++){
           this.yearStudentCount.push(data[i].count);
           this.yearLabels.push(data[i].meyear);
-          console.log(this.yearLabels);
         }
       });
   }
@@ -95,7 +86,6 @@ export class AlAnalysisComponent implements OnInit {
       this.pastYearData=data;
       this.lastYearCount.push(this.pastYearData.length);
       this.lastYearCount.push(this.pastYearALData.length);
-      //this.lastYearCount.push(totalcount);
     });
   }
 

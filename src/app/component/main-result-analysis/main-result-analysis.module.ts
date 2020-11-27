@@ -7,10 +7,12 @@ import { AlAnalysisComponent } from './al-analysis/al-analysis.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
+import { ViewOLComponent } from './view-ol/view-ol.component';
+import { ViewALComponent } from './view-al/view-al.component';
 
 
 @NgModule({
-  declarations: [OlAnalysisComponent, AlAnalysisComponent],
+  declarations: [OlAnalysisComponent, AlAnalysisComponent, ViewOLComponent, ViewALComponent, ],
   imports: [
     CommonModule,
     MainResultAnalysisRoutingModule,

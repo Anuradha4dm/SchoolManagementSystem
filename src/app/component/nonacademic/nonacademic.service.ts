@@ -229,8 +229,6 @@ export class NonAcademicService {
     });
   }
 
-
-
   onSwitchClassOfStudentForTheYear(switchtype: string) {
     return this.httpClient.post<{ gradeUpdate: boolean }>(
       'http://localhost:3000/nonacademic/switch-class-students',
@@ -289,8 +287,8 @@ export class NonAcademicService {
     }
   
      //return ol and al results related to any year
-     getMainExamResults(year: number, type: boolean){
-      return this.httpClient.post(
+     getMainExamResults(year: number, type: number){
+      return this.httpClient.post<{result: any[]}>(
         'http://localhost:3000/nonacademic/get-main-exam-results',{
           year: year,
           type: type

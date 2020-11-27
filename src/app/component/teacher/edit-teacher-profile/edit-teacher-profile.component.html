@@ -3,7 +3,7 @@
 <div class="main-content">
     <div class="card card-body">
         <h4 class="font-italic mb-4">Edit User Profile</h4>
-        <form #editTeacherForm="ngForm" (ngSubmit)="onFormSubmit(editTeacherForm.value)">
+        <form #formData="ngForm" (ngSubmit)="onFormSubmit(formData)">
             <!--Important detail section here-->
             <div class="row">
                 <div class="col">
@@ -51,7 +51,7 @@
                 <div *ngIf="teacherProfileData.class!='No Class...'" class="col">
                     <div class="form-group">
                         <label>Class</label>
-                        <input name="class" type="text" class="form-control" [value]="teacherProfileData.class">
+                        <input name="class" type="text" class="form-control" [value]="teacherProfileData.class" disabled>
                     </div>
                 </div>
             </div>

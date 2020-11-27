@@ -43,6 +43,7 @@ export class EditTermResultsComponent implements OnInit {
 
   //Execute when select box change,gives students avarage data
   onTermChange(){
+    this.show = false;
     this.teacherService.postGetAverageDataWithStudent(this.year,this.selectedTerm,this.classID)
       .subscribe((data)=>{
         this.avarageData = data.avarageData;

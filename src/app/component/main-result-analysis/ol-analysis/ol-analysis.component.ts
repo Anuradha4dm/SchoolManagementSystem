@@ -14,19 +14,19 @@ export class OlAnalysisComponent implements OnInit {
   year: number =new Date().getFullYear()-1;
   pastYearOLData;
   grades: string[] = ['A','B','C','S','W'];
-  counter: number[] = [0,1,2,3,4,5,6,7,8,9];
+  counter: number[] = [9,8,7,6,5,4,3,2,1,0];
 
   //Year by year analysis chart data here
   allYearData=[];
   allYearLabels=[];
     allYearGrade="A";
-    allYearCount=0;
+    allYearCount=9;
 
   //Past yaer count wise analysis chart data here
   pastYearData=[0,0];
   pastYearLabels=["Student Count of the result","Total student of the year"];
     pastYearGrade="A";
-    pastYearCount=0;
+    pastYearCount=9;
     pastYearStudentData: LastYearData[];
 
 
@@ -65,8 +65,9 @@ export class OlAnalysisComponent implements OnInit {
   ngOnInit(): void {
     this.allYearAnalysis(1);
     
-    this.nonService.getMainExamResults(this.year,false).subscribe((data)=>{
-      this.pastYearOLData=data;
+    this.nonService.getMainExamResults(this.year,0).subscribe((data)=>{
+      this.pastYearOLData=data.result;
+      console.log(this.pastYearOLData);
     });
   }
 
