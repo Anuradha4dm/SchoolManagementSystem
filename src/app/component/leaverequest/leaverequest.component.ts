@@ -22,7 +22,7 @@ export class LeaverequestComponent implements OnInit {
   leaveType: number =2;
 
   public chartData = [];
-  public chartLabel = ['Leaves Available','Leaves Taken'];
+  public chartLabel = ['Leaves Taken','Leaves Available'];
 
   public chartOption = {
     responsive: true,
@@ -54,7 +54,7 @@ export class LeaverequestComponent implements OnInit {
       this.teacherService.getTeacherProfileData(this.loggedUserID)
         .subscribe((data)=>{
           this.profile = data;
-          this.chartData=[data.numberofleaves,41-data.numberofleaves];
+          this.chartData=[41-data.numberofleaves,data.numberofleaves];
         });
     }
 

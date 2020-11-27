@@ -40,6 +40,24 @@ export interface ClassStudentList{
   }[];
 }
 
+//use to keep last year specific results student data
+export interface LastYearData{
+  class: string;
+  districtrank?: number;
+  islandrank?: number;
+  zscore?: number;
+  studentid: string;
+  indexnumber: number;
+}
+
+export interface SubjectAnalysis{
+  acount: number;
+  bcount: number;
+  ccount: number;
+  Scount: number;
+  wcount: number;
+}
+
 export interface ITermResults{
   subjectid: string;
   subjectname: string;
