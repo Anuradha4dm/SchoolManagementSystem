@@ -137,6 +137,7 @@ export class TeacherService {
     };
 
     reader.readAsBinaryString(target.files[0]);
+    return true;
   }
 
   mapDataFormTheServiceToStudent(studentid: string, subjectidArray: number[]) {

@@ -19,6 +19,7 @@ import { OlAnalysisComponent } from '../main-result-analysis/ol-analysis/ol-anal
 import { AlAnalysisComponent } from '../main-result-analysis/al-analysis/al-analysis.component';
 import { ViewALComponent } from '../main-result-analysis/view-al/view-al.component';
 import { ViewOLComponent } from '../main-result-analysis/view-ol/view-ol.component';
+import { ViewLayoutComponent } from '../main-result-analysis/view-layout/view-layout.component';
 
 const routes: Routes = [
   {
@@ -80,12 +81,8 @@ const routes: Routes = [
         component: AlAnalysisComponent,
       },
       {
-        path: 'al-view',
-        component: ViewALComponent,
-      },
-      {
-        path: 'ol-view',
-        component: ViewOLComponent,
+        path: 'view',
+        component: ViewLayoutComponent,
       }
       //to remove end
     ],

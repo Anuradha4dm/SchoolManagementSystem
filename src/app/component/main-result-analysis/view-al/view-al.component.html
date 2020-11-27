@@ -1,87 +1,83 @@
-<div class="panel-header"></div>
-
-<div class="main-content">
-    <div class="card card-body">
-        <h4 class="font-italic mb-4">View A/L Examination Results</h4>
-        <div class="row">
-            <!--All details here-->
-            <div class="col">
-                <div class="row mb-3">
-                    <!--Year selection-->
-                    <div class="col">
-                        <label>Select Year:</label>
-                        <input type="number" (change)="onYearChange()" [(ngModel)]="selectedYear" class="form-control">
-                    </div>
-
-                    <!--Stream filter section-->
-                    <div class="col">
-                        <label>Select Stream:</label>
-                        <select name="stream" [(ngModel)]="selectedStream" (change)="onStreamFilter()" class="form-control">
-                            <option value="ALL">All</option>
-                            <option value="MATH">Maths</option>
-                            <option>Bio</option>
-                            <option>Art</option>
-                            <option>Commerce</option>
-                            <option>Technology</option>
-                        </select>
-                    </div>
-
-                     <!--Shy filter section-->
-                     <div class="col">
-                        <label>Select Shy:</label>
-                        <select name="shy" (click)="onShyFilter()" class="form-control" [(ngModel)]="selectedShy">
-                            <option value="0">All</option>
-                            <option value="1">First</option>
-                            <option value="2">Second</option>
-                            <option value="3">Third</option>
-                        </select>
-                    </div>
+<div class="card card-body">
+    <h4 class="font-italic mb-4">View A/L Examination Results</h4>
+    <div class="row">
+        <!--All details here-->
+        <div class="col">
+            <div class="row mb-3">
+                <!--Year selection-->
+                <div class="col">
+                    <label>Select Year:</label>
+                    <input type="number" (change)="onYearChange()" [(ngModel)]="selectedYear" class="form-control">
                 </div>
 
-                <h5 class="text-muted text-center mb-3">G.C.E. A/L {{selectedYear}} Examination Results Table</h5>
-                <!--Results table here-->
-                <table class="table text-center">
-                    <tr class="bg-info">
-                        <th></th>
-                        <th>Index</th>
-                        <th>Student ID</th>
-                        <th>Shy</th>
-                        <th>District Rank</th>
-                        <th>Island Rank</th>
-                        <th>Z score</th>
-                        <th>A</th>
-                        <th>B</th>
-                        <th>C</th>
-                        <th>S</th>
-                        <th>W</th>
+                <!--Stream filter section-->
+                <div class="col">
+                    <label>Select Stream:</label>
+                    <select name="stream" [(ngModel)]="selectedStream" (change)="onStreamFilter()" class="form-control">
+                        <option value="ALL">All</option>
+                        <option value="MATH">Maths</option>
+                        <option>Bio</option>
+                        <option>Art</option>
+                        <option>Commerce</option>
+                        <option>Technology</option>
+                    </select>
+                </div>
+
+                    <!--Shy filter section-->
+                    <div class="col">
+                    <label>Select Shy:</label>
+                    <select name="shy" (click)="onShyFilter()" class="form-control" [(ngModel)]="selectedShy">
+                        <option value="0">All</option>
+                        <option value="1">First</option>
+                        <option value="2">Second</option>
+                        <option value="3">Third</option>
+                    </select>
+                </div>
+            </div>
+
+            <h5 class="text-muted text-center my-4">G.C.E. A/L {{selectedYear}} Examination Results Table</h5>
+            <!--Results table here-->
+            <table class="table text-center">
+                <tr class="bg-info">
+                    <th></th>
+                    <th>Index</th>
+                    <th>Student ID</th>
+                    <th>Shy</th>
+                    <th>District Rank</th>
+                    <th>Island Rank</th>
+                    <th>Z score</th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>S</th>
+                    <th>W</th>
+                </tr>
+                <tbody>
+                    <tr *ngFor="let i=index;let student of alData|paginate :{currentPage: page,itemsPerPage: 30}">
+                        <td>{{i+1}}</td>
+                        <td>{{student.indexnumber}}</td>
+                        <td>{{student.studentid}}</td>
+                        <td>{{student.shy}}</td>
+                        <td>{{student.districtrank}}</td>
+                        <td>{{student.islandrank}}</td>
+                        <td>{{student.zscore}}</td>
+                        <td>{{student.acount}}</td>
+                        <td>{{student.bcount}}</td>
+                        <td>{{student.ccount}}</td>
+                        <td>{{student.scount}}</td>
+                        <td>{{student.wcount}}</td>
                     </tr>
-                    <tbody>
-                        <tr *ngFor="let i=index;let student of alData|paginate :{currentPage: page,itemsPerPage: 30}">
-                            <td>{{i+1}}</td>
-                            <td>{{student.indexnumber}}</td>
-                            <td>{{student.studentid}}</td>
-                            <td>{{student.shy}}</td>
-                            <td>{{student.districtrank}}</td>
-                            <td>{{student.islandrank}}</td>
-                            <td>{{student.zscore}}</td>
-                            <td>{{student.acount}}</td>
-                            <td>{{student.bcount}}</td>
-                            <td>{{student.ccount}}</td>
-                            <td>{{student.scount}}</td>
-                            <td>{{student.wcount}}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                </tbody>
+            </table>
 
-                <div class="form-group text-center">
-                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
-                </div>
+            <div class="form-group text-center">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
             </div>
+        </div>
 
-            <!--Specific student details here-->
-            <div class="col-md-4" *ngIf="show">
-                
-            </div>
+        <!--Specific student details here-->
+        <div class="col-md-4" *ngIf="show">
+            
         </div>
     </div>
 </div>

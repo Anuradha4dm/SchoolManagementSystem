@@ -1,0 +1,23 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <!--Ol and al selection here-->
+    <div clas="row">
+        <div class="card card-body">
+            <div class="row">
+                <!--Exam selection here-->
+                <div class="col">
+                    <label>Select Examination:</label>
+                    <select name="exam" (change)="exam=$event.target.value" class="form-control w-50">
+                        <option value="0">G.C.E. O/L Examination</option>
+                        <option value="1">G.C.E. A/L Examination</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Body content here-->
+    <app-view-al *ngIf="exam"></app-view-al>
+    <app-view-ol *ngIf="!exam"></app-view-ol>
+</div>
