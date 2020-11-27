@@ -3,3 +3,8 @@ tbody tr:hover{
     color:white;
     background-color: black;
 }
+
+.bg{
+    background-color: green;
+    color: white;
+}

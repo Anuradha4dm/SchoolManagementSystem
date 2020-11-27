@@ -9,10 +9,16 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class AddALresultsComponent implements OnInit {
   @Input() year;
-  loggedUserID:string;
+  loggedUser:string;
   show:boolean = false;
   page:number = 1; //for pagination
   results:string[]=[];
+
+  selectedStudent; //contains details of selected student
+  subjectList; //contins selected student's subject data 
+  district=0;
+  island=0;
+  zscore=0;
 
   //to contain grade count
   Acount:number = 0;
@@ -21,6 +27,22 @@ export class AddALresultsComponent implements OnInit {
   Scount:number = 0;
   Wcount:number = 0;
 
+  //to remove start
+  studentList=[
+    {index:14100,studentid:"ST_1",name:"Randy Ortan",stream:"Maths"},
+    {index:14110,studentid:"ST_2",name:"Drew Macintyre",stream:"Commerce"},
+    {index:14120,studentid:"ST_3",name:"Brock Lesnar",stream:"Bio"},
+    {index:14130,studentid:"ST_4",name:"Triple H",stream:"Bio"},
+    {index:14140,studentid:"ST_5",name:"Jhon Cena",stream:"Bio"},
+    {index:14150,studentid:"ST_6",name:"Boby Lashlie",stream:"Bio"},
+    {index:14160,studentid:"ST_7",name:"Roman Reigns",stream:"Bio"},
+    {index:14170,studentid:"ST_8",name:"Seth Rolins",stream:"Bio"},
+    {index:14180,studentid:"ST_9",name:"Mat Hardy",stream:"Bio"},
+    {index:14180,studentid:"ST_10",name:"Ray Mystereo",stream:"Bio"},
+  ];
+  //to remove end
+
+
   constructor(
     private userLoginService: UserLogInService,
     private nonService: NonAcademicService
@@ -28,7 +50,7 @@ export class AddALresultsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLoginService.userAuthData.subscribe((userData) => {
-      this.loggedUserID = userData.getUserId;
+      this.loggedUser = userData.getUserId;
     });
   }
 
@@ -43,17 +65,35 @@ export class AddALresultsComponent implements OnInit {
     this.Wcount=this.results.filter((data)=>data=='W').length;
   }
 
-  onRowClick(){
+  //parse selected Student data
+  onRowClick(student){
+    this.selectedStudent=student;
     this.show = true;
-    this.nonService.getSubjectDataForResultAddition("ST_1",2020)
+
+    this.nonService.getSubjectDataForResultAddition(this.selectedStudent.studentid,this.year)
       .subscribe((data)=>{
-        console.log(data);
+        this.subjectList = data;
       });
   }
 
-  onSubmit(value){
-    this.nonService.addAdvanceLevelResults("NAC_1",123456,2020,23,43,"Maths",2,value)
-      .subscribe();
-      console.log(value);
+  onSubmit(formData){
+   let submitResults=[];
+
+    for (let key in formData) {
+      submitResults.push({ mesubjectid: key, meresult: formData[key] });
+    }
+
+    this.nonService.addAdvanceLevelResults(
+      this.loggedUser,
+      this.selectedStudent.index,
+      this.year,
+      this.island,
+      this.district,
+      this.selectedStudent.stream,
+      this.zscore,
+      submitResults
+    ).subscribe((data)=>{
+        console.log(data);
+      });
   }
 }
