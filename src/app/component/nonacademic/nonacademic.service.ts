@@ -1,5 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { LeadingComment } from '@angular/compiler';
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ThemeService } from 'ng2-charts';
 import { LeaveData } from 'src/app/models/leavedata';
@@ -16,6 +18,7 @@ export class NonAcademicService {
     );
   }
 
+  
    //update the leave status in leave table
    handleLeaves(leaveid: number,answer: boolean,leavetype: number,message: string){
 
@@ -254,76 +257,179 @@ export class NonAcademicService {
     );
   }
 
-    //this methos is used to add results of the ordinary level
-    addOrdinaryLevelResults(
-      nonacademicid: string,
-      indexnumber: number,
-      year: number,
-      islandrank: number,
-      districtrank: number,
-      results: { mesubjectid: number; meresult: string }[]
-    ) {
-      return this.httpClient.post<{ resultaddtion: boolean }>(
-        'http://localhost:3000/nonacademic/add-ordinary-level-results',
-        {
-          nonacademicid: nonacademicid,
-          indexnumber: indexnumber,
-          year: year,
-          islandrank: islandrank,
-          districtrank: districtrank,
-          results: results,
-        }
-      );
-    }
-  
-    //this method is used to add result of the advance level examination
-    addAdvanceLevelResults(
-      nonacademicid: string,
-      indexnumber: number,
-      year: number,
-      islandrank: number,
-      districtrank: number,
-      stream: string,
-      zscore: number,
-      results: { mesubjectid: number; meresult: string }[]
-    ) {
-      return this.httpClient.post<{ resultaddtion: boolean }>(
-        'http://localhost:3000/nonacademic/add-advance-lavel-result',
-        {
-          nonacademicid: nonacademicid,
-          indexnumber: indexnumber,
-          year: year,
-          islandrank: islandrank,
-          districtrank: districtrank,
-          stream: stream,
-          zscore: zscore,
-          results: results,
-        }
-      );
-    }
-  
-     //return ol and al results related to any year
-     getMainExamResults(year: number, type: number){
-      return this.httpClient.post<{result: any[]}>(
-        'http://localhost:3000/nonacademic/get-main-exam-results',{
-          year: year,
-          type: type
-        }
-      );
-    }
+  //this methos is used to add results of the ordinary level
+  addOrdinaryLevelResults(
+    nonacademicid: string,
+    indexnumber: number,
+    year: number,
+    islandrank: number,
+    districtrank: number,
+    results: { mesubjectid: number; meresult: string }[]
+  ) {
+    return this.httpClient.post<{ resultaddtion: boolean }>(
+      'http://localhost:3000/nonacademic/add-ordinary-level-results',
+      {
+        nonacademicid: nonacademicid,
+        indexnumber: indexnumber,
+        year: year,
+        islandrank: islandrank,
+        districtrank: districtrank,
+        results: results,
+      }
+    );
+  }
 
-    //get subject data of al and ol when give student
-    getSubjectDataForResultAddition(studentid: string, year: number) {
-      const paramsSet = new HttpParams().set('year', year.toString());
-  
-      return this.httpClient.get<{
-        responsedata: { mesubjectis: number; mesubjectname: string };
-      }>(
-        'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
-        {
-          params: paramsSet,
-        }
-      );
-    }
+  //this method is used to add result of the advance level examination
+  addAdvanceLevelResults(
+    nonacademicid: string,
+    indexnumber: number,
+    year: number,
+    islandrank: number,
+    districtrank: number,
+    stream: string,
+    zscore: number,
+    results: { mesubjectid: number; meresult: string }[]
+  ) {
+    return this.httpClient.post<{ resultaddtion: boolean }>(
+      'http://localhost:3000/nonacademic/add-advance-lavel-result',
+      {
+        nonacademicid: nonacademicid,
+        indexnumber: indexnumber,
+        year: year,
+        islandrank: islandrank,
+        districtrank: districtrank,
+        stream: stream,
+        zscore: zscore,
+        results: results,
+      }
+    );
+  }
 
+  //return ol and al results related to any year
+  getMainExamResults(year: number, type: number) {
+    return this.httpClient.post<{ result: any[] }>(
+      'http://localhost:3000/nonacademic/get-main-exam-results',
+      {
+        year: year,
+        type: type,
+      }
+    );
+  }
+
+  //get subject data of al and ol when give student
+  getSubjectDataForResultAddition(studentid: string, year: number) {
+    const paramsSet = new HttpParams().set('year', year.toString());
+
+    return this.httpClient.get<{
+      responsedata: { mesubjectis: number; mesubjectname: string };
+    }>(
+      'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
+      {
+        params: paramsSet,
+      }
+    );
+  }
+
+  //this gives the list of student for registred
+  getRegisteredStudentListOfBothExams(year: number, type: boolean) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/get-student-list-main-exam',
+      {
+        type: type,
+        year: year,
+      }
+    );
+  }
+
+  //this will give th answer to the pending leaves
+  answerForPensdingLeaves(
+    answer: boolean,
+    nonacademicid: string,
+    leaveid: number,
+    message: string
+  ) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/answer-pending-leave',
+      {
+        nonacademicid: nonacademicid,
+        leaveid: leaveid,
+        answer: answer,
+        message: message,
+      }
+    );
+  }
+
+  //message need to pass only for rejecting the request otherwise pass null empty string
+  updateNotification(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/update-notification',
+
+      formData
+    );
+  }
+
+  deletePostedNotification(notificationid: number) {
+    console.log(notificationid);
+    return this.httpClient.get<{ delete: boolean }>(
+      'http://localhost:3000/nonacademic/delete-notification/' + notificationid
+    );
+  }
+
+  getPendingAdvanceLevelRequest() {
+    return this.httpClient
+      .get<{
+        dataset: {
+          requestid: number;
+          stream: string;
+          allcount: boolean;
+          mathresult: boolean;
+          sinhalaresult: boolean;
+          viewcount: number;
+          state: number;
+          createdAt: Date;
+          studentId: string;
+          stateString: string;
+        }[];
+      }>('http://localhost:3000/nonacademic/get-advance-level-stream-register')
+      .pipe(
+        map((dataArray) => {
+          const dataHandler = dataArray.dataset.map((data) => {
+            if (data.state === 0) {
+              data.stateString = 'Reject';
+            }
+            if (data.state === 1) {
+              data.stateString = 'Allowed';
+            }
+            if (data.state === 2) {
+              data.stateString = 'Pending...';
+            }
+
+            return data;
+          });
+
+          return { dataset: dataHandler };
+        })
+      );
+  }
+
+  responseForTheRequestedAdvanceLevelClass(
+    answer: number,
+    requestid: number,
+    nonacademicid: string,
+    studentid: string,
+    message?: string,
+    classname?: string
+  ) {
+    return this.httpClient.post<{ udpaterecode: boolean }>(
+      'http://localhost:3000/nonacademic/respose-advance-levl-registration',
+      {
+        answer: answer,
+        requestid: requestid,
+        nonacademicid: nonacademicid,
+        studentid: studentid,
+        message: message,
+        classname: classname,
+      }
+    );
+  }
 }

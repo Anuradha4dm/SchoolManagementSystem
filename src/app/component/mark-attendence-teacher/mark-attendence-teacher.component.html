@@ -1,0 +1,63 @@
+<div class="panel-header"></div>
+<div class="main-content">
+  <div class="row my-view">
+    <div class="col-md-7">
+      <div class="card card-tasks">
+        <div class="card-header">
+          <h1 class="card-title">Mark Attendence</h1>
+          <h1 class="card-category">Mark Your Attendence By QR</h1>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onGenerateQR(formData)" #formData="ngForm">
+            <div class="card-content">
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="form-group">
+                    <label>Teacher ID</label>
+                    <input
+                      type="text"
+                      name="teacherid"
+                      class="form-control"
+                      minlength="4"
+                      [ngModel]="'AC_'"
+                      ngModel
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <ngx-qrcode
+                *ngIf="displayQR"
+                [elementType]="elementType"
+                [errorCorrectionLevel]="correctionLevel"
+                [value]="valueQR"
+                alt="Demo QR Code"
+                cssClass="bshadow"
+              ></ngx-qrcode>
+
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="btn-group">
+                    <input
+                      type="submit"
+                      class="btn btn-info form-control"
+                      value="Generate QR"
+                      [disabled]="!formData.valid"
+                    />
+                    <input
+                      type="button"
+                      class="btn btn-danger form-control"
+                      value="New QR"
+                      (click)="onRest()"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
