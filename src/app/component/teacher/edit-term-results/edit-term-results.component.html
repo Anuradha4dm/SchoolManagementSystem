@@ -12,12 +12,12 @@
 
             <div class="col">
                 <label>Class</label>
-                <input type="text" class="form-control" [value]="classStudentList.grade" disabled>
+                <input type="text" class="form-control" [value]="classID" disabled>
             </div>
 
             <div class="col">
                 <label>Term</label>
-                <select (change)="onTermChange()" class="form-control" [(ngModel)]="term">
+                <select (change)="onTermChange()" class="form-control" [(ngModel)]="selectedTerm">
                     <option value="1">Term1</option>
                     <option value="2">Term2</option>
                     <option value="3">Term3</option>
@@ -31,21 +31,20 @@
         <!--Breif description about result here-->
         <div class="col">
             <div class="card card-body">
+                <h4 class="text-center text-muted mb-4">{{classID}} Term {{selectedTerm}} results of {{year}}</h4>
                 <table class="table table-hover text-center">
                     <tr class="bg-primary">
                         <th>Student ID</th>
-                        <th>Full name</th>
                         <th>Average</th>
                         <th>Position</th>
                     </tr>
 
                     <tbody>
-                        <!--this should repeat-->
-                        <tr *ngFor="let student of classStudentList.studentListData" (click)="onRowClick(student._id)">
+                        <!--students results details-->
+                        <tr *ngFor="let i=index;let student of avarageData" (click)="onRowClick(student._id)" [class.bg]="i<3">
                             <td>{{student._id}}</td>
-                            <td>{{student.firstname +" "+ student.lastname| titlecase}}</td>
-                            <td>average</td>
-                            <td>position</td>
+                            <td>{{student.average| number: '.1-2'}}</td>
+                            <td>{{i+1}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -55,7 +54,7 @@
         <!--Edit results form here-->
         <div class="col-md-5" *ngIf="show">
             <div class="card card-body border border-dark p-3">
-                <form #EditResultForm="ngForm" (ngSubmit)="onUpdateResultsClick(EditResultForm.value)">
+                <form #EditResultForm="ngForm" (ngSubmit)="updateResults(EditResultForm.value)">
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
@@ -64,47 +63,39 @@
 
                         <div class="col">
                             <label>Class</label>
-                            <input type="text" class="form-control" [value]="classStudentList.grade" disabled>
+                            <input type="text" class="form-control" [value]="classID" disabled>
                         </div>
 
                         <div class="col">
                             <label>Term</label>
-                            <input type="text" class="form-control" [value]="term" disabled>
+                            <input type="text" class="form-control" [value]="selectedTerm" disabled>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>Full name</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="studentPastResults.fullname |titlecase" class="form-control" disabled>
                     </div>
 
                     <div class="form-group">
-                        <table class="table">
-                            <tr *ngFor="let result of studentPastResults">
+                        <table>
+                            <tr *ngFor="let result of studentPastResults.result">
                                 <td>
-                                    <label>{{result.subjectname| titlecase}}</label>
+                                    <label class="ml-4">{{result.subjectname| titlecase}}</label>
                                 </td>
                                 <td>
-                                    <input [name]="result.subjectid" type="text" [ngModel]="result.mark" class="w-50">
+                                    <input [name]="result.subjectid" type="text" [ngModel]="result.mark" class="form-control w-50 mb-1">
                                 </td>
                             </tr>
                        </table>
                     </div>
 
-                    <div class="form-group pull-right">
+                    <div class="form-group text-center">
                         <button type="submit" class="btn btn-info btn-sm">Update Results</button>
-                        <button class="btn btn-danger btn-sm">Cancel</button>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="show=false">Cancel</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
-       
-        <div class="row">
-          
-
-            <div >
-               
-            </div>
-        </div>
 </div>

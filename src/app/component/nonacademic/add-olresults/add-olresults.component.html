@@ -11,11 +11,12 @@
                     <th>Name</th>
                 </tr>
                 <tbody>
-                    <tr *ngFor="let student of [1,2,3,4,5,6,7,8]|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick()">
-                        <td>{{student}}</td>
-                        <td>145344</td>
-                        <td>ST_1</td>
-                        <td>My name</td>
+                    <!--change only the array to studentList-->
+                    <tr *ngFor="let i=index,let student of studentList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(student)">
+                        <td>{{i+1}}</td>
+                        <td>{{student.index}}</td>
+                        <td>{{student.studentid}}</td>
+                        <td>{{student.name}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -40,57 +41,57 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Index Number</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="selectedStudent.index" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="col">
                     <div class="form-group">
                         <label>Student ID</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="text" [value]="selectedStudent.studentid" class="form-control" disabled>
                     </div>
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Student Name</label>
-                <input type="text" class="form-control" disabled>
+                <input type="text" [value]="selectedStudent.name" class="form-control" disabled>
             </div>
 
-            <!--Student subject list here-->
-            <form>
-                <div class="row">
-                    <!--Result stats here-->
-                    <div class="col">
-                        <div class="card border border-dark p-4">
-                            <label>
-                                A count
-                                <input type="text" [value]="Acount" class="form-control w-50" disabled>
-                            </label>
-                            <label>
-                                B count
-                                <input type="text" [value]="Bcount" class="form-control w-50" disabled>
-                            </label>   <label>
-                                C count
-                                <input type="text" [value]="Ccount" class="form-control w-50" disabled>
-                            </label>   <label>
-                                S count
-                                <input type="text" [value]="Scount" class="form-control w-50" disabled>
-                            </label>   <label>
-                                W count
-                                <input type="text" [value]="Wcount" class="form-control w-50" disabled>
-                            </label>
-                        </div>
+        
+            <div class="row">
+                <!--Result stats here-->
+                <div class="col">
+                    <div class="card border border-dark p-4">
+                        <label>
+                            A count
+                            <input type="text" [value]="Acount" class="form-control w-50" disabled>
+                        </label>
+                        <label>
+                            B count
+                            <input type="text" [value]="Bcount" class="form-control w-50" disabled>
+                        </label>   <label>
+                            C count
+                            <input type="text" [value]="Ccount" class="form-control w-50" disabled>
+                        </label>   <label>
+                            S count
+                            <input type="text" [value]="Scount" class="form-control w-50" disabled>
+                        </label>   <label>
+                            W count
+                            <input type="text" [value]="Wcount" class="form-control w-50" disabled>
+                        </label>
                     </div>
-                    
-                    <!--Student subject list here-->
+                </div>
+                
+                <!--Student subject list here-->
+                <form #olForm="ngForm" (ngSubmit)="onSubmit(olForm.value)">
                     <div class="col">
                         <table>
-                            <tr *ngFor="let number of [0,1,2,3,4,5,6,7,8];let i=index"><!--loop here-->
+                            <tr *ngFor="let subject of subjectList;let i=index"><!--loop here-->
                                 <td>
-                                    <label>Subject name</label>
+                                    <label>{{subject.mesubjectname|titlecase}}</label>
                                 </td>
                                 <td>
-                                    <select [name]="number" ngModel (change)="onChange($event.target.value,i)" class="form-control">
+                                    <select [name]="subject.mesubjectid" ngModel (change)="onChange(results[i]=$event.target.value,i)" class="form-control">
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -101,15 +102,22 @@
                             </tr>
                         </table>
                     </div>
-                    
-                    
-                </div>
 
-                <div class="form-group text-right">
-                    <button class="btn btn-info btn-sm">Submit</button>
-                    <button class="btn btn-danger btn-sm">Cancel</button>
-                </div>
-            </form>
+                    <div class="col">
+                        <label>District Rank</label>
+                        <input name="district" type="text" [(ngModel)]="district" class="form-control w-50">
+                    </div>
+                    <div class="col">
+                        <label>Island Rank</label>
+                        <input name="island" type="text" [(ngModel)]="island" class="form-control w-50">
+                    </div>
+                    
+                    <div class="form-group text-center">
+                        <button class="btn btn-info btn-sm">Submit</button>
+                        <button class="btn btn-danger btn-sm">Cancel</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
