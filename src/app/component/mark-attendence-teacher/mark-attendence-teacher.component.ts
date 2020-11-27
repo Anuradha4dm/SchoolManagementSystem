@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import {
   NgxQrcodeElementTypes,
   NgxQrcodeErrorCorrectionLevels,
 } from '@techiediaries/ngx-qrcode';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 
 @Component({
   selector: 'app-mark-attendence-teacher',
@@ -10,19 +13,52 @@ import {
   styleUrls: ['./mark-attendence-teacher.component.css'],
 })
 export class MarkAttendenceTeacherComponent implements OnInit {
+  @ViewChild('formData', { static: false }) formDataRef: NgForm;
+
   displayQR: boolean = false;
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   valueQR: string = null;
-  constructor() {}
+  constructor(
+    private httpClient: HttpClient,
+    private alertMessageService: AlertMessageService
+  ) {}
 
   ngOnInit(): void {}
 
-  onRest() {}
+  onRest() {
+    this.formDataRef.reset({ teacherid: 'AC_' });
+  }
 
   onGenerateQR(formData) {
     const sequreRandom = this.randomString(5);
     const teacherid = formData.value.teacherid;
+
+    this.httpClient
+      .post<{ auth: boolean }>(
+        'http://localhost:3000/teacher/add-qrcode-data',
+        {
+          qrcode: sequreRandom,
+          teacherid: teacherid,
+        }
+      )
+      .subscribe(
+        (data) => {
+          if (data.auth) {
+            this.alertMessageService.competeAlert(
+              'Scan QR and Click The Link....15 Seconds Left...'
+            );
+          }
+        },
+        (error) => {
+          this.alertMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          setTimeout(() => {
+            this.displayQR = false;
+          }, 10000);
+        }
+      );
 
     this.valueQR = `http://localhost:3000/attendence-QR?teacherid=${teacherid}&sequreid=${sequreRandom}`;
 
