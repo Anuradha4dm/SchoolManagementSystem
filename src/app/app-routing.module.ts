@@ -4,6 +4,7 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
 
 import { HomelayoutComponent } from './component/homepage/homelayout/homelayout.component';
 import { PasswordResetComponent } from './component/homepage/password-reset/password-reset.component';
+import { MarkAttendenceTeacherComponent } from './component/mark-attendence-teacher/mark-attendence-teacher.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { SendEmilComponent } from './component/send-emil/send-emil.component';
 import { LayoutComponent } from './layout/layout.component';
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'forget-password',
     component: ForgetPasswordComponent,
+  },
+  {
+    path: 'teacher-attendence',
+    component: MarkAttendenceTeacherComponent,
   },
   {
     path: 'user',
