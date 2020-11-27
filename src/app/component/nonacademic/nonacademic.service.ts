@@ -17,21 +17,26 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/get-pending-request'
     );
   }
-
-  /*
-   //update the leave status in leave table
-   handleLeaves(leaveid: number,answer: boolean,leavetype: number,message: string){
-
+  //update the leave status in leave table
+  handleLeaves(
+    leaveid: number,
+    answer: boolean,
+    leavetype: number,
+    message: string
+  ) {
     return this.httpClient.post(
       'http://localhost:3000/nonacademic/answer-pending-leave',
       {
         leaveid: leaveid,
         answer: answer,
         leavetype: leavetype,
-        message: message
+        message: message,
       }
     );
   }
+
+  /*
+  
 
     //Return year by year student count related to grade and count
     getOrdinaryLeveChartOne(result: string, count: number) {
@@ -253,7 +258,7 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('result', result.toUpperCase());
     parameterSet = parameterSet.append('count', count.toString());
 
-    return this.httpClient.get(
+    return this.httpClient.get<{ count: number; meyear: number }[]>(
       'http://localhost:3000/nonacademic/ol-chart-one',
       {
         params: parameterSet,
@@ -283,7 +288,7 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('result', result);
     parameterSet = parameterSet.append('count', count);
 
-    return this.httpClient.get(
+    return this.httpClient.get<{ result: [] }>(
       'http://localhost:3000/nonacademic/ol-chart-three',
       {
         params: parameterSet,
@@ -292,7 +297,7 @@ export class NonAcademicService {
   }
 
   getAdvanceLevelChartOne(result: string, stream: string, count: number) {
-    return this.httpClient.post(
+    return this.httpClient.post<{ meyear: number; count: number }[]>(
       'http://localhost:3000/nonacademic/al-chart-one',
       {
         result: result,
@@ -391,7 +396,7 @@ export class NonAcademicService {
     count: number,
     stream: string
   ) {
-    return this.httpClient.post(
+    return this.httpClient.post<[]>(
       'http://localhost:3000/nonacademic/al-chart-three',
       {
         result: result,

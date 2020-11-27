@@ -92,8 +92,8 @@ export class OlAnalysisComponent implements OnInit {
         this.pastYearCount.toString()
       )
       .subscribe((data) => {
-        this.pastYearStudentData = data;
-        this.pastYearData.push(data.length);
+        this.pastYearStudentData = data.result;
+        this.pastYearData.push(data.result.length);
         this.pastYearData.push(this.pastYearOLData.length);
         console.log(this.pastYearOLData.length);
       });
@@ -103,7 +103,7 @@ export class OlAnalysisComponent implements OnInit {
     this.subjectData = [];
 
     this.nonService
-      .getOrdinaryLeveChartTwo(this.subjectYear, 2)
+      .getOrdinaryLeveChartTwo(this.subjectYear.toString(), '2')
       .subscribe((data) => {
         this.subjectData.push(data.acount);
         this.subjectData.push(data.bcount);
