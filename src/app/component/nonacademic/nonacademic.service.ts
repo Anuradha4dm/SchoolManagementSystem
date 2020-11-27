@@ -88,16 +88,7 @@ export class NonAcademicService {
       );
     }
   
-    //return grade count related to subject and year
-    getAdvanceLevelChartTwo(year: number, subjectid: number) {
-      return this.httpClient.post<SubjectAnalysis>(
-        'http://localhost:3000/nonacademic/al-chart-two',
-        {
-          year: year,
-          subjectid: subjectid,
-        }
-      );
-    }
+   
   
     //return student details related to given result
     getAdvanceLevelChartThree(
@@ -275,12 +266,15 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('year', year);
     parameterSet = parameterSet.append('subjectid', subjectid);
 
-    return this.httpClient.get(
-      'http://localhost:3000/nonacademic/ol-chart-two',
-      {
-        params: parameterSet,
-      }
-    );
+    return this.httpClient.get<{
+      acount: number;
+      bcount: number;
+      ccount: number;
+      scount: number;
+      wcount: number;
+    }>('http://localhost:3000/nonacademic/ol-chart-two', {
+      params: parameterSet,
+    });
   }
 
   getOrdinaryLeveChartThree(year: string, result: string, count: string) {
@@ -376,6 +370,17 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
       {
         params: paramsSet,
+      }
+    );
+  }
+
+  //return grade count related to subject and year
+  getAdvanceLevelChartTwo(year: number, subjectid: number) {
+    return this.httpClient.post<SubjectAnalysis>(
+      'http://localhost:3000/nonacademic/al-chart-two',
+      {
+        year: year,
+        subjectid: subjectid,
       }
     );
   }
