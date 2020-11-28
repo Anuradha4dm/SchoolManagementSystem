@@ -20,6 +20,9 @@ import { AlAnalysisComponent } from '../main-result-analysis/al-analysis/al-anal
 import { ViewALComponent } from '../main-result-analysis/view-al/view-al.component';
 import { ViewOLComponent } from '../main-result-analysis/view-ol/view-ol.component';
 import { ViewLayoutComponent } from '../main-result-analysis/view-layout/view-layout.component';
+import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
+import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
+import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
 
 const routes: Routes = [
   {
@@ -83,6 +86,18 @@ const routes: Routes = [
       {
         path: 'view',
         component: ViewLayoutComponent,
+      },
+      {
+        path: 'new',
+        component: AddNewProfileComponent
+      },
+      {
+        path: 'add-teacher',
+        component: AddTeacherComponent
+      },
+      {
+        path: 'add-non',
+        component: AddNonAcademicComponent
       }
       //to remove end
     ],

@@ -2,11 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AddNewProfileComponent } from './add-new-profile/add-new-profile.component';
+import { AddTeacherComponent } from './add-teacher/add-teacher.component';
+import { AddNonAcademicComponent } from './add-non-academic/add-non-academic.component';
 
 @NgModule({
   imports: [FormsModule, CommonModule],
   exports: [AddNewProfileComponent],
-  declarations: [AddNewProfileComponent],
+  declarations: [AddNewProfileComponent, AddTeacherComponent, AddNonAcademicComponent],
   providers: [],
 })
 export class AdminModule {}

@@ -17,4 +17,22 @@ export class AdminService {
       'http://localhost:3000/admin/get-new-student-id'
     );
   }
+
+  //To add new teacher to database
+  addNewTeacher(teacherid: string,formData){
+    return this.httpClient.post('http://localhost:3000/admin/add-new-teacher',{
+      teacherid: teacherid,
+      data: formData
+    });
+  }
+
+  //get all counts teacher,nonacademic,class and students
+  getAllCounts(){
+    return this.httpClient.get<{
+      studentCount: number,
+      classCount: number,
+      nonCount: number,
+      teacherCount: number
+    }>('http://localhost:3000/admin/get-all-count')
+  }
 }
