@@ -1,8 +1,14 @@
 header{
-    height: 10vh;
+    height: 15vh;
 }
 
 footer{
     color: white;
     background-color: black;
+}
+
+.font{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: black;
+    font-weight: bold;
 }
