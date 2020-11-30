@@ -8,15 +8,15 @@
                     <th>Number</th>
                     <th>Index Number</th>
                     <th>Student ID</th>
-                    <th>Name</th>
+                    <th>Class</th>
                 </tr>
                 <tbody>
                     <!--change only the array to studentList-->
                     <tr *ngFor="let i=index,let student of studentList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(student)">
                         <td>{{i+1}}</td>
-                        <td>{{student.index}}</td>
+                        <td>{{student.indexnumber}}</td>
                         <td>{{student.studentid}}</td>
-                        <td>{{student.name}}</td>
+                        <td>{{student.class}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -41,7 +41,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Index Number</label>
-                        <input type="text" [value]="selectedStudent.index" class="form-control" disabled>
+                        <input type="text" [value]="selectedStudent.indexnumber" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="col">
@@ -54,7 +54,7 @@
 
             <div class="form-group">
                 <label>Student Name</label>
-                <input type="text" [value]="selectedStudent.name" class="form-control" disabled>
+                <input type="text" [value]="selectedName" class="form-control" disabled>
             </div>
 
         
@@ -105,16 +105,16 @@
 
                     <div class="col">
                         <label>District Rank</label>
-                        <input name="district" type="text" [(ngModel)]="district" class="form-control w-50">
+                        <input type="text" [(ngModel)]="district" [ngModelOptions]="{standalone: true}" class="form-control w-50">
                     </div>
                     <div class="col">
                         <label>Island Rank</label>
-                        <input name="island" type="text" [(ngModel)]="island" class="form-control w-50">
+                        <input type="text" [(ngModel)]="island" [ngModelOptions]="{standalone: true}" class="form-control w-50">
                     </div>
                     
                     <div class="form-group text-center">
-                        <button class="btn btn-info btn-sm">Submit</button>
-                        <button class="btn btn-danger btn-sm">Cancel</button>
+                        <button type="submit" class="btn btn-info btn-sm">Submit</button>
+                        <button type="button" class="btn btn-danger btn-sm">Cancel</button>
                     </div>
                 </form>
             </div>

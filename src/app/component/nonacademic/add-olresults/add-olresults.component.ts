@@ -1,5 +1,6 @@
 import { KeyValuePipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { NonAcademicService } from '../nonacademic.service';
 
@@ -10,13 +11,16 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class AddOLresultsComponent implements OnInit {
   @Input() year;
+  @Input() studentList;
+  selectedStudent; //contains details of selected student
+  selectedName; //contain selected stdent name
+
   loggedUser: string;
   show:boolean = false;
   page:number =1;
   results:string[]=[]; //to cantain values from selet boxes
-
-  selectedStudent; //contains details of selected student
   subjectList; //contins selected student's subject data 
+ 
   district=0;
   island=0;
 
@@ -27,24 +31,10 @@ export class AddOLresultsComponent implements OnInit {
   Scount:number =0;
   Wcount:number =0;
 
-  //to remove start
-  studentList=[
-    {index:14100,studentid:"ST_1",name:"Randy Ortan"},
-    {index:14110,studentid:"ST_2",name:"Drew Macintyre"},
-    {index:14120,studentid:"ST_3",name:"Brock Lesnar"},
-    {index:14130,studentid:"ST_4",name:"Triple H"},
-    {index:14140,studentid:"ST_5",name:"Jhon Cena"},
-    {index:14150,studentid:"ST_6",name:"Boby Lashlie"},
-    {index:14160,studentid:"ST_7",name:"Roman Reigns"},
-    {index:14170,studentid:"ST_8",name:"Seth Rolins"},
-    {index:14180,studentid:"ST_9",name:"Mat Hardy"},
-    {index:14180,studentid:"ST_10",name:"Ray Mystereo"},
-  ];
-  //to remove end
-
   constructor(
     private userLoginService:UserLogInService,
-    private nonService: NonAcademicService
+    private nonService: NonAcademicService,
+    private alertService: AlertMessageService
   ) { }
 
   ngOnInit(): void {
@@ -68,8 +58,8 @@ export class AddOLresultsComponent implements OnInit {
 
     this.nonService.getSubjectDataForResultAddition(this.selectedStudent.studentid,this.year)
       .subscribe((data)=>{
-        this.subjectList = data.responsedata;
-        console.log(this.subjectList);
+        this.subjectList = data.subjects;
+        this.selectedName = data.studentname;
       });
     this.show = true;
   }
@@ -83,14 +73,17 @@ export class AddOLresultsComponent implements OnInit {
 
     this.nonService.addOrdinaryLevelResults(
       this.loggedUser,
-      this.selectedStudent.index,
+      this.selectedStudent.indexnumber,
       this.year,
-      45,
-      6,
+      this.island,
+      this.district,
       submitResults
     ).subscribe((data)=>{
-        console.log(data);
-      });
+        if(data.resultaddtion)
+          this.alertService.competeAlert("Results added successfully...");
+    },(error)=>{
+      this.alertService.competeAlert("Results cannot be added, try again later...");      
+    });
   }
 
 }

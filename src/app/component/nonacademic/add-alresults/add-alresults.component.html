@@ -23,16 +23,16 @@
                     <th>Number</th>
                     <th>Index Number</th>
                     <th>Student ID</th>
-                    <th>Name</th>
                     <th>Stream</th>
+                    <th>Class</th>
                 </tr>
                 <tbody>
                     <tr *ngFor="let i=index;let student of studentList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(student)">
                         <td>{{i+1}}</td>
-                        <td>{{student.index}}</td>
+                        <td>{{student.indexnumber}}</td>
                         <td>{{student.studentid}}</td>
-                        <td>{{student.name}}</td>
                         <td>{{student.stream}}</td>
+                        <td>{{student.class}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -56,7 +56,7 @@
                 <div class="col">
                     <div class="form-group">
                         <label>Index Number</label>
-                        <input type="text" [value]="selectedStudent.index" class="form-control" disabled>
+                        <input type="text" [value]="selectedStudent.indexnumber" class="form-control" disabled>
                     </div>
                 </div>
                 <div class="col">
@@ -69,7 +69,7 @@
 
             <div class="form-group">
                 <label>Student Name</label>
-                <input type="text" [value]="selectedStudent.name" class="form-control" disabled>
+                <input type="text" [value]="selectedName" class="form-control" disabled>
             </div>
 
             <!--Student subject list here-->
@@ -83,7 +83,7 @@
                                     <label>{{subject.mesubjectname}}</label>
                                 </td>
                                 <td>
-                                    <select ngModel [name]="subject.mesubjectid" (change)="onChange($event.target.value,i)" class="form-control">
+                                    <select [name]="subject.mesubjectid" ngModel (change)="onChange($event.target.value,i)" class="form-control">
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -97,7 +97,7 @@
                                     <label>General English</label>
                                 </td>
                                 <td>
-                                    <select name="english" ngModel class="form-control">
+                                    <select name="10" ngModel class="form-control">
                                         <option value="A">A</option>
                                         <option value="B">B</option>
                                         <option value="C">C</option>
@@ -111,7 +111,7 @@
                                     <label>Common Genaral Test</label>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control">
+                                    <input name="11" ngModel type="text" class="form-control">
                                 </td>
                             </tr>
                         </table>
@@ -122,15 +122,15 @@
                 <div class="row my-3">
                     <div class="col">
                         <label>Z Score</label>
-                        <input type="text" name="zscore" [(ngModel)]="zscore" class="form-control">
+                        <input type="text" [(ngModel)]="zscore" [ngModelOptions]="{standalone: true}" class="form-control">
                     </div>
                     <div class="col">
                         <label>Distric Rank</label>
-                        <input type="text" name="district" [(ngModel)]="district" class="form-control">
+                        <input type="text" [(ngModel)]="district" [ngModelOptions]="{standalone: true}" class="form-control">
                     </div>
                     <div class="col">
                         <label>Island Rank</label>
-                        <input type="text" name="island" [(ngModel)]="island" class="form-control">
+                        <input type="text" [(ngModel)]="island" [ngModelOptions]="{standalone: true}" class="form-control">
                     </div>
                 </div>
 
@@ -160,8 +160,8 @@
 
 
                 <div class="form-group text-right">
-                    <button class="btn btn-info btn-sm">Submit</button>
-                    <button class="btn btn-danger btn-sm">Cancel</button>
+                    <button type="submit" class="btn btn-info btn-sm">Submit</button>
+                    <button type="button" class="btn btn-danger btn-sm">Cancel</button>
                 </div>
             </form>
         </div>

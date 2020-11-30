@@ -8,7 +8,7 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class ExamLayoutComponent implements OnInit {
   studentList;
-  selection:number = 1;
+  selection:number = 3;
   selectedYear:number = new Date().getFullYear();
   exam:string = "G.C.E. A/L Examination";
 
@@ -17,7 +17,7 @@ export class ExamLayoutComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.onYearChange();
+    this.getStudentList();
   }
 
   //Execute when select box change
@@ -26,10 +26,11 @@ export class ExamLayoutComponent implements OnInit {
       this.exam = "G.C.E. A/L Examination";
     else
       this.exam = "G.C.E. O/L Examination";
-    this.onYearChange();
+    this.getStudentList();
   }
 
-  onYearChange(){
+  //return student list of the releted exam of year
+  getStudentList(){
     if(this.selection==1){
       this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,true)
         .subscribe((data)=>{
