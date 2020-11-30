@@ -162,5 +162,13 @@ export class TeacherService {
     return resultArray;
   }
 
+  sendTeacherNotifications(teacherid: string,selectedList,formData){
+    return this.httpClient.post('http://localhost:3000/teacher/teacher-send-notifications',{
+      teacherid: teacherid,
+      list: selectedList,
+      data: formData
+    })
+  }
+
 
 }

@@ -21,14 +21,14 @@
 
             <div class="col">
                 <label>Year</label>
-                <input type="number" [(ngModel)]="selectedYear" class="form-control">
+                <input type="number" [(ngModel)]="selectedYear" (change)="onYearChange()" class="form-control">
             </div>
         </div>
     </div>
 
     <!--Body content related to the selection here-->
-    <app-add-alresults *ngIf="selection==1" [year]="selectedYear"></app-add-alresults>
-    <app-add-olresults *ngIf="selection==2" [year]="selectedYear"></app-add-olresults>
+    <app-add-alresults *ngIf="selection==1" [year]="selectedYear" [studentList]="studentList"></app-add-alresults>
+    <app-add-olresults *ngIf="selection==2" [year]="selectedYear" [studentList]="studentList"></app-add-olresults>
     <app-register-for-al *ngIf="selection==3" [year]="selectedYear"></app-register-for-al>
     <app-register-for-ol *ngIf="selection==4" [year]="selectedYear"></app-register-for-ol>
 
