@@ -78,7 +78,7 @@ export class AddOLresultsComponent implements OnInit {
     let submitResults=[];
 
     for (let key in formData) {
-      submitResults.push({ mesubjectid: key, meresult: formData[key] });
+      submitResults.push({ mesubjectid: key, meresult: formData[key].toString() });
     }
 
     this.nonService.addOrdinaryLevelResults(
