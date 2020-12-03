@@ -19,11 +19,8 @@ export class AdminService {
   }
 
   //To add new teacher to database
-  addNewTeacher(teacherid: string,formData){
-    return this.httpClient.post('http://localhost:3000/admin/add-new-teacher',{
-      teacherid: teacherid,
-      data: formData
-    });
+  addNewTeacher(formdata){
+    return this.httpClient.post('http://localhost:3000/admin/add-new-teacher',formdata);
   }
 
   //get all counts teacher,nonacademic,class and students

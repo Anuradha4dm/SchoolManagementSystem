@@ -4,7 +4,7 @@
     <div class="card card-body">
         <h2 class="font-italic mb-5">Add New Teacher</h2>
         <!--Add teacher form here-->
-        <form #addTeacher="ngForm" (ngSubmit)="onSubmit(addTeacher.value)">
+        <form (ngSubmit)="onSubmit(addTeacher.value)" #addTeacher="ngForm">
             <div class="row mb-4">
                 <div class="col-sm-7">
                     <label>Teacher ID</label>
@@ -50,6 +50,22 @@
                 <div class="col">
                     <label>Start Year</label>
                     <input type="number" name="startyear" [ngModel]="startYear" [max]="startYear" class="form-control">
+                </div>
+            </div>
+
+            <!--Profile pic upload here-->
+            <div class="row my-3">
+                <div class="col-auto">
+                    <img src="{{profilePic}}" alt="profile pic">
+                </div>
+
+                <div class="col-auto">
+                    <div class="form-group">
+                        <label class="btn btn-dark">
+                            Select Profile Picture
+                            <input type="file" (change)="onChange($event)" accept="image/*">
+                        </label>
+                    </div>
                 </div>
             </div>
             
@@ -105,7 +121,7 @@
             </div>
 
             <div class="form-group text-right">
-                <button type="submit" class="btn btn-sm btn-info" [disabled]="addTeacher.invalid">Add Teacher</button>
+                <button type="submit" class="btn btn-sm btn-info">Add Teacher</button>
                 <button type="reset" class="btn btn-sm btn-danger">Cancel</button>
             </div>
         </form>

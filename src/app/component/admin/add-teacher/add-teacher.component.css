@@ -2,3 +2,9 @@
     color: red;
     font-size: small;
 }
+
+img{
+    border-radius: 500px;
+    height: 150px;
+    width: 150px;
+}
