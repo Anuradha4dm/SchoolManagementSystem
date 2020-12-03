@@ -23,6 +23,7 @@ import { ViewLayoutComponent } from '../main-result-analysis/view-layout/view-la
 import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
 import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
 import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
+import { AddClassComponent } from '../admin/add-class/add-class.component';
 
 const routes: Routes = [
   {
@@ -98,6 +99,10 @@ const routes: Routes = [
       {
         path: 'add-non',
         component: AddNonAcademicComponent
+      },
+      {
+        path: 'add-class',
+        component: AddClassComponent
       }
       //to remove end
     ],

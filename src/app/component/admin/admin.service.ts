@@ -32,4 +32,11 @@ export class AdminService {
       teacherCount: number
     }>('http://localhost:3000/admin/get-all-count')
   }
+
+  //create new class
+  createNewClass(grade:string){
+    return this.httpClient.post('http://localhost:3000/admin/create-new-class',{
+      className:grade
+    });
+  }
 }

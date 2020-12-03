@@ -1,0 +1,70 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <div class="row">
+        <!--Created class list here-->
+        <div class="col">
+            <div class="card card-body">
+                <h3 class="font-italic mb-4">Add Class</h3>
+                <h5 class="text-center text-muted">Current class list</h5>
+                <table class="table text-center">
+                    <tr class="bg-info">
+                        <th>Class ID</th>
+                        <th>Class Name</th>
+                        <th>Class Teacher</th>
+                    </tr>
+                    <tbody>
+                        <tr><!--loop here-->
+                            <td>id</td>
+                            <td>id</td>
+                            <td>id</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!--Add new or modify class form here-->
+        <div class="col">
+            <div class="card card-body">
+                <h5 class="font-italic mb-3">Create new class</h5>
+                <form #classForm="ngForm" (ngSubmit)="onSubmit(classForm.value)">
+                    <div class="row">
+                        <!--Grade selector-->
+                        <div class="col">
+                            <label>Select Grade</label>
+                            <select #grade name="grade" ngModel class="form-control p-2" required>
+                                <option [value]="grade" *ngFor="let grade of gradeList">{{grade}}</option>
+                            </select>
+                        </div>
+                           
+                        <!--Letter selector-->
+                        <div class="col">
+                            <label>Select Letter</label>
+                            <select name="letter" ngModel class="form-control p-2" required>
+                                <option [value]="letter" *ngFor="let letter of letterList">{{letter}}</option>
+                            </select>
+                        </div>
+                        
+                        <!--Stream selector-->
+                        <div class="col" *ngIf="grade.value>=12">
+                            <label>Select Stream</label>
+                            <select name="stream" ngModel class="form-control p-2">
+                                <option [value]="stream" *ngFor="let stream of streamList">{{stream}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group text-center mt-3">
+                        <button type="submit" class="btn btn-sm btn-info" [disabled]="classForm.invalid">Create</button>
+                        <button type="reset" class="btn btn-sm btn-danger">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{selectedGrade}}
+{{selectedStream}}
+{{selectedLetter}}
