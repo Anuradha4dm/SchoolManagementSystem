@@ -20,12 +20,10 @@ export class TeacherService {
   }
 
   //need to create a route for this
-  updateTeacherProfile(teacherid: string,profileData){
-    return this.httpClient.post(
-      'http://localhost:3000/teacher/update-teacher-profile',{
-        teacherid: teacherid,
-        data: profileData
-      }
+  updateTeacherProfile(teacherid: string, profileData) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/update-teacher-profile/' + teacherid,
+      profileData
     );
   }
 
@@ -96,20 +94,20 @@ export class TeacherService {
 
   //return students avarage related to grade and term
   postGetAverageDataWithStudent(year: number, term: number, grade: string) {
-    return this.httpClient.post<{avarageData:{
-      average: number,
-      grade: string,
-      place: number,
-      term: number,
-      year: number,
-      _id: string}[]}>(
-      'http://localhost:3000/teacher/get-average-data',
-      {
-        year: year,
-        term: term,
-        grade: grade,
-      }
-    );
+    return this.httpClient.post<{
+      avarageData: {
+        average: number;
+        grade: string;
+        place: number;
+        term: number;
+        year: number;
+        _id: string;
+      }[];
+    }>('http://localhost:3000/teacher/get-average-data', {
+      year: year,
+      term: term,
+      grade: grade,
+    });
   }
 
   xlsxFileReader(event) {
@@ -160,6 +158,4 @@ export class TeacherService {
 
     return resultArray;
   }
-
-
 }

@@ -14,6 +14,8 @@ export class TeacherProfileComponent implements OnInit {
   teacherProfileData: TeacherProfileData;
   qualifications: string[];
 
+  imagepath: string;
+
   constructor(
     private userLoginService: UserLogInService,
     private teacherService: TeacherService,
@@ -25,12 +27,17 @@ export class TeacherProfileComponent implements OnInit {
       this.loggedTeacherID = data.getUserId;
     });
 
-    this.teacherService.getTeacherProfileData(this.loggedTeacherID)
+    this.teacherService
+      .getTeacherProfileData(this.loggedTeacherID)
       .subscribe((data) => {
         this.teacherProfileData = data;
-        this.qualifications=this.teacherProfileData.qualifications.toString().split(',');
+
+        this.imagepath = 'http://localhost:3000/' + data.imagepath;
+
+        this.qualifications = this.teacherProfileData.qualifications
+          .toString()
+          .split(',');
       });
-    
   }
 
   //execute when edit profile click

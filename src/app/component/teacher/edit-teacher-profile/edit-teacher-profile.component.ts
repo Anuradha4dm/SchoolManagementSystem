@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TeacherProfileData } from 'src/app/models/teacher.model';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { TeacherService } from '../teacher.service';
@@ -13,13 +13,14 @@ export class EditTeacherProfileComponent implements OnInit {
   loggedTeacherID: string;
   teacherProfileData: TeacherProfileData;
   selectedFile: File;
-  imageFile:string;
+  imageFile: string;
   profilePic;
 
   constructor(
     private route: ActivatedRoute,
     private teacherService: TeacherService,
-    private alertMessage: AlertMessageService
+    private alertMessage: AlertMessageService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -27,10 +28,11 @@ export class EditTeacherProfileComponent implements OnInit {
       this.loggedTeacherID = params['id'];
     });
 
-    this.teacherService.getTeacherProfileData(this.loggedTeacherID)
-      .subscribe((data) => {
+    this.teacherService.getTeacherProfileData(this.loggedTeacherID).subscribe(
+      (data) => {
         this.teacherProfileData = data;
-        this.profilePic = 'http://localhost:3000/' + this.teacherProfileData.imagepath;
+        this.profilePic =
+          'http://localhost:3000/' + this.teacherProfileData.imagepath;
       },
       (error) => {
         console.log(error);
@@ -52,36 +54,41 @@ export class EditTeacherProfileComponent implements OnInit {
   }
 
   onFormSubmit(formData) {
-    const form = new FormData();
-    form.append('firstname', formData.value.firstname);
-    form.append('lastname', formData.value.lastname);
-    form.append('surname', formData.value.surname);
-    form.append('username', formData.value.username);
-    form.append('email', formData.value.email);
-    form.append('mobile', formData.value.mobile);
-    form.append('age', formData.value.age);
+    const formObj = new FormData();
+    formObj.append('firstname', formData.value.firstname);
+    formObj.append('lastname', formData.value.lastname);
+    formObj.append('surname', formData.value.surname);
+    formObj.append('username', formData.value.username);
+    formObj.append('email', formData.value.email);
+    formObj.append('mobile', formData.value.mobile);
+    formObj.append('age', formData.value.age);
 
-
-    form.append('addressline1', formData.value.addressline1);
-    form.append('addressline2', formData.value.addressline2);
-    form.append('addressline3', formData.value.addressline3);
-    form.append('city', formData.value.city);
-
+    formObj.append('addressline1', formData.value.addressline1);
+    formObj.append('addressline2', formData.value.addressline2);
+    formObj.append('addressline3', formData.value.addressline3);
+    formObj.append('city', formData.value.city);
 
     if (!this.selectedFile) {
-      form.append('imagepath', this.teacherProfileData.imagepath);
+      formObj.append('imagepath', this.teacherProfileData.imagepath);
     } else {
-      form.append('imageData', this.selectedFile, this.imageFile);
+      formObj.append('imageData', this.selectedFile, this.imageFile);
     }
 
-    this.teacherService.updateTeacherProfile(this.loggedTeacherID,form)
+    this.teacherService
+      .updateTeacherProfile(this.loggedTeacherID, formObj)
       .subscribe(
-      (data)=>{},
-      (error)=>{console.log(error)},
-      ()=>{
-        this.alertMessage.competeAlert("You have updated profile successfully");
-      });
-
+        (data) => {
+          if (data.update) {
+            this.alertMessage.competeAlert('Update Profile Successfully...');
+          }
+        },
+        (error) => {
+          this.alertMessage.errorAlert(error.error.message);
+        },
+        () => {
+          this.router.navigate(['user', 'teacher-profile']);
+        }
+      );
   }
 
   //execute when reset click
