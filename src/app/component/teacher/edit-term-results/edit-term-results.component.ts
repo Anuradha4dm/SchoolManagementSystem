@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { element } from 'protractor';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { TeacherService } from '../teacher.service';
@@ -46,7 +47,8 @@ export class EditTermResultsComponent implements OnInit {
     this.show = false;
     this.teacherService.postGetAverageDataWithStudent(this.year,this.selectedTerm,this.classID)
       .subscribe((data)=>{
-        this.avarageData = data.avarageData;
+        this.avarageData = data.avarageData.sort((a,b)=>{return b.average-a.average});
+        console.log(this.avarageData)
       });
   }
 
@@ -77,7 +79,7 @@ export class EditTermResultsComponent implements OnInit {
         this.alertService.competeAlert("Results updated successfully..");
       },
       (error)=>{
-        console.log(error);
+        this.alertService.competeAlert("Results couldn't updated..");
       },
       ()=>{
         this.ngOnInit();

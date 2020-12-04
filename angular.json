@@ -16,7 +16,8 @@
             "allowedCommonJsDependencies": [
               "chart.js",
               "socket.io-client",
-              "xlsx"
+              "xlsx",
+              "qrcode"
             ],
             "outputPath": "dist/SchoolMangementSystem",
             "index": "src/index.html",

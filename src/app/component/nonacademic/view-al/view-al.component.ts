@@ -7,7 +7,7 @@ import { NonAcademicService } from '../../nonacademic/nonacademic.service';
   styleUrls: ['./view-al.component.css']
 })
 export class ViewALComponent implements OnInit {
-  selectedYear:number=2020;
+  selectedYear:number=new Date().getFullYear();
   selectedShy: number=0;
   selectedStream: string="ALL";
   

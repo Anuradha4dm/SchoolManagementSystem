@@ -18,20 +18,26 @@ export class NonAcademicService {
     );
   }
 
-  /*
-   //update the leave status in leave table
-   handleLeaves(leaveid: number,answer: boolean,leavetype: number,message: string){
-
+  //update the leave status in leave table
+  handleLeaves(
+    leaveid: number,
+    answer: boolean,
+    leavetype: number,
+    message: string
+  ) {
     return this.httpClient.post(
       'http://localhost:3000/nonacademic/answer-pending-leave',
       {
         leaveid: leaveid,
         answer: answer,
         leavetype: leavetype,
-        message: message
+        message: message,
       }
     );
   }
+
+  /*
+  
 
     //Return year by year student count related to grade and count
     getOrdinaryLeveChartOne(result: string, count: number) {
@@ -88,16 +94,7 @@ export class NonAcademicService {
       );
     }
   
-    //return grade count related to subject and year
-    getAdvanceLevelChartTwo(year: number, subjectid: number) {
-      return this.httpClient.post<SubjectAnalysis>(
-        'http://localhost:3000/nonacademic/al-chart-two',
-        {
-          year: year,
-          subjectid: subjectid,
-        }
-      );
-    }
+   
   
     //return student details related to given result
     getAdvanceLevelChartThree(
@@ -262,7 +259,7 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('result', result.toUpperCase());
     parameterSet = parameterSet.append('count', count.toString());
 
-    return this.httpClient.get(
+    return this.httpClient.get<{ count: number; meyear: number }[]>(
       'http://localhost:3000/nonacademic/ol-chart-one',
       {
         params: parameterSet,
@@ -275,12 +272,15 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('year', year);
     parameterSet = parameterSet.append('subjectid', subjectid);
 
-    return this.httpClient.get(
-      'http://localhost:3000/nonacademic/ol-chart-two',
-      {
-        params: parameterSet,
-      }
-    );
+    return this.httpClient.get<{
+      acount: number;
+      bcount: number;
+      ccount: number;
+      scount: number;
+      wcount: number;
+    }>('http://localhost:3000/nonacademic/ol-chart-two', {
+      params: parameterSet,
+    });
   }
 
   getOrdinaryLeveChartThree(year: string, result: string, count: string) {
@@ -289,7 +289,7 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('result', result);
     parameterSet = parameterSet.append('count', count);
 
-    return this.httpClient.get(
+    return this.httpClient.get<{ result: [] }>(
       'http://localhost:3000/nonacademic/ol-chart-three',
       {
         params: parameterSet,
@@ -298,7 +298,7 @@ export class NonAcademicService {
   }
 
   getAdvanceLevelChartOne(result: string, stream: string, count: number) {
-    return this.httpClient.post(
+    return this.httpClient.post<{ meyear: number; count: number }[]>(
       'http://localhost:3000/nonacademic/al-chart-one',
       {
         result: result,
@@ -371,11 +371,23 @@ export class NonAcademicService {
     const paramsSet = new HttpParams().set('year', year.toString());
 
     return this.httpClient.get<{
-      responsedata: { mesubjectis: number; mesubjectname: string };
+      subjects: { mesubjectis: number; mesubjectname: string }[];
+      studentname: string;
     }>(
       'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
       {
         params: paramsSet,
+      }
+    );
+  }
+
+  //return grade count related to subject and year
+  getAdvanceLevelChartTwo(year: number, subjectid: number) {
+    return this.httpClient.post<SubjectAnalysis>(
+      'http://localhost:3000/nonacademic/al-chart-two',
+      {
+        year: year,
+        subjectid: subjectid,
       }
     );
   }
@@ -386,7 +398,7 @@ export class NonAcademicService {
     count: number,
     stream: string
   ) {
-    return this.httpClient.post(
+    return this.httpClient.post<[]>(
       'http://localhost:3000/nonacademic/al-chart-three',
       {
         result: result,
@@ -399,13 +411,15 @@ export class NonAcademicService {
 
   //this gives the list of student for registred
   getRegisteredStudentListOfBothExams(year: number, type: boolean) {
-    return this.httpClient.post(
-      'http://localhost:3000/nonacademic/get-student-list-main-exam',
-      {
-        type: type,
-        year: year,
-      }
-    );
+    return this.httpClient.post<{
+      class: string;
+      indexnumber: number;
+      studentid: string;
+      stream: string;
+    }>('http://localhost:3000/nonacademic/get-student-list-main-exam', {
+      type: type,
+      year: year,
+    });
   }
 
   //this will give th answer to the pending leaves
