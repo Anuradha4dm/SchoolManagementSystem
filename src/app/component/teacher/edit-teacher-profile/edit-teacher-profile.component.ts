@@ -54,6 +54,8 @@ export class EditTeacherProfileComponent implements OnInit {
 
   onFormSubmit(formData) {
     const form = new FormData();
+
+    form.append('teacherid',this.loggedTeacherID);
     form.append('firstname', formData.value.firstname);
     form.append('lastname', formData.value.lastname);
     form.append('surname', formData.value.surname);
@@ -61,13 +63,11 @@ export class EditTeacherProfileComponent implements OnInit {
     form.append('email', formData.value.email);
     form.append('mobile', formData.value.mobile);
     form.append('age', formData.value.age);
-
-
     form.append('addressline1', formData.value.addressline1);
     form.append('addressline2', formData.value.addressline2);
     form.append('addressline3', formData.value.addressline3);
     form.append('city', formData.value.city);
-
+    form.append('qualifications',formData.value.qualifications);
 
     if (!this.selectedFile) {
       form.append('imagepath', this.teacherProfileData.imagepath);
@@ -75,7 +75,7 @@ export class EditTeacherProfileComponent implements OnInit {
       form.append('imageData', this.selectedFile, this.imageFile);
     }
 
-    this.teacherService.updateTeacherProfile(this.loggedTeacherID,form)
+    this.teacherService.updateTeacherProfile(form)
       .subscribe(
       (data)=>{},
       (error)=>{console.log(error)},

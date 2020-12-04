@@ -20,13 +20,8 @@ export class TeacherService {
   }
 
   //need to create a route for this
-  updateTeacherProfile(teacherid: string,profileData){
-    return this.httpClient.post(
-      'http://localhost:3000/teacher/update-teacher-profile',{
-        teacherid: teacherid,
-        data: profileData
-      }
-    );
+  updateTeacherProfile(profileData){
+    return this.httpClient.post('http://localhost:3000/teacher/update-teacher-profile',profileData);
   }
 
   //return class students list of data when give teacher's id

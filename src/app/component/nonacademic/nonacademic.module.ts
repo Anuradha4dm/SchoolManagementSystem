@@ -21,6 +21,7 @@ import { RegisterForOLComponent } from './register-for-ol/register-for-ol.compon
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
+import { ModifyClassComponent } from './modify-class/modify-class.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-
     RegisterForALComponent,
     RegisterForOLComponent,
     RegisterAlSubjectsComponent,
+    ModifyClassComponent,
   ],
   imports: [
     CommonModule,

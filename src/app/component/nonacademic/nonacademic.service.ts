@@ -124,6 +124,7 @@ export class NonAcademicService {
     );
   }
 */
+  //return teacher assigned subject with grades
   getListOfSubjectsTeachedByTeacher(teacherid: string) {
     return this.httpClient.get<{
       subjectlist: {
@@ -137,12 +138,14 @@ export class NonAcademicService {
     );
   }
 
+  //return teachers that have no class
   findFreeClassTeachers() {
     return this.httpClient.get<{
       teachers: { teacherid: string; username: string }[];
     }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
+  //not used
   getClassTeacherForClassHandler(className: string) {
     return this.httpClient.get<{
       fullname: string;
@@ -153,6 +156,7 @@ export class NonAcademicService {
     }>('http://localhost:3000/nonacademic/get-class-teacher/' + className);
   }
 
+  //not working can remove
   updateClassProperties(submitData: FormData) {
     return this.httpClient.post<{ success: boolean }>(
       'http://localhost:3000/nonacademic/update-class-handler',
@@ -437,5 +441,28 @@ export class NonAcademicService {
         classname: classname,
       }
     );
+  }
+
+  //use to change the class teacher
+  changeClassTeacher(newTeacherID: string,classID: number){
+      return this.httpClient.post('http://localhost:3000/nonacademic/change-class-teacher',{
+        newTeacherID: newTeacherID,
+        classID: classID
+      })
+  }
+  
+  //return teacher list relted to subject
+  getTeacherListBySubject(subjectname: string){
+    return this.httpClient.post('http://localhost:3000/nonacademic/get-teacher-by-subject',{
+      subjectName:subjectname
+    });
+  }
+
+  addTeacherSubjects(grade: string,subjectname: string,teacherid: string){
+    return this.httpClient.post('http://localhost:3000/nonacademic/add-teacher-subject',{
+      grade: grade,
+      subjectname: subjectname,
+      teacherid: teacherid
+    });
   }
 }

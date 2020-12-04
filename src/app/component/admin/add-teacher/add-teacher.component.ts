@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { stringify } from 'querystring';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { AdminService } from '../admin.service';
 
@@ -13,7 +14,8 @@ export class AddTeacherComponent implements OnInit {
   selectedFile:File=null; //contain the selected image file
   imagePath:string=''; //contain the selected image path
   profilePic;
-  
+  subjects=[];
+
   constructor(
     private adminService: AdminService,
     private alertService: AlertMessageService
@@ -41,6 +43,15 @@ export class AddTeacherComponent implements OnInit {
 
   //Add teacher details to database
   onSubmit(value){
+    var subjectList:string="";
+
+    for(let i=0;i<this.subjects.length;i++){
+      if(i==this.subjects.length-1)
+        subjectList+=this.subjects[i];
+      else
+        subjectList+=this.subjects[i]+",";
+    }
+
     const formdata=new FormData();
 
     formdata.append('teacherid',this.teacherID);
@@ -60,8 +71,9 @@ export class AddTeacherComponent implements OnInit {
     formdata.append('startyear',value.startyear);
     formdata.append('surname',value.surname);
     formdata.append('username',value.username);
+    formdata.append('subjectlist',subjectList);
     //formdata.append('photo', this.selectedFile, this.imagePath);
-
+    console.log(subjectList)
     this.adminService.addNewTeacher(formdata).subscribe((data)=>{
       if(data)
         this.alertService.competeAlert("New Teacher has been added successfully...");

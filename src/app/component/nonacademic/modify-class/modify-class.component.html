@@ -1,0 +1,123 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <div class="row">
+        <!--Class list here-->
+        <div class="col">
+            <div class="card card-body">
+                <h3 class="font-italic mb-4">Manage Classes</h3>
+                <h5 class="text-center text-muted">Available class list</h5>
+                <table class="table text-center">
+                    <tr class="bg-info">
+                        <th>Class ID</th>
+                        <th>Class Name</th>
+                        <th>Class Teacher</th>
+                    </tr>
+                    <tbody>
+                        <tr *ngFor="let class of classList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(class)">
+                            <td>{{class.classid}}</td>
+                            <td>{{class.grade}}</td>
+                            <td>{{class.teacher?class.teacher.teacherid : "Not Assigned"}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-group text-center mt-2">
+                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+        <div class="col" *ngIf="show">
+            <!--Class teacher assign section here-->
+            <div class="row">
+                <div class="card card-body">
+                    <h5 class="font-italic mb-3">Class teacher handle section</h5>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <label>Class ID</label>
+                            <input type="text" [value]="selectedClass.classid" class="form-control" disabled>
+                        </div>  
+    
+                        <div class="col-sm-8">
+                            <label>Class Name</label>
+                            <input type="text" [value]="selectedClass.grade" class="form-control" disabled>
+                        </div>
+                    </div>
+                    
+                    <!--Class Teacher details here-->
+                    <div class="row" *ngIf="selectedClass.teacher">
+                        <div class="col-sm-7">
+                            <label>Class Teacher</label>
+                            <input type="text" [value]="selectedClass.teacher.firstname+' '+selectedClass.teacher.lastname|titlecase" class="form-control" disabled>
+                        </div>  
+    
+                        <div class="col-sm-5">
+                            <label>Teacher ID</label>
+                            <input type="text" [value]="selectedClass.teacher.teacherid" class="form-control" disabled>
+                        </div>
+                    </div>
+    
+                    <div class="form-group mt-3" *ngIf="!selectedClass.teacher || findTeacher">
+                        <label>Select Teacher</label>
+                        <select name="newTeacher" [(ngModel)]="newTeacherID" class="form-control p-1">
+                            <option [value]="teacher.teacherid" *ngFor="let teacher of freeTeacherList.teachers">{{teacher.teacherid}}</option>
+                        </select>
+                    </div>
+    
+                    <div class="form-group">
+                        <button type="button" *ngIf="!selectedClass.teacher" (click)="changeClassTeacher()" class="btn btn-sm btn-success">Add Teacher</button>
+                        <button type="button" *ngIf="selectedClass.teacher && !findTeacher" (click)="findTeacher=true" class="btn btn-sm btn-danger">Change Teacher</button>
+                        <button type="button" *ngIf="findTeacher" (click)="changeClassTeacher()" class="btn btn-sm btn-success">Confirm Change</button>
+                        <button type="button" *ngIf="findTeacher" (click)="findTeacher=false" class="btn btn-sm btn-danger">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+            <!--Class subject assign section here-->
+            <div class="row">
+                <div class="card card-body">
+                    <h5 class="font-italic mb-3">Assign class subjects to teachers section</h5>
+                    <div class="row">
+                        <div class="col">
+                           <label>Select Subject</label>
+                           <select (change)="onSelectSubjectChange($event.target.value)" class="form-control">
+                               <option value="sinhala">Sinhala</option>
+                               <option value="pts">PTS</option>
+                           </select> 
+                        </div>
+
+                        <div class="col">
+                            <label>Select Teacher</label>
+                            <select (change)="onSelectTeacherChange($event.target.value)" class="form-control">
+                                <option *ngFor="let teacher of subjectTeacherList" [value]="teacher.teacherid">{{teacher.teacherid}}</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <button (click)="onAddTeacherClick()" class="btn btn-sm btn-success">Add Teacher</button>
+                    </div>
+
+                    <div class="form-group">
+                        <table class="table text-center">
+                            <tr class="bg-secondary">
+                                <th>Subject ID</th>
+                                <th>Subject Name</th>
+                                <th>Class</th>
+                            </tr>
+                            <tbody>
+                                <tr *ngFor="let class of teacherTimetable">
+                                    <td>{{class.subjectid}}</td>
+                                    <td>{{class.subjectname}}</td>
+                                    <td>{{class.grade}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    </div>
+</div>

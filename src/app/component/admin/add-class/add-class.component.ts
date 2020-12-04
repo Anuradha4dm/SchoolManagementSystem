@@ -12,10 +12,12 @@ export class AddClassComponent implements OnInit {
   letterList=['A','B','C','D','E','F','G','H','I','J'];
   gradeList=[6,7,8,9,10,11,12,13];
   streamList=["Maths","Bio","Art","Commerce","Tech"];
+  classList;
 
   selectedGrade;
   selectedLetter;
   selectedStream;
+  page=1; //contain current page of pagination
 
   constructor(
     private adminService: AdminService,
@@ -23,6 +25,9 @@ export class AddClassComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.adminService.getClassList().subscribe((data)=>{
+      this.classList=data;
+    });
   }
 
   //Excecute when create button click

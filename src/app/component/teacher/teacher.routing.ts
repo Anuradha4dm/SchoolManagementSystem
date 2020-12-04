@@ -24,6 +24,7 @@ import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile
 import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
 import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
 import { AddClassComponent } from '../admin/add-class/add-class.component';
+import { ModifyClassComponent } from '../nonacademic/modify-class/modify-class.component';
 
 const routes: Routes = [
   {
@@ -103,6 +104,10 @@ const routes: Routes = [
       {
         path: 'add-class',
         component: AddClassComponent
+      },
+      {
+        path: 'edit-class',
+        component: ModifyClassComponent
       }
       //to remove end
     ],
