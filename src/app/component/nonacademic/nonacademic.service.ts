@@ -513,4 +513,56 @@ export class NonAcademicService {
       }
     );
   }
+
+  getOrdinaryLevelStudentListForRegister() {
+    return this.httpClient.get<{
+      studentList: {
+        firstname: string;
+        lastname: string;
+        _id: string;
+        class: { grade: string };
+      }[];
+    }>(
+      'http://localhost:3000/nonacademic/get-ol-student-list-for-registration'
+    );
+  }
+
+  getAdvanceLevelStudentListForRegister() {
+    return this.httpClient
+      .get<{
+        studentList: {
+          firstname: string;
+          lastname: string;
+          _id: string;
+          class: { grade: string };
+          stream: string;
+        }[];
+      }>(
+        'http://localhost:3000/nonacademic/get-al-student-list-for-registration'
+      )
+      .pipe(
+        map((data) => {
+          var findStream: string;
+          const responceData = data.studentList.map((student) => {
+            findStream = student.class.grade.split('_')[1];
+
+            if (findStream === 'MATH') {
+              student.stream = 'Physical';
+            } else if (findStream === 'TEC') {
+              student.stream = 'Technology';
+            } else if (findStream === 'BIO') {
+              student.stream = 'Biology';
+            } else if (findStream === 'ART') {
+              student.stream = 'ART';
+            } else {
+              student.stream = 'Commerce';
+            }
+
+            return student;
+          });
+
+          return responceData;
+        })
+      );
+  }
 }
