@@ -1,0 +1,102 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <div class="card card-body">
+        <h2 class="font-italic mb-5">Add New Non Academic</h2>
+        <!--Add teacher form here-->
+        <form #addNonAc="ngForm" (ngSubmit)="onSubmit(addNonAc.value)">
+            <div class="form-group w-50">
+                <label>User ID</label>
+                <input type="text" name="id" [value]="nonAcademicID" class="form-control" disabled>
+            </div>
+            
+            <div class="row">
+                <div class="col">
+                    <label>First Name</label>
+                    <input #fname="ngModel" type="text" name="firstname" ngModel class="form-control" required>
+                    <span *ngIf="fname.invalid && fname.touched" class="error mb-1">This field is required</span>
+                </div>
+    
+                <div class="col">
+                    <label>Last Name</label>
+                    <input #lname="ngModel" type="text" name="lastname" ngModel class="form-control" required>
+                    <span *ngIf="lname.invalid && lname.touched" class="error mb-1">This field is required</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Surname</label>
+                <input #sname="ngModel" type="text" name="surname" ngModel class="form-control" required>
+                <span *ngIf="sname.invalid && sname.touched" class="error mb-1">This field is required</span>
+            </div>
+
+            <div class="row form-group mb-5">
+                <div class="col">
+                    <label>Username</label>
+                    <input #uname="ngModel" type="text" name="username" [ngModel]="'@_'+fname.value| lowercase" class="form-control" required>
+                    <span *ngIf="uname.invalid && uname.touched" class="error mb-1">This field is required</span>
+                </div>
+                <div class="col">
+                    <label>Role</label>
+                    <input type="text" name="role" ngModel="Non Academic" class="form-control">
+                </div>
+            </div>
+            
+            <div class="row form-group">
+                <div class="col">
+                    <label>Mobile</label>
+                    <input #mobile="ngModel" type="text" name="mobile" ngModel class="form-control" required>
+                    <span *ngIf="mobile.invalid && mobile.touched" class="error mb-1">This field is required</span>
+                </div>
+                <div class="col-sm-8">
+                    <label>Email</label>
+                    <input #email="ngModel" type="email" name="email" ngModel class="form-control" required>
+                    <span *ngIf="email.invalid && email.touched" class="error mb-1">This field is required</span>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col">
+                    <label>Birth Date</label>
+                    <input type="date" name="birthdate" ngModel class="form-control">
+                </div>
+                <div class="col">
+                    <label>Age</label>
+                    <input type="text" name="age" ngModel="30" class="form-control">
+                </div>
+                <div class="col">
+                    <label>Gender</label>
+                    <select name="gender" ngModel class="form-control p-2">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>AddressLine 1</label>
+                <input type="text" name="addressline1" ngModel class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>AddressLine 2</label>
+                <input type="text" name="addressline2" ngModel class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>AddressLine 3</label>
+                <input type="text" name="addressline3" ngModel class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" ngModel class="form-control w-50">
+            </div>
+
+            <div class="form-group text-right">
+                <button type="submit" class="btn btn-sm btn-info" [disabled]="addNonAc.invalid">Create User</button>
+                <button type="reset" class="btn btn-sm btn-danger">Cancel</button>
+            </div>
+        </form>
+    </div>
+</div>

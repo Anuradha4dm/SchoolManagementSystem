@@ -17,6 +17,7 @@ export class NonAcademicService {
       'http://localhost:3000/nonacademic/get-pending-request'
     );
   }
+
   //update the leave status in leave table
   handleLeaves(
     leaveid: number,
@@ -370,7 +371,8 @@ export class NonAcademicService {
     const paramsSet = new HttpParams().set('year', year.toString());
 
     return this.httpClient.get<{
-      responsedata: { mesubjectis: number; mesubjectname: string };
+      subjects: { mesubjectis: number; mesubjectname: string }[];
+      studentname: string;
     }>(
       'http://localhost:3000/nonacademic/get-subjects-result-add/' + studentid,
       {
@@ -409,13 +411,15 @@ export class NonAcademicService {
 
   //this gives the list of student for registred
   getRegisteredStudentListOfBothExams(year: number, type: boolean) {
-    return this.httpClient.post(
-      'http://localhost:3000/nonacademic/get-student-list-main-exam',
-      {
-        type: type,
-        year: year,
-      }
-    );
+    return this.httpClient.post<{
+      class: string;
+      indexnumber: number;
+      studentid: string;
+      stream: string;
+    }>('http://localhost:3000/nonacademic/get-student-list-main-exam', {
+      type: type,
+      year: year,
+    });
   }
 
   //this will give th answer to the pending leaves

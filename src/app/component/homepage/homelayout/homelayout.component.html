@@ -1,43 +1,37 @@
 <!--Header section here-->
-<header>
-  <nav class="navbar bg-dark">
-    <ul class="nav nav-navbar">
-        <li class="nav-link btn btn-sm btn-danger mr-1" role="button" (click)="tabActivate(tab.name)" *ngFor="let tab of tabs">
-          {{tab.name}}
-        </li>
-    </ul>
-
-    <div>
+<header class="bg-dark">
+  <div class="row">
+    <div class="col p-4 ml-3 text-left">
+      <button class="btn btn-info btn-lg mr-3 font">Home</button>
       <app-login></app-login>
     </div>
-  </nav>
+  </div>
 </header>
 
-<!--Body section here-->
-<main class="text-center card" [ngSwitch]="tabName">
-  <app-home *ngSwitchCase="'Home'"></app-home>
-  <app-staff *ngSwitchCase="'Academic Staff'"></app-staff>
-  <app-downloads *ngSwitchCase="'Downloads'"></app-downloads> 
-  <app-about *ngSwitchCase="'About'"></app-about>
-</main>
+<div class="main-content card card-body">
+  <app-home></app-home>
+</div>
 
 <!--Footer section here-->
 <footer>
   <div class="card-body">
-    <div class="row footerText">
+    <div class="form-group mb-4">
+      <h2 class="font-italic text-center">Contact Us</h2>
+    </div>
 
-      <!--Contact details here-->
-      <div class="col text-center">
-        <h3>Contact Us</h3>
-        <p>
-          <strong>Address: </strong>{{schoolAddress}}
-        </p>
-        <p>
-          <strong>Phone: </strong>{{schoolPhone}}<br>
-          <strong>Email: </strong>{{schoolMail}}<br>
-        </p>
+    <div class="row">
+      <div class="mb-3 col text-center">
+        <h5>Our Address:</h5>
+        <span *ngFor="let line of addressArray">{{line}},<br></span>
       </div>
-
+      <div class="col mb-3 text-center">
+        <h5>Our Telephone:</h5>
+        <span *ngFor="let number of phone">{{number}}<br></span>
+      </div>
+      <div class="col mb-3 text-center">
+        <h5>Our Social:</h5>
+        <span *ngFor="let link of social">{{link}}<br></span>
+      </div>
     </div>
   </div>
 </footer>

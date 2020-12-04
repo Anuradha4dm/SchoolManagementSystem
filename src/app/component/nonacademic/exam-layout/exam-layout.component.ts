@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
   selector: 'app-exam-layout',
@@ -6,14 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./exam-layout.component.css']
 })
 export class ExamLayoutComponent implements OnInit {
-
-  selection:number = 1;
+  studentList;
+  selection:number = 3;
   selectedYear:number = new Date().getFullYear();
   exam:string = "G.C.E. A/L Examination";
 
-  constructor() { }
+  constructor(
+    private nonService: NonAcademicService
+  ) { }
 
   ngOnInit(): void {
+    this.getStudentList();
   }
 
   //Execute when select box change
@@ -22,6 +26,23 @@ export class ExamLayoutComponent implements OnInit {
       this.exam = "G.C.E. A/L Examination";
     else
       this.exam = "G.C.E. O/L Examination";
+    this.getStudentList();
   }
 
+  //return student list of the releted exam of year
+  getStudentList(){
+    if(this.selection==1){
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,true)
+        .subscribe((data)=>{
+          this.studentList = data;
+        });
+    }
+    if(this.selection==2){
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,false)
+      .subscribe((data)=>{
+        this.studentList = data;
+      });
+    }
+    console.log(this.studentList);
+  }
 }

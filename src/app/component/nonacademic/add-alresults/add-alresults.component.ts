@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { NonAcademicService } from '../nonacademic.service';
 
@@ -9,12 +10,15 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class AddALresultsComponent implements OnInit {
   @Input() year;
+  @Input() studentList;
   loggedUser:string;
+  selectedStudent; //contains details of selected student
+  selectedName; //contain selcted student name
+
   show:boolean = false;
   page:number = 1; //for pagination
   results:string[]=[];
 
-  selectedStudent; //contains details of selected student
   subjectList; //contins selected student's subject data 
   district=0;
   island=0;
@@ -27,25 +31,10 @@ export class AddALresultsComponent implements OnInit {
   Scount:number = 0;
   Wcount:number = 0;
 
-  //to remove start
-  studentList=[
-    {index:14100,studentid:"ST_1",name:"Randy Ortan",stream:"Maths"},
-    {index:14110,studentid:"ST_2",name:"Drew Macintyre",stream:"Commerce"},
-    {index:14120,studentid:"ST_3",name:"Brock Lesnar",stream:"Bio"},
-    {index:14130,studentid:"ST_4",name:"Triple H",stream:"Bio"},
-    {index:14140,studentid:"ST_5",name:"Jhon Cena",stream:"Bio"},
-    {index:14150,studentid:"ST_6",name:"Boby Lashlie",stream:"Bio"},
-    {index:14160,studentid:"ST_7",name:"Roman Reigns",stream:"Bio"},
-    {index:14170,studentid:"ST_8",name:"Seth Rolins",stream:"Bio"},
-    {index:14180,studentid:"ST_9",name:"Mat Hardy",stream:"Bio"},
-    {index:14180,studentid:"ST_10",name:"Ray Mystereo",stream:"Bio"},
-  ];
-  //to remove end
-
-
   constructor(
     private userLoginService: UserLogInService,
-    private nonService: NonAcademicService
+    private nonService: NonAcademicService,
+    private alertService: AlertMessageService
   ) { }
 
   ngOnInit(): void {
@@ -72,7 +61,8 @@ export class AddALresultsComponent implements OnInit {
 
     this.nonService.getSubjectDataForResultAddition(this.selectedStudent.studentid,this.year)
       .subscribe((data)=>{
-        this.subjectList = data;
+        this.subjectList = data.subjects;
+        this.selectedName = data.studentname;
       });
   }
 
@@ -82,10 +72,11 @@ export class AddALresultsComponent implements OnInit {
     for (let key in formData) {
       submitResults.push({ mesubjectid: key, meresult: formData[key] });
     }
-
+    console.log(formData)
+    
     this.nonService.addAdvanceLevelResults(
       this.loggedUser,
-      this.selectedStudent.index,
+      this.selectedStudent.indexnumber,
       this.year,
       this.island,
       this.district,
@@ -93,7 +84,10 @@ export class AddALresultsComponent implements OnInit {
       this.zscore,
       submitResults
     ).subscribe((data)=>{
-        console.log(data);
-      });
+        if(data.resultaddtion)
+          this.alertService.competeAlert("Results added successfully...");
+        else
+          this.alertService.competeAlert("Results cannot be added, try again later...");
+    });
   }
 }

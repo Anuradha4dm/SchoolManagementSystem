@@ -6,20 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homelayout.component.css'],
 })
 export class HomelayoutComponent implements OnInit {
-  schoolAddress = "No.6/15,Station road,Katukurunda,Kalutara.";
-  schoolPhone = "034-2234561";
-  schoolMail = "mySchool@gmail2020.com";
   
-  tabName="Home";
-  tabs = [{name:'Home'},{name:'Academic Staff'},{name:'Downloads'},{name:'About'}];
+  address = "No.6/15,Station road,Katukurunda,Kalutara.";
+  phone = ["034-2234561","034-2234562","034-2234563"];
+  social = ["myschool@2020gmail.com","myschool@facebook.com"];
+  addressArray=[];
+
 
   constructor() {}
 
   ngOnInit(): void {
+    this.addressArray=this.address.split(',')
   }
 
-  tabActivate(tabName) {
-    this.tabName = tabName;
-  }
 
 }

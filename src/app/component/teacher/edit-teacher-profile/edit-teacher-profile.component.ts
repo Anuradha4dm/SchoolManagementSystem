@@ -33,6 +33,7 @@ export class EditTeacherProfileComponent implements OnInit {
         this.teacherProfileData = data;
         this.profilePic =
           'http://localhost:3000/' + this.teacherProfileData.imagepath;
+        console.log(data);
       },
       (error) => {
         console.log(error);

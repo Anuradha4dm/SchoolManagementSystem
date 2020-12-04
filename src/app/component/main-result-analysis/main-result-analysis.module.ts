@@ -9,10 +9,11 @@ import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
 import { ViewOLComponent } from './view-ol/view-ol.component';
 import { ViewALComponent } from './view-al/view-al.component';
+import { ViewLayoutComponent } from './view-layout/view-layout.component';
 
 
 @NgModule({
-  declarations: [OlAnalysisComponent, AlAnalysisComponent, ViewOLComponent, ViewALComponent, ],
+  declarations: [OlAnalysisComponent, AlAnalysisComponent, ViewOLComponent, ViewALComponent, ViewLayoutComponent, ],
   imports: [
     CommonModule,
     MainResultAnalysisRoutingModule,

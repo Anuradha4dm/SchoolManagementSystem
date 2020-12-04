@@ -19,6 +19,11 @@ import { OlAnalysisComponent } from '../main-result-analysis/ol-analysis/ol-anal
 import { AlAnalysisComponent } from '../main-result-analysis/al-analysis/al-analysis.component';
 import { ViewALComponent } from '../main-result-analysis/view-al/view-al.component';
 import { ViewOLComponent } from '../main-result-analysis/view-ol/view-ol.component';
+import { ViewLayoutComponent } from '../main-result-analysis/view-layout/view-layout.component';
+import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
+import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
+import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
+import { AddClassComponent } from '../admin/add-class/add-class.component';
 
 const routes: Routes = [
   {
@@ -80,12 +85,24 @@ const routes: Routes = [
         component: AlAnalysisComponent,
       },
       {
-        path: 'al-view',
-        component: ViewALComponent,
+        path: 'view',
+        component: ViewLayoutComponent,
       },
       {
-        path: 'ol-view',
-        component: ViewOLComponent,
+        path: 'new',
+        component: AddNewProfileComponent
+      },
+      {
+        path: 'add-teacher',
+        component: AddTeacherComponent
+      },
+      {
+        path: 'add-non',
+        component: AddNonAcademicComponent
+      },
+      {
+        path: 'add-class',
+        component: AddClassComponent
       }
       //to remove end
     ],

@@ -135,6 +135,7 @@ export class TeacherService {
     };
 
     reader.readAsBinaryString(target.files[0]);
+    return true;
   }
 
   mapDataFormTheServiceToStudent(studentid: string, subjectidArray: number[]) {
@@ -157,5 +158,16 @@ export class TeacherService {
     console.log(resultArray);
 
     return resultArray;
+  }
+
+  sendTeacherNotifications(teacherid: string, selectedList, formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/teacher-send-notifications',
+      {
+        teacherid: teacherid,
+        list: selectedList,
+        data: formData,
+      }
+    );
   }
 }

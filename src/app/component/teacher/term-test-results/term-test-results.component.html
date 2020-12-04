@@ -1,63 +1,45 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-  <!--Selections are here-->
-  <div class="card card-body">
-    <h4 class="font-italic">Add Term Test Reuslts</h4>
+  <!--Term selection section here-->
+  <div class="row">
+    <div class="card card-body">
+      <h4 class="font-italic mb-4">Add Term Test Results</h4>
 
-    <div class="row">
-      <div class="col">
-        <label>Class:</label>
-        <input
-          type="text"
-          [value]="termResult.grade"
-          class="form-control"
-          disabled
-        />
+      <div class="row">
+        <div class="col">
+          <label>Class:</label>
+          <input type="text" [value]="termResult.grade" class="form-control" disabled>
+        </div>
+  
+        <div class="col">
+          <label>Year:</label>
+          <input type="text" [value]="termResult.year" class="form-control" disabled>
+        </div>
+  
+        <div class="col">
+          <label>Term:</label>
+          <select class="form-control" [(ngModel)]="termResult.term">
+            <option value="1">Term1</option>
+            <option value="2">Term2</option>
+            <option value="3">Term3</option>
+          </select>
+        </div>
       </div>
 
-      <div class="col">
-        <label>Year:</label>
-        <input
-          type="text"
-          [value]="termResult.year"
-          class="form-control"
-          disabled
-        />
-      </div>
+      <input type="file" name="filename" multiple="false" (change)="onFileChange($event)" class="my-3">
 
-      <div class="col">
-        <label>Term:</label>
-        <select class="form-control" [(ngModel)]="termResult.term">
-          <option value="1">Term1</option>
-          <option value="2">Term2</option>
-          <option value="3">Term3</option>
-        </select>
-      </div>
     </div>
-
-    <input
-      type="file"
-      name="filename"
-      multiple="false"
-      (change)="onFileChange($event)"
-      id=""
-    />
-
-    <input
-      type="button"
-      value="read"
-      (click)="onReadStudentResult()"
-      class="btn btn-danger"
-    />
   </div>
 
+  <!--Student list here with results-->
   <div class="row">
-    <!--Student List here-->
+    <!--Student list here-->
     <div class="col">
       <div class="card card-body">
-        <table class="table table-hover text-center">
-          <tr>
+        <h3 *ngIf="!fileSelected" class="text-center">Please select the result sheet to continue</h3>
+        <table *ngIf="fileSelected" class="table text-center">
+          <tr class="bg-info">
             <th>Student ID</th>
             <th>First Name</th>
             <th>Last Name</th>
@@ -68,17 +50,8 @@
               <td>{{ student.firstname | titlecase }}</td>
               <td>{{ student.lastname | titlecase }}</td>
               <td>
-                <button
-                  (click)="
-                    onAddResultsClick(
-                      student._id,
-                      student.firstname,
-                      student.lastname
-                    )
-                  "
-                  class="btn btn-primary btn-sm"
-                >
-                  Add Results
+                <button (click)="onCheckClick(student)" class="btn btn-primary btn-sm">
+                  Check
                 </button>
               </td>
             </tr>
@@ -87,88 +60,50 @@
       </div>
     </div>
 
-    <!--Specific student subjects here-->
-    <div class="col-md-5" *ngIf="show">
+    <!--One student results here-->
+    <div class="col-md-6" *ngIf="show">
       <div class="card card-body border border-dark">
         <div class="row">
           <div class="col">
             <label>Year</label>
-            <input
-              type="text"
-              class="form-control"
-              [value]="termResult.year"
-              disabled
-            />
+            <input type="text" class="form-control" [value]="termResult.year" disabled>
           </div>
 
           <div class="col">
             <label>Term</label>
-            <input
-              type="text"
-              class="form-control"
-              [value]="termResult.term"
-              disabled
-            />
+            <input type="text" class="form-control" [value]="termResult.term" disabled>
           </div>
 
           <div class="col">
             <label>Student ID</label>
-            <input
-              type="text"
-              class="form-control"
-              [value]="termResult.studentid"
-              disabled
-            />
+            <input type="text" class="form-control" [value]="termResult.studentid" disabled>
           </div>
         </div>
 
         <div class="form-group">
           <label>Student Name</label>
-          <input
-            type="text"
-            class="form-control"
-            [value]="fullname | titlecase"
-            disabled
-          />
+          <input type="text" class="form-control" [value]="fullname | titlecase" disabled>
         </div>
 
         <form #resultForm="ngForm" (ngSubmit)="onSubmitClick(resultForm.value)">
           <table>
-            <tr *ngFor="let subject of subjectList">
+            <tr *ngFor="let result of resultList">
               <td class="text-right">
-                <label>{{ subject.subjectname | titlecase }} :</label>
+                <label>{{ result.subjectname | titlecase }} :</label>
               </td>
               <td>
-                <input
-                  type="text"
-                  [name]="subject.subjectid"
-                  class="form-control w-50"
-                  ngModel
-                  required
-                />
+                <input type="text" [name]="result.id" [ngModel]="result.mark" class="form-control w-50" required>
               </td>
             </tr>
           </table>
 
           <div class="form-group text-right">
-            <button
-              type="submit"
-              class="btn btn-success btn-sm"
-              [disabled]="resultForm.invalid"
-              [attr.data-dismiss]="element"
-            >
-              Submit
-            </button>
-            <button
-              type="button"
-              class="btn btn-danger btn-sm"
-              (click)="onCancelClick()"
-            >
-              Cancel
-            </button>
+            <button type="submit" class="btn btn-success btn-sm" [disabled]="resultForm.invalid" [attr.data-dismiss]="element">Submit</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="show=false">Cancel</button>
           </div>
         </form>
       </div>
     </div>
+ 
   </div>
 </div>
