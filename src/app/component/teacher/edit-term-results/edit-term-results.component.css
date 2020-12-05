@@ -5,6 +5,6 @@ tbody tr:hover{
 }
 
 .bg{
-    background-color: green;
+    background-color: rgba(180, 90, 50,1);
     color: white;
 }

@@ -2,15 +2,11 @@
 <div>
     <div id="myslide" class="carousel slide carousel-fade" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#myslide" data-slide-to="0" class="active"></li>
-            <li data-target="#myslide" data-slide-to="1"></li>
-            <li data-target="#myslide" data-slide-to="2"></li>
+            <li *ngFor="let i=index,let img of images" data-target="#myslide" [data-slide-to]="i"></li>
         </ol>
 
         <div class="carousel-inner">
-            <img class="carousel-item slideimage active" src="assets/img/bg5.jpg" alt="Slide1"/>
-            <img class="carousel-item slideimage" src="assets/img/bg6.jpg" alt="Slide2"/>
-            <img class="carousel-item slideimage" src="assets/img/header.jpg" alt="Slide3"/>
+            <img *ngFor="let i=index;let image of images" class="carousel-item slideimage" [class.active]="i==0?true:false" [src]="'assets/img/'+image" alt="Slide">
         </div>
 
         <a class="carousel-control-prev" href="#myslide" data-slide="prev">
@@ -26,37 +22,56 @@
 
 <!--Home body content here-->
 <div class="container text-center">
-    <h3 class="card-title">Welcome to Our Official Page</h3>
+    <h2 class="card-title">Welcome to Our Official Page</h2>
 
-    <p>
-        Voluptua scripserit per ad, laudem viderer sit ex. Ex alia corrumpit voluptatibus usu, sed unum convenire id. Ut cum nisl moderatius, per nihil dicant commodo an. Eum tacimates erroribus ad. Atqui feugiat euripidis ea pri, sed veniam tacimates ex. Menandri
-        temporibus an duo.
-    </p>
+    <!--Description about school-->
+    <div class="form-group my-5 font">
+        Our school is widely known as the premier educational institution in the province.
+        This is an institution that brings together all walks of life, giving an equal platform for every student to reach his maximum potential. 
+        Actually we believe that commitment, dedication and a Royal Heart is the key towards achieving excellence. With over 20 Sports and 35 Clubs & Societies,
+        our school produces some of the best talent the nation has seen, and continues to innovate and set the trend for those around. Being the oldest public 
+        school in Province that is still in existence, the rich history & traditions are never forgotten, and show the students the path they need 
+    </div>
 
+    <!--Vission mission section here-->
+    <div class="row mb-5">
+        <div class="col border border-dark p-4 m-4">
+            <h4>Our Mission</h4>
+            <p>
+                {{mission}}
+            </p>
+        </div>
+        <div class="col border border-dark p-4 m-4">
+            <h4>Our Vision</h4>
+            <p>
+                {{vision}}
+            </p>
+        </div>
+    </div>
+    <!--Count section here-->
     <div class="row mt-5 mb-3">
         <div class="stats-col text-center col-md-3 col-sm-6">
             <div class="circle">
-                <span class="stats-no" data-toggle="counter-up">{{noOfStudent}}</span>Students
+                <span class="stats-no">{{counts.studentCount}}</span>Students
             </div>
         </div>
 
         <div class="stats-col text-center col-md-3 col-sm-6">
             <div class="circle">
-                <span class="stats-no" data-toggle="counter-up">{{noOfTeacher}}</span>Teachers
+                <span class="stats-no">{{counts.teacherCount}}</span>Teachers
             </div>
         </div>
 
         <div class="stats-col text-center col-md-3 col-sm-6">
             <div class="circle">
-                <span class="stats-no" data-toggle="counter-up">{{noOfClass}}</span>Classes
+                <span class="stats-no">{{counts.classCount}}</span>Classes
             </div>
         </div>
 
         <div class="stats-col text-center col-md-3 col-sm-6">
             <div class="circle">
-                <span class="stats-no" data-toggle="counter-up">{{noOfNonAcademic}}</span>Non Academic staff
+                <span class="stats-no">{{counts.nonCount}}</span>Non Academic staff
             </div>
         </div>
     </div>
-
 </div>

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
   selector: 'app-register-for-al',
@@ -10,7 +11,9 @@ export class RegisterForALComponent implements OnInit {
   show:boolean = false;
   page:number = 1;
   
-  constructor() { }
+  constructor(
+    private nonService: NonAcademicService
+  ) { }
 
   ngOnInit(): void {
   }

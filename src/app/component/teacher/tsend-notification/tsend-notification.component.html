@@ -1,80 +1,85 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-    <div class="row">
-        
-        <!--Student List here-->
-        <div class="col-md-7">
-            <div class="card card-body">
-                <h4 class="font-italic mb-4">Send Notifications</h4>
+    <form #teacherNotiForm="ngForm" (ngSubmit)="onSendClick(teacherNotiForm.value)">
+        <div class="row">
+            <!--Student List here-->
+            <div class="col-md-7">
+                <div class="card card-body">
+                    <h4 class="font-italic mb-4">Send Notifications</h4>
+                    
+                    <div class="row mb-4">
+                        <div class="col">
+                            <label>Class</label>
+                            <input type="text" [value]="studentList.grade" class="form-control" disabled>
+                        </div>
+
+                        <div class="col">
+                            <label>Select Category</label>
+                            <select #category class="form-control" name="type" ngModel="4">
+                                <option value="4">To Specific Students</option>
+                                <option value="5">To All Students</option>
+                            </select>
+                        </div>
+                    </div>
                 
-                <div class="row mb-4">
-                    <div class="col">
-                        <label>Class</label>
-                        <input type="text" class="form-control" disabled>
-                    </div>
-
-                    <div class="col">
-                        <label>Teacher Name</label>
-                        <input type="text" class="form-control" disabled>
-                    </div>
-                </div>
-            
-                <table class="table text-center table-hover">
-                    <tr class="bg-secondary">
-                        <th>Student ID</th> 
-                        <th>Full Name</th> 
-                        <th>Email</th> 
-                        <th>Mobile</th> 
-                        <th></th> 
-                    </tr>
-                    <tbody>
-                        <tr class="bottom">
-                            <td>id</td>
-                            <td>name</td>
-                            <td>email</td>
-                            <td>mobile</td>
-                            <td>
-                                <input type="checkbox" (change)="updateSelectedList($event)">
-                            </td>
+                    <table class="table text-center table-hover">
+                        <tr class="bg-secondary">
+                            <th>Student ID</th> 
+                            <th>First Name</th> 
+                            <th>Last Name</th>
+                            <th></th>
                         </tr>
-                    </tbody>
-                </table>
+                        <tbody>
+                            <tr *ngFor="let student of studentList.studentListData">
+                                <td>{{student._id}}</td>
+                                <td>{{student.firstname}}</td>
+                                <td>{{student.lastname}}</td>
+                                <td>
+                                    <mat-slide-toggle [name]="student._id" [ngModel]="category.value=='5'?true:false"></mat-slide-toggle>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-                <small *ngIf="selectedList.length==0" class="error">Please select at least one student</small>
+                </div>
+            </div>
+
+            <!--Notification content here-->
+            <div class="col-md-5">
+                    <div class="card card-body border border-dark">
+                        <h5 class="text-muted mb-4 font-italic">Notification details</h5>
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" name="title" ngModel class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>From</label>
+                            <input type="text" name="from" [value]="loggedUserID" class="form-control" disabled>
+                        </div>
+
+                        <div class="form-group w-50">
+                            <label>Expired Date</label>
+                            <input type="date" name="expire" ngModel class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Message Body</label>
+                            <textarea type="text" name="description" ngModel class="form-control border" required></textarea>
+                        </div>
+
+                        <div class="row">
+                            <input type="file" class="btn">
+                        </div>
+
+                        <div class="form-group text-right">
+                            <button type="submit" class="btn btn-sm btn-info" [disabled]="teacherNotiForm.invalid">Send</button>
+                            <button type="button" class="btn btn-sm btn-danger">Cancel</button>
+                        </div>
+                    </div>
+
             </div>
         </div>
-
-        <!--Notification content here-->
-        <div class="col-md-5">
-            <form #teacherNotiForm="ngForm" (ngSubmit)="onSendClick()">
-                <div class="card card-body border border-dark">
-                    <h5 class="text-muted mb-4 font-italic">Notification details</h5>
-                    <div class="form-group">
-                        <label>Title</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>From</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Message Body</label>
-                        <textarea type="text" class="form-control border"></textarea>
-                    </div>
-
-                    <div class="row">
-                        <input type="file" class="btn">
-                    </div>
-    
-                    <div class="form-group text-right">
-                        <button type="submit" class="btn btn-sm btn-info">Send</button>
-                        <button type="button" class="btn btn-sm btn-danger">Cancel</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
+    </form>
 </div>

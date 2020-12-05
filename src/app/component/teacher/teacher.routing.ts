@@ -15,10 +15,11 @@ import { TermTestResultsComponent } from './term-test-results/term-test-results.
 import { EditTermResultsComponent } from './edit-term-results/edit-term-results.component';
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
-import { OlAnalysisComponent } from '../main-result-analysis/ol-analysis/ol-analysis.component';
-import { AlAnalysisComponent } from '../main-result-analysis/al-analysis/al-analysis.component';
-import { ViewALComponent } from '../main-result-analysis/view-al/view-al.component';
-import { ViewOLComponent } from '../main-result-analysis/view-ol/view-ol.component';
+
+import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
+import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
+import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
+import { AddClassComponent } from '../admin/add-class/add-class.component';
 
 const routes: Routes = [
   {
@@ -71,22 +72,23 @@ const routes: Routes = [
         path: 'tsend-noti',
         component: TsendNotificationComponent,
       },
+
       {
-        path: 'ol-analysis',
-        component: OlAnalysisComponent,
+        path: 'new',
+        component: AddNewProfileComponent,
       },
       {
-        path: 'al-analysis',
-        component: AlAnalysisComponent,
+        path: 'add-teacher',
+        component: AddTeacherComponent,
       },
       {
-        path: 'al-view',
-        component: ViewALComponent,
+        path: 'add-non',
+        component: AddNonAcademicComponent,
       },
       {
-        path: 'ol-view',
-        component: ViewOLComponent,
-      }
+        path: 'add-class',
+        component: AddClassComponent,
+      },
       //to remove end
     ],
   },

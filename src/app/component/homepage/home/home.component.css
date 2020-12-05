@@ -1,5 +1,5 @@
 .slideimage{
-    height: 90vh;
+    height: 80vh;
 }
 
 .stats-col .circle {
@@ -29,5 +29,13 @@
     position: absolute;
     border-radius: 50%;
     font-weight: 700;
-  }
-  
+}
+
+.height{
+    height: 20vh
+}
+
+.font{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+}
