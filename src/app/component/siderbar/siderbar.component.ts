@@ -148,12 +148,7 @@ export class SiderbarComponent implements OnInit {
           icon: 'users_single-02',
           class: '',
         },
-        {
-          path: '/user/add-event',
-          title: 'ADD EVENT',
-          icon: 'users_single-02',
-          class: '',
-        },
+
         {
           path: '/user/send-notification',
           title: 'SEND NOTIFICATION',
@@ -169,6 +164,24 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/student-class-change',
           title: 'Class Change',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/main-exam-layout',
+          title: 'Main Exams',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/ol-analysis',
+          title: 'O/L Analysis',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/al-analysis',
+          title: 'A/L Analysis',
           icon: 'gestures_tap-01',
           class: '',
         },

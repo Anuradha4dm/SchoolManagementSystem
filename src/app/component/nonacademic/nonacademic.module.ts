@@ -23,6 +23,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
 import { ModifyClassComponent } from './modify-class/modify-class.component';
 
+import { ChartsModule } from 'ng2-charts';
+import { AlAnalysisComponent } from './al-analysis/al-analysis.component';
+import { OlAnalysisComponent } from './ol-analysis/ol-analysis.component';
+import { ViewALComponent } from './view-al/view-al.component';
+import { ViewOLComponent } from './view-ol/view-ol.component';
+import { ViewLayoutComponent } from './view-layout/view-layout.component';
+
 @NgModule({
   declarations: [
     LeavehandleComponent,
@@ -37,6 +44,11 @@ import { ModifyClassComponent } from './modify-class/modify-class.component';
     RegisterForOLComponent,
     RegisterAlSubjectsComponent,
     ModifyClassComponent,
+    OlAnalysisComponent,
+    AlAnalysisComponent,
+    ViewALComponent,
+    ViewOLComponent,
+    ViewLayoutComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +60,8 @@ import { ModifyClassComponent } from './modify-class/modify-class.component';
     MatProgressBarModule,
     MatTabsModule,
     MatCheckboxModule,
+    NgxPaginationModule,
+    ChartsModule,
   ],
   exports: [
     LeavehandleComponent,
