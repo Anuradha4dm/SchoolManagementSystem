@@ -7,8 +7,7 @@ import { NonAcademicService } from '../../nonacademic/nonacademic.service';
   styleUrls: ['./view-ol.component.css']
 })
 export class ViewOLComponent implements OnInit {
-  selectedYear:number=new Date().getFullYear();
-  selectedShy: number=0;
+  selectedYear:number=new Date().getFullYear()-1;
   selectedStream: number;
   
   olData; //contain A/L exam resukts of selected year
@@ -31,7 +30,7 @@ export class ViewOLComponent implements OnInit {
       console.log(this.olData);
     })
   }
-
+/*
   //Select student related to shy
   onShyFilter(){
     if(this.selectedShy!=0){
@@ -45,5 +44,5 @@ export class ViewOLComponent implements OnInit {
       this.onYearChange();
    
   }
-
+*/
 }

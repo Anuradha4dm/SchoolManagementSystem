@@ -31,11 +31,6 @@ export class TsendNotificationComponent implements OnInit {
     });
   }
 
-  updateSelectedList(event){
-  
-
-  }
-
   //execute when send button click
   onSendClick(value){
     var selectedList=[];
@@ -55,7 +50,6 @@ export class TsendNotificationComponent implements OnInit {
     this.teacherService.sendTeacherNotifications(this.loggedUserID,selectedList,value).subscribe((data)=>{
       if(data)
         this.alertService.competeAlert("Notification send successfully");
-
     })
   }
 }

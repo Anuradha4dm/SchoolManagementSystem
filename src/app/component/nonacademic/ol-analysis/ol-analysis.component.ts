@@ -24,10 +24,10 @@ export class OlAnalysisComponent implements OnInit {
 
   //Past yaer count wise analysis chart data here
   pastYearData = [0, 0];
-  pastYearLabels = ['Student Count of the result', 'Total student of the year'];
+  pastYearLabels = ['Result count', 'Rest count'];
   pastYearGrade = 'A';
   pastYearCount = 9;
-  pastYearStudentData: LastYearData[];
+  pastYearStudentData;
 
   //Subject analysis chart data here
   subjectData = [];
@@ -92,10 +92,10 @@ export class OlAnalysisComponent implements OnInit {
         this.pastYearCount.toString()
       )
       .subscribe((data) => {
-        this.pastYearStudentData = data.result;
-        this.pastYearData.push(data.result.length);
-        this.pastYearData.push(this.pastYearOLData.length);
-        console.log(this.pastYearOLData.length);
+        this.pastYearStudentData = data;
+        this.pastYearData.push(this.pastYearStudentData.length);
+        this.pastYearData.push(this.pastYearOLData.length-this.pastYearStudentData.length);
+        console.log(data);
       });
   }
 

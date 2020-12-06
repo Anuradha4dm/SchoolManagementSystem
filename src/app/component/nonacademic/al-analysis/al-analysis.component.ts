@@ -28,7 +28,7 @@ export class AlAnalysisComponent implements OnInit {
 
   //Last year analysis detials here
   lastYearCount = [0, 0];
-  lastYearLabels = ['Result count', 'Total count'];
+  lastYearLabels = ['Result count', 'Other count'];
   pastYearData: LastYearData[];
   lastGrade = 'A';
   lastCount = 3;
@@ -92,7 +92,7 @@ export class AlAnalysisComponent implements OnInit {
         //this method has some error
         this.pastYearData = data;
         this.lastYearCount.push(this.pastYearData.length);
-        this.lastYearCount.push(this.pastYearALData.length);
+        this.lastYearCount.push(this.pastYearALData.length-this.pastYearData.length);
       });
   }
 

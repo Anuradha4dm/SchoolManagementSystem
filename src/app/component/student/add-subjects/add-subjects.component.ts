@@ -85,7 +85,7 @@ export class AddSubjectsComponent implements OnInit {
 
     //categorize subjects
     this.gradeVal = +this.studentData.grade.split('_')[0];
-    this.stream = this.studentData.grade.split('_')[1];
+    this.stream = this.studentData.grade.split('_')[2];
 
     //ths is the grades in between  grade 6-9
     if (this.gradeVal >= 6 && this.gradeVal <= 9) {

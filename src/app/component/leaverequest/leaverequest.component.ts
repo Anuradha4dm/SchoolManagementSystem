@@ -50,13 +50,11 @@ export class LeaverequestComponent implements OnInit {
     );
 
     //Check logged user non academic or academic
-    if(this.role.toLowerCase()=="teacher"){
-      this.teacherService.getTeacherProfileData(this.loggedUserID)
-        .subscribe((data)=>{
-          this.profile = data;
-          this.chartData=[41-data.numberofleaves,data.numberofleaves];
-        });
-    }
+    this.teacherService.getTeacherProfileData(this.loggedUserID)
+      .subscribe((data)=>{
+        this.profile = data;
+        this.chartData=[41-data.numberofleaves,data.numberofleaves];
+      });
 
     this.nonService.getPendingRequest()
       .subscribe((data)=>{
