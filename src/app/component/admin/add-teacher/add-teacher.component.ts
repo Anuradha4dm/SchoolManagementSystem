@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { stringify } from 'querystring';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
+import { SubjectListsService } from '../../nonacademic/subject-lists.service';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -14,10 +15,12 @@ export class AddTeacherComponent implements OnInit {
   selectedFile:File=null; //contain the selected image file
   imagePath:string=''; //contain the selected image path
   profilePic;
+  allSubjects; //contain all subject of school
   subjects=[];
 
   constructor(
     private adminService: AdminService,
+    private subjectListService: SubjectListsService,
     private alertService: AlertMessageService
   ) { }
 
@@ -25,7 +28,9 @@ export class AddTeacherComponent implements OnInit {
     this.adminService.getAllCounts().subscribe((data)=>{
       console.log(data);
       this.teacherID = "AC_"+(data.teacherCount+1);
-    })
+    });
+
+    this.allSubjects=this.subjectListService.getAllSubjects();
   }
 
   //Execute when profile pic change
@@ -72,7 +77,10 @@ export class AddTeacherComponent implements OnInit {
     formdata.append('surname',value.surname);
     formdata.append('username',value.username);
     formdata.append('subjectlist',subjectList);
-    //formdata.append('photo', this.selectedFile, this.imagePath);
+
+    if(this.selectedFile)
+      formdata.append('imageData', this.selectedFile, this.imagePath);
+
     console.log(subjectList)
     this.adminService.addNewTeacher(formdata).subscribe((data)=>{
       if(data)

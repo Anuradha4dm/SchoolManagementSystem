@@ -73,14 +73,19 @@
             </div>
 
             <!--Personal details here-->
-            <div class="form-group">
-                <label>Email</label>
-                <input name="email" [ngModel]="teacherProfileData.email" type="email" class="form-control">
-            </div>
-
-            <div class="form-group">
-                <label>Mobile</label>
-                <input name="mobile" [ngModel]="teacherProfileData.mobile" type="text" class="form-control">
+            <div class="row form-group">
+                <div class="col">
+                    <label>Email</label>
+                    <input name="email" [ngModel]="teacherProfileData.email" type="email" class="form-control">
+                </div>
+                <div class="col">
+                    <label>Mobile</label>
+                    <input name="mobile" [ngModel]="teacherProfileData.mobile" type="text" class="form-control">
+                </div>
+                <div class="col">
+                    <label>Description</label>
+                    <input name="description" [ngModel]="teacherProfileData.description" type="text" class="form-control">
+                </div>
             </div>
 
             <div class="form-group">
@@ -90,22 +95,22 @@
 
             <div class="form-group">
                 <label>Address Line 1</label>
-                <input name="addressline1" [ngModel]="teacherProfileData.addressline1| titlecase" type="text" class="form-control">
+                <input name="addressline1" [ngModel]="teacherProfileData.addressline1| titlecase" type="text" class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>Address Line 2</label>
-                <input name="addressline2" [ngModel]="teacherProfileData.addressline2| titlecase" type="text" class="form-control">
+                <input name="addressline2" [ngModel]="teacherProfileData.addressline2| titlecase" type="text" class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>Address Line 3</label>
-                <input name="addressline3" [ngModel]="teacherProfileData.addressline3| titlecase" type="text" class="form-control">
+                <input name="addressline3" [ngModel]="teacherProfileData.addressline3| titlecase" type="text" class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>City</label>
-                <input name="city" [ngModel]="teacherProfileData.city| titlecase" type="text" class="form-control w-50">
+                <input name="city" [ngModel]="teacherProfileData.city| titlecase" type="text" class="form-control w-25">
             </div>
 
             <div class="form-group">

@@ -2,32 +2,6 @@
 
 <div class="main-content">
     <div class="row">
-        <!--Class list here-->
-        <div class="col">
-            <div class="card card-body">
-                <h3 class="font-italic mb-4">Manage Classes</h3>
-                <h5 class="text-center text-muted">Available class list</h5>
-                <table class="table text-center">
-                    <tr class="bg-info">
-                        <th>Class ID</th>
-                        <th>Class Name</th>
-                        <th>Class Teacher</th>
-                    </tr>
-                    <tbody>
-                        <tr *ngFor="let class of classList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(class)">
-                            <td>{{class.classid}}</td>
-                            <td>{{class.grade}}</td>
-                            <td>{{class.teacher?class.teacher.teacherid : "Not Assigned"}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <div class="form-group text-center mt-2">
-                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
-                </div>
-            </div>
-        </div>
-
         <div class="col" *ngIf="show">
             <!--Class teacher assign section here-->
             <div class="row">
@@ -59,7 +33,7 @@
                     </div>
     
                     <div class="form-group mt-3" *ngIf="!selectedClass.teacher || findTeacher">
-                        <label>Select Teacher</label>
+                        <label>Available Teacher List</label>
                         <select name="newTeacher" [(ngModel)]="newTeacherID" class="form-control p-1">
                             <option [value]="teacher.teacherid" *ngFor="let teacher of freeTeacherList.teachers">{{teacher.teacherid}}</option>
                         </select>
@@ -81,15 +55,14 @@
                     <div class="row">
                         <div class="col">
                            <label>Select Subject</label>
-                           <select (change)="onSelectSubjectChange($event.target.value)" class="form-control">
-                               <option value="sinhala">Sinhala</option>
-                               <option value="pts">PTS</option>
+                           <select name="selectSubject" ngModel (change)="onSelectSubjectChange($event.target.value)" class="form-control">
+                               <option [value]="subject" *ngFor="let subject of completeSubjectList">{{subject}}</option>
                            </select> 
                         </div>
 
                         <div class="col">
                             <label>Select Teacher</label>
-                            <select (change)="onSelectTeacherChange($event.target.value)" class="form-control">
+                            <select name="selectTeacher" ngModel (change)="onSelectTeacherChange($event.target.value)" class="form-control">
                                 <option *ngFor="let teacher of subjectTeacherList" [value]="teacher.teacherid">{{teacher.teacherid}}</option>
                             </select>
                         </div>
@@ -100,6 +73,8 @@
                     </div>
 
                     <div class="form-group">
+                        <h5 class="text-muted text-center mb-3">Selected teacher other classes and subjects</h5>
+
                         <table class="table text-center">
                             <tr class="bg-secondary">
                                 <th>Subject ID</th>
@@ -118,6 +93,58 @@
                 </div>
             </div>
         
+        </div>
+
+        <!--Class list here-->
+        <div class="col">
+            <!--Available class list-->
+            <div class="card card-body" *ngIf="!show">
+                <h3 class="font-italic mb-4">Manage Classes</h3>
+                <h5 class="text-center text-muted mb-3">Available class list</h5>
+
+                <div class="form-group border border-dark w-75 mx-auto p-4">
+                    <table class="table text-center">
+                        <tr class="bg-info">
+                            <th>Class ID</th>
+                            <th>Class Name</th>
+                            <th>Class Teacher</th>
+                        </tr>
+                        <tbody>
+                            <tr *ngFor="let class of classList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(class)">
+                                <td>{{class.classid}}</td>
+                                <td>{{class.grade}}</td>
+                                <td>{{class.teacher?class.teacher.teacherid : "Not Assigned"}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+    
+                </div>
+             
+                <div class="form-group text-center mt-2">
+                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                </div>
+            </div>
+
+            <!--Already registered subject list here-->
+            <div class="card card-body" *ngIf="show">
+                <h5 class="font-italic mb-3">Already assigned subjects</h5>
+                <table class="table text-center">
+                    <tr class="bg-secondary">
+                        <th>Subject Name</th>
+                        <th>Teacher ID</th>
+                    </tr>
+                    <tbody>
+                        <tr *ngFor="let subject of alreadyRegisteredSubjects.List">
+                            <td>{{subject.subjectname| uppercase}}</td>
+                            <td>{{subject.teacherTeacherid}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="form-group text-right">
+                    <button type="button" (click)="show=false" class="btn btn-info">Back</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

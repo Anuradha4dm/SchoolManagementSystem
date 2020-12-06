@@ -215,7 +215,7 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('result', result);
     parameterSet = parameterSet.append('count', count);
 
-    return this.httpClient.get<{ result: [] }>(
+    return this.httpClient.get(
       'http://localhost:3000/nonacademic/ol-chart-three',
       {
         params: parameterSet,
@@ -460,6 +460,13 @@ export class NonAcademicService {
       grade: grade,
       subjectname: subjectname,
       teacherid: teacherid
+    });
+  }
+
+  //return subject list that assigned to teachers
+  getClassRegisteredSubjects(grade: string){
+    return this.httpClient.post('http://localhost:3000/nonacademic/get-class-registered-subjects',{
+      class:grade
     });
   }
 }

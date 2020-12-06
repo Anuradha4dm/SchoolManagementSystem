@@ -11,7 +11,6 @@ export class AddClassComponent implements OnInit {
 
   letterList=['A','B','C','D','E','F','G','H','I','J'];
   gradeList=[6,7,8,9,10,11,12,13];
-  streamList=["Maths","Bio","Art","Commerce","Tech"];
   classList;
 
   selectedGrade;
@@ -41,8 +40,8 @@ export class AddClassComponent implements OnInit {
     this.adminService.createNewClass(className).subscribe((data)=>{
       if(data)
         this.alertService.competeAlert("New class created successfully...");
-    },(error)=>{
-      this.alertService.errorAlert("Class cannot create at this time...");
-    })
+      else
+        this.alertService.errorAlert("Please enter valid class properties...");
+    });
   }
 }

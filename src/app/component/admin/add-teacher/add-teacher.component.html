@@ -74,18 +74,14 @@
                 <div class="col">
                     <label>Subject 1</label>
                     <select name="subject1" [(ngModel)]="subjects[0]" class="form-control p-1">
-                        <option value="sinhala">Sinhala</option>
-                        <option value="history">History</option>
-                        <option value="maths">Maths</option>
+                        <option [value]="subject" *ngFor="let subject of allSubjects">{{subject}}</option>
                     </select>
                 </div>
 
                 <div class="col">
                     <label>Subject 2</label>
-                    <select name="subject1" [(ngModel)]="subjects[1]" class="form-control p-1">
-                        <option value="sinhala">Sinhala</option>
-                        <option value="history">History</option>
-                        <option value="maths">Maths</option>
+                    <select name="subject2" [(ngModel)]="subjects[1]" class="form-control p-1">
+                        <option [value]="subject" *ngFor="let subject of allSubjects">{{subject}}</option>
                     </select>
                 </div>
             </div>
@@ -123,26 +119,26 @@
 
             <div class="form-group">
                 <label>AddressLine 1</label>
-                <input type="text" name="addressline1" ngModel class="form-control">
+                <input type="text" name="addressline1" ngModel class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>AddressLine 2</label>
-                <input type="text" name="addressline2" ngModel class="form-control">
+                <input type="text" name="addressline2" ngModel class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>AddressLine 3</label>
-                <input type="text" name="addressline3" ngModel class="form-control">
+                <input type="text" name="addressline3" ngModel class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>City</label>
-                <input type="text" name="city" ngModel class="form-control w-50">
+                <input type="text" name="city" ngModel class="form-control w-25">
             </div>
 
             <div class="form-group text-right">
-                <button type="submit" class="btn btn-sm btn-info">Add Teacher</button>
+                <button type="submit" class="btn btn-sm btn-info" [disabled]="addTeacher.invalid">Add Teacher</button>
                 <button type="reset" class="btn btn-sm btn-danger">Cancel</button>
             </div>
         </form>

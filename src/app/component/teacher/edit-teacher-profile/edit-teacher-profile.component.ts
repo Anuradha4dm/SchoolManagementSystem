@@ -69,6 +69,7 @@ export class EditTeacherProfileComponent implements OnInit {
     formObj.append('addressline3', formData.value.addressline3);
     formObj.append('city', formData.value.city);
     formObj.append('qualifications',formData.value.qualifications);
+    formObj.append('description',formData.value.description);
 
 
     if (!this.selectedFile) {

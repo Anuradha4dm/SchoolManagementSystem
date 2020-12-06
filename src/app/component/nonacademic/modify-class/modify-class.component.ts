@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { AdminService } from '../../admin/admin.service';
 import { NonAcademicService } from '../nonacademic.service';
+import { SubjectListsService } from '../subject-lists.service';
 
 @Component({
   selector: 'app-modify-class',
@@ -9,7 +10,7 @@ import { NonAcademicService } from '../nonacademic.service';
   styleUrls: ['./modify-class.component.css']
 })
 export class ModifyClassComponent implements OnInit {
-  classList;
+  classList; //contain all classes available
   selectedClass; //contain selected class data
   page; //for pagination
   show: boolean=false;
@@ -20,10 +21,13 @@ export class ModifyClassComponent implements OnInit {
   subjectTeacherList; //contain teacher list according to subject
   registerSubject;
   registerTeacher; //contain new teacher assign to subject
+  alreadyRegisteredSubjects; //contain already registered subjects of class
+  completeSubjectList; //contain all subject list related to the class
 
   constructor(
     private adminService: AdminService,
     private nonService: NonAcademicService,
+    private subjectList: SubjectListsService,
     private alertService: AlertMessageService
   ) { }
 
@@ -32,11 +36,6 @@ export class ModifyClassComponent implements OnInit {
       this.classList=data;
       console.log(data)
     });
-
-    this.nonService.findFreeClassTeachers().subscribe((data)=>{
-      this.freeTeacherList=data;
-      console.log(data);
-    });
   }
 
   //get selected class details
@@ -44,17 +43,27 @@ export class ModifyClassComponent implements OnInit {
     this.selectedClass = classData;
     this.show=true;
     this.findTeacher=false;
+    
+    this.nonService.findFreeClassTeachers().subscribe((data)=>{
+      this.freeTeacherList=data;
+    });
+
+    this.nonService.getClassRegisteredSubjects(classData.grade).subscribe((data)=>{
+      this.alreadyRegisteredSubjects=data;
+    });
+
+    this.completeSubjectList=this.subjectList.getAllSubjectsOfGrade(classData.grade);
+    console.log(this.completeSubjectList);
+    
   }
 
-  //execute when add teacher or confirm button click
+  //execute when confirm button click
   changeClassTeacher(){
    this.nonService.changeClassTeacher(this.newTeacherID,this.selectedClass.classid).subscribe((data)=>{
       if(data)
-        this.alertService.competeAlert("New Teacher added to the class...")
+        this.alertService.competeAlert("Class teacher changed successfully...")
       else
        this.alertService.errorAlert("Sorry,Teacher cannot assign to the class...");
-
-      this.show=false;
     });
   }
 
@@ -70,8 +79,9 @@ export class ModifyClassComponent implements OnInit {
   //execute when select teacher select box changes
   onSelectTeacherChange(value){
     this.registerTeacher=value;
-
-    this.nonService.getListOfSubjectsTeachedByTeacher(this.registerSubject).subscribe((data)=>{
+    this.teacherTimetable=null;
+    
+    this.nonService.getListOfSubjectsTeachedByTeacher(value).subscribe((data)=>{
       this.teacherTimetable=data.subjectlist;
       console.log(data)
     })
@@ -81,7 +91,7 @@ export class ModifyClassComponent implements OnInit {
   onAddTeacherClick(){
     this.nonService.addTeacherSubjects(this.selectedClass.grade,this.registerSubject,this.registerTeacher).subscribe((data)=>{
       if(data)
-        this.alertService.competeAlert("Subject assign to teacher successfully...")
+        this.alertService.competeAlert("Subject assign to teacher successfully...");
     });
   }
 }

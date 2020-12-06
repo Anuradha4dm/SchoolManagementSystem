@@ -51,8 +51,12 @@
                         <!--Stream selector-->
                         <div class="col" *ngIf="grade.value>=12">
                             <label>Select Stream</label>
-                            <select name="stream" ngModel class="form-control p-2">
-                                <option [value]="stream" *ngFor="let stream of streamList">{{stream}}</option>
+                            <select name="stream" ngModel class="form-control p-2" required>
+                                <option value="MATH">Maths</option>
+                                <option value="BIO">Bio</option>
+                                <option value="ART">Arts</option>
+                                <option value="TEC">Tech</option>
+                                <option value="COM">Commerce</option>
                             </select>
                         </div>
                     </div>
