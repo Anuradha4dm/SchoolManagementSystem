@@ -79,7 +79,6 @@ export class ModifyClassComponent implements OnInit {
   //execute when select teacher select box changes
   onSelectTeacherChange(value){
     this.registerTeacher=value;
-    this.teacherTimetable=null;
     
     this.nonService.getListOfSubjectsTeachedByTeacher(value).subscribe((data)=>{
       this.teacherTimetable=data.subjectlist;
