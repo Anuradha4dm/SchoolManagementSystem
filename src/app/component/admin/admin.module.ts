@@ -5,11 +5,24 @@ import { AddNewProfileComponent } from './add-new-profile/add-new-profile.compon
 import { AddTeacherComponent } from './add-teacher/add-teacher.component';
 import { AddNonAcademicComponent } from './add-non-academic/add-non-academic.component';
 import { AddClassComponent } from './add-class/add-class.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-  imports: [FormsModule, CommonModule],
+  imports: [
+    FormsModule,
+    CommonModule,
+    NgxPaginationModule
+  ],
+
   exports: [AddNewProfileComponent],
-  declarations: [AddNewProfileComponent, AddTeacherComponent, AddNonAcademicComponent, AddClassComponent],
+  
+  declarations: [
+    AddNewProfileComponent,
+    AddTeacherComponent,
+    AddNonAcademicComponent,
+    AddClassComponent
+  ],
+
   providers: [],
 })
 export class AdminModule {}

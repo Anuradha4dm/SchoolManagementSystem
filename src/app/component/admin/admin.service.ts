@@ -39,4 +39,13 @@ export class AdminService {
       className:grade
     });
   }
+
+  //return all class list with details
+  getClassList(){
+    return this.httpClient.get<{
+      classid: number,
+      grade: string,
+      teacher:{teacherid: string,firstname: string,lastname: string}
+    }[]>('http://localhost:3000/admin/get-class-list')
+  }
 }

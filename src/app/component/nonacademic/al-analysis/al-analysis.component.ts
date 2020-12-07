@@ -28,7 +28,7 @@ export class AlAnalysisComponent implements OnInit {
 
   //Last year analysis detials here
   lastYearCount = [0, 0];
-  lastYearLabels = ['Result count', 'Total count'];
+  lastYearLabels = ['Result count', 'Other count'];
   pastYearData: LastYearData[];
   lastGrade = 'A';
   lastCount = 3;
@@ -61,18 +61,23 @@ export class AlAnalysisComponent implements OnInit {
   }
 
   //Execute when year analysis selection change
-  yearAnalysis(value) {
-    this.yearStudentCount = [];
-    this.yearLabels = [];
-
-    this.nonService
-      .getAdvanceLevelChartOne(this.yearGrade, this.yearStream, this.yearCount)
-      .subscribe((data) => {
-        // this method has some error
-        for (let i = 0; i < data.length; i++) {
-          this.yearStudentCount.push(data[i].count);
-          this.yearLabels.push(data[i].meyear);
-        }
+  yearAnalysis(value) {    
+      this.yearStudentCount = [];
+      this.yearLabels = [];
+  
+      for(let i=0;i<10;i++){
+        this.yearLabels.push(this.year-i);
+      }
+  
+      this.nonService.getAdvanceLevelChartOne(this.yearGrade, this.yearStream, this.yearCount).subscribe((data) => {
+        data.map((content)=>{
+          for(let i=0;i<this.yearLabels.length;i++){
+            if(content.meyear==this.yearLabels[i])
+              this.yearStudentCount[i]=content.count;
+            if(this.yearStudentCount[i]==null)
+              this.yearStudentCount[i]=0
+          }
+        })
       });
   }
 
@@ -92,7 +97,7 @@ export class AlAnalysisComponent implements OnInit {
         //this method has some error
         this.pastYearData = data;
         this.lastYearCount.push(this.pastYearData.length);
-        this.lastYearCount.push(this.pastYearALData.length);
+        this.lastYearCount.push(this.pastYearALData.length-this.pastYearData.length);
       });
   }
 

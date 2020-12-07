@@ -36,84 +36,6 @@ export class NonAcademicService {
     );
   }
 
-  /*
-  
-
-    //Return year by year student count related to grade and count
-    getOrdinaryLeveChartOne(result: string, count: number) {
-      var parameterSet = new HttpParams();
-      parameterSet = parameterSet.append('result', result.toUpperCase());
-      parameterSet = parameterSet.append('count', count.toString());
-  
-      return this.httpClient.get<{meyear: number,count: number}[]>(
-        'http://localhost:3000/nonacademic/ol-chart-one',
-        {
-          params: parameterSet,
-        }
-      );
-    }
-  
-    //Return subject's A,B,C,S,W count related to year and subject
-    getOrdinaryLeveChartTwo(year: number, subjectid: number) {
-      var parameterSet = new HttpParams();
-      parameterSet = parameterSet.append('year', year.toString());
-      parameterSet = parameterSet.append('subjectid', subjectid.toString());
-  
-      return this.httpClient.get<SubjectAnalysis>(
-        'http://localhost:3000/nonacademic/ol-chart-two',
-        {
-          params: parameterSet,
-        }
-      );
-    }
-  
-    //Return past year student grade and count total
-    getOrdinaryLeveChartThree(year: number, result: string, count: number) {
-      var parameterSet = new HttpParams();
-      parameterSet = parameterSet.append('year', year.toString());
-      parameterSet = parameterSet.append('result', result);
-      parameterSet = parameterSet.append('count', count.toString());
-  
-      return this.httpClient.get<LastYearData[]>(
-        'http://localhost:3000/nonacademic/ol-chart-three',
-        {
-          params: parameterSet,
-        }
-      );
-    }
-  
-    //return student count year by year releted to grade and stream
-    getAdvanceLevelChartOne(result: string, stream: string, count: number) {
-      return this.httpClient.post<{meyear: number,count: number}[]>(
-        'http://localhost:3000/nonacademic/al-chart-one',
-        {
-          result: result,
-          count: count,
-          stream: stream,
-        }
-      );
-    }
-  
-   
-  
-    //return student details related to given result
-    getAdvanceLevelChartThree(
-      year: number,
-      result: string,
-      count: number,
-      stream: string
-    ) {
-      return this.httpClient.post<LastYearData[]>(
-        'http://localhost:3000/nonacademic/al-chart-three',
-        {
-          result: result,
-          year: year,
-          stream: stream,
-          count: count,
-        }
-      );
-    }
-
 /*
   getPendingLeaveData() {
     return this.httpClient.get(
@@ -121,6 +43,7 @@ export class NonAcademicService {
     );
   }
 */
+  //return teacher assigned subject with grades
   getListOfSubjectsTeachedByTeacher(teacherid: string) {
     return this.httpClient.get<{
       subjectlist: {
@@ -134,12 +57,14 @@ export class NonAcademicService {
     );
   }
 
+  //return teachers that have no class
   findFreeClassTeachers() {
     return this.httpClient.get<{
       teachers: { teacherid: string; username: string }[];
     }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
+  //not used
   getClassTeacherForClassHandler(className: string) {
     return this.httpClient.get<{
       fullname: string;
@@ -150,6 +75,7 @@ export class NonAcademicService {
     }>('http://localhost:3000/nonacademic/get-class-teacher/' + className);
   }
 
+  //not working can remove
   updateClassProperties(submitData: FormData) {
     return this.httpClient.post<{ success: boolean }>(
       'http://localhost:3000/nonacademic/update-class-handler',
@@ -289,7 +215,7 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('result', result);
     parameterSet = parameterSet.append('count', count);
 
-    return this.httpClient.get<{ result: [] }>(
+    return this.httpClient.get(
       'http://localhost:3000/nonacademic/ol-chart-three',
       {
         params: parameterSet,
@@ -564,5 +490,35 @@ export class NonAcademicService {
           return responceData;
         })
       );
+  }
+  
+  //use to change the class teacher
+  changeClassTeacher(newTeacherID: string,classID: number){
+      return this.httpClient.post('http://localhost:3000/nonacademic/change-class-teacher',{
+        newTeacherID: newTeacherID,
+        classID: classID
+      })
+  }
+  
+  //return teacher list relted to subject
+  getTeacherListBySubject(subjectname: string){
+    return this.httpClient.post('http://localhost:3000/nonacademic/get-teacher-by-subject',{
+      subjectName:subjectname
+    });
+  }
+
+  addTeacherSubjects(grade: string,subjectname: string,teacherid: string){
+    return this.httpClient.post('http://localhost:3000/nonacademic/add-teacher-subject',{
+      grade: grade,
+      subjectname: subjectname,
+      teacherid: teacherid
+    });
+  }
+
+  //return subject list that assigned to teachers
+  getClassRegisteredSubjects(grade: string){
+    return this.httpClient.post('http://localhost:3000/nonacademic/get-class-registered-subjects',{
+      class:grade
+    });
   }
 }
