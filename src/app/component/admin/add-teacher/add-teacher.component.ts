@@ -11,6 +11,8 @@ import { AdminService } from '../admin.service';
 })
 export class AddTeacherComponent implements OnInit {
   startYear=new Date().getFullYear();
+  age;
+
   teacherID;
   selectedFile:File=null; //contain the selected image file
   imagePath:string=''; //contain the selected image path
@@ -29,7 +31,6 @@ export class AddTeacherComponent implements OnInit {
       console.log(data);
       this.teacherID = "AC_"+(data.teacherCount+1);
     });
-
     this.allSubjects=this.subjectListService.getAllSubjects();
   }
 
@@ -44,6 +45,10 @@ export class AddTeacherComponent implements OnInit {
     reader.onload = (_event) => {
       this.profilePic = reader.result;
     };
+  }
+
+  ageCalculate(value){
+    this.age=new Date().getFullYear() - value.split('-')[0];
   }
 
   //Add teacher details to database
@@ -63,7 +68,7 @@ export class AddTeacherComponent implements OnInit {
     formdata.append('addressline1',value.addressline1);
     formdata.append('addressline2',value.addressline2);
     formdata.append('addressline3',value.addressline3);
-    formdata.append('age',value.age);
+    formdata.append('age',this.age);
     formdata.append('birthdate',value.birthdate);
     formdata.append('city',value.city);
     formdata.append('email',value.email);
@@ -81,7 +86,6 @@ export class AddTeacherComponent implements OnInit {
     if(this.selectedFile)
       formdata.append('imageData', this.selectedFile, this.imagePath);
 
-    console.log(subjectList)
     this.adminService.addNewTeacher(formdata).subscribe((data)=>{
       if(data)
         this.alertService.competeAlert("New Teacher has been added successfully...");
