@@ -12,6 +12,8 @@ import { ExamLayoutComponent } from './exam-layout/exam-layout.component';
 import { LeavehandleComponent } from './leavehandle/leavehandle.component';
 import { OlAnalysisComponent } from './ol-analysis/ol-analysis.component';
 import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
+import { RegisterForALComponent } from './register-for-al/register-for-al.component';
+import { RegisterForOLComponent } from './register-for-ol/register-for-ol.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
 import { ViewLayoutComponent } from './view-layout/view-layout.component';
 
@@ -40,6 +42,14 @@ const routes: Routes = [
       {
         path: 'al-analysis',
         component: AlAnalysisComponent,
+      },
+      {
+        path: 'al-registration',
+        component: RegisterForALComponent,
+      },
+      {
+        path: 'ol-registration',
+        component: RegisterForOLComponent,
       },
     ],
   },

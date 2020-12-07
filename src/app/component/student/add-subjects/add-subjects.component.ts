@@ -143,7 +143,7 @@ export class AddSubjectsComponent implements OnInit {
     if (this.gradeVal >= 12 && this.stream === 'MATH') {
       this.subjectSet1 = ['combine_mathematics', 'physics'];
       this.isOptionalList1 = true;
-      this.optionalList1 = ['Chemistry', 'Infomation Technology'];
+      this.optionalList1 = ['Chemistry', 'infomation_technology'];
     }
 
     if (this.gradeVal >= 12 && this.stream === 'BIO') {
