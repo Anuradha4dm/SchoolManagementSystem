@@ -68,16 +68,22 @@ export class OlAnalysisComponent implements OnInit {
 
   //Execute when year by year select box changes
   allYearAnalysis(value) {
-    this.allYearData = [];
-    this.allYearLabels = [];
-
-    this.nonService
-      .getOrdinaryLeveChartOne(this.allYearGrade, this.allYearCount)
-      .subscribe((data) => {
-        for (let i = 0; i < data.length; i++) {
-          this.allYearData.push(data[i].count);
-          this.allYearLabels.push(data[i].meyear);
-        }
+      this.allYearData = [];
+      this.allYearLabels = [];
+  
+      for(let i=0;i<10;i++){
+        this.allYearLabels.push(this.year-i);
+      }
+  
+      this.nonService.getOrdinaryLeveChartOne(this.allYearGrade, this.allYearCount).subscribe((data) => {
+        data.map((content)=>{
+          for(let i=0;i<this.allYearLabels.length;i++){
+            if(content.meyear==this.allYearLabels[i])
+              this.allYearData[i]=content.count;
+            if(this.allYearData[i]==null)
+              this.allYearData[i]=0
+          }
+        })
       });
   }
 
@@ -103,7 +109,7 @@ export class OlAnalysisComponent implements OnInit {
     this.subjectData = [];
 
     this.nonService
-      .getOrdinaryLeveChartTwo(this.subjectYear.toString(), '2')
+      .getOrdinaryLeveChartTwo(this.subjectYear.toString(),this.subjectId)
       .subscribe((data) => {
         this.subjectData.push(data.acount);
         this.subjectData.push(data.bcount);
