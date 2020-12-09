@@ -111,7 +111,7 @@ export class AddSubjectsComponent implements OnInit {
       this.optionalList1 = [
         'commerce',
         'geography',
-        'art',
+
         'citizen_education',
         'tamil',
         'hindi',

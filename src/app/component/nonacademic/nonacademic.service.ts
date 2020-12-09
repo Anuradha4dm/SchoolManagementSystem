@@ -533,4 +533,24 @@ export class NonAcademicService {
       }
     );
   }
+
+  //get non academic profile data
+  getNonAcademicProfileData(id: string) {
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/profile-data/' + id
+    );
+  }
+
+  //get student subejct list when they are going to register for main exams
+  getStudentSubjectListForRegistration(studentid: string, examtype: string) {
+    const paramsData = new HttpParams().append('examtype', examtype);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/get-student-registered-subjects/' +
+        studentid,
+      {
+        params: paramsData,
+      }
+    );
+  }
 }

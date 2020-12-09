@@ -181,6 +181,12 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
+          path: '/user/teacher-handler',
+          title: 'Teacher Handler',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
           path: '/user/student-class-change',
           title: 'Class Change',
           icon: 'gestures_tap-01',

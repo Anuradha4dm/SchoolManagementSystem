@@ -65,15 +65,19 @@ export class UserLogInService {
 
   autoLogin() {
     const previousLogin: any = JSON.parse(localStorage.getItem('userData'));
-    const user = new LogInUserModel(
-      previousLogin._id,
-      previousLogin.authentication,
-      previousLogin.logInAs,
-      previousLogin.token,
-      previousLogin.expirationdata
-    );
-    this.autoLogout(previousLogin.expirationdata);
-    this.userAuthData.next(user);
+
+    if (previousLogin) {
+      const user = new LogInUserModel(
+        previousLogin._id,
+        previousLogin.authentication,
+        previousLogin.logInAs,
+        previousLogin.token,
+        previousLogin.expirationdata
+      );
+      this.autoLogout(previousLogin.expirationdata);
+      this.userAuthData.next(user);
+      this.router.navigate(['user']);
+    }
   }
 
   logout() {
