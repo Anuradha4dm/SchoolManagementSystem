@@ -149,25 +149,27 @@ export class NonAcademicService {
 
   //this method is used to register student for the a/l or o/l examinations
   registerStudentsForExams(
-    nonacademicid: string,
     year: number,
     indexnumber: number,
     studentid: string,
     shy: number,
     type: boolean,
+    grade: string,
+    stream: string,
     subjectnames: string[]
   ) {
     return this.httpClient.post<{
       registration: boolean;
       subjectRegister: boolean;
     }>('http://localhost:3000/nonacademic/registration-exam', {
-      nonacademicid: nonacademicid,
       year: year,
       indexnumber: indexnumber,
       studentid: studentid,
       shy: shy,
       type: type,
       subjectnames: subjectnames,
+      class: grade,
+      stream: stream
     });
   }
 
@@ -481,7 +483,7 @@ export class NonAcademicService {
             } else if (findStream === 'BIO') {
               student.stream = 'Biology';
             } else if (findStream === 'ART') {
-              student.stream = 'ART';
+              student.stream = 'Art';
             } else {
               student.stream = 'Commerce';
             }
@@ -546,7 +548,7 @@ export class NonAcademicService {
   getStudentSubjectListForRegistration(studentid: string, examtype: string) {
     const paramsData = new HttpParams().append('examtype', examtype);
 
-    return this.httpClient.get(
+    return this.httpClient.get<{subjects:[]}>(
       'http://localhost:3000/nonacademic/get-student-registered-subjects/' +
         studentid,
       {

@@ -132,7 +132,7 @@
                         </div>
                         <div class="col">
                             <label>Select Stream</label>
-                            <select (change)="yearAnalysis(yearStream=$event.target.value)" class="form-control p-1">
+                            <select [(ngModel)]="cutoffStream" (change)="cutoffFilter(cutoffStream=$event.target.value)" class="form-control p-1">
                                 <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
                             </select>
                         </div>
@@ -147,7 +147,7 @@
                             <th>Z score</th>
                        </tr>
                        <tbody>
-                           <tr *ngFor="let result of pastYearALData|paginate: {currentPage: page,itemsPerPage: 15}"  [class.bg]="result.zscore>=cutoff">
+                           <tr *ngFor="let result of cutoffList|paginate: {currentPage: page,itemsPerPage: 15}"  [class.bg]="result.zscore>=cutoff">
                                <td>{{result.indexnumber}}</td>
                                <td>{{result.studentid}}</td>
                                <td>{{result.districtrank}}</td>

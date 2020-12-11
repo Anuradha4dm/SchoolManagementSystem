@@ -15,16 +15,18 @@ export class AlAnalysisComponent implements OnInit {
   cutoff: number = 1.3;
   year: number = new Date().getFullYear() - 1;
   pastYearALData; //contain past year al data of students
+  cutoffStream;
+  cutoffList;
   grades: string[] = ['A', 'B', 'C', 'S', 'W'];
   counter: number[] = [3, 2, 1, 0];
-  streams = ['MATH'];
+  streams = ['Physical','Biology','Commerce','Art','Technology'];
 
   //Year by year analysis details here
   yearStudentCount = [];
   yearLabels = [];
   yearGrade = 'A';
   yearCount = 3;
-  yearStream = 'MATH';
+  yearStream = 'Physical';
 
   //Last year analysis detials here
   lastYearCount = [0, 0];
@@ -119,4 +121,12 @@ export class AlAnalysisComponent implements OnInit {
         this.subjectCount.push(data.wcount);
       });
   }
+
+  cutoffFilter(value){
+      this.cutoffList=this.pastYearALData.filter((student)=>{
+        return student.stream==this.cutoffStream;
+      });
+
+  }
+
 }
