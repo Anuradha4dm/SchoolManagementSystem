@@ -21,6 +21,7 @@ import { RegisterForOLComponent } from './register-for-ol/register-for-ol.compon
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
+import { ModifyClassComponent } from './modify-class/modify-class.component';
 
 import { ChartsModule } from 'ng2-charts';
 import { AlAnalysisComponent } from './al-analysis/al-analysis.component';
@@ -42,6 +43,7 @@ import { ViewLayoutComponent } from './view-layout/view-layout.component';
     RegisterForALComponent,
     RegisterForOLComponent,
     RegisterAlSubjectsComponent,
+    ModifyClassComponent,
     OlAnalysisComponent,
     AlAnalysisComponent,
     ViewALComponent,

@@ -79,24 +79,25 @@ export class SiderbarComponent implements OnInit {
         },
       ];
     }
+
     if (this.userRoll === 'teacher') {
       this.sideBarItems = [
-        {
+        /*{
           path: '/user/dashboard',
           title: 'Dashboard',
           icon: 'design_app',
           class: '',
         },
         {
-          path: '/user/teacher-profile',
-          title: 'Profile',
-          icon: 'users_single-02',
-          class: '',
-        },
-        {
           path: '/user/student-list',
           title: 'Student List',
           icon: 'design_bullet-list-67',
+          class: '',
+        },*/
+        {
+          path: '/user/teacher-profile',
+          title: 'Profile',
+          icon: 'users_single-02',
           class: '',
         },
         {
@@ -113,21 +114,37 @@ export class SiderbarComponent implements OnInit {
         },
         {
           path: '/user/add-student-result',
-          title: 'ADD RESULT',
+          title: 'Add Result',
           icon: 'education_agenda-bookmark',
           class: '',
         },
-
+        {
+          path: '/user/view-student-result',
+          title: 'View Result',
+          icon: 'education_agenda-bookmark',
+          class: '',
+        },
         {
           path: '/user/leave-request',
           title: 'Request Leave',
           icon: 'gestures_tap-01',
           class: '',
         },
-
         {
-          path: '/user/exams',
-          title: 'EXAMS',
+          path: '/user/teacher-send-messages',
+          title: 'Send Messages',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/view-ol-results',
+          title: 'O/L Results',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/view-al-results',
+          title: 'A/L Results',
           icon: 'gestures_tap-01',
           class: '',
         },
@@ -142,6 +159,20 @@ export class SiderbarComponent implements OnInit {
           icon: 'users_single-02',
           class: '',
         },
+        //to remove start
+        {
+          path: '/user/add-new-class',
+          title: 'Create Class',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/add-new-teacher',
+          title: 'Add Teacher',
+          icon: 'users_single-02',
+          class: '',
+        },
+        //to remove end
         {
           path: '/user/handle-leave',
           title: 'HANDLE LEAVES',

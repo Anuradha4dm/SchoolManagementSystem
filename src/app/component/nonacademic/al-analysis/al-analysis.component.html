@@ -38,8 +38,7 @@
                         <canvas class="bg-dark" baseChart 
                             [data]="yearStudentCount" 
                             [labels]="yearLabels" 
-                            [options]="myOption"
-                            chartType="line"
+                            chartType="bar"
                             [legend]="false">
                         </canvas>
                     </div> 
@@ -86,7 +85,7 @@
                             baseChart
                             [data]="lastYearCount"
                             [labels]="lastYearLabels"
-                            chartType="doughnut">
+                            chartType="pie">
                         </canvas>
                     </div>
 
@@ -108,7 +107,7 @@
                                     <td>{{student.studentid}}</td>
                                     <td>{{student.districtrank}}</td>
                                     <td>{{student.islandrank}}</td>
-                                    <td>3</td>
+                                    <td>{{student.zscore}}</td>
                                     <td>{{student.class}}</td>
                                 </tr>
                             </tbody>

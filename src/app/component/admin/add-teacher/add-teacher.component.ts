@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { stringify } from 'querystring';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
+import { SubjectListsService } from '../../nonacademic/subject-lists.service';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -9,13 +11,18 @@ import { AdminService } from '../admin.service';
 })
 export class AddTeacherComponent implements OnInit {
   startYear=new Date().getFullYear();
+  age;
+
   teacherID;
   selectedFile:File=null; //contain the selected image file
   imagePath:string=''; //contain the selected image path
   profilePic;
-  
+  allSubjects; //contain all subject of school
+  subjects=[];
+
   constructor(
     private adminService: AdminService,
+    private subjectListService: SubjectListsService,
     private alertService: AlertMessageService
   ) { }
 
@@ -23,7 +30,8 @@ export class AddTeacherComponent implements OnInit {
     this.adminService.getAllCounts().subscribe((data)=>{
       console.log(data);
       this.teacherID = "AC_"+(data.teacherCount+1);
-    })
+    });
+    this.allSubjects=this.subjectListService.getAllSubjects();
   }
 
   //Execute when profile pic change
@@ -39,15 +47,28 @@ export class AddTeacherComponent implements OnInit {
     };
   }
 
+  ageCalculate(value){
+    this.age=new Date().getFullYear() - value.split('-')[0];
+  }
+
   //Add teacher details to database
   onSubmit(value){
+    var subjectList:string="";
+
+    for(let i=0;i<this.subjects.length;i++){
+      if(i==this.subjects.length-1)
+        subjectList+=this.subjects[i];
+      else
+        subjectList+=this.subjects[i]+",";
+    }
+
     const formdata=new FormData();
 
     formdata.append('teacherid',this.teacherID);
     formdata.append('addressline1',value.addressline1);
     formdata.append('addressline2',value.addressline2);
     formdata.append('addressline3',value.addressline3);
-    formdata.append('age',value.age);
+    formdata.append('age',this.age);
     formdata.append('birthdate',value.birthdate);
     formdata.append('city',value.city);
     formdata.append('email',value.email);
@@ -60,7 +81,10 @@ export class AddTeacherComponent implements OnInit {
     formdata.append('startyear',value.startyear);
     formdata.append('surname',value.surname);
     formdata.append('username',value.username);
-    //formdata.append('photo', this.selectedFile, this.imagePath);
+    formdata.append('subjectlist',subjectList);
+
+    if(this.selectedFile)
+      formdata.append('imageData', this.selectedFile, this.imagePath);
 
     this.adminService.addNewTeacher(formdata).subscribe((data)=>{
       if(data)

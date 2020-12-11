@@ -10,28 +10,38 @@ export class RegisterForALComponent implements OnInit {
   @Input() year;
   show: boolean = false;
   page: number = 1;
-
-  studentList: {
-    firstname: string;
-    lastname: string;
-    _id: string;
-    class: { grade: string };
-    stream: string;
-  }[] = [];
+  @Input() studentList;
+  selectedStudent; //contain selected student data
+  index; //selected students indexnumber
+  verified:boolean=true;
+  stream;
+  filteredList;
 
   constructor(private nonService: NonAcademicService) {}
 
   ngOnInit(): void {
-    this.nonService
-      .getAdvanceLevelStudentListForRegister()
-      .subscribe((data) => {
-        this.studentList = data;
-      });
   }
 
-  onRowClick(id: string) {
+  onRowClick(student) {
+    this.selectedStudent = student;
     this.show = true;
+  }
 
-    console.log(id);
+  verifyIndex(text){
+    if(text==this.index)
+      this.verified=true;
+    else
+      this.verified=false;
+  }
+
+  onStreamFilter(){
+    if(this.stream!="ALL"){
+      this.filteredList=this.studentList.filter((student)=>{
+        return student.stream==this.stream;
+      });
+    }
+    else{
+      this.filteredList=this.studentList;
+    }
   }
 }
