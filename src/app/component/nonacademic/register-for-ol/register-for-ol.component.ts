@@ -9,16 +9,13 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class RegisterForOLComponent implements OnInit {
   @Input() year;
+  @Input() studentList;
   loggedUserID: string;
   show: boolean = false;
+  selectedStudent;
   page: number = 1;
-
-  studentList: {
-    firstname: string;
-    lastname: string;
-    _id: string;
-    class: { grade: string };
-  }[] = [];
+  index;
+  verified:boolean=true; //check both index numbers ara same
 
   constructor(
     private userLoginService: UserLogInService,
@@ -37,8 +34,16 @@ export class RegisterForOLComponent implements OnInit {
       });
   }
 
-  onRowClick() {
+  onRowClick(student) {
+    this.selectedStudent = student;
     this.show = true;
+  }
+
+  verifyIndex(text){
+    if(text==this.index)
+      this.verified=true;
+    else
+      this.verified=false;
   }
 
   //Executes when form submitted

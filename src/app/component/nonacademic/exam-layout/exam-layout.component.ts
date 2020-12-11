@@ -33,20 +33,35 @@ export class ExamLayoutComponent implements OnInit {
   getStudentList(){
    
     if(this.selection==1){
+      this.studentList=[];
+
       this.nonService.getOrdinaryLevelStudentListForRegister().subscribe((data)=>{
-        console.log(data);
-      })
+        this.studentList = data.studentList;
+      });
+    }
+
+    if(this.selection==2){
+      this.studentList=[];
+      
+      this.nonService.getAdvanceLevelStudentListForRegister().subscribe((data)=>{
+        this.studentList = data;
+        console.log(this.studentList)
+      });
     }
 
     if(this.selection==3){
-      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,false)
+      this.studentList=[];
+      
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear-1,false)
       .subscribe((data)=>{
         this.studentList = data;
       });
     }
 
     if(this.selection==4){
-      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,true)
+      this.studentList=[];
+      
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear-1,true)
         .subscribe((data)=>{
           this.studentList = data;
         });

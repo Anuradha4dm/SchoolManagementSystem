@@ -18,18 +18,13 @@
                 <label>Exam</label>
                 <input type="text" [value]="exam" class="form-control" disabled>
             </div>
-
-            <div class="col">
-                <label>Year</label>
-                <input type="number" [(ngModel)]="selectedYear" (change)="getStudentList()" class="form-control">
-            </div>
         </div>
     </div>
 
     <!--Body content related to the selection here-->
-    <app-register-for-ol *ngIf="selection==1" [year]="selectedYear"></app-register-for-ol>
-    <app-register-for-al *ngIf="selection==2" [year]="selectedYear"></app-register-for-al>
-    <app-add-olresults *ngIf="selection==3" [year]="selectedYear" [studentList]="studentList"></app-add-olresults>
-    <app-add-alresults *ngIf="selection==4" [year]="selectedYear" [studentList]="studentList"></app-add-alresults>
+    <app-register-for-ol *ngIf="selection==1" [year]="selectedYear" [studentList]="studentList"></app-register-for-ol>
+    <app-register-for-al *ngIf="selection==2" [year]="selectedYear" [studentList]="studentList"></app-register-for-al>
+    <app-add-olresults *ngIf="selection==3" [year]="selectedYear-1" [studentList]="studentList"></app-add-olresults>
+    <app-add-alresults *ngIf="selection==4" [year]="selectedYear-1" [studentList]="studentList"></app-add-alresults>
 
 </div>

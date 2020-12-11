@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import jsPDF from 'jspdf';
 import { element } from 'protractor';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { TeacherService } from '../teacher.service';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-edit-term-results',
@@ -86,4 +88,21 @@ export class EditTermResultsComponent implements OnInit {
       });
   }
 
+  printResults(){
+    var data=document.getElementById('formContent');
+
+    html2canvas(data).then((canvas)=>{
+      var imgWidth = (canvas.width*65)/100;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height*70)/100;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jsPDF('p','px','a4');
+      var position=0;
+      pdf.addImage(contentDataURL,'png',18,position,imgWidth,imgHeight);
+      pdf.save('test1.pdf');
+    });
+
+  }
 }

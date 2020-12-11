@@ -470,7 +470,9 @@ export class NonAcademicService {
         map((data) => {
           var findStream: string;
           const responceData = data.studentList.map((student) => {
-            findStream = student.class.grade.split('_')[1];
+            var arr=student.class.grade.split('_');
+
+            findStream = student.class.grade.split('_')[arr.length-1];
 
             if (findStream === 'MATH') {
               student.stream = 'Physical';

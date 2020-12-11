@@ -13,17 +13,11 @@
           <th>Class</th>
         </tr>
         <tbody>
-          <tr
-            *ngFor="
-              let student of studentList
-                | paginate: { currentPage: page, itemsPerPage: 10 }
-            "
-            (click)="onRowClick()"
-          >
-            <td>{{ student._id }}</td>
-            <td>{{ student._id }}</td>
-            <td>{{ student.firstname + " " + student.lastname }}</td>
-            <td>{{ student.class.grade }}</td>
+          <tr *ngFor="let i=index;let student of studentList| paginate: { currentPage: page, itemsPerPage: 10 }" (click)="onRowClick(student)">
+            <td>{{i+1}}</td>
+            <td>{{student._id }}</td>
+            <td>{{student.firstname + " " + student.lastname|titlecase}}</td>
+            <td>{{student.class.grade}}</td>
           </tr>
         </tbody>
       </table>
@@ -49,14 +43,14 @@
         <div class="col">
           <div class="form-group">
             <label>Student ID</label>
-            <input type="text" class="form-control" disabled />
+            <input type="text" [value]="selectedStudent._id" class="form-control" disabled />
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label>Student Name</label>
-        <input type="text" class="form-control" disabled />
+        <input type="text" [value]="selectedStudent.firstname+' '+selectedStudent.lastname|titlecase" class="form-control" disabled />
       </div>
 
       <!--Student subject list here-->
@@ -80,11 +74,12 @@
             <div class="card card-body border border-dark">
               <div class="form-group">
                 <label>Index Number</label>
-                <input type="text" class="form-control" />
+                <input name="index" type="text" [(ngModel)]="index" class="form-control" />
               </div>
               <div class="form-group">
                 <label>Verify Index Number</label>
-                <input type="text" class="form-control" />
+                <input type="text" (input)="verifyIndex($event.target.value)" class="form-control" />
+                <span *ngIf="!verified" class="error">Index number is not matched</span>
               </div>
             </div>
           </div>
