@@ -36,7 +36,7 @@ export class NonAcademicService {
     );
   }
 
-/*
+  /*
   getPendingLeaveData() {
     return this.httpClient.get(
       'http://localhost:3000/nonacademic/get-pending-leaves'
@@ -493,34 +493,65 @@ export class NonAcademicService {
         })
       );
   }
-  
   //use to change the class teacher
-  changeClassTeacher(newTeacherID: string,classID: number){
-      return this.httpClient.post('http://localhost:3000/nonacademic/change-class-teacher',{
+  changeClassTeacher(newTeacherID: string, classID: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/change-class-teacher',
+      {
         newTeacherID: newTeacherID,
-        classID: classID
-      })
-  }
-  
-  //return teacher list relted to subject
-  getTeacherListBySubject(subjectname: string){
-    return this.httpClient.post('http://localhost:3000/nonacademic/get-teacher-by-subject',{
-      subjectName:subjectname
-    });
+        classID: classID,
+      }
+    );
   }
 
-  addTeacherSubjects(grade: string,subjectname: string,teacherid: string){
-    return this.httpClient.post('http://localhost:3000/nonacademic/add-teacher-subject',{
-      grade: grade,
-      subjectname: subjectname,
-      teacherid: teacherid
-    });
+  //return teacher list relted to subject
+  getTeacherListBySubject(subjectname: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/get-teacher-by-subject',
+      {
+        subjectName: subjectname,
+      }
+    );
+  }
+
+  addTeacherSubjects(grade: string, subjectname: string, teacherid: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/add-teacher-subject',
+      {
+        grade: grade,
+        subjectname: subjectname,
+        teacherid: teacherid,
+      }
+    );
   }
 
   //return subject list that assigned to teachers
-  getClassRegisteredSubjects(grade: string){
-    return this.httpClient.post('http://localhost:3000/nonacademic/get-class-registered-subjects',{
-      class:grade
-    });
+  getClassRegisteredSubjects(grade: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/get-class-registered-subjects',
+      {
+        class: grade,
+      }
+    );
+  }
+
+  //get non academic profile data
+  getNonAcademicProfileData(id: string) {
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/profile-data/' + id
+    );
+  }
+
+  //get student subejct list when they are going to register for main exams
+  getStudentSubjectListForRegistration(studentid: string, examtype: string) {
+    const paramsData = new HttpParams().append('examtype', examtype);
+
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/get-student-registered-subjects/' +
+        studentid,
+      {
+        params: paramsData,
+      }
+    );
   }
 }

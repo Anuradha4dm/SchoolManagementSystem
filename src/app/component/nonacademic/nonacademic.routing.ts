@@ -35,6 +35,8 @@ const routes: Routes = [
       { path: 'main-exam-layout', component: ExamLayoutComponent },
       { path: 'add-new-class', component: AddClassComponent },
       { path: 'add-new-teacher', component: AddTeacherComponent },
+      { path: 'teacher-handler', component: ClassHandlerComponent },
+
       {
         path: 'register-advance-level-stream',
         component: RegisterAlSubjectsComponent,

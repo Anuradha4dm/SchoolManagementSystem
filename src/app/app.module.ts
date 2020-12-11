@@ -4,7 +4,7 @@ import { NgbModule, NgbPaginationConfig } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { ChartsModule } from 'ng2-charts';
 
@@ -30,6 +30,7 @@ import { ForgetPasswordComponent } from './component/forget-password/forget-pass
 import { MarkAttendenceTeacherComponent } from './component/mark-attendence-teacher/mark-attendence-teacher.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import { WelcomePageComponent } from './component/welcome-page/welcome-page.component';
+import { JWTInterceptor } from './services/auth-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { WelcomePageComponent } from './component/welcome-page/welcome-page.comp
     NotificationResolver,
     GetStudentListForAttendenceResolver,
     GetClassStudentListResolver,
+    { provide: HTTP_INTERCEPTORS, useClass: JWTInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

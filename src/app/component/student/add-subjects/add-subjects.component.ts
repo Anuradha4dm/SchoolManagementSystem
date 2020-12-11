@@ -85,7 +85,7 @@ export class AddSubjectsComponent implements OnInit {
 
     //categorize subjects
     this.gradeVal = +this.studentData.grade.split('_')[0];
-    this.stream = this.studentData.grade.split('_')[2];
+    this.stream = this.studentData.grade.split('_')[1];
 
     //ths is the grades in between  grade 6-9
     if (this.gradeVal >= 6 && this.gradeVal <= 9) {
@@ -111,7 +111,7 @@ export class AddSubjectsComponent implements OnInit {
       this.optionalList1 = [
         'commerce',
         'geography',
-        'art',
+
         'citizen_education',
         'tamil',
         'hindi',
@@ -147,7 +147,7 @@ export class AddSubjectsComponent implements OnInit {
     }
 
     if (this.gradeVal >= 12 && this.stream === 'BIO') {
-      this.subjectSet1 = ['Biology', 'chemistry'];
+      this.subjectSet1 = ['biology', 'chemistry'];
       this.isOptionalList1 = true;
       this.optionalList1 = ['physics', 'agriculture'];
     }
@@ -156,7 +156,7 @@ export class AddSubjectsComponent implements OnInit {
       this.isOptionalList1 = true;
       this.optionalList1 = [
         'economics',
-        'roman_Civilization',
+        'roman_civilization',
         'home_economics',
         'divinity',
         'ict',

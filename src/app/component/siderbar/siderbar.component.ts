@@ -82,18 +82,6 @@ export class SiderbarComponent implements OnInit {
 
     if (this.userRoll === 'teacher') {
       this.sideBarItems = [
-        /*{
-          path: '/user/dashboard',
-          title: 'Dashboard',
-          icon: 'design_app',
-          class: '',
-        },
-        {
-          path: '/user/student-list',
-          title: 'Student List',
-          icon: 'design_bullet-list-67',
-          class: '',
-        },*/
         {
           path: '/user/teacher-profile',
           title: 'Profile',
@@ -193,6 +181,12 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
+          path: '/user/teacher-handler',
+          title: 'Teacher Handler',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
           path: '/user/student-class-change',
           title: 'Class Change',
           icon: 'gestures_tap-01',
@@ -213,6 +207,13 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/al-analysis',
           title: 'A/L Analysis',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+
+        {
+          path: '/user/register-advance-level-stream',
+          title: 'A/L Registration',
           icon: 'gestures_tap-01',
           class: '',
         },
