@@ -154,12 +154,7 @@ export class SiderbarComponent implements OnInit {
           icon: 'users_single-02',
           class: '',
         },
-        {
-          path: '/user/add-new-teacher',
-          title: 'Add Teacher',
-          icon: 'users_single-02',
-          class: '',
-        },
+
         //to remove end
         {
           path: '/user/handle-leave',
@@ -214,6 +209,18 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/register-advance-level-stream',
           title: 'A/L Registration',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/add-new-teacher',
+          title: 'Add Teacher',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/new-student',
+          title: 'New Student',
           icon: 'gestures_tap-01',
           class: '',
         },
