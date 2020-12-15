@@ -16,19 +16,19 @@ export class EditTermResultsComponent implements OnInit {
   classID: string;
   year: number = new Date().getFullYear();
   selectedTerm: number=1;
-  selectedID: string; //to contain selected student id
+  selectedStudent; //to contain selected student data
+  place: number;  //contain selected student place
   avarageData=[]; //contain students avarage and position data of the term
   studentPastResults;
 
   page: number; //for pagination current page
   show:boolean = false;
-
-
+  selectedFile: File;
 
   constructor(
     private userLoginService: UserLogInService,
     private teacherService: TeacherService,
-    private alertService: AlertMessageService
+    private alertService: AlertMessageService,
   ) {}
 
   ngOnInit(): void {
@@ -41,7 +41,6 @@ export class EditTermResultsComponent implements OnInit {
         this.classID = data.class;
         this.onTermChange();
       }); 
-
   }
 
   //Execute when select box change,gives students avarage data
@@ -55,10 +54,11 @@ export class EditTermResultsComponent implements OnInit {
   }
 
   //Execute when click one row
-  onRowClick(studentid){
-    this.selectedID = studentid;
+  onRowClick(student,index){
+    this.selectedStudent = student;
+    this.place=index;
 
-    this.teacherService.getStudentPastResultForEdit(this.year,this.selectedTerm,studentid)
+    this.teacherService.getStudentPastResultForEdit(this.year,this.selectedTerm,student._id)
       .subscribe((data)=>{
         this.studentPastResults = data;
       });
@@ -75,7 +75,7 @@ export class EditTermResultsComponent implements OnInit {
     this.teacherService.updateStudentResultAfterEdit(
       this.year,
       this.selectedTerm,
-      this.selectedID,
+      this.selectedStudent._id,
       results)
       .subscribe((data)=>{
         this.alertService.competeAlert("Results updated successfully..");
@@ -88,21 +88,50 @@ export class EditTermResultsComponent implements OnInit {
       });
   }
 
+  //used when print report press
   printResults(){
-    var data=document.getElementById('formContent');
+    var data=document.getElementById("formContent")
+    const formData = new FormData();
 
     html2canvas(data).then((canvas)=>{
-      var imgWidth = (canvas.width*65)/100;
-      var pageHeight = 295;
-      var imgHeight = (canvas.height*70)/100;
-      var heightLeft = imgHeight;
+      var imgWidth = 380;
+      var imgHeight = 388;
 
       const contentDataURL = canvas.toDataURL('image/png');
-      let pdf = new jsPDF('p','px','a4');
       var position=0;
-      pdf.addImage(contentDataURL,'png',18,position,imgWidth,imgHeight);
-      pdf.save('test1.pdf');
+      let pdf = new jsPDF('p','pt','a5');
+      pdf.addImage(contentDataURL,'PNG',10,position,imgWidth,imgHeight);
+
+      
+      formData.append("id",this.selectedStudent._id);
+      formData.append("grade",this.classID);
+      formData.append("place",this.place.toString());
+
+      this.teacherService.printReport(formData).subscribe((data)=>{
+        if(data){
+          this.alertService.competeAlert("Report has been printed successfully...");
+          pdf.save(this.selectedStudent._id+'.pdf');
+        }
+        else if(!data)
+          this.alertService.errorAlert("You have already printed the report...");
+        else
+          this.alertService.errorAlert("Couldn't print report, try again later...");
+      });
     });
 
+  }
+
+  //send data to backend here
+  sendReport(event){
+    this.selectedFile = event.target.files[0];
+    var imageFile = "reports." + this.selectedFile.name.split('.')[1];
+
+    const formData=new FormData();
+    formData.append('report',this.selectedFile,imageFile);
+
+    this.teacherService.sendEreport(formData).subscribe((data)=>{
+      console.log(data);
+    })
+ 
   }
 }

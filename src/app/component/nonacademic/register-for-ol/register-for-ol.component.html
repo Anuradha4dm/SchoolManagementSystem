@@ -13,7 +13,7 @@
           <th>Class</th>
         </tr>
         <tbody>
-          <tr *ngFor="let i=index;let student of studentList| paginate: { currentPage: page, itemsPerPage: 10 }" (click)="onRowClick(student)">
+          <tr *ngFor="let i=index,let student of studentList| paginate: { currentPage: page, itemsPerPage: 10 }" (click)="onRowClick(student)">
             <td>{{i+1}}</td>
             <td>{{student._id }}</td>
             <td>{{student.firstname + " " + student.lastname|titlecase}}</td>
@@ -62,7 +62,7 @@
             <table>
               <tr *ngFor="let subject of subjectList">
                 <td>
-                  <input type="text" [value]="subject.mesubjectname" class="form-control mb-1" />
+                  <input type="text" [value]="subject.mesubjectname" class="form-control mb-1" disabled>
                 </td>
               </tr>
             </table>

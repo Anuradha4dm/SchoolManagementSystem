@@ -344,6 +344,10 @@ export class AddSubjectsComponent implements OnInit {
     this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
   }
 
+  onChangeListItemOption3(subjectValue: string) {
+    this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
+  }
+
   assignValues(
     id: number,
     sname: string,

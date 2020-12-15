@@ -175,14 +175,20 @@
                         </div>
 
                         <div class="col">
+                            <label>Stream</label>
+                            <select name="stream" ngModel (change)="onSubjectStreamChange($event.target.value)" class="form-control">
+                                <option value="13_MATH">Physical</option>
+                                <option value="13_BIO">Biology</option>
+                                <option value="13_COM">Commerce</option>
+                                <option value="13_ART">Art</option>
+                                <option value="13_TEC">Technology</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
                             <label>Subject</label>
-                            <select (change)="subjectAnalysis(subjectId=$event.target.value)" class="form-control">
-                                <option value="1">Maths</option>
-                                <option value="2">Science</option>
-                                <option value="3">Buddhism</option>
-                                <option value="4">English</option>
-                                <option value="5">Hitory</option>
-                                <option value="6">Sinhala</option>
+                            <select name="subject" ngModel (change)="subjectAnalysis(subjectName=$event.target.value)" class="form-control">
+                                <option [value]="subject" *ngFor="let subject of subjectList">{{subject| titlecase}}</option>
                             </select>
                         </div>
                     </div>

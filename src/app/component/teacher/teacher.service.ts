@@ -92,6 +92,16 @@ export class TeacherService {
     );
   }
 
+  //used to print result sheet
+  printReport(formData){
+      return this.httpClient.post('http://localhost:3000/teacher/print-report',formData);
+  }
+
+  //execute when e-report send
+  sendEreport(formData){
+    return this.httpClient.post('http://localhost:3000/teacher/send-report',formData);
+  }
+
   //return students avarage related to grade and term
   postGetAverageDataWithStudent(year: number, term: number, grade: string) {
     return this.httpClient.post<{

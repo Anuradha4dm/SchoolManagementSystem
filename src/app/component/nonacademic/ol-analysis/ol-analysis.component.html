@@ -87,18 +87,13 @@
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
-                            <input type="number" [value]="year" class="form-control">
+                            <input type="number" [value]="subjectYear" (change)="subjectAnalysis(subjectYear=$event.target.value)" class="form-control">
                         </div>
     
                         <div class="col">
                             <label>Subject</label>
-                            <select (change)="subjectAnalysis(subjectId=$event.target.value)" class="form-control">
-                                <option value="1">Maths</option>
-                                <option value="2">Science</option>
-                                <option value="3">Buddhism</option>
-                                <option>English</option>
-                                <option>Hitory</option>
-                                <option>Sinhala</option>
+                            <select (change)="subjectAnalysis(subjectName=$event.target.value)" class="form-control">
+                                <option [value]="subject" *ngFor="let subject of subjectList">{{subject| titlecase}}</option>
                             </select>
                         </div>
                     </div>

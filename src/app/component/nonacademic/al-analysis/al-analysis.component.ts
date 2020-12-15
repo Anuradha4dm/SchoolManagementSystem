@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LastYearData } from 'src/app/models/teacher.model';
 import { sortAndDeduplicateDiagnostics } from 'typescript';
 import { NonAcademicService } from '../../nonacademic/nonacademic.service';
+import { SubjectListsService } from '../subject-lists.service';
 
 @Component({
   selector: 'app-al-analysis',
@@ -15,6 +16,7 @@ export class AlAnalysisComponent implements OnInit {
   cutoff: number = 1.3;
   year: number = new Date().getFullYear() - 1;
   pastYearALData; //contain past year al data of students
+  subjectList; //contain all subject related to A/L stream
   cutoffStream;
   cutoffList;
   grades: string[] = ['A', 'B', 'C', 'S', 'W'];
@@ -39,7 +41,7 @@ export class AlAnalysisComponent implements OnInit {
   //Subject analysis chart data here
   subjectCount = [0, 0, 0, 0, 0];
   subjectLabels = ['A count', 'B count', 'C count', 'S count', 'W count'];
-  subjectId = 2;
+  subjectName;
   subjectYear = this.year;
 
   public myLegend = 'helo';
@@ -51,7 +53,10 @@ export class AlAnalysisComponent implements OnInit {
     responsive: true,
   };
 
-  constructor(private nonService: NonAcademicService) {}
+  constructor(
+    private nonService: NonAcademicService,
+    private subjectService: SubjectListsService
+  ) {}
 
   ngOnInit(): void {
     //Return student count related to strem and grade year by year
@@ -112,7 +117,7 @@ export class AlAnalysisComponent implements OnInit {
     this.subjectCount = [];
 
     this.nonService
-      .getAdvanceLevelChartTwo(this.subjectYear, this.subjectId)
+      .getAdvanceLevelChartTwo(this.subjectYear, this.subjectName)
       .subscribe((data) => {
         this.subjectCount.push(data.acount);
         this.subjectCount.push(data.bcount);
@@ -120,6 +125,11 @@ export class AlAnalysisComponent implements OnInit {
         this.subjectCount.push(data.Scount);
         this.subjectCount.push(data.wcount);
       });
+  }
+
+  //exceute when subject section stream change
+  onSubjectStreamChange(value){
+    this.subjectList=this.subjectService.getAllSubjectsOfGrade(value);
   }
 
   cutoffFilter(value){
