@@ -45,6 +45,8 @@ export class RegisterForALComponent implements OnInit {
   }
 
   onStreamFilter(){
+    this.show=false;
+
     if(this.stream!="ALL"){
       this.filteredList=this.studentList.filter((student)=>{
         return student.stream==this.stream;
@@ -53,6 +55,7 @@ export class RegisterForALComponent implements OnInit {
     else{
       this.filteredList=this.studentList;
     }
+
   }
 
   onSubmit(){

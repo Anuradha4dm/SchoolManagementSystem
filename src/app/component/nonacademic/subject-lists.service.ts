@@ -114,12 +114,12 @@ export class SubjectListsService {
 
 
       'combine_mathematics','chemistry','english',
-      'biology','physics'
-      ,'economics', 'roman_civilization', 'home_economics', 'divinity', 'ict','statistics', 
+      'biology','physics',
+      'economics', 'roman_civilization', 'home_economics', 'divinity', 'ict','statistics', 
       'political_science','art','french','accounts','logic','hindi',
       'economics',
       'science_for_teachnology','engineering_tech','bio_system_tech','informaticon_tehnology','accounting',
-      ,'pts',
+      'pts',
      ];
    }
 
