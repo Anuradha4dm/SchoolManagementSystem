@@ -17,7 +17,8 @@
               "chart.js",
               "socket.io-client",
               "xlsx",
-              "qrcode"
+              "qrcode",
+              "pako"
             ],
             "outputPath": "dist/SchoolMangementSystem",
             "index": "src/index.html",
