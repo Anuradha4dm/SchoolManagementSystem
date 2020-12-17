@@ -12,8 +12,13 @@ import { WebSocketService } from '../services/websocket.service';
 })
 export class LayoutComponent implements OnInit {
   role: string;
+  show=true;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  changeStatus(){
+    this.show=false;
+  }
 }

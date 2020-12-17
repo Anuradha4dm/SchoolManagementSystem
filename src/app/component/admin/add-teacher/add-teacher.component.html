@@ -102,11 +102,11 @@
             <div class="row form-group">
                 <div class="col">
                     <label>Birth Date</label>
-                    <input #birth type="date" name="birthdate" [ngModel]="startYear" class="form-control">
+                    <input type="date" name="birthdate" ngModel (change)="ageCalculate($event.target.value)" class="form-control">
                 </div>
                 <div class="col">
                     <label>Age</label>
-                    <input type="text" name="age" ngModel="30" class="form-control">
+                    <input type="text" name="age" [ngModel]="age" class="form-control" disabled>
                 </div>
                 <div class="col">
                     <label>Gender</label>

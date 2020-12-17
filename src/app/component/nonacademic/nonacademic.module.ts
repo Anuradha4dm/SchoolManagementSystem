@@ -29,6 +29,7 @@ import { OlAnalysisComponent } from './ol-analysis/ol-analysis.component';
 import { ViewALComponent } from './view-al/view-al.component';
 import { ViewOLComponent } from './view-ol/view-ol.component';
 import { ViewLayoutComponent } from './view-layout/view-layout.component';
+import { NonProfileComponent } from './non-profile/non-profile.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ViewLayoutComponent } from './view-layout/view-layout.component';
     ViewALComponent,
     ViewOLComponent,
     ViewLayoutComponent,
+    NonProfileComponent,
   ],
   imports: [
     CommonModule,

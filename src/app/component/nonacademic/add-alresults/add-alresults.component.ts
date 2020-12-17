@@ -11,9 +11,11 @@ import { NonAcademicService } from '../nonacademic.service';
 export class AddALresultsComponent implements OnInit {
   @Input() year;
   @Input() studentList;
+  filteredList;
   loggedUser:string;
   selectedStudent; //contains details of selected student
   selectedName; //contain selcted student name
+  stream;
 
   show:boolean = false;
   page:number = 1; //for pagination
@@ -89,5 +91,19 @@ export class AddALresultsComponent implements OnInit {
         else
           this.alertService.competeAlert("Results cannot be added, try again later...");
     });
+  }
+
+  onStreamFilter(){
+    this.show=false;
+console.log(this.studentList)
+    if(this.stream!="ALL"){
+      this.filteredList=this.studentList.filter((student)=>{
+        return student.stream==this.stream;
+      });
+    }
+    else{
+      this.filteredList=this.studentList;
+    }
+
   }
 }

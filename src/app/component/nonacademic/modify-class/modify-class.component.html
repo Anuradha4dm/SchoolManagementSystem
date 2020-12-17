@@ -62,7 +62,7 @@
 
                         <div class="col">
                             <label>Select Teacher</label>
-                            <select name="selectTeacher" ngModel (change)="onSelectTeacherChange($event.target.value)" class="form-control">
+                            <select name="selectTeacher" ngModel (click)="onSelectTeacherChange($event.target.value)" class="form-control">
                                 <option *ngFor="let teacher of subjectTeacherList" [value]="teacher.teacherid">{{teacher.teacherid}}</option>
                             </select>
                         </div>

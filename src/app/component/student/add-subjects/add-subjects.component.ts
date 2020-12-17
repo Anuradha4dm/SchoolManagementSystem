@@ -84,8 +84,10 @@ export class AddSubjectsComponent implements OnInit {
     );
 
     //categorize subjects
+    var arr = this.studentData.grade.split('_');
+
     this.gradeVal = +this.studentData.grade.split('_')[0];
-    this.stream = this.studentData.grade.split('_')[1];
+    this.stream = arr[arr.length-1];
 
     //ths is the grades in between  grade 6-9
     if (this.gradeVal >= 6 && this.gradeVal <= 9) {
@@ -341,6 +343,10 @@ export class AddSubjectsComponent implements OnInit {
   }
 
   onChangeListItemOption1(subjectValue: string) {
+    this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
+  }
+
+  onChangeListItemOption3(subjectValue: string) {
     this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
   }
 

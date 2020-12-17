@@ -9,13 +9,13 @@
           </h4>
         </div>
         <div class="col-sm-5 text-right">
-          <select class="form-control">
-            <option>All</option>
-            <option>Maths Stream</option>
-            <option>Bio Stream</option>
-            <option>Commerce Stream</option>
-            <option>Art Stream</option>
-            <option>Tech Stream</option>
+          <select class="form-control" name="stream" (change)="onStreamFilter()" [(ngModel)]="stream">
+            <option value="ALL">All</option>
+            <option value="Physical">Physical Stream</option>
+            <option value="Biology">Biology Stream</option>
+            <option value="Commerce">Commerce Stream</option>
+            <option value="Art">Art Stream</option>
+            <option value="Technology">Technology Stream</option>
           </select>
         </div>
       </div>
@@ -29,16 +29,10 @@
           <th>Stream</th>
         </tr>
         <tbody>
-          <tr
-            *ngFor="
-              let student of studentList
-                | paginate: { currentPage: page, itemsPerPage: 10 }
-            "
-            (click)="onRowClick(student._id)"
-          >
-            <td>1</td>
+          <tr *ngFor="let i=index;let student of filteredList| paginate: { currentPage: page, itemsPerPage: 10 }" (click)="onRowClick(student)">
+            <td>{{i+1}}</td>
             <td>{{ student._id }}</td>
-            <td>{{ student.firstname + " " + student.lastname }}</td>
+            <td>{{ student.firstname + " " + student.lastname| titlecase }}</td>
             <td>{{ student.class.grade }}</td>
             <td>{{ student.stream }}</td>
           </tr>
@@ -66,32 +60,30 @@
         <div class="col">
           <div class="form-group">
             <label>Student ID</label>
-            <input type="text" class="form-control" disabled />
+            <input type="text" [value]="selectedStudent._id" class="form-control" disabled />
           </div>
         </div>
       </div>
 
       <div class="form-group">
         <label>Student Name</label>
-        <input type="text" class="form-control" disabled />
+        <input type="text" [value]="selectedStudent.firstname+' '+selectedStudent.lastname| titlecase" class="form-control" disabled />
       </div>
 
       <div class="form-group">
         <label>Stream</label>
-        <input type="text" class="form-control" disabled />
+        <input type="text" [value]="selectedStudent.stream" class="form-control" disabled />
       </div>
 
       <!--Student subject list here-->
-      <form>
         <div class="row">
           <!--Student subject list here-->
           <div class="col">
             <h6 class="text-muted font-italic">Subject List</h6>
             <table>
-              <tr *ngFor="let number of [0, 1, 2, 3, 4]">
-                <!--loop here-->
+              <tr *ngFor="let subject of subjectList">
                 <td>
-                  <input type="text" class="form-control mb-1" disabled />
+                  <input type="text" [value]="subject.mesubjectname" class="form-control mb-1" disabled />
                 </td>
               </tr>
             </table>
@@ -102,21 +94,21 @@
             <div class="card card-body border border-dark">
               <div class="form-group">
                 <label>Index Number</label>
-                <input type="text" class="form-control" />
+                <input name="index" type="text" [(ngModel)]="index" class="form-control" />
               </div>
               <div class="form-group">
                 <label>Verify Index Number</label>
-                <input type="text" class="form-control" />
+                <input type="text" (input)="verifyIndex($event.target.value)" class="form-control" />
+                <span *ngIf="!verified" class="error">Index number is not matched</span>
               </div>
             </div>
           </div>
         </div>
 
         <div class="form-group text-right">
-          <button type="submit" class="btn btn-info btn-sm">Register</button>
+          <button type="button" class="btn btn-info btn-sm" (click)="onSubmit()">Register</button>
           <button type="button" class="btn btn-danger btn-sm">Cancel</button>
         </div>
-      </form>
     </div>
   </div>
 </div>

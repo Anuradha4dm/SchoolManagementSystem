@@ -18,11 +18,11 @@
                         <label>Select Stream:</label>
                         <select name="stream" [(ngModel)]="selectedStream" (change)="onStreamFilter()" class="form-control">
                             <option value="ALL">All</option>
-                            <option value="MATH">Maths</option>
-                            <option value="BIO">Bio</option>
-                            <option value="ART">Art</option>
-                            <option value="COM">Commerce</option>
-                            <option value="TEC">Technology</option>
+                            <option value="Physical">Physical</option>
+                            <option value="Biology">Biology</option>
+                            <option value="Art">Art</option>
+                            <option value="Commerce">Commerce</option>
+                            <option value="Technology">Technology</option>
                         </select>
                     </div>
                 </div>
@@ -36,6 +36,7 @@
                         <th>Student ID</th>
                         <th>District Rank</th>
                         <th>Island Rank</th>
+                        <th>Stream</th>
                         <th>Z score</th>
                         <th>A</th>
                         <th>B</th>
@@ -50,6 +51,7 @@
                             <td>{{student.studentid}}</td>
                             <td>{{student.districtrank}}</td>
                             <td>{{student.islandrank}}</td>
+                            <td>{{student.stream}}</td>
                             <td>{{student.zscore}}</td>
                             <td>{{student.acount}}</td>
                             <td>{{student.bcount}}</td>

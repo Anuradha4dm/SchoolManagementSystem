@@ -11,6 +11,8 @@ import { AdminService } from '../admin.service';
 })
 export class AddTeacherComponent implements OnInit {
   startYear = new Date().getFullYear();
+  age;
+
   teacherID;
   selectedFile: File = null; //contain the selected image file
   imagePath: string = '../../../../assets/img/profile.png'; //contain the selected image path
@@ -29,7 +31,6 @@ export class AddTeacherComponent implements OnInit {
       console.log(data);
       this.teacherID = 'AC_' + (data.teacherCount + 1);
     });
-
     this.allSubjects = this.subjectListService.getAllSubjects();
   }
 
@@ -47,6 +48,10 @@ export class AddTeacherComponent implements OnInit {
     };
   }
 
+  ageCalculate(value) {
+    this.age = new Date().getFullYear() - value.split('-')[0];
+  }
+
   //Add teacher details to database
   onSubmit(value) {
     var subjectList: string = '';
@@ -62,7 +67,7 @@ export class AddTeacherComponent implements OnInit {
     formdata.append('addressline1', value.addressline1);
     formdata.append('addressline2', value.addressline2);
     formdata.append('addressline3', value.addressline3);
-    formdata.append('age', value.age);
+    formdata.append('age', this.age);
     formdata.append('birthdate', value.birthdate);
     formdata.append('city', value.city);
     formdata.append('email', value.email);

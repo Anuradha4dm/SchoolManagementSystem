@@ -1,0 +1,16 @@
+table tr{
+    font-size: 25px;
+}
+
+table td{
+    font-style: italic;
+}
+
+.rounded-circle{
+    padding: 100px 0;
+}
+
+li{
+    font-size: 25px;
+    font-weight: 600;
+}

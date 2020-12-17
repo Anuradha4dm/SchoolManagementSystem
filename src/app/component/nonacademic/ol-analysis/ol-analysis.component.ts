@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LastYearData } from 'src/app/models/teacher.model';
 import { NonAcademicService } from '../../nonacademic/nonacademic.service';
+import { SubjectListsService } from '../subject-lists.service';
 
 @Component({
   selector: 'app-ol-analysis',
@@ -13,6 +14,7 @@ export class OlAnalysisComponent implements OnInit {
   analysis: boolean = false; //to check done the analysis
   year: number = new Date().getFullYear() - 1;
   pastYearOLData;
+  subjectList; //contain all subject names of O/L
   grades: string[] = ['A', 'B', 'C', 'S', 'W'];
   counter: number[] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
 
@@ -30,11 +32,12 @@ export class OlAnalysisComponent implements OnInit {
   pastYearStudentData;
 
   //Subject analysis chart data here
-  subjectData = [];
-  subjectLabels = [];
+  subjectData = [0,0,0,0,0];
+  subjectLabels = ['A count', 'B count', 'C count', 'S count', 'W count'];
   subjectYear = this.year;
-  subjectId;
-  //Subject wise analysis details here
+  subjectName="mathematics";
+
+  /*Subject wise analysis details here
 
   public myLegend = 'helo';
   public myLabel = ['A', 'B', 'C'];
@@ -55,7 +58,10 @@ export class OlAnalysisComponent implements OnInit {
     },
   ];*/
 
-  constructor(private nonService: NonAcademicService) {}
+  constructor(
+    private nonService: NonAcademicService,
+    private subjectService: SubjectListsService
+  ) {}
 
   ngOnInit(): void {
     this.allYearAnalysis(1);
@@ -64,20 +70,28 @@ export class OlAnalysisComponent implements OnInit {
       this.pastYearOLData = data.result;
       console.log(this.pastYearOLData);
     });
+
+    this.subjectList=this.subjectService.getAllSubjectsOfGrade("11");
   }
 
   //Execute when year by year select box changes
   allYearAnalysis(value) {
-    this.allYearData = [];
-    this.allYearLabels = [];
-
-    this.nonService
-      .getOrdinaryLeveChartOne(this.allYearGrade, this.allYearCount)
-      .subscribe((data) => {
-        for (let i = 0; i < data.length; i++) {
-          this.allYearData.push(data[i].count);
-          this.allYearLabels.push(data[i].meyear);
-        }
+      this.allYearData = [];
+      this.allYearLabels = [];
+  
+      for(let i=0;i<10;i++){
+        this.allYearLabels.push(this.year-i);
+      }
+  
+      this.nonService.getOrdinaryLeveChartOne(this.allYearGrade, this.allYearCount).subscribe((data) => {
+        data.map((content)=>{
+          for(let i=0;i<this.allYearLabels.length;i++){
+            if(content.meyear==this.allYearLabels[i])
+              this.allYearData[i]=content.count;
+            if(this.allYearData[i]==null)
+              this.allYearData[i]=0
+          }
+        })
       });
   }
 
@@ -103,7 +117,7 @@ export class OlAnalysisComponent implements OnInit {
     this.subjectData = [];
 
     this.nonService
-      .getOrdinaryLeveChartTwo(this.subjectYear.toString(), '2')
+      .getOrdinaryLeveChartTwo(this.subjectYear.toString(),this.subjectName)
       .subscribe((data) => {
         this.subjectData.push(data.acount);
         this.subjectData.push(data.bcount);

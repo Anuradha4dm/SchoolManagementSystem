@@ -142,7 +142,7 @@ export class SiderbarComponent implements OnInit {
     if (this.userRoll === 'nonacademic') {
       this.sideBarItems = [
         {
-          path: '/user/userprofile',
+          path: '/user/profile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',
@@ -155,6 +155,18 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
 
+        {
+          path: '/user/add-new-teacher',
+          title: 'Add Teacher',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/add-non-academic',
+          title: 'Add Nonacademic',
+          icon: 'users_single-02',
+          class: '',
+        },
         //to remove end
         {
           path: '/user/handle-leave',

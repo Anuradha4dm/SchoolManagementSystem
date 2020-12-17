@@ -29,6 +29,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { ForgetPasswordComponent } from './component/forget-password/forget-password.component';
 import { MarkAttendenceTeacherComponent } from './component/mark-attendence-teacher/mark-attendence-teacher.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import { WelcomePageComponent } from './component/welcome-page/welcome-page.component';
 import { JWTInterceptor } from './services/auth-interceptor.service';
 
 @NgModule({
@@ -42,6 +43,7 @@ import { JWTInterceptor } from './services/auth-interceptor.service';
     ResetPasswordComponent,
     ForgetPasswordComponent,
     MarkAttendenceTeacherComponent,
+    WelcomePageComponent,
   ],
   imports: [
     BrowserModule,
