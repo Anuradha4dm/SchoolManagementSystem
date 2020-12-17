@@ -48,4 +48,9 @@ export class AdminService {
       teacher:{teacherid: string,firstname: string,lastname: string}
     }[]>('http://localhost:3000/admin/get-class-list')
   }
+
+  //used to create new non academic
+  createNonAcademic(formData){
+    return this.httpClient.post('http://localhost:3000/admin/create-non-academic',formData)
+  }
 }

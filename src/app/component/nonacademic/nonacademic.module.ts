@@ -30,6 +30,7 @@ import { ViewALComponent } from './view-al/view-al.component';
 import { ViewOLComponent } from './view-ol/view-ol.component';
 import { ViewLayoutComponent } from './view-layout/view-layout.component';
 import { NonProfileComponent } from './non-profile/non-profile.component';
+import { EditNonComponent } from './edit-non/edit-non.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { NonProfileComponent } from './non-profile/non-profile.component';
     ViewOLComponent,
     ViewLayoutComponent,
     NonProfileComponent,
+    EditNonComponent,
   ],
   imports: [
     CommonModule,

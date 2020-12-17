@@ -1,38 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { TeacherProfileData } from 'src/app/models/teacher.model';
 import { AlertMessageService } from 'src/app/services/alert-message.service';
-import { TeacherService } from '../teacher.service';
+import { NonAcademicService } from '../nonacademic.service';
 
 @Component({
-  selector: 'app-edit-teacher-profile',
-  templateUrl: './edit-teacher-profile.component.html',
-  styleUrls: ['./edit-teacher-profile.component.css'],
+  selector: 'app-edit-non',
+  templateUrl: './edit-non.component.html',
+  styleUrls: ['./edit-non.component.css']
 })
-export class EditTeacherProfileComponent implements OnInit {
-  loggedTeacherID: string;
-  teacherProfileData: TeacherProfileData;
+export class EditNonComponent implements OnInit {
+  loggedUserID;
+  userProfileData;
   selectedFile: File;
   imageFile: string;
   profilePic;
 
   constructor(
     private route: ActivatedRoute,
-    private teacherService: TeacherService,
+    private nonService: NonAcademicService,
     private alertMessage: AlertMessageService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
     this.route.params.subscribe((params: Params) => {
-      this.loggedTeacherID = params['id'];
+      this.loggedUserID = params['id'];
     });
 
-    this.teacherService.getTeacherProfileData(this.loggedTeacherID).subscribe(
-      (data) => {
-        this.teacherProfileData = data;
+    this.nonService.getNonAcademicProfileData(this.loggedUserID).subscribe((data) => {
+        this.userProfileData = data;
         this.profilePic =
-          'http://localhost:3000/' + this.teacherProfileData.imagepath;
+          'http://localhost:3000/' + this.userProfileData.imagepath;
         console.log(data);
       },
       (error) => {
@@ -45,7 +43,7 @@ export class EditTeacherProfileComponent implements OnInit {
   onChange(event) {
     this.selectedFile = event.target.files[0];
     const extention = this.selectedFile.name.split('.')[1];
-    this.imageFile = this.loggedTeacherID + '.' + extention;
+    this.imageFile = this.loggedUserID + '.' + extention;
 
     var reader = new FileReader();
     reader.readAsDataURL(this.selectedFile);
@@ -56,6 +54,7 @@ export class EditTeacherProfileComponent implements OnInit {
 
   onFormSubmit(formData) {
     const formObj = new FormData();
+    formObj.append('id', this.loggedUserID);
     formObj.append('firstname', formData.value.firstname);
     formObj.append('lastname', formData.value.lastname);
     formObj.append('surname', formData.value.surname);
@@ -74,16 +73,14 @@ export class EditTeacherProfileComponent implements OnInit {
 
 
     if (!this.selectedFile) {
-      formObj.append('imagepath', this.teacherProfileData.imagepath);
+      formObj.append('imagepath', this.userProfileData.imagepath);
     } else {
       formObj.append('imageData', this.selectedFile, this.imageFile);
     }
 
-    this.teacherService
-      .updateTeacherProfile(this.loggedTeacherID, formObj)
-      .subscribe(
+    this.nonService.updateNonProfile(formObj).subscribe(
         (data) => {
-          if (data.update) {
+          if (data) {
             this.alertMessage.competeAlert('Update Profile Successfully...');
           }
         },
@@ -91,7 +88,7 @@ export class EditTeacherProfileComponent implements OnInit {
           this.alertMessage.errorAlert(error.error.message);
         },
         () => {
-          this.router.navigate(['user', 'teacher-profile']);
+          this.router.navigate(['user', 'profile']);
         }
       );
   }

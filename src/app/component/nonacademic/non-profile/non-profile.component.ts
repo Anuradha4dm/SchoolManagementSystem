@@ -27,16 +27,15 @@ export class NonProfileComponent implements OnInit {
 
     this.nonService.getNonAcademicProfileData(this.loggedUserID).subscribe((data) => {
         this.profileData = data;
-        this.qualifications = this.profileData.qualifications.toString().split(',');
         this.imagepath = 'http://localhost:3000/' + this.profileData.imagepath;
-        console.log(this.profileData)
+        this.qualifications = this.profileData.qualifications.toString().split(',');
     });
 
   }
 
   //execute when edit profile click
   onEditClick() {
-    this.router.navigate(['user', 'edit-teacher', this.loggedUserID]);
+    this.router.navigate(['user', 'edit-non', this.loggedUserID]);
   }
 
 }

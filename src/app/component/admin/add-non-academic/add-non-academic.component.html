@@ -4,7 +4,7 @@
     <div class="card card-body">
         <h2 class="font-italic mb-5">Add New Non Academic</h2>
         <!--Add teacher form here-->
-        <form #addNonAc="ngForm" (ngSubmit)="onSubmit(addNonAc.value)">
+        <form #addNonAc="ngForm" (ngSubmit)="createUser(addNonAc.value)">
             <div class="form-group w-50">
                 <label>User ID</label>
                 <input type="text" name="id" [value]="nonAcademicID" class="form-control" disabled>
@@ -46,6 +46,22 @@
                     </select>
                 </div>
             </div>
+           
+            <!--Profile pic upload here-->
+            <div class="row my-3">
+                <div class="col-auto">
+                    <img src="{{profilePic}}" alt="profile pic">
+                </div>
+
+                <div class="col-auto">
+                    <div class="form-group">
+                        <label class="btn btn-dark">
+                            Select Profile Picture
+                            <input type="file" (change)="onChange($event)" accept="image/*">
+                        </label>
+                    </div>
+                </div>
+            </div>
             
             <div class="row form-group">
                 <div class="col">
@@ -63,11 +79,11 @@
             <div class="row form-group">
                 <div class="col">
                     <label>Birth Date</label>
-                    <input type="date" name="birthdate" ngModel class="form-control">
+                    <input type="date" name="birthdate" (change)="ageCalculate($event.target.value)" ngModel class="form-control">
                 </div>
                 <div class="col">
                     <label>Age</label>
-                    <input type="text" name="age" ngModel="30" class="form-control" disabled>
+                    <input type="text" name="age" [ngModel]="age" class="form-control" disabled>
                 </div>
                 <div class="col">
                     <label>Gender</label>

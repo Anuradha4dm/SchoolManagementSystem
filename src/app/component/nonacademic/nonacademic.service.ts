@@ -544,6 +544,11 @@ export class NonAcademicService {
     );
   }
 
+  //used to update non academic profile
+  updateNonProfile(formData){
+      return this.httpClient.post('http://localhost:3000/nonacademic/update-profile',formData)
+  }
+
   //get student subejct list when they are going to register for main exams
   getStudentSubjectListForRegistration(studentid: string, examtype: string) {
     const paramsData = new HttpParams().append('examtype', examtype);

@@ -115,10 +115,7 @@
       <div class="row">
         <!--Subject section here-->
         <div class="card card-body">
-          <div
-            *ngIf="teacherProfileData.class != 'No Class...'"
-            class="form-group"
-          >
+          <div *ngIf="teacherProfileData.class != null" class="form-group">
             <label>Class Teacher of</label>
             <input
               type="text"

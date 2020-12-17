@@ -8,6 +8,7 @@ export interface TeacherProfileData{
   imagepath: string;
   startyear: number;
   age: number;
+  gender: string;
   role: string;
   subjects:[
     {
