@@ -21,6 +21,8 @@ export class EditTermResultsComponent implements OnInit {
   avarageData = []; //contain students avarage and position data of the term
   studentPastResults;
 
+  loginToken: string;
+
   page: number; //for pagination current page
   show: boolean = false;
   selectedFile: File;
@@ -34,6 +36,7 @@ export class EditTermResultsComponent implements OnInit {
   ngOnInit(): void {
     this.userLoginService.userAuthData.subscribe((userData) => {
       this.loggedUserID = userData.getUserId;
+      this.loginToken = userData.getToken;
     });
 
     this.teacherService
@@ -144,8 +147,17 @@ export class EditTermResultsComponent implements OnInit {
     const formData = new FormData();
     formData.append('report', this.selectedFile, imageFile);
 
-    this.teacherService.sendEreport(formData).subscribe((data) => {
-      console.log(data);
-    });
+    this.teacherService.sendEreport(formData, this.loginToken).subscribe(
+      (data) => {
+        if (data.sendReport) {
+          this.alertService.competeAlert('Report Send Successfully...');
+        }
+      },
+      (error) => {
+        this.alertService.errorAlert(
+          'Not Report Sent...Some Problem Try Later...'
+        );
+      }
+    );
   }
 }
