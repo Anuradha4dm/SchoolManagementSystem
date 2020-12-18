@@ -125,13 +125,20 @@ export class EditTermResultsComponent implements OnInit {
   sendReport(event){
     this.selectedFile = event.target.files[0];
     var imageFile = "report." + this.selectedFile.name.split('.')[1];
+    var studentID = this.selectedFile.name.split('.')[0];
 
     const formData=new FormData();
     formData.append('report',this.selectedFile,imageFile);
+    formData.append('id',studentID);
 
     this.teacherService.sendEreport(formData).subscribe((data)=>{
-      console.log(data);
-    })
+      if(data)
+        this.alertService.competeAlert("E-report send successfully...");
+    },(error)=>{
+      this.alertService.errorAlert("Couldn't send E-report, try again later...");
+    },()=>{
+      this.ngOnInit();
+    });
  
   }
 }
