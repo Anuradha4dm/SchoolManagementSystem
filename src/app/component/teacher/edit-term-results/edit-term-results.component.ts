@@ -124,7 +124,7 @@ export class EditTermResultsComponent implements OnInit {
   //send data to backend here
   sendReport(event){
     this.selectedFile = event.target.files[0];
-    var imageFile = "reports." + this.selectedFile.name.split('.')[1];
+    var imageFile = "report." + this.selectedFile.name.split('.')[1];
 
     const formData=new FormData();
     formData.append('report',this.selectedFile,imageFile);
