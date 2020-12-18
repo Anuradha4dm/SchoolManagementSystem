@@ -152,7 +152,7 @@ export class StudentProfileService {
   }
 
   addSports(sportsData) {
-    return this.httpClient.post(
+    return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/student/add-sports',
       sportsData
     );

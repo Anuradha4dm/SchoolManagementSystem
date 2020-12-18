@@ -87,14 +87,14 @@ export class AddSubjectsComponent implements OnInit {
     var arr = this.studentData.grade.split('_');
 
     this.gradeVal = +this.studentData.grade.split('_')[0];
-    this.stream = arr[arr.length-1];
+    this.stream = arr[arr.length - 1];
 
     //ths is the grades in between  grade 6-9
     if (this.gradeVal >= 6 && this.gradeVal <= 9) {
       this.isOptionalList1 = true;
       this.optionalList1 = ['estern_music', 'western_music', 'art', 'dancing'];
       this.subjectSet1 = [
-        'mathemetics',
+        'mathematics',
         'sinhala',
         'science',
         'history',
@@ -241,7 +241,7 @@ export class AddSubjectsComponent implements OnInit {
         .addSubjectsPrimary({
           studentid: this.studentData.studentid,
           grade: this.studentData.grade,
-          optional1: data.optional1,
+          optional1: data.value.optional1,
         })
         .subscribe(
           (data) => {
