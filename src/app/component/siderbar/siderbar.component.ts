@@ -42,39 +42,32 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/notification',
           title: 'Notification',
-          icon: 'education_agenda-bookmark',
+          icon: 'gestures_tap-01',
           class: '',
         },
         {
           path: '/user/view-participation',
           title: 'PARTICIPATION',
-          icon: 'education_agenda-bookmark',
+          icon: 'media-2_sound-wave',
           class: '',
         },
 
         {
           path: '/user/view-result',
           title: 'VIEW RESULT',
-          icon: 'education_agenda-bookmark',
+          icon: 'education_paper',
           class: '',
         },
         {
           path: '/user/addsubjects',
           title: 'Add Subjects',
-          icon: 'files_single-copy-04',
+          icon: 'education_agenda-bookmark',
           class: '',
         },
         {
           path: '/user/viewsubjects',
           title: 'View Subjects',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
-
-        {
-          path: '/user/payment',
-          title: 'Payment',
-          icon: 'gestures_tap-01',
+          icon: 'files_single-copy-04',
           class: '',
         },
       ];
