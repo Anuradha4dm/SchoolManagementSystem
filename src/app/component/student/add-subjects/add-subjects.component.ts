@@ -84,15 +84,17 @@ export class AddSubjectsComponent implements OnInit {
     );
 
     //categorize subjects
+    var arr = this.studentData.grade.split('_');
+
     this.gradeVal = +this.studentData.grade.split('_')[0];
-    this.stream = this.studentData.grade.split('_')[1];
+    this.stream = arr[arr.length - 1];
 
     //ths is the grades in between  grade 6-9
     if (this.gradeVal >= 6 && this.gradeVal <= 9) {
       this.isOptionalList1 = true;
       this.optionalList1 = ['estern_music', 'western_music', 'art', 'dancing'];
       this.subjectSet1 = [
-        'mathemetics',
+        'mathematics',
         'sinhala',
         'science',
         'history',
@@ -111,7 +113,7 @@ export class AddSubjectsComponent implements OnInit {
       this.optionalList1 = [
         'commerce',
         'geography',
-        'art',
+
         'citizen_education',
         'tamil',
         'hindi',
@@ -143,11 +145,11 @@ export class AddSubjectsComponent implements OnInit {
     if (this.gradeVal >= 12 && this.stream === 'MATH') {
       this.subjectSet1 = ['combine_mathematics', 'physics'];
       this.isOptionalList1 = true;
-      this.optionalList1 = ['Chemistry', 'Infomation Technology'];
+      this.optionalList1 = ['Chemistry', 'infomation_technology'];
     }
 
     if (this.gradeVal >= 12 && this.stream === 'BIO') {
-      this.subjectSet1 = ['Biology', 'chemistry'];
+      this.subjectSet1 = ['biology', 'chemistry'];
       this.isOptionalList1 = true;
       this.optionalList1 = ['physics', 'agriculture'];
     }
@@ -156,7 +158,7 @@ export class AddSubjectsComponent implements OnInit {
       this.isOptionalList1 = true;
       this.optionalList1 = [
         'economics',
-        'roman_Civilization',
+        'roman_civilization',
         'home_economics',
         'divinity',
         'ict',
@@ -239,7 +241,7 @@ export class AddSubjectsComponent implements OnInit {
         .addSubjectsPrimary({
           studentid: this.studentData.studentid,
           grade: this.studentData.grade,
-          optional1: data.optional1,
+          optional1: data.value.optional1,
         })
         .subscribe(
           (data) => {
@@ -341,6 +343,10 @@ export class AddSubjectsComponent implements OnInit {
   }
 
   onChangeListItemOption1(subjectValue: string) {
+    this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
+  }
+
+  onChangeListItemOption3(subjectValue: string) {
     this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
   }
 

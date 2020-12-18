@@ -8,9 +8,9 @@ import { NonAcademicService } from '../nonacademic.service';
 })
 export class ExamLayoutComponent implements OnInit {
   studentList;
-  selection:number = 3;
+  selection:number = 1;
   selectedYear:number = new Date().getFullYear();
-  exam:string = "G.C.E. A/L Examination";
+  exam:string = "G.C.E. O/L Examination";
 
   constructor(
     private nonService: NonAcademicService
@@ -23,26 +23,48 @@ export class ExamLayoutComponent implements OnInit {
   //Execute when select box change
   onSelectChange(){
     if(this.selection==1 || this.selection==3)
-      this.exam = "G.C.E. A/L Examination";
-    else
       this.exam = "G.C.E. O/L Examination";
+    else
+      this.exam = "G.C.E. A/L Examination";
     this.getStudentList();
   }
 
   //return student list of the releted exam of year
   getStudentList(){
+   
     if(this.selection==1){
-      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,true)
-        .subscribe((data)=>{
-          this.studentList = data;
-        });
+      this.studentList=[];
+
+      this.nonService.getOrdinaryLevelStudentListForRegister().subscribe((data)=>{
+        this.studentList = data.studentList;
+      });
     }
+
     if(this.selection==2){
-      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,false)
+      this.studentList=[];
+      
+      this.nonService.getAdvanceLevelStudentListForRegister().subscribe((data)=>{
+        this.studentList = data;
+        console.log(this.studentList)
+      });
+    }
+
+    if(this.selection==3){
+      this.studentList=[];
+      
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear-1,false)
       .subscribe((data)=>{
         this.studentList = data;
       });
     }
-    console.log(this.studentList);
+
+    if(this.selection==4){
+      this.studentList=[];
+      
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear-1,true)
+        .subscribe((data)=>{
+          this.studentList = data;
+        });
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { Injectable } from '@angular/core';
 import {
@@ -88,6 +88,27 @@ export class TeacherService {
         term: term,
         studentid: studentid,
         result: result,
+      }
+    );
+  }
+
+  //used to print result sheet
+  printReport(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/print-report',
+      formData
+    );
+  }
+
+  //execute when e-report send
+  sendEreport(formData, loginToken: string) {
+    var addParams = new HttpParams().append('token', loginToken);
+
+    return this.httpClient.post<{ sendReport: boolean }>(
+      'http://localhost:3000/teacher/send-report',
+      formData,
+      {
+        params: addParams,
       }
     );
   }
