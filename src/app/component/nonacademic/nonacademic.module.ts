@@ -31,6 +31,7 @@ import { ViewOLComponent } from './view-ol/view-ol.component';
 import { ViewLayoutComponent } from './view-layout/view-layout.component';
 import { NonProfileComponent } from './non-profile/non-profile.component';
 import { EditNonComponent } from './edit-non/edit-non.component';
+import { AddTimetableComponent } from './add-timetable/add-timetable.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { EditNonComponent } from './edit-non/edit-non.component';
     ViewLayoutComponent,
     NonProfileComponent,
     EditNonComponent,
+    AddTimetableComponent,
   ],
   imports: [
     CommonModule,

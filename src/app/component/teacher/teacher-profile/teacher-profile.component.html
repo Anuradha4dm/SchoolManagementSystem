@@ -11,7 +11,7 @@
 
         <div class="card-body">
           <div class="author">
-            <a href="">
+            <a href="{{imagepath}}">
               <img
                 class="avatar border-black"
                 [src]="imagepath"
@@ -101,9 +101,8 @@
               >
                 Edit Profile
               </button>
-              <button href="#" type="button" class="btn btn-dark">
-                View Time Table
-              </button>
+              
+              <a href="http://localhost:3000/{{teacherProfileData.timatable}}" class="btn btn-dark">View Timetable</a>
             </div>
           </div>
         </div>

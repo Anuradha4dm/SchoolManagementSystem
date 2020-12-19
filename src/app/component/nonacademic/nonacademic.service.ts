@@ -561,4 +561,9 @@ export class NonAcademicService {
       }
     );
   }
+
+  //used to add timetable for classes and teachers
+  addTimetables(formData){
+      return this.httpClient.post('http://localhost:3000/nonacademic/add-timetable',formData);
+  }
 }

@@ -8,6 +8,7 @@ import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component'
 import { AddALresultsComponent } from './add-alresults/add-alresults.component';
 import { AddEventComponent } from './add-event/add-event.component';
 import { AddOLresultsComponent } from './add-olresults/add-olresults.component';
+import { AddTimetableComponent } from './add-timetable/add-timetable.component';
 import { AlAnalysisComponent } from './al-analysis/al-analysis.component';
 import { ClassChangeComponent } from './class-change/class-change.component';
 import { ClassHandlerComponent } from './class-handler/class-handler.component';
@@ -40,6 +41,7 @@ const routes: Routes = [
       { path: 'add-new-class', component: AddClassComponent },
       { path: 'add-new-teacher', component: AddTeacherComponent },
       { path: 'add-non-academic', component: AddNonAcademicComponent },
+      { path: 'add-timetable', component: AddTimetableComponent },
       { path: 'teacher-handler', component: ClassHandlerComponent },
       {
         path: 'edit-non/:id',
