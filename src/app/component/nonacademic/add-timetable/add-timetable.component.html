@@ -1,0 +1,87 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <!--category selection here-->
+    <div class="row">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-sm-7">
+                    <h4 class="font-italic">Add Timetables</h4>
+                </div>
+    
+                <div class="col-sm-5">
+                    <select [(ngModel)]="type" (change)="onChange()" class="form-control">
+                        <option value="class">Add Class Timetables</option>
+                        <option value="teacher">Add Teacher Timetables</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!--Add timetable for classes-->
+        <div class="card card-body" *ngIf="type=='class'">
+            <h5 class="font-italic text-muted text-center mb-3">Available Class List</h5>
+
+            <table class="table text-center">
+                <tr class="bg-info">
+                    <th>Class ID</th>
+                    <th>Class Name</th>
+                    <th>Timetable</th>
+                </tr>
+
+                <tbody>
+                    <tr *ngFor="let class of classList|paginate: {currentPage: page,itemsPerPage:20}">
+                        <td>{{class.classid}}</td>
+                        <td>{{class.grade}}</td>
+                        <td>{{class.timetable==null?'Not Added': 'Added'}}</td>
+                        <td>
+                            <div class="form-group my-0">
+                                <label class="btn btn-dark">
+                                    Add Timetable
+                                    <input type="file" (change)="addTimetable($event,class.grade)">
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group text-center">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
+            </div>
+        </div>
+
+        <!--Add timetable for teachers-->
+        <div class="card card-body" *ngIf="type=='teacher'">
+            <h5 class="font-italic text-muted text-center mb-3">Available Teacher List</h5>
+        
+            <table class="table text-center">
+                <tr class="bg-info">
+                    <th>Teacher ID</th>
+                    <th>Teacher Name</th>
+                    <th>Timetable</th>
+                </tr>
+
+                <tbody>
+                    <tr *ngFor="let teacher of teacherList">
+                        <td>{{teacher.teacherid}}</td>
+                        <td>{{teacher.firstname+' '+teacher.lastname+' '+teacher.surname| titlecase}}</td>
+                        <td>{{teacher.timetablepath==null?'Not Added': 'Added'}}</td>
+                        <td>
+                            <div class="form-group my-0">
+                                <label class="btn btn-dark">
+                                    Add Timetable
+                                    <input type="file" (change)="addTimetable($event,teacher.teacherid)">
+                                </label>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group text-center">
+                <pagination-controls (pageChange)="page=$event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</div>

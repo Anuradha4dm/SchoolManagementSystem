@@ -142,21 +142,25 @@ export class EditTermResultsComponent implements OnInit {
   //send data to backend here
   sendReport(event) {
     this.selectedFile = event.target.files[0];
-    var imageFile = event.target.files[0].name;
+    var imageFile = 'report.' + this.selectedFile.name.split('.')[1];
+    var studentID = this.selectedFile.name.split('.')[0];
 
     const formData = new FormData();
     formData.append('report', this.selectedFile, imageFile);
+    formData.append('id', studentID);
 
     this.teacherService.sendEreport(formData, this.loginToken).subscribe(
       (data) => {
-        if (data.sendReport) {
-          this.alertService.competeAlert('Report Send Successfully...');
-        }
+        if (data)
+          this.alertService.competeAlert('E-report send successfully...');
       },
       (error) => {
         this.alertService.errorAlert(
-          'Not Report Sent...Some Problem Try Later...'
+          "Couldn't send E-report, try again later..."
         );
+      },
+      () => {
+        this.ngOnInit();
       }
     );
   }

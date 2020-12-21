@@ -33,7 +33,6 @@ export class TermTestResultsComponent implements OnInit {
     this.userLoginService.userAuthData.subscribe((userData) => {
       this.loginUserData = userData;
     });
-    console.log('this is the data');
 
     this.teacherService.getClassStudentList(this.loginUserData.getUserId)
       .subscribe(
