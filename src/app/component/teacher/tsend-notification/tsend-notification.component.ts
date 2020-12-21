@@ -26,6 +26,7 @@ export class TsendNotificationComponent implements OnInit {
 
     this.teacherService.getClassStudentList(this.loggedUserID).subscribe((data)=>{
       this.studentList=data;
+      console.log(data)
     });
   }
 

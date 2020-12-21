@@ -12,7 +12,7 @@
                 <div class="card-body">
                   <div class="author">
                     <a href="">
-                      <img class="avatar border-black" [src]="imagepath" alt="profile picture">
+                      <img class="avatar border-black" src={{imagepath}} alt="profile picture">
                     </a>
                     <p class="description">{{profileData.username}}</p>
                   </div>
@@ -70,11 +70,11 @@
                     <div class="card-content">
                       <h5 class="text-des cont-text">
                         <i class="now-ui-icons ui-1_send"></i>
-                        address:<!--br />
+                        address:<br />
                         {{profileData.addressline1}},<br />
                         {{profileData.addressline2}},<br />
                         {{profileData.addressline3}},<br />
-                        {{profileData.city}}<br-->
+                        {{profileData.city}}<br>
                       </h5>
                     </div>
           
@@ -89,9 +89,6 @@
                     <div class="btn-group my-btn-group" role="group">
                       <button href="#" type="button" class="btn btn-dark" (click)="onEditClick()">
                         Edit Profile
-                      </button>
-                      <button href="#" type="button" class="btn btn-dark">
-                        View Time Table
                       </button>
                     </div>
                   </div>

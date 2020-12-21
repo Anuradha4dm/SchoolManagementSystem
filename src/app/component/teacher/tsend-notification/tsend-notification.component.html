@@ -1,7 +1,7 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-    <form #teacherNotiForm="ngForm" (ngSubmit)="onSendClick(teacherNotiForm.value)">
+    <form #teacherNotiForm="ngForm" (ngSubmit)="onSendClick(teacherNotiForm.value)" *ngIf="studentList!=null">
         <div class="row">
             <!--Student List here-->
             <div class="col-md-7">
@@ -78,4 +78,9 @@
             </div>
         </div>
     </form>
+    
+    <!--If not a class teacher-->
+    <div class="card card-body" *ngIf="studentList==null">
+        <h4 class="text-muted text-center font-italic my-5">Sorry, You do not have permissions to enroll with student notifications</h4>
+    </div>
 </div>

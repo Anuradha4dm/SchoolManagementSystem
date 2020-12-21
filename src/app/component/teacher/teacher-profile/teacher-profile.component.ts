@@ -32,7 +32,6 @@ export class TeacherProfileComponent implements OnInit {
         this.teacherProfileData = data;
         console.log(this.teacherProfileData)
         this.imagepath = 'http://localhost:3000/' + data.imagepath;
-
         this.qualifications = this.teacherProfileData.qualifications.toString().split(',');
       });
   }

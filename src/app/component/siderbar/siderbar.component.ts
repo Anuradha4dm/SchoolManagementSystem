@@ -160,6 +160,12 @@ export class SiderbarComponent implements OnInit {
           icon: 'users_single-02',
           class: '',
         },
+        {
+          path: '/user/add-timetable',
+          title: 'Add Timetables',
+          icon: 'users_single-02',
+          class: '',
+        },
         //to remove end
         {
           path: '/user/handle-leave',
