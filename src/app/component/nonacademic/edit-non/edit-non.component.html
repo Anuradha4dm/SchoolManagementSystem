@@ -9,60 +9,48 @@
                 <div class="col">
                     <div class="form-group">
                         <label>First Name</label>
-                        <input name="firstname" [ngModel]="teacherProfileData.firstname| titlecase" type="text" class="form-control">
+                        <input name="firstname" [ngModel]="userProfileData.firstname| titlecase" type="text" class="form-control">
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="form-group">
                         <label>Last Name</label>
-                        <input name="lastname" [ngModel]="teacherProfileData.lastname| titlecase" type="text" class="form-control">
+                        <input name="lastname" [ngModel]="userProfileData.lastname| titlecase" type="text" class="form-control">
                     </div>
                 </div>
             </div>
 
-            <div class="row form-group">
-                <div class="col-sm-7">
-                    <label>Surname</label>
-                    <input name="surname" [ngModel]="teacherProfileData.surname| titlecase" type="text" class="form-control">
-                </div>
-                <div class="col-sm-5">
-                    <label>Gender</label>
-                    <select name="gender" [ngModel]="teacherProfileData.gender" class="form-control p-1">
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>
-                </div>
+            <div class="form-group">
+                <label>Surname</label>
+                <input name="surname" [ngModel]="userProfileData.surname| titlecase" type="text" class="form-control">
             </div>
     
             <div class="row">
                 <div class="col">
                     <div class="form-group">
                         <label>Username</label>
-                        <input type="text" name="username" class="form-control" [ngModel]="teacherProfileData.username" >
+                        <input type="text" name="username" class="form-control" [ngModel]="userProfileData.username" >
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="form-group">
                         <label>Age</label>
-                        <input type="text" name="age" class="form-control" [ngModel]="teacherProfileData.age" >
+                        <input type="text" name="age" class="form-control" [ngModel]="userProfileData.age" >
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="form-group">
-                        <label>Start Year</label>
-                        <input type="text" class="form-control" [value]="teacherProfileData.startyear" disabled>
+                        <label>Gender</label>
+                        <select name="gender" class="form-control p-1" [(ngModel)]="userProfileData.gender">
+                            <option value="male">Male</option>    
+                            <option value="female">Female</option>    
+                        </select>
                     </div>
                 </div>
 
-                <div *ngIf="teacherProfileData.class!=null" class="col">
-                    <div class="form-group">
-                        <label>Class</label>
-                        <input name="class" type="text" class="form-control" [value]="teacherProfileData.class" disabled>
-                    </div>
-                </div>
             </div>
 
             <!--Profile pic upload here-->
@@ -85,41 +73,41 @@
             <div class="row form-group">
                 <div class="col">
                     <label>Email</label>
-                    <input name="email" [ngModel]="teacherProfileData.email" type="email" class="form-control">
+                    <input name="email" [ngModel]="userProfileData.email" type="email" class="form-control">
                 </div>
                 <div class="col">
                     <label>Mobile</label>
-                    <input name="mobile" [ngModel]="teacherProfileData.mobile" type="text" class="form-control">
+                    <input name="mobile" [ngModel]="userProfileData.mobile" type="text" class="form-control">
                 </div>
                 <div class="col">
                     <label>Description</label>
-                    <input name="description" [ngModel]="teacherProfileData.description" type="text" class="form-control">
+                    <input name="description" [ngModel]="userProfileData.description" type="text" class="form-control">
                 </div>
             </div>
 
             <div class="form-group">
                 <label>Qualifications (Enter by separating comma)</label>
-                <textarea name="qualifications" [ngModel]="teacherProfileData.qualifications" class="border border-primary-1 form-control"></textarea>
+                <textarea name="qualifications" [ngModel]="userProfileData.qualifications" class="border border-primary-1 form-control"></textarea>
             </div>
 
             <div class="form-group">
                 <label>Address Line 1</label>
-                <input name="addressline1" [ngModel]="teacherProfileData.addressline1| titlecase" type="text" class="form-control w-50">
+                <input name="addressline1" [ngModel]="userProfileData.addressline1| titlecase" type="text" class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>Address Line 2</label>
-                <input name="addressline2" [ngModel]="teacherProfileData.addressline2| titlecase" type="text" class="form-control w-50">
+                <input name="addressline2" [ngModel]="userProfileData.addressline2| titlecase" type="text" class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>Address Line 3</label>
-                <input name="addressline3" [ngModel]="teacherProfileData.addressline3| titlecase" type="text" class="form-control w-50">
+                <input name="addressline3" [ngModel]="userProfileData.addressline3| titlecase" type="text" class="form-control w-50">
             </div>
 
             <div class="form-group">
                 <label>City</label>
-                <input name="city" [ngModel]="teacherProfileData.city| titlecase" type="text" class="form-control w-25">
+                <input name="city" [ngModel]="userProfileData.city| titlecase" type="text" class="form-control w-25">
             </div>
 
             <div class="form-group">

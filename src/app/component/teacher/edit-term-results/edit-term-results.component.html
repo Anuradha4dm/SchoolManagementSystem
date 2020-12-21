@@ -1,7 +1,7 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-    <div class="row">
+    <div class="row" *ngIf="classID!=null">
         <div class="col">
             <!--Year,class and Term selection here-->
             <div class="row">
@@ -122,5 +122,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <!--If not a class teacher-->
+    <div class="card card-body" *ngIf="classID==null">
+        <h4 class="text-muted text-center font-italic my-5">Sorry, You do not have permissions to enroll with student results</h4>
     </div>
 </div>
