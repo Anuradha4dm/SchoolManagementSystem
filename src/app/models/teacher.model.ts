@@ -19,7 +19,7 @@ export interface TeacherProfileData{
       mandatory: boolean;
     }
   ];
-  timetable?: string;
+  timatable?: string;
   description?: string;
   qualifications?: string;
   mobile: string;
