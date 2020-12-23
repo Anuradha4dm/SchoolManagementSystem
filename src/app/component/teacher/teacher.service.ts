@@ -35,11 +35,12 @@ export class TeacherService {
   }
 
   //add students attendance to database
-  markStudentAttendence(teacherid: string, submitdata: string) {
+  markStudentAttendence(teacherid: string, submitdata: string, date: Date) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/teacher/mark-attendence',
       {
         teahcerid: teacherid,
+        date: date,
         submitdata: submitdata,
       }
     );
