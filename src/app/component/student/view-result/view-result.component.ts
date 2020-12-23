@@ -93,7 +93,7 @@ export class ViewResultComponent implements OnInit, OnDestroy {
         this.averagedata.update = data.update;
       },
       (error) => {
-        this.alertMessageService.errorAlert('NO DATA FOUND');
+        this.alertMessageService.errorAlert(error.error.message);
       }
     );
   }

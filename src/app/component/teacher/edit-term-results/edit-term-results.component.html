@@ -1,60 +1,72 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-    <!--Year,class and Term selection here-->
-    <div class="card card-body">
-        <h4 class="font-italic">Modify Term Test Results</h4>
-        <div class="row">
-            <div class="col">
-                <label>Year</label>
-                <input type="text" class="form-control" [value]="year" disabled>
-            </div>
-
-            <div class="col">
-                <label>Class</label>
-                <input type="text" class="form-control" [value]="classID" disabled>
-            </div>
-
-            <div class="col">
-                <label>Term</label>
-                <select (change)="onTermChange()" class="form-control" [(ngModel)]="selectedTerm">
-                    <option value="1">Term1</option>
-                    <option value="2">Term2</option>
-                    <option value="3">Term3</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <!--Student list and results here--> 
-    <div class="row">
-        <!--Breif description about result here-->
+    <div class="row" *ngIf="classID!=null">
         <div class="col">
-            <div class="card card-body">
-                <h4 class="text-center text-muted mb-4">{{classID}} Term {{selectedTerm}} results of {{year}}</h4>
-                <table class="table table-hover text-center">
-                    <tr class="bg-primary">
-                        <th>Student ID</th>
-                        <th>Average</th>
-                        <th>Position</th>
-                    </tr>
+            <!--Year,class and Term selection here-->
+            <div class="row">
+                <div class="card card-body">
+                    <h4 class="font-italic">Modify Term Test Results</h4>
+                    <div class="row">
+                        <div class="col">
+                            <label>Year</label>
+                            <input type="text" class="form-control" [value]="year" disabled>
+                        </div>
 
-                    <tbody>
-                        <!--students results details-->
-                        <tr *ngFor="let i=index;let student of avarageData" (click)="onRowClick(student._id)" [class.bg]="i<3">
-                            <td>{{student._id}}</td>
-                            <td>{{student.average| number: '.1-2'}}</td>
-                            <td>{{i+1}}</td>
+                        <div class="col">
+                            <label>Class</label>
+                            <input type="text" class="form-control" [value]="classID" disabled>
+                        </div>
+
+                        <div class="col">
+                            <label>Term</label>
+                            <select (change)="onTermChange()" class="form-control" [(ngModel)]="selectedTerm">
+                                <option value="1">Term1</option>
+                                <option value="2">Term2</option>
+                                <option value="3">Term3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Breif description about result here-->
+            <div class="row">
+                <div class="card card-body">
+                    <h4 class="text-center text-muted mb-4">{{classID}} Term {{selectedTerm}} results of {{year}}</h4>
+                    <table class="table table-hover text-center">
+                        <tr class="bg-primary">
+                            <th>Student ID</th>
+                            <th>Average</th>
+                            <th>Position</th>
                         </tr>
-                    </tbody>
-                </table>
+    
+                        <tbody>
+                            <!--students results details-->
+                            <tr *ngFor="let i=index;let student of avarageData" (click)="onRowClick(student,i+1)" [class.bg]="i<3">
+                                <td>{{student._id}}</td>
+                                <td>{{student.average| number: '.1-2'}}</td>
+                                <td>{{i+1}}</td>
+                                <td>
+                                    <div class="form-group my-0">
+                                        <label class="btn btn-dark">
+                                            Send Report
+                                            <input type="file" (change)="sendReport($event)">
+                                        </label>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <!--Edit results form here-->
         <div class="col-md-5" *ngIf="show">
             <div class="card card-body border border-dark p-3">
-                <form #EditResultForm="ngForm" (ngSubmit)="updateResults(EditResultForm.value)">
+                <form id="formContent" #EditResultForm="ngForm">
+                    
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
@@ -68,13 +80,25 @@
 
                         <div class="col">
                             <label>Student ID</label>
-                            <input type="text" class="form-control" [value]="selectedID" disabled>
+                            <input type="text" class="form-control" [value]="selectedStudent._id" disabled>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Full name</label>
-                        <input type="text" [value]="studentPastResults.fullname |titlecase" class="form-control" disabled>
+                    <div class="row mb-2">
+                        <div class="col-sm-7">
+                            <label>Full name</label>
+                            <input type="text" [value]="studentPastResults.fullname |titlecase" class="form-control" disabled>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label>Average</label>
+                            <input type="text" [value]="selectedStudent.average| number: '.1-2'" class="form-control" disabled>
+                        </div>
+                        
+                        <div class="col-sm-2">
+                            <label>Place</label>
+                            <input type="text" [value]="place" class="form-control" disabled>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -87,15 +111,21 @@
                                     <input [name]="result.subjectid" type="text" [ngModel]="result.mark" class="form-control w-50 mb-1">
                                 </td>
                             </tr>
-                       </table>
-                    </div>
-
-                    <div class="form-group text-center">
-                        <button type="submit" class="btn btn-info btn-sm">Update Results</button>
-                        <button type="button" class="btn btn-danger btn-sm" (click)="show=false">Cancel</button>
+                        </table>
                     </div>
                 </form>
+                
+                <div class="form-group text-center mt-5">
+                    <button type="button" class="btn btn-info btn-sm" (click)="updateResults(EditResultForm.value)">Update Results</button>
+                    <button type="button" class="btn btn-danger btn-sm" (click)="show=false">Cancel</button>
+                    <button type="button" class="btn btn-dark btn-sm" (click)="printResults()">Print Report</button>
+                </div>
             </div>
         </div>
+    </div>
+
+    <!--If not a class teacher-->
+    <div class="card card-body" *ngIf="classID==null">
+        <h4 class="text-muted text-center font-italic my-5">Sorry, You do not have permissions to enroll with student results</h4>
     </div>
 </div>

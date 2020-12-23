@@ -63,15 +63,19 @@ export class EditTeacherProfileComponent implements OnInit {
     formObj.append('email', formData.value.email);
     formObj.append('mobile', formData.value.mobile);
     formObj.append('age', formData.value.age);
+    formObj.append('gender', formData.value.gender);
 
     formObj.append('addressline1', formData.value.addressline1);
     formObj.append('addressline2', formData.value.addressline2);
     formObj.append('addressline3', formData.value.addressline3);
     formObj.append('city', formData.value.city);
+    formObj.append('qualifications', formData.value.qualifications);
+    formObj.append('description', formData.value.description);
 
     if (!this.selectedFile) {
       formObj.append('imagepath', this.teacherProfileData.imagepath);
     } else {
+      console.log(this.selectedFile);
       formObj.append('imageData', this.selectedFile, this.imageFile);
     }
 

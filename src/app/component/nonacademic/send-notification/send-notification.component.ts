@@ -200,6 +200,42 @@ export class SendNotificationComponent implements OnInit, OnDestroy {
         }
       );
     }
+
+    if (parseInt(formData.value.category) === 5) {
+      var classArray: any = [];
+      for (let index = 0; index < this.numOfUsers; index++) {
+        classArray.push(formData.value[index]);
+      }
+
+      formDataObj.append('type', formData.value.category);
+      formDataObj.append('from', formData.value.from);
+      formDataObj.append('to', 'For Your Grade');
+      formDataObj.append('description', formData.value.description);
+      formDataObj.append('title', formData.value.title);
+      formDataObj.append('nonacademicid', this.userLoginData.getUserId);
+      formDataObj.append('expire', formData.value.expire);
+      formDataObj.append('classarray', classArray);
+
+      if (this.selectedFile != null) {
+        formDataObj.append('attachment', this.selectedFile);
+      }
+
+      this.nonacademicService.sendNotification(formDataObj).subscribe(
+        (data) => {
+          if (data.notification) {
+            this.alertMessageService.competeAlert(
+              'Notification Update Successfully...'
+            );
+          }
+        },
+        (error) => {
+          this.alertMessageService.errorAlert(error.error.message);
+        },
+        () => {
+          this.selectedFile = null;
+        }
+      );
+    }
   }
 
   addUser(value: number) {

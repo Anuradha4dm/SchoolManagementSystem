@@ -27,16 +27,12 @@ export class TeacherProfileComponent implements OnInit {
       this.loggedTeacherID = data.getUserId;
     });
 
-    this.teacherService
-      .getTeacherProfileData(this.loggedTeacherID)
+    this.teacherService.getTeacherProfileData(this.loggedTeacherID)
       .subscribe((data) => {
         this.teacherProfileData = data;
-
+        console.log(this.teacherProfileData)
         this.imagepath = 'http://localhost:3000/' + data.imagepath;
-
-        this.qualifications = this.teacherProfileData.qualifications
-          .toString()
-          .split(',');
+        this.qualifications = this.teacherProfileData.qualifications.toString().split(',');
       });
   }
 

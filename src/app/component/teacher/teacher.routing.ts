@@ -20,6 +20,10 @@ import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile
 import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
 import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
 import { AddClassComponent } from '../admin/add-class/add-class.component';
+import { ModifyClassComponent } from '../nonacademic/modify-class/modify-class.component';
+import { ViewOLComponent } from '../nonacademic/view-ol/view-ol.component';
+import { ViewALComponent } from '../nonacademic/view-al/view-al.component';
+import { RegisterAlSubjectsComponent } from '../nonacademic/register-al-subjects/register-al-subjects.component';
 
 const routes: Routes = [
   {
@@ -41,11 +45,6 @@ const routes: Routes = [
         resolve: { studentList: GetStudentListForAttendenceResolver },
       },
       {
-        path: 'student-list',
-        component: StudentListComponent,
-        resolve: { studentList: GetClassStudentListResolver },
-      },
-      {
         path: 'add-student-result',
         component: TermTestResultsComponent,
       },
@@ -58,21 +57,32 @@ const routes: Routes = [
         component: NotificationComponent,
         resolve: { notifications: NotificationResolver },
       },
+      {
+        path: 'view-student-result',
+        component: EditTermResultsComponent,
+      },
+      {
+        path: 'teacher-send-messages',
+        component: TsendNotificationComponent,
+      },
+      {
+        path: 'view-ol-results',
+        component: ViewOLComponent
+      },
+      {
+        path: 'view-al-results',
+        component: ViewALComponent
+      },
       //to remove start
       {
-        path: 'edit-results',
-        component: EditTermResultsComponent,
+        path: 'student-list',
+        component: StudentListComponent,
+        resolve: { studentList: GetClassStudentListResolver },
       },
       {
         path: 'leave-handle',
         component: LeavehandleComponent,
       },
-
-      {
-        path: 'tsend-noti',
-        component: TsendNotificationComponent,
-      },
-
       {
         path: 'new',
         component: AddNewProfileComponent,
@@ -87,8 +97,16 @@ const routes: Routes = [
       },
       {
         path: 'add-class',
-        component: AddClassComponent,
+        component: AddClassComponent
       },
+      {
+        path: 'edit-class',
+        component: ModifyClassComponent
+      },
+      {
+        path: 'al-req',
+        component: RegisterAlSubjectsComponent
+      }
       //to remove end
     ],
   },

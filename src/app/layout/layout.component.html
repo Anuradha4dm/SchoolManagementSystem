@@ -4,7 +4,8 @@
       <app-siderbar></app-siderbar>
     </div>
     <div class="main-panel">
-      <router-outlet></router-outlet>
+      <app-welcome-page *ngIf="show"></app-welcome-page>
+      <router-outlet (activate)="changeStatus()"></router-outlet>
     </div>
   </div>
 </div>

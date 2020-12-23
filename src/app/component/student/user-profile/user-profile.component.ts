@@ -4,6 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LogInUserModel } from 'src/app/models/login-user.model';
 import { Student } from 'src/app/models/student.model';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 import { UserLogInService } from '../../homepage/login/user-login.service';
 import { StudentProfileService } from '../student-profile.service';
@@ -46,7 +47,8 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private studentProfileService: StudentProfileService,
     private loginUserService: UserLogInService,
-    private confirmationDialogService: ConfirmationDialogService
+    private confirmationDialogService: ConfirmationDialogService,
+    private alertMessageService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -71,7 +73,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
             'http://localhost:3000/' + this.studentProfileData.imagePath;
         },
         (error) => {
-          console.log(error);
+          this.alertMessageService.errorAlert(error.error.message);
         },
         () => {
           if (this.gradeupdate) {

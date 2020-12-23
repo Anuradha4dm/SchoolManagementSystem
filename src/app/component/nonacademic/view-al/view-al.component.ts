@@ -7,8 +7,7 @@ import { NonAcademicService } from '../../nonacademic/nonacademic.service';
   styleUrls: ['./view-al.component.css']
 })
 export class ViewALComponent implements OnInit {
-  selectedYear:number=new Date().getFullYear();
-  selectedShy: number=0;
+  selectedYear:number=new Date().getFullYear()-1;
   selectedStream: string="ALL";
   
   alData; //contain A/L exam resukts of selected year
@@ -31,7 +30,7 @@ export class ViewALComponent implements OnInit {
       console.log(this.alData);
     })
   }
-
+/*
   onShyFilter(){
     if(this.selectedShy!=0){
       this.nonService.getMainExamResults(this.selectedYear,1).subscribe((data)=>{
@@ -43,7 +42,7 @@ export class ViewALComponent implements OnInit {
     else 
       this.onYearChange();
   }
-
+*/
   onStreamFilter(){
     if(this.selectedStream!="ALL"){
       this.nonService.getMainExamResults(this.selectedYear,1).subscribe((data)=>{

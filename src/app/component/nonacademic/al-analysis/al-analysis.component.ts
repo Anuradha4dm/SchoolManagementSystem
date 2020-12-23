@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LastYearData } from 'src/app/models/teacher.model';
 import { sortAndDeduplicateDiagnostics } from 'typescript';
 import { NonAcademicService } from '../../nonacademic/nonacademic.service';
+import { SubjectListsService } from '../subject-lists.service';
 
 @Component({
   selector: 'app-al-analysis',
@@ -15,20 +16,23 @@ export class AlAnalysisComponent implements OnInit {
   cutoff: number = 1.3;
   year: number = new Date().getFullYear() - 1;
   pastYearALData; //contain past year al data of students
+  subjectList; //contain all subject related to A/L stream
+  cutoffStream;
+  cutoffList;
   grades: string[] = ['A', 'B', 'C', 'S', 'W'];
   counter: number[] = [3, 2, 1, 0];
-  streams = ['MATH'];
+  streams = ['Physical','Biology','Commerce','Art','Technology'];
 
   //Year by year analysis details here
   yearStudentCount = [];
   yearLabels = [];
   yearGrade = 'A';
   yearCount = 3;
-  yearStream = 'MATH';
+  yearStream = 'Physical';
 
   //Last year analysis detials here
   lastYearCount = [0, 0];
-  lastYearLabels = ['Result count', 'Total count'];
+  lastYearLabels = ['Result count', 'Other count'];
   pastYearData: LastYearData[];
   lastGrade = 'A';
   lastCount = 3;
@@ -37,7 +41,7 @@ export class AlAnalysisComponent implements OnInit {
   //Subject analysis chart data here
   subjectCount = [0, 0, 0, 0, 0];
   subjectLabels = ['A count', 'B count', 'C count', 'S count', 'W count'];
-  subjectId = 2;
+  subjectName;
   subjectYear = this.year;
 
   public myLegend = 'helo';
@@ -49,7 +53,10 @@ export class AlAnalysisComponent implements OnInit {
     responsive: true,
   };
 
-  constructor(private nonService: NonAcademicService) {}
+  constructor(
+    private nonService: NonAcademicService,
+    private subjectService: SubjectListsService
+  ) {}
 
   ngOnInit(): void {
     //Return student count related to strem and grade year by year
@@ -61,18 +68,23 @@ export class AlAnalysisComponent implements OnInit {
   }
 
   //Execute when year analysis selection change
-  yearAnalysis(value) {
-    this.yearStudentCount = [];
-    this.yearLabels = [];
-
-    this.nonService
-      .getAdvanceLevelChartOne(this.yearGrade, this.yearStream, this.yearCount)
-      .subscribe((data) => {
-        // this method has some error
-        for (let i = 0; i < data.length; i++) {
-          this.yearStudentCount.push(data[i].count);
-          this.yearLabels.push(data[i].meyear);
-        }
+  yearAnalysis(value) {    
+      this.yearStudentCount = [];
+      this.yearLabels = [];
+  
+      for(let i=0;i<10;i++){
+        this.yearLabels.push(this.year-i);
+      }
+  
+      this.nonService.getAdvanceLevelChartOne(this.yearGrade, this.yearStream, this.yearCount).subscribe((data) => {
+        data.map((content)=>{
+          for(let i=0;i<this.yearLabels.length;i++){
+            if(content.meyear==this.yearLabels[i])
+              this.yearStudentCount[i]=content.count;
+            if(this.yearStudentCount[i]==null)
+              this.yearStudentCount[i]=0
+          }
+        })
       });
   }
 
@@ -92,7 +104,7 @@ export class AlAnalysisComponent implements OnInit {
         //this method has some error
         this.pastYearData = data;
         this.lastYearCount.push(this.pastYearData.length);
-        this.lastYearCount.push(this.pastYearALData.length);
+        this.lastYearCount.push(this.pastYearALData.length-this.pastYearData.length);
       });
   }
 
@@ -105,7 +117,7 @@ export class AlAnalysisComponent implements OnInit {
     this.subjectCount = [];
 
     this.nonService
-      .getAdvanceLevelChartTwo(this.subjectYear, this.subjectId)
+      .getAdvanceLevelChartTwo(this.subjectYear, this.subjectName)
       .subscribe((data) => {
         this.subjectCount.push(data.acount);
         this.subjectCount.push(data.bcount);
@@ -114,4 +126,17 @@ export class AlAnalysisComponent implements OnInit {
         this.subjectCount.push(data.wcount);
       });
   }
+
+  //exceute when subject section stream change
+  onSubjectStreamChange(value){
+    this.subjectList=this.subjectService.getAllSubjectsOfGrade(value);
+  }
+
+  cutoffFilter(value){
+      this.cutoffList=this.pastYearALData.filter((student)=>{
+        return student.stream==this.cutoffStream;
+      });
+
+  }
+
 }

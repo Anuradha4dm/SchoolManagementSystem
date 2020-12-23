@@ -1,0 +1,63 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+  <div class="row">
+    <div class="card card-body">
+      <h1 class="text-center font-weight-bold font-italic mb-3">
+        Welcome to our School Management System
+      </h1>
+    </div>
+  </div>
+
+  <div class="row">
+    <!--About date section-->
+    <div class="col-md-6">
+      <div class="card card-body">
+        <table class="table bg-secondary">
+          <tr class="bg-info">
+            <th colspan="2" class="font-italic text-center">Today info</th>
+          </tr>
+          <tbody>
+            <tr>
+              <td>Year</td>
+              <th>{{ year }}</th>
+            </tr>
+            <tr>
+              <td>Month</td>
+              <th>{{ month }}</th>
+            </tr>
+            <tr>
+              <td>Date</td>
+              <th>{{ date }}</th>
+            </tr>
+            <tr>
+              <td>Day</td>
+              <th>{{ day }}</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="card card-body rounded-circle">
+        <ul class="list-group w-50 mx-auto text-center">
+          <h3 class="font-italic mb-3">Stats so far</h3>
+
+          <li class="list-group-item bg-success">
+            {{ counts.studentCount }} Students
+          </li>
+          <li class="list-group-item bg-danger">
+            {{ counts.teacherCount }} Teachers
+          </li>
+          <li class="list-group-item bg-warning">
+            {{ counts.classCount }} Classes
+          </li>
+          <li class="list-group-item bg-primary">
+            {{ counts.nonCount }} Non Academics
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

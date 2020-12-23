@@ -1,7 +1,7 @@
 <div class="panel-header"></div>
 
 <div class="main-content">
-    <form #teacherNotiForm="ngForm" (ngSubmit)="onSendClick(teacherNotiForm.value)">
+    <form #teacherNotiForm="ngForm" (ngSubmit)="onSendClick(teacherNotiForm.value)" *ngIf="studentList!=null">
         <div class="row">
             <!--Student List here-->
             <div class="col-md-7">
@@ -16,7 +16,7 @@
 
                         <div class="col">
                             <label>Select Category</label>
-                            <select #category class="form-control" name="type" ngModel="4">
+                            <select #category class="form-control" name="type" ngModel>
                                 <option value="4">To Specific Students</option>
                                 <option value="5">To All Students</option>
                             </select>
@@ -69,10 +69,6 @@
                             <textarea type="text" name="description" ngModel class="form-control border" required></textarea>
                         </div>
 
-                        <div class="row">
-                            <input type="file" class="btn">
-                        </div>
-
                         <div class="form-group text-right">
                             <button type="submit" class="btn btn-sm btn-info" [disabled]="teacherNotiForm.invalid">Send</button>
                             <button type="button" class="btn btn-sm btn-danger">Cancel</button>
@@ -82,4 +78,9 @@
             </div>
         </div>
     </form>
+    
+    <!--If not a class teacher-->
+    <div class="card card-body" *ngIf="studentList==null">
+        <h4 class="text-muted text-center font-italic my-5">Sorry, You do not have permissions to enroll with student notifications</h4>
+    </div>
 </div>

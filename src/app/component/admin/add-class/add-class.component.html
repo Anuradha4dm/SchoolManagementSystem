@@ -11,20 +11,22 @@
                     <tr class="bg-info">
                         <th>Class ID</th>
                         <th>Class Name</th>
-                        <th>Class Teacher</th>
                     </tr>
                     <tbody>
-                        <tr><!--loop here-->
-                            <td>id</td>
-                            <td>id</td>
-                            <td>id</td>
+                        <tr *ngFor="let class of classList|paginate: {currentPage: page,itemsPerPage: 10}">
+                            <td>{{class.classid}}</td>
+                            <td>{{class.grade}}</td>
                         </tr>
                     </tbody>
                 </table>
+
+                <div class="form-group text-center mt-2">
+                    <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                </div>
             </div>
         </div>
 
-        <!--Add new or modify class form here-->
+        <!--Add new class form here-->
         <div class="col">
             <div class="card card-body">
                 <h5 class="font-italic mb-3">Create new class</h5>
@@ -49,8 +51,12 @@
                         <!--Stream selector-->
                         <div class="col" *ngIf="grade.value>=12">
                             <label>Select Stream</label>
-                            <select name="stream" ngModel class="form-control p-2">
-                                <option [value]="stream" *ngFor="let stream of streamList">{{stream}}</option>
+                            <select name="stream" ngModel class="form-control p-2" required>
+                                <option value="MATH">Maths</option>
+                                <option value="BIO">Bio</option>
+                                <option value="ART">Arts</option>
+                                <option value="TEC">Tech</option>
+                                <option value="COM">Commerce</option>
                             </select>
                         </div>
                     </div>
@@ -64,7 +70,3 @@
         </div>
     </div>
 </div>
-
-{{selectedGrade}}
-{{selectedStream}}
-{{selectedLetter}}

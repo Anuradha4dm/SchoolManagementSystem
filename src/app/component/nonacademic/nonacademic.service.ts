@@ -37,90 +37,13 @@ export class NonAcademicService {
   }
 
   /*
-  
-
-    //Return year by year student count related to grade and count
-    getOrdinaryLeveChartOne(result: string, count: number) {
-      var parameterSet = new HttpParams();
-      parameterSet = parameterSet.append('result', result.toUpperCase());
-      parameterSet = parameterSet.append('count', count.toString());
-  
-      return this.httpClient.get<{meyear: number,count: number}[]>(
-        'http://localhost:3000/nonacademic/ol-chart-one',
-        {
-          params: parameterSet,
-        }
-      );
-    }
-  
-    //Return subject's A,B,C,S,W count related to year and subject
-    getOrdinaryLeveChartTwo(year: number, subjectid: number) {
-      var parameterSet = new HttpParams();
-      parameterSet = parameterSet.append('year', year.toString());
-      parameterSet = parameterSet.append('subjectid', subjectid.toString());
-  
-      return this.httpClient.get<SubjectAnalysis>(
-        'http://localhost:3000/nonacademic/ol-chart-two',
-        {
-          params: parameterSet,
-        }
-      );
-    }
-  
-    //Return past year student grade and count total
-    getOrdinaryLeveChartThree(year: number, result: string, count: number) {
-      var parameterSet = new HttpParams();
-      parameterSet = parameterSet.append('year', year.toString());
-      parameterSet = parameterSet.append('result', result);
-      parameterSet = parameterSet.append('count', count.toString());
-  
-      return this.httpClient.get<LastYearData[]>(
-        'http://localhost:3000/nonacademic/ol-chart-three',
-        {
-          params: parameterSet,
-        }
-      );
-    }
-  
-    //return student count year by year releted to grade and stream
-    getAdvanceLevelChartOne(result: string, stream: string, count: number) {
-      return this.httpClient.post<{meyear: number,count: number}[]>(
-        'http://localhost:3000/nonacademic/al-chart-one',
-        {
-          result: result,
-          count: count,
-          stream: stream,
-        }
-      );
-    }
-  
-   
-  
-    //return student details related to given result
-    getAdvanceLevelChartThree(
-      year: number,
-      result: string,
-      count: number,
-      stream: string
-    ) {
-      return this.httpClient.post<LastYearData[]>(
-        'http://localhost:3000/nonacademic/al-chart-three',
-        {
-          result: result,
-          year: year,
-          stream: stream,
-          count: count,
-        }
-      );
-    }
-
-/*
   getPendingLeaveData() {
     return this.httpClient.get(
       'http://localhost:3000/nonacademic/get-pending-leaves'
     );
   }
 */
+  //return teacher assigned subject with grades
   getListOfSubjectsTeachedByTeacher(teacherid: string) {
     return this.httpClient.get<{
       subjectlist: {
@@ -134,12 +57,14 @@ export class NonAcademicService {
     );
   }
 
+  //return teachers that have no class
   findFreeClassTeachers() {
     return this.httpClient.get<{
       teachers: { teacherid: string; username: string }[];
     }>('http://localhost:3000/nonacademic/get-free-class-teacher');
   }
 
+  //not used
   getClassTeacherForClassHandler(className: string) {
     return this.httpClient.get<{
       fullname: string;
@@ -150,6 +75,7 @@ export class NonAcademicService {
     }>('http://localhost:3000/nonacademic/get-class-teacher/' + className);
   }
 
+  //not working can remove
   updateClassProperties(submitData: FormData) {
     return this.httpClient.post<{ success: boolean }>(
       'http://localhost:3000/nonacademic/update-class-handler',
@@ -223,25 +149,27 @@ export class NonAcademicService {
 
   //this method is used to register student for the a/l or o/l examinations
   registerStudentsForExams(
-    nonacademicid: string,
     year: number,
     indexnumber: number,
     studentid: string,
     shy: number,
     type: boolean,
+    grade: string,
+    stream: string,
     subjectnames: string[]
   ) {
     return this.httpClient.post<{
       registration: boolean;
       subjectRegister: boolean;
     }>('http://localhost:3000/nonacademic/registration-exam', {
-      nonacademicid: nonacademicid,
       year: year,
       indexnumber: indexnumber,
       studentid: studentid,
       shy: shy,
       type: type,
       subjectnames: subjectnames,
+      class: grade,
+      stream: stream
     });
   }
 
@@ -267,10 +195,10 @@ export class NonAcademicService {
     );
   }
 
-  getOrdinaryLeveChartTwo(year: string, subjectid: string) {
+  getOrdinaryLeveChartTwo(year: string, subjectname: string) {
     var parameterSet = new HttpParams();
     parameterSet = parameterSet.append('year', year);
-    parameterSet = parameterSet.append('subjectid', subjectid);
+    parameterSet = parameterSet.append('subjectname', subjectname);
 
     return this.httpClient.get<{
       acount: number;
@@ -289,7 +217,7 @@ export class NonAcademicService {
     parameterSet = parameterSet.append('result', result);
     parameterSet = parameterSet.append('count', count);
 
-    return this.httpClient.get<{ result: [] }>(
+    return this.httpClient.get(
       'http://localhost:3000/nonacademic/ol-chart-three',
       {
         params: parameterSet,
@@ -382,12 +310,12 @@ export class NonAcademicService {
   }
 
   //return grade count related to subject and year
-  getAdvanceLevelChartTwo(year: number, subjectid: number) {
+  getAdvanceLevelChartTwo(year: number, subjectname: string) {
     return this.httpClient.post<SubjectAnalysis>(
       'http://localhost:3000/nonacademic/al-chart-two',
       {
         year: year,
-        subjectid: subjectid,
+        subjectname: subjectname,
       }
     );
   }
@@ -512,5 +440,130 @@ export class NonAcademicService {
         classname: classname,
       }
     );
+  }
+
+  getOrdinaryLevelStudentListForRegister() {
+    return this.httpClient.get<{
+      studentList: {
+        firstname: string;
+        lastname: string;
+        _id: string;
+        class: { grade: string };
+      }[];
+    }>(
+      'http://localhost:3000/nonacademic/get-ol-student-list-for-registration'
+    );
+  }
+
+  getAdvanceLevelStudentListForRegister() {
+    return this.httpClient
+      .get<{
+        studentList: {
+          firstname: string;
+          lastname: string;
+          _id: string;
+          class: { grade: string };
+          stream: string;
+        }[];
+      }>(
+        'http://localhost:3000/nonacademic/get-al-student-list-for-registration'
+      )
+      .pipe(
+        map((data) => {
+          var findStream: string;
+          const responceData = data.studentList.map((student) => {
+            var arr=student.class.grade.split('_');
+
+            findStream = student.class.grade.split('_')[arr.length-1];
+
+            if (findStream === 'MATH') {
+              student.stream = 'Physical';
+            } else if (findStream === 'TEC') {
+              student.stream = 'Technology';
+            } else if (findStream === 'BIO') {
+              student.stream = 'Biology';
+            } else if (findStream === 'ART') {
+              student.stream = 'Art';
+            } else {
+              student.stream = 'Commerce';
+            }
+
+            return student;
+          });
+
+          return responceData;
+        })
+      );
+  }
+  //use to change the class teacher
+  changeClassTeacher(newTeacherID: string, classID: number) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/change-class-teacher',
+      {
+        newTeacherID: newTeacherID,
+        classID: classID,
+      }
+    );
+  }
+
+  //return teacher list relted to subject
+  getTeacherListBySubject(subjectname: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/get-teacher-by-subject',
+      {
+        subjectName: subjectname,
+      }
+    );
+  }
+
+  addTeacherSubjects(grade: string, subjectname: string, teacherid: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/add-teacher-subject',
+      {
+        grade: grade,
+        subjectname: subjectname,
+        teacherid: teacherid,
+      }
+    );
+  }
+
+  //return subject list that assigned to teachers
+  getClassRegisteredSubjects(grade: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/nonacademic/get-class-registered-subjects',
+      {
+        class: grade,
+      }
+    );
+  }
+
+  //get non academic profile data
+  getNonAcademicProfileData(id: string) {
+    return this.httpClient.get(
+      'http://localhost:3000/nonacademic/profile-data/' + id
+    );
+  }
+
+  //used to update non academic profile
+  updateNonProfile(formData){
+      return this.httpClient.post('http://localhost:3000/nonacademic/update-profile',formData)
+  }
+
+  //get student subejct list when they are going to register for main exams
+  getStudentSubjectListForRegistration(studentid: string, examtype: string) {
+    const paramsData = new HttpParams().append('examtype', examtype);
+
+    return this.httpClient.get<{subjects:[]}>(
+      'http://localhost:3000/nonacademic/get-student-registered-subjects/' +
+        studentid,
+      {
+        params: paramsData,
+      }
+    );
+  }
+
+  //used to add timetable for classes and teachers
+  addTimetables(formData){
+      return this.httpClient.post('http://localhost:3000/nonacademic/add-timetable',formData);
   }
 }

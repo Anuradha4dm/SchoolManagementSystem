@@ -11,7 +11,7 @@
 
         <div class="card-body">
           <div class="author">
-            <a href="">
+            <a href="{{ imagepath }}">
               <img
                 class="avatar border-black"
                 [src]="imagepath"
@@ -101,9 +101,12 @@
               >
                 Edit Profile
               </button>
-              <button href="#" type="button" class="btn btn-dark">
-                View Time Table
-              </button>
+
+              <a
+                href="http://localhost:3000/{{ teacherProfileData.timetable }}"
+                class="btn btn-dark"
+                >View Timetable</a
+              >
             </div>
           </div>
         </div>
@@ -115,10 +118,7 @@
       <div class="row">
         <!--Subject section here-->
         <div class="card card-body">
-          <div
-            *ngIf="teacherProfileData.class != 'No Class...'"
-            class="form-group"
-          >
+          <div *ngIf="teacherProfileData.class != null" class="form-group">
             <label>Class Teacher of</label>
             <input
               type="text"
@@ -130,11 +130,13 @@
 
           <table class="table text-center">
             <tr class="bg-secondary">
-              <th>Subject</th>
+              <th>Subject ID</th>
+              <th>Subject Name</th>
               <th>Class</th>
             </tr>
             <tbody>
               <tr *ngFor="let subject of teacherProfileData.subjects">
+                <td>{{ subject.subjectid }}</td>
                 <td>{{ subject.subjectname | titlecase }}</td>
                 <td>{{ subject.grade }}</td>
               </tr>
