@@ -81,7 +81,8 @@ export class AddTeacherComponent implements OnInit {
     formdata.append('surname', value.surname);
     formdata.append('username', value.username);
     formdata.append('subjectlist', subjectList);
-
+    formdata.append('mac', value.mac);
+    
     if (this.selectedFile)
       formdata.append('imageData', this.selectedFile, this.imagePath);
 

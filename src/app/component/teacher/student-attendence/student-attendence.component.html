@@ -23,8 +23,6 @@
     <div class="card-body border border-dark m-2">
       <!--current class and class teacher here-->
       <div class="row mb-4">
-        <div class="col"></div>
-
         <div class="col text-center">
           <label>Class:
             <input type="text" class="form-control" [ngModel]="classStudentList.grade" disabled>
@@ -34,6 +32,12 @@
         <div class="col text-center">
           <label>Class Teacher ID:
             <input type="text" class="form-control" [ngModel]="teacherID" disabled>
+          </label>
+        </div>
+
+        <div class="col text-center">
+          <label>Select Date:
+            <input type="date" class="form-control" [(ngModel)]="date">
           </label>
         </div>
       </div>

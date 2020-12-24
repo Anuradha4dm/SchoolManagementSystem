@@ -119,6 +119,7 @@ export class EditTermResultsComponent implements OnInit {
 
       formData.append('id', this.selectedStudent._id);
       formData.append('grade', this.classID);
+      formData.append('term', this.selectedTerm.toString());
       formData.append('place', this.place.toString());
 
       this.teacherService.printReport(formData).subscribe((data) => {
