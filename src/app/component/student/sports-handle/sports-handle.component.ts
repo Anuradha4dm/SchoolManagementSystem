@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { WebSocketService } from 'src/app/services/websocket.service';
 import { StudentProfileService } from '../student-profile.service';
 
@@ -20,7 +21,8 @@ export class SportsHandleComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private studentProfileService: StudentProfileService,
-    private webSocketService: WebSocketService
+    private webSocketService: WebSocketService,
+    private alertMessageService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -46,9 +48,16 @@ export class SportsHandleComponent implements OnInit, OnDestroy {
       }
     }
 
-    this.studentProfileService.addSports(sendData).subscribe((response) => {
-      console.log(response);
-    });
+    this.studentProfileService.addSports(sendData).subscribe(
+      (response) => {
+        if (response.update) {
+          this.alertMessageService.competeAlert('Sports Add Successfully...');
+        }
+      },
+      (error) => {
+        this.alertMessageService.errorAlert(error.error.message);
+      }
+    );
   }
 
   refreshSportList() {

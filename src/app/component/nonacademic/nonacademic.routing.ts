@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from 'src/app/layout/layout.component';
 import { AddClassComponent } from '../admin/add-class/add-class.component';
+import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
 import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
 import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
 
@@ -66,6 +67,10 @@ const routes: Routes = [
       {
         path: 'ol-registration',
         component: RegisterForOLComponent,
+      },
+      {
+        path: 'new-student',
+        component: AddNewProfileComponent,
       },
     ],
   },

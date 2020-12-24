@@ -336,7 +336,8 @@
                         class="form-control"
                         name="student_id"
                         placeholder="Student Id"
-                        ngModel
+                        [ngModel]="'ST_'"
+                        pattern="ST_[0-9]^"
                         #studentIdRef
                         required
                       />
@@ -347,6 +348,7 @@
                       <input
                         type="button"
                         name="find"
+                        [disabled]="studentIdRef.valid"
                         value="Find"
                         placeholder="First Name"
                         class="btn btn-info"
@@ -450,7 +452,7 @@
                       type="text"
                       name="studentid"
                       class="form-control"
-                      placeholder="Student ID"
+                      value="ST_"
                       #stuIdRef
                     />
                   </div>
@@ -461,6 +463,7 @@
                       type="button"
                       name="resetData"
                       class="btn btn-danger"
+                      [disabled]="stuIdRef.value === null"
                       value="Reset now"
                       (click)="onSubjectRest(stuIdRef.value)"
                     />

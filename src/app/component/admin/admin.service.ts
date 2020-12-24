@@ -6,7 +6,7 @@ export class AdminService {
   constructor(private httpClient: HttpClient) {}
 
   postNewStudentData(submissionData) {
-    return this.httpClient.post(
+    return this.httpClient.post<{ newstudent: boolean }>(
       'http://localhost:3000/admin/new-student-profile',
       submissionData
     );
@@ -19,34 +19,42 @@ export class AdminService {
   }
 
   //To add new teacher to database
-  addNewTeacher(formdata){
-    return this.httpClient.post('http://localhost:3000/admin/add-new-teacher',formdata);
+  addNewTeacher(formdata) {
+    return this.httpClient.post(
+      'http://localhost:3000/admin/add-new-teacher',
+      formdata
+    );
   }
 
   //get all counts teacher,nonacademic,class and students
-  getAllCounts(){
+  getAllCounts() {
     return this.httpClient.get<{
-      studentCount: number,
-      classCount: number,
-      nonCount: number,
-      teacherCount: number
-    }>('http://localhost:3000/admin/get-all-count')
+      studentCount: number;
+      classCount: number;
+      nonCount: number;
+      teacherCount: number;
+    }>('http://localhost:3000/admin/get-all-count');
   }
 
   //create new class
-  createNewClass(grade:string){
-    return this.httpClient.post('http://localhost:3000/admin/create-new-class',{
-      className:grade
-    });
+  createNewClass(grade: string) {
+    return this.httpClient.post(
+      'http://localhost:3000/admin/create-new-class',
+      {
+        className: grade,
+      }
+    );
   }
 
   //return all class list with details
-  getClassList(){
-    return this.httpClient.get<{
-      classid: number,
-      grade: string,
-      teacher:{teacherid: string,firstname: string,lastname: string}
-    }[]>('http://localhost:3000/admin/get-class-list')
+  getClassList() {
+    return this.httpClient.get<
+      {
+        classid: number;
+        grade: string;
+        teacher: { teacherid: string; firstname: string; lastname: string };
+      }[]
+    >('http://localhost:3000/admin/get-class-list');
   }
 
   //used to create new non academic
