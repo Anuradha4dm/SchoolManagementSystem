@@ -31,7 +31,7 @@
                     <tbody>
                         <tr *ngFor="let data of filteredData">
                             <td [class.absent]="!data.present" [class.present]="data.present"></td>
-                            <td>{{data.date| date}}</td>
+                            <td>{{data.year+'-'+data.month+'-'+data.day}}</td>
                             <td>{{data.present? 'Present':'Absent'}}</td>
                         </tr>
                     </tbody>

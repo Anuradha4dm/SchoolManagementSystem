@@ -184,7 +184,9 @@ export class TeacherService {
   //return this month attendance of teacher
   getTeacherAttendance(id: string){
     return this.httpClient.post<{   
-      date: Date,
+      year: number,
+      month: number,
+      day: number,
       present: Boolean
     }[]>('http://localhost:3000/teacher/get-teacher-attendance',
       {
