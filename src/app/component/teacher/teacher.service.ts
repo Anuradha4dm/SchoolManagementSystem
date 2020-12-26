@@ -180,4 +180,16 @@ export class TeacherService {
       }
     );
   }
+
+  //return this month attendance of teacher
+  getTeacherAttendance(id: string){
+    return this.httpClient.post<{   
+      date: Date,
+      present: Boolean
+    }[]>('http://localhost:3000/teacher/get-teacher-attendance',
+      {
+        teacherid: id
+      }
+    );
+  }
 }

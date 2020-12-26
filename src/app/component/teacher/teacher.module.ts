@@ -15,6 +15,7 @@ import { EditTermResultsComponent } from './edit-term-results/edit-term-results.
 import { EditTeacherProfileComponent } from './edit-teacher-profile/edit-teacher-profile.component';
 import { TsendNotificationComponent } from './tsend-notification/tsend-notification.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
 
 @NgModule({
   imports: [
@@ -45,6 +46,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     EditTermResultsComponent,
     EditTeacherProfileComponent,
     TsendNotificationComponent,
+    TeacherDashboardComponent,
   ],
   providers: [],
 })

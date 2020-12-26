@@ -150,7 +150,7 @@ export class EditTermResultsComponent implements OnInit {
     formData.append('report', this.selectedFile, imageFile);
     formData.append('id', studentID);
 
-    this.teacherService.sendEreport(formData, this.loginToken).subscribe(
+    this.teacherService.sendEreport(formData).subscribe(
       (data) => {
         if (data)
           this.alertService.competeAlert('E-report send successfully...');

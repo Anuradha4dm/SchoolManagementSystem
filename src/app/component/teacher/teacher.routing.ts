@@ -24,6 +24,7 @@ import { ModifyClassComponent } from '../nonacademic/modify-class/modify-class.c
 import { ViewOLComponent } from '../nonacademic/view-ol/view-ol.component';
 import { ViewALComponent } from '../nonacademic/view-al/view-al.component';
 import { RegisterAlSubjectsComponent } from '../nonacademic/register-al-subjects/register-al-subjects.component';
+import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
     component: LayoutComponent,
 
     children: [
+      {
+        path: 'teacher-dashboard',
+        component: TeacherDashboardComponent,
+      },
       {
         path: 'teacher-profile',
         component: TeacherProfileComponent,
