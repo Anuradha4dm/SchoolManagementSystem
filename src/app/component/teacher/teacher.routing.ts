@@ -25,6 +25,7 @@ import { ViewOLComponent } from '../nonacademic/view-ol/view-ol.component';
 import { ViewALComponent } from '../nonacademic/view-al/view-al.component';
 import { RegisterAlSubjectsComponent } from '../nonacademic/register-al-subjects/register-al-subjects.component';
 import { TeacherDashboardComponent } from './teacher-dashboard/teacher-dashboard.component';
+import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -78,41 +79,10 @@ const routes: Routes = [
         path: 'view-al-results',
         component: ViewALComponent
       },
-      //to remove start
       {
-        path: 'student-list',
-        component: StudentListComponent,
-        resolve: { studentList: GetClassStudentListResolver },
+        path: 'change-password',
+        component: ResetPasswordComponent
       },
-      {
-        path: 'leave-handle',
-        component: LeavehandleComponent,
-      },
-      {
-        path: 'new',
-        component: AddNewProfileComponent,
-      },
-      {
-        path: 'add-teacher',
-        component: AddTeacherComponent,
-      },
-      {
-        path: 'add-non',
-        component: AddNonAcademicComponent,
-      },
-      {
-        path: 'add-class',
-        component: AddClassComponent
-      },
-      {
-        path: 'edit-class',
-        component: ModifyClassComponent
-      },
-      {
-        path: 'al-req',
-        component: RegisterAlSubjectsComponent
-      }
-      //to remove end
     ],
   },
 ];
