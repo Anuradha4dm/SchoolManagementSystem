@@ -135,12 +135,6 @@ export class SiderbarComponent implements OnInit {
           icon: 'files_paper',
           class: '',
         },
-        {
-          path: '/user/change-password',
-          title: 'Change Password',
-          icon: 'files_paper',
-          class: '',
-        },
       ];
     }
 
