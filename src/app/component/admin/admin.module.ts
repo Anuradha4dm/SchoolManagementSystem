@@ -6,6 +6,7 @@ import { AddTeacherComponent } from './add-teacher/add-teacher.component';
 import { AddNonAcademicComponent } from './add-non-academic/add-non-academic.component';
 import { AddClassComponent } from './add-class/add-class.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AddStudentComponent } from './add-student/add-student.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     AddNewProfileComponent,
     AddTeacherComponent,
     AddNonAcademicComponent,
-    AddClassComponent
+    AddClassComponent,
+    AddStudentComponent
   ],
 
   providers: [],
