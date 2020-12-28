@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ClassStudentList } from 'src/app/models/teacher.model';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 
 import { UserLogInService } from '../../homepage/login/user-login.service';
@@ -22,12 +23,14 @@ export class StudentAttendenceComponent implements OnInit {
   otherID: string;
   error: boolean = true;
   doneSubmition: boolean = false;
+  marked: boolean = false;
 
   constructor(
     private userLoginService: UserLogInService,
     private teacherService: TeacherService,
     private confirmationDialogService: ConfirmationDialogService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private alertService: AlertMessageService
   ) {}
 
   ngOnInit(): void {
@@ -40,6 +43,15 @@ export class StudentAttendenceComponent implements OnInit {
       .subscribe((data) => {
         this.classStudentList = data;
       });
+
+    this.checkStatus();
+  }
+
+  //execute when change the date
+  checkStatus() {
+    this.teacherService.checkAttendanceStatus(this.date).subscribe((data) => {
+      this.marked = data.mark;
+    });
   }
 
   //execute when change the slider state
@@ -67,12 +79,12 @@ export class StudentAttendenceComponent implements OnInit {
   //execute when form submit
   onAttendanceSubmit(formValue) {
     this.teacherService
-      .markStudentAttendence(this.teacherID, formValue, new Date()) //apply date to here
+      .markStudentAttendence(this.date, this.teacherID, formValue)
       .subscribe();
 
     this.toastr.info(
       '<span class="now-ui-icons ui-1_bell-53"></span> Done Submition For ' +
-        this.date,
+        new Date(this.date),
       '',
       {
         timeOut: 8000,
@@ -87,23 +99,17 @@ export class StudentAttendenceComponent implements OnInit {
 
   onReSubmitbtnClick(formValue) {
     this.teacherService
-      .markStudentAttendence(this.teacherID, formValue, new Date()) //apply date here
-      .subscribe();
-
-    this.confirmationDialogService
-      .confirm(
-        'Please confirm...',
-        'Do you really want to resubmit the attendance?'
-      )
-      .then((confirmed) => {
-        if (confirmed) {
-          this.doneSubmition = true;
+      .reSubmitStudentAttendance(this.date, this.teacherID, formValue)
+      .subscribe(
+        (data) => {
+          if (data)
+            this.alertService.competeAlert(
+              'Attendance updated successfully for ' + new Date(this.date)
+            );
+        },
+        (error) => {
+          this.alertService.errorAlert("Sorry,Couldn't updated attendance...");
         }
-      })
-      .catch(() =>
-        console.log(
-          'User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)'
-        )
       );
   }
 }

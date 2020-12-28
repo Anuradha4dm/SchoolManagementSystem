@@ -1,0 +1,11 @@
+.absent{
+    background-color: red;
+}
+
+.present{
+    background-color: green;
+}
+
+.large{
+    font-size: 90px;
+}

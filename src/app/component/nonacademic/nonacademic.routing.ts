@@ -24,7 +24,6 @@ import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-
 import { RegisterForALComponent } from './register-for-al/register-for-al.component';
 import { RegisterForOLComponent } from './register-for-ol/register-for-ol.component';
 import { SendNotificationComponent } from './send-notification/send-notification.component';
-import { ViewLayoutComponent } from './view-layout/view-layout.component';
 
 const routes: Routes = [
   {
@@ -45,6 +44,7 @@ const routes: Routes = [
       { path: 'add-non-academic', component: AddNonAcademicComponent },
       { path: 'add-timetable', component: AddTimetableComponent },
       { path: 'teacher-handler', component: ClassHandlerComponent },
+      { path: 'change-passowrd', component: ResetPasswordComponent},
       {
         path: 'edit-non/:id',
         component: EditNonComponent,
