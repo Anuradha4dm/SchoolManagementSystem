@@ -110,7 +110,7 @@
                             <th>Class Teacher</th>
                         </tr>
                         <tbody>
-                            <tr *ngFor="let class of classList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(class)">
+                            <tr *ngFor="let class of classList|paginate: {currentPage: page,itemsPerPage: 20}" (click)="onRowClick(class)">
                                 <td>{{class.classid}}</td>
                                 <td>{{class.grade}}</td>
                                 <td>{{class.teacher?class.teacher.teacherid : "Not Assigned"}}</td>

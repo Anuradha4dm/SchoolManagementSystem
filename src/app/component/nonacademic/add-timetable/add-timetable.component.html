@@ -64,7 +64,7 @@
                 </tr>
 
                 <tbody>
-                    <tr *ngFor="let teacher of teacherList">
+                    <tr *ngFor="let teacher of teacherList|paginate: {currentPage: page,itemsPerPage: 20}">
                         <td>{{teacher.teacherid}}</td>
                         <td>{{teacher.firstname+' '+teacher.lastname+' '+teacher.surname| titlecase}}</td>
                         <td>{{teacher.timetablepath==null?'Not Added': 'Added'}}</td>
