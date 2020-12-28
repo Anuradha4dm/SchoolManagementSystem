@@ -9,7 +9,7 @@ import { NonAcademicService } from '../nonacademic.service';
 export class ExamLayoutComponent implements OnInit {
   studentList;
   selection:number = 1;
-  selectedYear:number = new Date().getFullYear();
+  selectedYear:number = new Date().getFullYear()-1;
   exam:string = "G.C.E. O/L Examination";
 
   constructor(
@@ -52,7 +52,7 @@ export class ExamLayoutComponent implements OnInit {
     if(this.selection==3){
       this.studentList=[];
       
-      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear-1,false)
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,false)
       .subscribe((data)=>{
         this.studentList = data;
       });
@@ -61,7 +61,7 @@ export class ExamLayoutComponent implements OnInit {
     if(this.selection==4){
       this.studentList=[];
       
-      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear-1,true)
+      this.nonService.getRegisteredStudentListOfBothExams(this.selectedYear,true)
         .subscribe((data)=>{
           this.studentList = data;
         });

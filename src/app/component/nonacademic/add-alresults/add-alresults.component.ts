@@ -95,7 +95,7 @@ export class AddALresultsComponent implements OnInit {
 
   onStreamFilter(){
     this.show=false;
-console.log(this.studentList)
+
     if(this.stream!="ALL"){
       this.filteredList=this.studentList.filter((student)=>{
         return student.stream==this.stream;

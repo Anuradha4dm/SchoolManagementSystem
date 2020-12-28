@@ -37,12 +37,12 @@
 
         <div class="col text-center">
           <label>Select Date:
-            <input type="date" class="form-control" [(ngModel)]="date">
+            <input type="date" (change)="checkStatus()" class="form-control" [(ngModel)]="date">
           </label>
         </div>
       </div>
 
-      <form #attendanceForm="ngForm" (ngSubmit)="onAttendanceSubmit(attendanceForm.value)">
+      <form #attendanceForm="ngForm">
     
         <!--Student list here-->
         <table class="table table-hover text-center">
@@ -63,8 +63,8 @@
         </table>
 
         <div class="col text-right">
-          <button type="submit" *ngIf="!doneSubmition" class="btn btn-primary btn-sm">Submit</button>
-          <button type="button" *ngIf="doneSubmition" (click)="onReSubmitbtnClick(attendanceForm.value)" class="btn btn-success btn-sm">Re-Submit</button>
+          <button type="button" *ngIf="!marked" (click)="onAttendanceSubmit(attendanceForm.value)" class="btn btn-primary btn-sm">Submit</button>
+          <button type="button" *ngIf="marked" (click)="onReSubmitbtnClick(attendanceForm.value)" class="btn btn-success btn-sm">Re-Submit</button>
           <button type="button" class="btn btn-danger btn-sm" (click)="onCancelClick()">Cancel</button>
         </div>
     </form>

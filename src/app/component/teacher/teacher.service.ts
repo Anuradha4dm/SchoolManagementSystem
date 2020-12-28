@@ -34,13 +34,33 @@ export class TeacherService {
     );
   }
 
+  //used to check whether attendance is marked or not
+  checkAttendanceStatus(date: Date){
+    return this.httpClient.post<{mark: boolean}>('http://localhost:3000/teacher/check-attendance-status',{
+      date: date
+    });
+  }
+
   //add students attendance to database
-  markStudentAttendence(teacherid: string, submitdata: string) {
+  markStudentAttendence(date:Date, teacherid: string, submitdata: string) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/teacher/mark-attendence',
       {
         teahcerid: teacherid,
         submitdata: submitdata,
+        date: date
+      }
+    );
+  }
+
+  //add students attendance to database
+  reSubmitStudentAttendance(date:Date, teacherid: string, submitdata: string) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/attendence-resubmit',
+      {
+        teahcerid: teacherid,
+        submitdata: submitdata,
+        date: date
       }
     );
   }
