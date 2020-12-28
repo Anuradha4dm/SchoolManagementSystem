@@ -66,6 +66,8 @@ export class AddALresultsComponent implements OnInit {
         this.subjectList = data.subjects;
         this.selectedName = data.studentname;
       });
+
+      console.log(this.selectedStudent);
   }
 
   onSubmit(formData){
