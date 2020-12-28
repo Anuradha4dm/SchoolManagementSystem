@@ -6,14 +6,19 @@
         <!--Add teacher form here-->
         <form (ngSubmit)="onSubmit(addTeacher.value)" #addTeacher="ngForm">
             <div class="row mb-4">
-                <div class="col-sm-7">
+                <div class="col">
                     <label>Teacher ID</label>
                     <input type="text" name="id" [value]="teacherID" class="form-control" disabled>
                 </div>
     
                 <div class="col">
                     <label>Total Leaves</label>
-                    <input type="number" name="nbrofleaves" ngModel="41" max="41" class="form-control w-50">
+                    <input type="number" name="nbrofleaves" ngModel="41" max="41" class="form-control">
+                </div>
+
+                <div class="col">
+                    <label>MAC Address0</label>
+                    <input type="text" name="mac" ngModel class="form-control">
                 </div>
             </div>
             

@@ -18,7 +18,6 @@ export class NotificationComponent implements OnInit {
   ngOnInit(): void {
     this.route.data.subscribe((data: Data) => {
       this.notifications = data['notifications'];
-      console.log(this.notifications[0]);
     });
     this.isNotificationAvailable = this.notifications.length > 0;
   }

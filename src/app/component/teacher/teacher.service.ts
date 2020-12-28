@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import * as XLSX from 'xlsx';
 import { Injectable } from '@angular/core';
 import {
@@ -34,13 +34,36 @@ export class TeacherService {
     );
   }
 
+  //used to check whether attendance is marked or not
+  checkAttendanceStatus(date: Date) {
+    return this.httpClient.post<{ mark: boolean }>(
+      'http://localhost:3000/teacher/check-attendance-status',
+      {
+        date: date,
+      }
+    );
+  }
+
   //add students attendance to database
-  markStudentAttendence(teacherid: string, submitdata: string) {
+  markStudentAttendence(date: Date, teacherid: string, submitdata: string) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/teacher/mark-attendence',
       {
         teahcerid: teacherid,
+        date: date,
         submitdata: submitdata,
+      }
+    );
+  }
+
+  //add students attendance to database
+  reSubmitStudentAttendance(date: Date, teacherid: string, submitdata: string) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/attendence-resubmit',
+      {
+        teahcerid: teacherid,
+        submitdata: submitdata,
+        date: date,
       }
     );
   }
@@ -101,15 +124,10 @@ export class TeacherService {
   }
 
   //execute when e-report send
-  sendEreport(formData, loginToken: string) {
-    var addParams = new HttpParams().append('token', loginToken);
-
-    return this.httpClient.post<{ sendReport: boolean }>(
+  sendEreport(formData) {
+    return this.httpClient.post(
       'http://localhost:3000/teacher/send-report',
-      formData,
-      {
-        params: addParams,
-      }
+      formData
     );
   }
 
@@ -190,5 +208,19 @@ export class TeacherService {
         data: formData,
       }
     );
+  }
+
+  //return this month attendance of teacher
+  getTeacherAttendance(id: string) {
+    return this.httpClient.post<
+      {
+        year: number;
+        month: number;
+        day: number;
+        present: Boolean;
+      }[]
+    >('http://localhost:3000/teacher/get-teacher-attendance', {
+      teacherid: id,
+    });
   }
 }

@@ -295,7 +295,7 @@
 
                 <div class="row">
                   <div class="col-md-11" *ngIf="progressBarShow">
-                    <h5>Progressing Chnages......</h5>
+                    <h5>{{ progressMessage }}</h5>
                     <mat-progress-bar
                       mode="determinate"
                       [value]="progressbar"
@@ -305,7 +305,7 @@
 
                 <div class="row">
                   <div class="col-md-4">
-                    <div class="form-group">
+                    <div class="form-group" *ngIf="showSwitchBtn">
                       <input
                         type="submit"
                         name="resetData"
@@ -337,7 +337,6 @@
                         name="student_id"
                         placeholder="Student Id"
                         [ngModel]="'ST_'"
-                        pattern="ST_[0-9]^"
                         #studentIdRef
                         required
                       />

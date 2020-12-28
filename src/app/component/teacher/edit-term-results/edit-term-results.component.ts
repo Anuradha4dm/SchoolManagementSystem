@@ -119,6 +119,7 @@ export class EditTermResultsComponent implements OnInit {
 
       formData.append('id', this.selectedStudent._id);
       formData.append('grade', this.classID);
+      formData.append('term', this.selectedTerm.toString());
       formData.append('place', this.place.toString());
 
       this.teacherService.printReport(formData).subscribe((data) => {
@@ -149,7 +150,7 @@ export class EditTermResultsComponent implements OnInit {
     formData.append('report', this.selectedFile, imageFile);
     formData.append('id', studentID);
 
-    this.teacherService.sendEreport(formData, this.loginToken).subscribe(
+    this.teacherService.sendEreport(formData).subscribe(
       (data) => {
         if (data)
           this.alertService.competeAlert('E-report send successfully...');

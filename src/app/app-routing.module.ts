@@ -27,6 +27,7 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [{ path: 'send-email', component: SendEmilComponent }],
   },
+  { path: 'reset-password', component: ResetPasswordComponent },
 ];
 
 @NgModule({
