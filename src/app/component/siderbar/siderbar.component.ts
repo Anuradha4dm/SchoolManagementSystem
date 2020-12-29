@@ -137,8 +137,8 @@ export class SiderbarComponent implements OnInit {
         },
       ];
     }
-
-    if (this.userRoll === 'leave_handler') {
+    
+    if (this.userRoll === 'admin') {
       this.sideBarItems = [
         {
           path: '/user/profile',
@@ -146,14 +146,12 @@ export class SiderbarComponent implements OnInit {
           icon: 'users_single-02',
           class: '',
         },
-        //to remove start
         {
           path: '/user/add-new-class',
           title: 'Create Class',
           icon: 'objects_globe',
           class: '',
         },
-
         {
           path: '/user/add-new-teacher',
           title: 'Add Teacher',
@@ -167,47 +165,9 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
-          path: '/user/add-timetable',
-          title: 'Add Timetables',
-          icon: 'ui-1_calendar-60',
-          class: '',
-        },
-        //to remove end
-        {
-          path: '/user/handle-leave',
-          title: 'HANDLE LEAVES',
-          icon: 'files_single-copy-04',
-          class: '',
-        },
-
-        {
-          path: '/user/send-notification',
-          title: 'SEND NOTIFICATION',
-          icon: 'ui-1_email-85',
-          class: '',
-        },
-        {
-          path: '/user/class-handler',
-          title: 'HANDLE CLASS',
-          icon: 'shopping_shop',
-          class: '',
-        },
-        {
-          path: '/user/teacher-handler',
-          title: 'Teacher Handler',
+          path: '/user/new-student',
+          title: 'New Student',
           icon: 'gestures_tap-01',
-          class: '',
-        },
-        {
-          path: '/user/student-class-change',
-          title: 'Class Change',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
-        {
-          path: '/user/main-exam-layout',
-          title: 'Main Exams',
-          icon: 'education_paper',
           class: '',
         },
         {
@@ -222,7 +182,95 @@ export class SiderbarComponent implements OnInit {
           icon: 'business_chart-pie-36',
           class: '',
         },
+        {
+          path: '/user/send-notification',
+          title: 'SEND NOTIFICATION',
+          icon: 'ui-1_email-85',
+          class: '',
+        },
+      
+      ]
+    }
 
+    if (this.userRoll === 'leave_handler') {
+      this.sideBarItems = [
+        {
+          path: '/user/profile',
+          title: 'Profile',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/handle-leave',
+          title: 'HANDLE LEAVES',
+          icon: 'files_single-copy-04',
+          class: '',
+        },
+        {
+          path: '/user/send-notification',
+          title: 'SEND NOTIFICATION',
+          icon: 'ui-1_email-85',
+          class: '',
+        },
+      ];
+    }
+
+    
+    if (this.userRoll === 'class_handler') {
+      this.sideBarItems = [
+        {
+          path: '/user/profile',
+          title: 'Profile',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/add-new-class',
+          title: 'Create Class',
+          icon: 'objects_globe',
+          class: '',
+        },
+        {
+          path: '/user/class-handler',
+          title: 'HANDLE CLASS',
+          icon: 'shopping_shop',
+          class: '',
+        },
+        {
+          path: '/user/student-class-change',
+          title: 'Class Change',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/send-notification',
+          title: 'SEND NOTIFICATION',
+          icon: 'ui-1_email-85',
+          class: '',
+        },
+      ]
+    }
+
+    if (this.userRoll === 'other') {
+      this.sideBarItems = [
+        {
+          path: '/user/profile',
+          title: 'Profile',
+          icon: 'users_single-02',
+          class: '',
+        },
+        {
+          path: '/user/teacher-handler',
+          title: 'Teacher Handler',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
+        {
+          path: '/user/add-timetable',
+          title: 'Add Timetables',
+          icon: 'ui-1_calendar-60',
+          class: '',
+        },
         {
           path: '/user/register-advance-level-stream',
           title: 'A/L Registration',
@@ -230,17 +278,20 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
         {
-          path: '/user/new-student',
-          title: 'New Student',
-          icon: 'gestures_tap-01',
+          path: '/user/main-exam-layout',
+          title: 'Main Exams',
+          icon: 'education_paper',
           class: '',
         },
-      ];
+        {
+          path: '/user/send-notification',
+          title: 'SEND NOTIFICATION',
+          icon: 'ui-1_email-85',
+          class: '',
+        },
+      ]
     }
 
-    if (this.userRoll === 'leave_handler') {
-      console.log('test');
-    }
   }
 
   logout() {

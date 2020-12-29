@@ -69,7 +69,7 @@
 
             <div class="form-group">
                 <label>Student Name</label>
-                <input type="text" [value]="selectedName" class="form-control" disabled>
+                <input type="text" [value]="selectedName|titlecase" class="form-control" disabled>
             </div>
 
             <!--Student subject list here-->
@@ -80,7 +80,7 @@
                         <table>
                             <tr *ngFor="let subject of subjectList,let i=index"><!--loop here-->
                                 <td>
-                                    <label>{{subject.mesubjectname}}</label>
+                                    <label>{{subject.mesubjectname|titlecase}}</label>
                                 </td>
                                 <td>
                                     <select [name]="subject.mesubjectid" ngModel (change)="onChange($event.target.value,i)" class="form-control">

@@ -54,6 +54,6 @@ export class TeacherDashboardComponent implements OnInit {
     this.percentage=this.attendanceData.filter((data)=>{
       return data.present==true
     }).length*100/this.attendanceData.length;
-
+console.log(this.percentage)
   }
 }

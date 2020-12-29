@@ -90,6 +90,7 @@ export class AlAnalysisComponent implements OnInit {
 
   //Execute when analysis button click
   onAnalysisClick() {
+    var total=0;
     this.lastYearCount = [];
     this.analysis = true;
 
@@ -101,10 +102,15 @@ export class AlAnalysisComponent implements OnInit {
         this.lastStream
       )
       .subscribe((data) => {
-        //this method has some error
         this.pastYearData = data;
         this.lastYearCount.push(this.pastYearData.length);
-        this.lastYearCount.push(this.pastYearALData.length-this.pastYearData.length);
+        
+        this.pastYearALData.forEach(element => {
+          if(element.stream==this.lastStream)
+            total++
+        });
+
+        this.lastYearCount.push(total-this.pastYearData.length);
       });
   }
 

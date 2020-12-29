@@ -60,20 +60,11 @@ export class SubjectListsService {
         if(stream=="COM"){
           return [
             'economics',
-            'roman_civilization',
-            'home_economics',
-            'divinity',
             'ict',
             'english',
-            'statistics',
-            'political_science',
-            'art',
-            'french',
-            'accounts',
-            'geography',
-            'logic',
-            'sinhala',
-            'hindi',
+            'statistic',
+            'accounting',
+            'business_studies'
           ];
         }
 
@@ -117,7 +108,7 @@ export class SubjectListsService {
       'biology','physics',
       'economics', 'roman_civilization', 'home_economics', 'divinity', 'ict','statistics', 
       'political_science','art','french','accounts','logic','hindi',
-      'economics',
+      'economics','business_studies',
       'science_for_teachnology','engineering_tech','bio_system_tech','informaticon_tehnology','accounting',
       'pts',
      ];

@@ -61,14 +61,14 @@
 
                         <div class="col">
                             <label>Select Count</label>
-                            <select (change)="lastCount=$event.target.value" class="form-control p-1">
+                            <select ngModel (change)="lastCount=$event.target.value" class="form-control p-1">
                                 <option [value]="count" *ngFor="let count of counter">{{count}}</option>
                             </select>
                         </div>
                         
                         <div class="col">
                             <label>Select Stream</label>
-                            <select (change)="lastStream=$event.target.value" class="form-control p-1">
+                            <select ngModel (change)="lastStream=$event.target.value" class="form-control p-1">
                                 <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
                             </select>
                         </div>
