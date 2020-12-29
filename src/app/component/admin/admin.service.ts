@@ -61,9 +61,4 @@ export class AdminService {
   createNonAcademic(formData){
     return this.httpClient.post('http://localhost:3000/admin/create-non-academic',formData)
   }
-
-  //used to create new non academic
-  createStudent(formData){
-    return this.httpClient.post('http://localhost:3000/admin/create-student',formData)
-  }
 }

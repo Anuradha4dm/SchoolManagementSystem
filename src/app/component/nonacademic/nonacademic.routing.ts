@@ -4,7 +4,6 @@ import { LayoutComponent } from 'src/app/layout/layout.component';
 import { AddClassComponent } from '../admin/add-class/add-class.component';
 import { AddNewProfileComponent } from '../admin/add-new-profile/add-new-profile.component';
 import { AddNonAcademicComponent } from '../admin/add-non-academic/add-non-academic.component';
-import { AddStudentComponent } from '../admin/add-student/add-student.component';
 import { AddTeacherComponent } from '../admin/add-teacher/add-teacher.component';
 import { ResetPasswordComponent } from '../reset-password/reset-password.component';
 
@@ -72,7 +71,7 @@ const routes: Routes = [
       },
       {
         path: 'new-student',
-        component: AddStudentComponent,
+        component: AddNewProfileComponent,
       },
     ],
   },
