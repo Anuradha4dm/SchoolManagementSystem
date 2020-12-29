@@ -75,6 +75,8 @@ export class RegisterForOLComponent implements OnInit {
           this.alertService.errorAlert("You Have already registered this student...");
         else
           this.alertService.competeAlert("Student registered successfully...");
+        this.index = "";
+        this.show = false;
       });
   }
 }

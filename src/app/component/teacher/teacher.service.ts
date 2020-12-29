@@ -35,9 +35,10 @@ export class TeacherService {
   }
 
   //used to check whether attendance is marked or not
-  checkAttendanceStatus(date: Date){
+  checkAttendanceStatus(date: Date,studentid: string){
     return this.httpClient.post<{mark: boolean}>('http://localhost:3000/teacher/check-attendance-status',{
-      date: date
+      date: date,
+      id: studentid
     });
   }
 

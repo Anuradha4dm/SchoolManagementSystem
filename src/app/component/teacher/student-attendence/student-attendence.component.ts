@@ -41,14 +41,14 @@ export class StudentAttendenceComponent implements OnInit {
     this.teacherService.getClassStudentList(this.teacherID)
       .subscribe((data) => {
         this.classStudentList = data;
+        this.checkStatus();
     });
 
-    this.checkStatus();
   }
 
   //execute when change the date
   checkStatus(){
-    this.teacherService.checkAttendanceStatus(this.date).subscribe((data)=>{
+    this.teacherService.checkAttendanceStatus(this.date,this.classStudentList.studentListData[0]._id).subscribe((data)=>{
       this.marked=data.mark;
     });
   }

@@ -62,7 +62,7 @@
             <table>
               <tr *ngFor="let subject of subjectList">
                 <td>
-                  <input type="text" [value]="subject.mesubjectname" class="form-control mb-1" disabled>
+                  <input type="text" [value]="subject.mesubjectname|titlecase" class="form-control mb-1" disabled>
                 </td>
               </tr>
             </table>
