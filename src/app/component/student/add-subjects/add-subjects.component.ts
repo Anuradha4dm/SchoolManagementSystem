@@ -182,29 +182,10 @@ export class AddSubjectsComponent implements OnInit {
     }
     if (this.gradeVal >= 12 && this.stream === 'COM') {
       this.isOptionalList1 = true;
-      this.optionalList1 = [
-        'economics',
-        'roman_Civilization',
-        'home_economics',
-        'divinity',
-        'ict',
-      ];
+      this.optionalList1 = ['economics', 'ict'];
       this.isOptionalList2 = true;
-      this.optionalList2 = [
-        'english',
-        'statistics',
-        'political_science',
-        'art',
-      ];
-      this.isOptionalList3 = true;
-      this.optionalList3 = [
-        'french',
-        'accounts',
-        'geography',
-        'logic',
-        'sinhala',
-        'hindi',
-      ];
+      this.optionalList2 = ['business_studies', 'statistic'];
+      this.subjectSet1 = ['accounting'];
     }
 
     if (this.gradeVal >= 12 && this.stream === 'TEC') {
@@ -301,9 +282,9 @@ export class AddSubjectsComponent implements OnInit {
       }
 
       if (this.stream === 'ART' || this.stream === 'COM') {
-        request.subject1 = data.value.optional1;
-        request.subject2 = data.value.optional2;
-        request.subject3 = data.value.optional3;
+        request.subject1 = this.subjectSet1[0];
+        request.subject2 = data.value.optional1;
+        request.subject3 = data.value.optional2;
       }
 
       if (this.stream === 'TEC') {

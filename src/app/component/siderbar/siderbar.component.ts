@@ -138,7 +138,7 @@ export class SiderbarComponent implements OnInit {
       ];
     }
 
-    if (this.userRoll === 'nonacademic') {
+    if (this.userRoll === 'leave_handler') {
       this.sideBarItems = [
         {
           path: '/user/profile',
@@ -236,6 +236,10 @@ export class SiderbarComponent implements OnInit {
           class: '',
         },
       ];
+    }
+
+    if (this.userRoll === 'leave_handler') {
+      console.log('test');
     }
   }
 
