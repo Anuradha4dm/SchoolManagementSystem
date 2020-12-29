@@ -19,6 +19,7 @@
                     placeholder="User Id"
                     [ngModel]="nextVal"
                     #userid
+                    required
                   />
                 </div>
               </div>
@@ -46,6 +47,7 @@
                     id=""
                     placeholder="Surname"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -59,6 +61,7 @@
                     placeholder="First Name"
                     class="form-control"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -75,6 +78,7 @@
                     id=""
                     placeholder="Last Name"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -88,6 +92,7 @@
                     id=""
                     placeholder="Username"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -130,6 +135,7 @@
                     placeholder="Email"
                     ngModel
                     email
+                    required
                   />
                 </div>
               </div>
@@ -143,6 +149,7 @@
                     id=""
                     placeholder="Age"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -151,29 +158,18 @@
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label>Grade</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="grade"
-                    id=""
-                    placeholder="Grade"
-                    ngModel
-                  />
+
+                  <select name="grade" class="form-control" ngModel required>
+                    <option
+                      [value]="classname"
+                      *ngFor="let classname of classList"
+                    >
+                      {{ classname }}
+                    </option>
+                  </select>
                 </div>
               </div>
-              <div class="col-md-5 pr-1">
-                <div class="form-group">
-                  <label>Class Teacher</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    name="classteacher"
-                    id=""
-                    placeholder="Class Teacher"
-                    ngModel
-                  />
-                </div>
-              </div>
+
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label>Start Year</label>
@@ -184,6 +180,7 @@
                     id=""
                     placeholder="Year"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -196,9 +193,8 @@
                     type="date"
                     class="form-control"
                     name="birthdate"
-                    id=""
-                    placeholder=""
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -212,13 +208,14 @@
                     id=""
                     placeholder="MobileNumber"
                     ngModel
+                    required
                   />
                 </div>
               </div>
               <div class="col-md-3 pr-1">
                 <div class="form-group">
                   <label>Gender</label>
-                  <select class="form-control" name="gender" ngModel>
+                  <select class="form-control" name="gender" ngModel required>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
                   </select>
@@ -237,6 +234,7 @@
                     id=""
                     placeholder="Line 1"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -252,6 +250,7 @@
                     id=""
                     placeholder="Line 2"
                     ngModel
+                    required
                   />
                 </div>
               </div>
@@ -282,6 +281,7 @@
                     id=""
                     placeholder="City"
                     ngModel
+                    required
                   />
                 </div>
               </div>

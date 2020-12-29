@@ -21,9 +21,18 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label>Surname</label>
-                <input name="surname" [ngModel]="teacherProfileData.surname| titlecase" type="text" class="form-control">
+            <div class="row form-group">
+                <div class="col-sm-7">
+                    <label>Surname</label>
+                    <input name="surname" [ngModel]="teacherProfileData.surname| titlecase" type="text" class="form-control">
+                </div>
+                <div class="col-sm-5">
+                    <label>Gender</label>
+                    <select name="gender" [ngModel]="teacherProfileData.gender" class="form-control p-1">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
             </div>
     
             <div class="row">
@@ -48,7 +57,7 @@
                     </div>
                 </div>
 
-                <div *ngIf="teacherProfileData.class!='No Class...'" class="col">
+                <div *ngIf="teacherProfileData.class!=null" class="col">
                     <div class="form-group">
                         <label>Class</label>
                         <input name="class" type="text" class="form-control" [value]="teacherProfileData.class" disabled>

@@ -6,6 +6,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { NonAcademicRoutingModule } from './nonacademic.routing';
 import { AddEventComponent } from './add-event/add-event.component';
@@ -19,16 +20,17 @@ import { ExamLayoutComponent } from './exam-layout/exam-layout.component';
 import { RegisterForALComponent } from './register-for-al/register-for-al.component';
 import { RegisterForOLComponent } from './register-for-ol/register-for-ol.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RegisterAlSubjectsComponent } from './register-al-subjects/register-al-subjects.component';
 import { ModifyClassComponent } from './modify-class/modify-class.component';
-
 import { ChartsModule } from 'ng2-charts';
 import { AlAnalysisComponent } from './al-analysis/al-analysis.component';
 import { OlAnalysisComponent } from './ol-analysis/ol-analysis.component';
 import { ViewALComponent } from './view-al/view-al.component';
 import { ViewOLComponent } from './view-ol/view-ol.component';
 import { ViewLayoutComponent } from './view-layout/view-layout.component';
+import { NonProfileComponent } from './non-profile/non-profile.component';
+import { EditNonComponent } from './edit-non/edit-non.component';
+import { AddTimetableComponent } from './add-timetable/add-timetable.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +51,9 @@ import { ViewLayoutComponent } from './view-layout/view-layout.component';
     ViewALComponent,
     ViewOLComponent,
     ViewLayoutComponent,
+    NonProfileComponent,
+    EditNonComponent,
+    AddTimetableComponent,
   ],
   imports: [
     CommonModule,

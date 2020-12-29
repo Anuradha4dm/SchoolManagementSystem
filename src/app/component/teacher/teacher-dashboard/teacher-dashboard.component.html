@@ -1,0 +1,42 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+    <div class="row">
+        <!--Percentage of attendance here-->
+        <div class="col">
+            <div class="card card-body">
+                <h3 class="text-center font-italic">This month attendance stats</h3>
+                <h1 class="text-center large mt-3">{{percentage| number:'.1-2'}}%</h1>
+            </div>
+        </div>
+
+        <!--Absent or present dates here-->
+        <div class="col">
+            <div class="card card-body">
+                <h4 class="text-center font-italic">This month attendance details</h4>
+                
+                <div class="form-group text-center">
+                    <button type="button" (click)="filterDates('all')" class="btn btn-sm btn-dark">All Dates</button>
+                    <button type="button" (click)="filterDates('present')" class="btn btn-sm btn-dark">Present</button>
+                    <button type="button" (click)="filterDates('absent')" class="btn btn-sm btn-dark">Absent</button>
+                </div>
+
+                <table class="table text-center">
+                    <tr class="bg-secondary">
+                        <th></th>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+
+                    <tbody>
+                        <tr *ngFor="let data of filteredData">
+                            <td [class.absent]="!data.present" [class.present]="data.present"></td>
+                            <td>{{data.year+'-'+data.month+'-'+data.day}}</td>
+                            <td>{{data.present? 'Present':'Absent'}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

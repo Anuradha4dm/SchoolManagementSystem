@@ -8,6 +8,7 @@ export interface TeacherProfileData{
   imagepath: string;
   startyear: number;
   age: number;
+  gender: string;
   role: string;
   subjects:[
     {
@@ -18,7 +19,7 @@ export interface TeacherProfileData{
       mandatory: boolean;
     }
   ];
-  timetable?: string;
+  timatable?: string;
   description?: string;
   qualifications?: string;
   mobile: string;

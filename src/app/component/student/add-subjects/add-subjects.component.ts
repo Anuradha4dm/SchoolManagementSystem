@@ -84,15 +84,17 @@ export class AddSubjectsComponent implements OnInit {
     );
 
     //categorize subjects
+    var arr = this.studentData.grade.split('_');
+
     this.gradeVal = +this.studentData.grade.split('_')[0];
-    this.stream = this.studentData.grade.split('_')[1];
+    this.stream = arr[arr.length - 1];
 
     //ths is the grades in between  grade 6-9
     if (this.gradeVal >= 6 && this.gradeVal <= 9) {
       this.isOptionalList1 = true;
       this.optionalList1 = ['estern_music', 'western_music', 'art', 'dancing'];
       this.subjectSet1 = [
-        'mathemetics',
+        'mathematics',
         'sinhala',
         'science',
         'history',
@@ -180,29 +182,10 @@ export class AddSubjectsComponent implements OnInit {
     }
     if (this.gradeVal >= 12 && this.stream === 'COM') {
       this.isOptionalList1 = true;
-      this.optionalList1 = [
-        'economics',
-        'roman_Civilization',
-        'home_economics',
-        'divinity',
-        'ict',
-      ];
+      this.optionalList1 = ['economics', 'ict'];
       this.isOptionalList2 = true;
-      this.optionalList2 = [
-        'english',
-        'statistics',
-        'political_science',
-        'art',
-      ];
-      this.isOptionalList3 = true;
-      this.optionalList3 = [
-        'french',
-        'accounts',
-        'geography',
-        'logic',
-        'sinhala',
-        'hindi',
-      ];
+      this.optionalList2 = ['business_studies', 'statistic'];
+      this.subjectSet1 = ['accounting'];
     }
 
     if (this.gradeVal >= 12 && this.stream === 'TEC') {
@@ -239,7 +222,7 @@ export class AddSubjectsComponent implements OnInit {
         .addSubjectsPrimary({
           studentid: this.studentData.studentid,
           grade: this.studentData.grade,
-          optional1: data.optional1,
+          optional1: data.value.optional1,
         })
         .subscribe(
           (data) => {
@@ -299,9 +282,9 @@ export class AddSubjectsComponent implements OnInit {
       }
 
       if (this.stream === 'ART' || this.stream === 'COM') {
-        request.subject1 = data.value.optional1;
-        request.subject2 = data.value.optional2;
-        request.subject3 = data.value.optional3;
+        request.subject1 = this.subjectSet1[0];
+        request.subject2 = data.value.optional1;
+        request.subject3 = data.value.optional2;
       }
 
       if (this.stream === 'TEC') {
@@ -341,6 +324,10 @@ export class AddSubjectsComponent implements OnInit {
   }
 
   onChangeListItemOption1(subjectValue: string) {
+    this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
+  }
+
+  onChangeListItemOption3(subjectValue: string) {
     this.fetchDataAndPopulate(subjectValue, this.studentData.grade);
   }
 

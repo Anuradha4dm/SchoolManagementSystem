@@ -1,6 +1,7 @@
 import { ConstantPool } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { AlertMessageService } from 'src/app/services/alert-message.service';
 import { AdminService } from '../admin.service';
 
 @Component({
@@ -9,12 +10,56 @@ import { AdminService } from '../admin.service';
   styleUrls: ['./add-new-profile.component.css'],
 })
 export class AddNewProfileComponent implements OnInit {
+  @ViewChild('formData', { static: false }) formDataRef: NgForm;
   @ViewChild('userid', { static: false }) userid: ElementRef;
 
   adminLogin: boolean = false;
   studentLogin: boolean = false;
   teacherLoginn: boolean = false;
   nonAcademinLogin: boolean = false;
+
+  classList: string[] = [
+    '6_A',
+    '6_B',
+    '6_C',
+    '6_D',
+    '6_E',
+    '7_A',
+    '7_B',
+    '7_C',
+    '7_D',
+    '7_E',
+    '8_A',
+    '8_B',
+    '8_C',
+    '8_D',
+    '8_E',
+    '9_A',
+    '9_B',
+    '9_C',
+    '9_D',
+    '9_E',
+    '10_A',
+    '10_B',
+    '10_C',
+    '10_D',
+    '10_E',
+    '11_A',
+    '11_B',
+    '11_C',
+    '11_D',
+    '11_E',
+    '12_MATH',
+    '12_BIO',
+    '12_ART',
+    '12_COM',
+    '12_TEC',
+    '13_MATH',
+    '13_BIO',
+    '13_ART',
+    '13_COM',
+    '13_TEC',
+  ];
 
   //this is for generating the studnet id
   nextVal: string = '';
@@ -25,12 +70,17 @@ export class AddNewProfileComponent implements OnInit {
   selectedFile: File = null;
   imageFileName: string = '';
 
-  constructor(private adminService: AdminService) {}
+  constructor(
+    private adminService: AdminService,
+    private alertMessageService: AlertMessageService
+  ) {}
 
   ngOnInit(): void {}
 
   onSubmit(formData: NgForm) {
     const form = new FormData();
+
+    console.log(formData.value.grade);
 
     form.append('grade', formData.value.grade);
     form.append('addressline1', formData.value.addressline1);
@@ -54,13 +104,18 @@ export class AddNewProfileComponent implements OnInit {
 
     this.adminService.postNewStudentData(form).subscribe(
       (result) => {
-        console.log('data submitted');
+        console.log(result.newstudent);
+        if (result.newstudent) {
+          this.alertMessageService.competeAlert(
+            'Student added Successfully...'
+          );
+        }
       },
       (error) => {
-        console.log(error);
+        this.alertMessageService.errorAlert(error.error.message);
       },
       () => {
-        console.log('completed');
+        this.formDataRef.reset();
       }
     );
   }

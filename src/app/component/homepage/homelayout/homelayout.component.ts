@@ -16,5 +16,6 @@ export class HomelayoutComponent implements OnInit {
 
   ngOnInit(): void {
     this.userLoginService.autoLogin();
+    this.addressArray=(this.address.split(','));
   }
 }

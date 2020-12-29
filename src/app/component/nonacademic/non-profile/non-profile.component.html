@@ -1,0 +1,131 @@
+<div class="panel-header"></div>
+
+<div class="main-content">
+  <div class="row">
+    <!--Non Academic personal details here-->
+    <div class="col-md-7">
+      <div class="card card-user">
+        <div class="image">
+          <img src="./assets/img/header.jpg" alt="background_image" />
+        </div>
+
+        <div class="card-body">
+          <div class="author">
+            <a href="">
+              <img
+                class="avatar border-black"
+                src="{{ imagepath }}"
+                alt="profile picture"
+              />
+            </a>
+            <p class="description">{{ profileData.username }}</p>
+          </div>
+
+          <div class="card-container">
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons users_single-02"></i>
+                Surname: {{ profileData.surname | titlecase }}
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons users_single-02"></i>
+                First Name: {{ profileData.firstname | titlecase }}
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons users_single-02"></i>
+                Last Name: {{ profileData.lastname | titlecase }}
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons ui-1_email-85"></i>
+                Email: {{ profileData.email }}
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons tech_mobile"></i>
+                Mobile: {{ profileData.mobile }}
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons shopping_tag-content"></i>
+                Age: {{ profileData.age }}
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons shopping_tag-content"></i>
+                Role: {{ profileData.role | titlecase }}
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons ui-1_send"></i>
+                address:<br />
+                {{ profileData.addressline1 }},<br />
+                {{ profileData.addressline2 }},<br />
+                {{ profileData.addressline3 }},<br />
+                {{ profileData.city }}<br />
+              </h5>
+            </div>
+
+            <div class="card-content">
+              <h5 class="text-des cont-text">
+                <i class="now-ui-icons shopping_tag-content"></i>
+                Description: {{ profileData.description }}
+              </h5>
+            </div>
+
+            <!--Bottom button group here-->
+            <div class="btn-group my-btn-group" role="group">
+              <button
+                href="#"
+                type="button"
+                class="btn btn-dark"
+                (click)="onEditClick()"
+              >
+                Edit Profile
+              </button>
+
+              <button
+                routerLink="/user/change-password"
+                type="button"
+                class="btn btn-dark"
+              >
+                Change Password
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <!--Qualification here-->
+      <div class="card card-body">
+        <h6 class="text-muted font-italic">Qualifications</h6>
+        <ul class="list-group">
+          <li
+            class="list-group-item font-weight-bold"
+            *ngFor="let qualific of qualifications"
+          >
+            {{ qualific | titlecase }}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

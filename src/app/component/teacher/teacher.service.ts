@@ -34,13 +34,36 @@ export class TeacherService {
     );
   }
 
+  //used to check whether attendance is marked or not
+  checkAttendanceStatus(date: Date) {
+    return this.httpClient.post<{ mark: boolean }>(
+      'http://localhost:3000/teacher/check-attendance-status',
+      {
+        date: date,
+      }
+    );
+  }
+
   //add students attendance to database
-  markStudentAttendence(teacherid: string, submitdata: string) {
+  markStudentAttendence(date: Date, teacherid: string, submitdata: string) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/teacher/mark-attendence',
       {
         teahcerid: teacherid,
+        date: date,
         submitdata: submitdata,
+      }
+    );
+  }
+
+  //add students attendance to database
+  reSubmitStudentAttendance(date: Date, teacherid: string, submitdata: string) {
+    return this.httpClient.post<{ update: boolean }>(
+      'http://localhost:3000/teacher/attendence-resubmit',
+      {
+        teahcerid: teacherid,
+        submitdata: submitdata,
+        date: date,
       }
     );
   }
@@ -89,6 +112,22 @@ export class TeacherService {
         studentid: studentid,
         result: result,
       }
+    );
+  }
+
+  //used to print result sheet
+  printReport(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/print-report',
+      formData
+    );
+  }
+
+  //execute when e-report send
+  sendEreport(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/send-report',
+      formData
     );
   }
 
@@ -169,5 +208,19 @@ export class TeacherService {
         data: formData,
       }
     );
+  }
+
+  //return this month attendance of teacher
+  getTeacherAttendance(id: string) {
+    return this.httpClient.post<
+      {
+        year: number;
+        month: number;
+        day: number;
+        present: Boolean;
+      }[]
+    >('http://localhost:3000/teacher/get-teacher-attendance', {
+      teacherid: id,
+    });
   }
 }

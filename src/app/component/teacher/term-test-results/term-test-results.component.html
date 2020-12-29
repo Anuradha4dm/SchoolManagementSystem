@@ -1,6 +1,6 @@
 <div class="panel-header"></div>
 
-<div class="main-content">
+<div class="main-content" *ngIf="termResult.grade">
   <!--Term selection section here-->
   <div class="row">
     <div class="card card-body">
@@ -61,7 +61,7 @@
     </div>
 
     <!--One student results here-->
-    <div class="col-md-6" *ngIf="show">
+    <div class="col-md-5" *ngIf="show">
       <div class="card card-body border border-dark">
         <div class="row">
           <div class="col">
@@ -107,3 +107,10 @@
  
   </div>
 </div>
+
+<diV class="main-content" *ngIf="!termResult.grade">
+    <!--If not a class teacher-->
+    <div class="card card-body">
+      <h4 class="text-muted text-center font-italic my-5">Sorry, You do not have permissions to enroll with student results</h4>
+    </div>
+</diV>

@@ -7,13 +7,13 @@
                     <h4 class="font-italic mb-4">{{year}} A/L Student List</h4>
                 </div>
                 <div class="col-sm-5 text-right">
-                    <select class="form-control">
-                        <option>All</option>
-                        <option>Maths Stream</option>
-                        <option>Bio Stream</option>
-                        <option>Commerce Stream</option>
-                        <option>Art Stream</option>
-                        <option>Tech Stream</option>
+                    <select class="form-control" name="stream" (change)="onStreamFilter()" [(ngModel)]="stream">
+                        <option value="ALL">All</option>
+                        <option value="Physical">Maths Stream</option>
+                        <option value="Biology">Bio Stream</option>
+                        <option value="Commerce">Commerce Stream</option>
+                        <option value="Art">Art Stream</option>
+                        <option value="Technology">Tech Stream</option>
                     </select>
                 </div>
             </div>
@@ -27,7 +27,7 @@
                     <th>Class</th>
                 </tr>
                 <tbody>
-                    <tr *ngFor="let i=index;let student of studentList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(student)">
+                    <tr *ngFor="let i=index;let student of filteredList|paginate: {currentPage: page,itemsPerPage: 10}" (click)="onRowClick(student)">
                         <td>{{i+1}}</td>
                         <td>{{student.indexnumber}}</td>
                         <td>{{student.studentid}}</td>
@@ -160,7 +160,7 @@
 
 
                 <div class="form-group text-right">
-                    <button type="submit" class="btn btn-info btn-sm">Submit</button>
+                    <button type="submit" class="btn btn-info btn-sm">{{selectedStudent.addresultdone?'Update':'Submit'}}</button>
                     <button type="button" class="btn btn-danger btn-sm">Cancel</button>
                 </div>
             </form>

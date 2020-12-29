@@ -42,39 +42,32 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/notification',
           title: 'Notification',
-          icon: 'education_agenda-bookmark',
+          icon: 'gestures_tap-01',
           class: '',
         },
         {
           path: '/user/view-participation',
           title: 'PARTICIPATION',
-          icon: 'education_agenda-bookmark',
+          icon: 'media-2_sound-wave',
           class: '',
         },
 
         {
           path: '/user/view-result',
           title: 'VIEW RESULT',
-          icon: 'education_agenda-bookmark',
+          icon: 'education_paper',
           class: '',
         },
         {
           path: '/user/addsubjects',
           title: 'Add Subjects',
-          icon: 'files_single-copy-04',
+          icon: 'education_agenda-bookmark',
           class: '',
         },
         {
           path: '/user/viewsubjects',
           title: 'View Subjects',
-          icon: 'gestures_tap-01',
-          class: '',
-        },
-
-        {
-          path: '/user/payment',
-          title: 'Payment',
-          icon: 'gestures_tap-01',
+          icon: 'files_single-copy-04',
           class: '',
         },
       ];
@@ -82,6 +75,12 @@ export class SiderbarComponent implements OnInit {
 
     if (this.userRoll === 'teacher') {
       this.sideBarItems = [
+        {
+          path: '/user/teacher-dashboard',
+          title: 'Dashboard',
+          icon: 'design_app',
+          class: '',
+        },
         {
           path: '/user/teacher-profile',
           title: 'Profile',
@@ -97,13 +96,13 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/teacher-notification',
           title: 'Notification',
-          icon: 'education_agenda-bookmark',
+          icon: 'ui-1_bell-53',
           class: '',
         },
         {
           path: '/user/add-student-result',
           title: 'Add Result',
-          icon: 'education_agenda-bookmark',
+          icon: 'files_single-copy-04',
           class: '',
         },
         {
@@ -115,34 +114,34 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/leave-request',
           title: 'Request Leave',
-          icon: 'gestures_tap-01',
+          icon: 'ui-1_calendar-60',
           class: '',
         },
         {
           path: '/user/teacher-send-messages',
           title: 'Send Messages',
-          icon: 'gestures_tap-01',
+          icon: 'ui-1_email-85',
           class: '',
         },
         {
           path: '/user/view-ol-results',
           title: 'O/L Results',
-          icon: 'gestures_tap-01',
+          icon: 'files_paper',
           class: '',
         },
         {
           path: '/user/view-al-results',
           title: 'A/L Results',
-          icon: 'gestures_tap-01',
+          icon: 'files_paper',
           class: '',
         },
       ];
     }
 
-    if (this.userRoll === 'nonacademic') {
+    if (this.userRoll === 'leave_handler') {
       this.sideBarItems = [
         {
-          path: '/user/userprofile',
+          path: '/user/profile',
           title: 'Profile',
           icon: 'users_single-02',
           class: '',
@@ -151,33 +150,46 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/add-new-class',
           title: 'Create Class',
-          icon: 'users_single-02',
+          icon: 'objects_globe',
           class: '',
         },
+
         {
           path: '/user/add-new-teacher',
           title: 'Add Teacher',
-          icon: 'users_single-02',
+          icon: 'education_hat',
+          class: '',
+        },
+        {
+          path: '/user/add-non-academic',
+          title: 'Add Nonacademic',
+          icon: 'users_circle-08',
+          class: '',
+        },
+        {
+          path: '/user/add-timetable',
+          title: 'Add Timetables',
+          icon: 'ui-1_calendar-60',
           class: '',
         },
         //to remove end
         {
           path: '/user/handle-leave',
           title: 'HANDLE LEAVES',
-          icon: 'users_single-02',
+          icon: 'files_single-copy-04',
           class: '',
         },
 
         {
           path: '/user/send-notification',
           title: 'SEND NOTIFICATION',
-          icon: 'users_single-02',
+          icon: 'ui-1_email-85',
           class: '',
         },
         {
           path: '/user/class-handler',
           title: 'HANDLE CLASS',
-          icon: 'users_single-02',
+          icon: 'shopping_shop',
           class: '',
         },
         {
@@ -195,19 +207,19 @@ export class SiderbarComponent implements OnInit {
         {
           path: '/user/main-exam-layout',
           title: 'Main Exams',
-          icon: 'gestures_tap-01',
+          icon: 'education_paper',
           class: '',
         },
         {
           path: '/user/ol-analysis',
           title: 'O/L Analysis',
-          icon: 'gestures_tap-01',
+          icon: 'business_chart-bar-32',
           class: '',
         },
         {
           path: '/user/al-analysis',
           title: 'A/L Analysis',
-          icon: 'gestures_tap-01',
+          icon: 'business_chart-pie-36',
           class: '',
         },
 
@@ -217,7 +229,17 @@ export class SiderbarComponent implements OnInit {
           icon: 'gestures_tap-01',
           class: '',
         },
+        {
+          path: '/user/new-student',
+          title: 'New Student',
+          icon: 'gestures_tap-01',
+          class: '',
+        },
       ];
+    }
+
+    if (this.userRoll === 'leave_handler') {
+      console.log('test');
     }
   }
 
