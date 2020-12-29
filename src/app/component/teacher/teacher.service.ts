@@ -43,25 +43,25 @@ export class TeacherService {
   }
 
   //add students attendance to database
-  markStudentAttendence(date:Date, teacherid: string, submitdata: string) {
+  markStudentAttendence(date: Date, teacherid: string, submitdata: string) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/teacher/mark-attendence',
       {
         teahcerid: teacherid,
+        date: date,
         submitdata: submitdata,
-        date: date
       }
     );
   }
 
   //add students attendance to database
-  reSubmitStudentAttendance(date:Date, teacherid: string, submitdata: string) {
+  reSubmitStudentAttendance(date: Date, teacherid: string, submitdata: string) {
     return this.httpClient.post<{ update: boolean }>(
       'http://localhost:3000/teacher/attendence-resubmit',
       {
         teahcerid: teacherid,
         submitdata: submitdata,
-        date: date
+        date: date,
       }
     );
   }
@@ -114,13 +114,19 @@ export class TeacherService {
   }
 
   //used to print result sheet
-  printReport(formData){
-      return this.httpClient.post('http://localhost:3000/teacher/print-report',formData);
+  printReport(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/print-report',
+      formData
+    );
   }
 
   //execute when e-report send
-  sendEreport(formData){
-    return this.httpClient.post('http://localhost:3000/teacher/send-report',formData);
+  sendEreport(formData) {
+    return this.httpClient.post(
+      'http://localhost:3000/teacher/send-report',
+      formData
+    );
   }
 
   //return students avarage related to grade and term
@@ -203,16 +209,16 @@ export class TeacherService {
   }
 
   //return this month attendance of teacher
-  getTeacherAttendance(id: string){
-    return this.httpClient.post<{   
-      year: number,
-      month: number,
-      day: number,
-      present: Boolean
-    }[]>('http://localhost:3000/teacher/get-teacher-attendance',
+  getTeacherAttendance(id: string) {
+    return this.httpClient.post<
       {
-        teacherid: id
-      }
-    );
+        year: number;
+        month: number;
+        day: number;
+        present: Boolean;
+      }[]
+    >('http://localhost:3000/teacher/get-teacher-attendance', {
+      teacherid: id,
+    });
   }
 }

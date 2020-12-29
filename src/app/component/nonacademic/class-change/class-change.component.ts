@@ -15,6 +15,9 @@ export class ClassChangeComponent implements OnInit {
   @ViewChild('classSwitchFormData', { static: true })
   classSwitchFormData: NgForm;
 
+  showSwitchBtn: boolean = true;
+  progressMessage: string = 'Progressing Chnages......';
+
   progressbar: number = 0;
   progressBarShow: boolean = false;
 
@@ -111,6 +114,8 @@ export class ClassChangeComponent implements OnInit {
           clearInterval(interval);
           this.progressbar = 100;
           this.classSwitchFormData.reset();
+          this.showSwitchBtn = false;
+          this.progressMessage = 'Process Completed...';
         }
       );
   }

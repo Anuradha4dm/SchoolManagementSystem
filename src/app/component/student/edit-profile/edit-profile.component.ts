@@ -43,7 +43,7 @@ export class EditProfileComponent implements OnInit {
         this.profilePic = 'http://localhost:3000/' + this.studentData.imagePath;
       },
       (error) => {
-        console.log(error);
+        this.alertMessageService.errorAlert(error.error.message);
       },
       () => {
         this.gradeAvalilable = this.gradeUpdateHandler(this.studentData.grade);
@@ -97,12 +97,13 @@ export class EditProfileComponent implements OnInit {
       form.append('grade', this.studentData.grade);
     }
 
+    console.log('this is the messag that');
     this.studentProfileService.updateStudentProfile(form).subscribe(
       (result) => {
         console.log('update success');
       },
       (error) => {
-        console.log(error);
+        this.alertMessageService.errorAlert(error.error.message);
       },
       () => {
         this.alertMessageService.competeAlert('Update Profile Success!');
@@ -111,7 +112,6 @@ export class EditProfileComponent implements OnInit {
         }, 1000);
       }
     );
-    console.log(form)
   }
 
   onReset() {
