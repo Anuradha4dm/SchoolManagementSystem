@@ -55,7 +55,7 @@ export interface SubjectAnalysis{
   acount: number;
   bcount: number;
   ccount: number;
-  Scount: number;
+  scount: number;
   wcount: number;
 }
 

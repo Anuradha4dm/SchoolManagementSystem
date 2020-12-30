@@ -10,7 +10,8 @@ import { SubjectListsService } from '../subject-lists.service';
   styleUrls: ['./al-analysis.component.css'],
 })
 export class AlAnalysisComponent implements OnInit {
-  page: number = 1; //for pagination
+  page: number = 1; //for pagination of university students
+  pageLastCount: number = 1; //for pagination of last year students
   show: boolean = false; //for student list hide and show
   analysis: boolean = false; //for past year chart hide and show
   cutoff: number = 1.3;
@@ -128,8 +129,9 @@ export class AlAnalysisComponent implements OnInit {
         this.subjectCount.push(data.acount);
         this.subjectCount.push(data.bcount);
         this.subjectCount.push(data.ccount);
-        this.subjectCount.push(data.Scount);
+        this.subjectCount.push(data.scount);
         this.subjectCount.push(data.wcount);
+        console.log(this.subjectCount)
       });
   }
 
@@ -139,8 +141,12 @@ export class AlAnalysisComponent implements OnInit {
   }
 
   cutoffFilter(value){
-      this.cutoffList=this.pastYearALData.filter((student)=>{
+      var list=this.pastYearALData.filter((student)=>{
         return student.stream==this.cutoffStream;
+      });
+
+      this.cutoffList=list.sort((a,b)=>{
+        return b.zscore-a.zscore
       });
 
   }

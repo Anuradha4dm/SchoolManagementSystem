@@ -31,13 +31,46 @@
                         <canvas class="bg-dark" baseChart
                             [data]="allYearData"
                             [labels]="allYearLabels"
-                            legend="false"
-                            chartType="bar">
+                            [legend]="false"
+                            chartType="bar"
+                        >
                         </canvas>
                     </div> 
                 </div>
             </div>
 
+            <!--Subject wise analysis here-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <h4 class="font-italic text-muted text-center">subject analysis</h4>
+                    <!--subject and year selection here-->
+                    <div class="row">
+                        <div class="col">
+                            <label>Year</label>
+                            <input type="number" [value]="subjectYear" (change)="subjectAnalysis(subjectYear=$event.target.value)" class="form-control">
+                        </div>
+    
+                        <div class="col">
+                            <label>Subject</label>
+                            <select (change)="subjectAnalysis(subjectName=$event.target.value)" class="form-control">
+                                <option [value]="subject" *ngFor="let subject of subjectList">{{subject| titlecase}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Subject dougnut chart here-->
+                    <div class="form-group mt-4">
+                        <canvas class="bg-dark p-2" baseChart
+                            [data]="subjectData"
+                            [labels]="subjectLabels"
+                            chartType="doughnut">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Second main column here-->
+        <div class="col-md-5">
             <!--Past year stat count analysis-->
             <div class="row">
                 <div class="card card-body m-2">
@@ -75,42 +108,10 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!--Second main column here-->
-        <div class="col-md-5">
-            <!--Subject wise analysis here-->
-            <div class="row">
-                <div class="card card-body m-2">
-                    <h4 class="font-italic text-muted text-center">subject analysis</h4>
-                    <!--subject and year selection here-->
-                    <div class="row">
-                        <div class="col">
-                            <label>Year</label>
-                            <input type="number" [value]="subjectYear" (change)="subjectAnalysis(subjectYear=$event.target.value)" class="form-control">
-                        </div>
-    
-                        <div class="col">
-                            <label>Subject</label>
-                            <select (change)="subjectAnalysis(subjectName=$event.target.value)" class="form-control">
-                                <option [value]="subject" *ngFor="let subject of subjectList">{{subject| titlecase}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--Subject dougnut chart here-->
-                    <div class="form-group mt-4">
-                        <canvas class="bg-dark p-2" baseChart
-                            [data]="subjectData"
-                            [labels]="subjectLabels"
-                            chartType="doughnut">
-                        </canvas>
-                    </div>
-                </div>
-            </div>
 
             <!--Student list or total count details here-->
             <div class="row">
-                <div class="card card-body m-2" *ngIf="show">
+                <div class="card card-body m-2" *ngIf="show && pastYearStudentData.length!=0">
                     <table class="table table-hover text-center">
                         <tr class="bg-info">
                             <th>Index</th>
@@ -130,6 +131,10 @@
                     <div class="row mx-auto">
                         <pagination-controls (pageChange)="page=$event"></pagination-controls>
                     </div>
+                </div>
+
+                <div class="card card-body m-2" *ngIf="show && pastYearStudentData.length==0">
+                    <h3 class="mt-3 font-italic text-center">No students to display</h3>
                 </div>
             </div>
         </div>

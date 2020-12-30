@@ -45,6 +45,96 @@
                 </div>
             </div>
 
+            <!--Subject wise analysis here-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <h4 class="font-italic text-muted text-center">subject analysis</h4>
+                    <!--subject and year selection here-->
+                    <div class="row">
+                        <div class="col">
+                            <label>Year</label>
+                            <input type="number" [(ngModel)]="subjectYear" (change)="subjectAnalysis(1)" class="form-control">
+                        </div>
+
+                        <div class="col">
+                            <label>Stream</label>
+                            <select name="stream" ngModel (change)="onSubjectStreamChange($event.target.value)" class="form-control">
+                                <option value="13_MATH">Physical</option>
+                                <option value="13_BIO">Biology</option>
+                                <option value="13_COM">Commerce</option>
+                                <option value="13_ART">Art</option>
+                                <option value="13_TEC">Technology</option>
+                            </select>
+                        </div>
+
+                        <div class="col">
+                            <label>Subject</label>
+                            <select name="subject" ngModel (change)="subjectAnalysis(subjectName=$event.target.value)" class="form-control">
+                                <option [value]="subject" *ngFor="let subject of subjectList">{{subject| titlecase}}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <!--Subject dougnut chart here-->
+                    <div class="form-group mt-4">
+                        <canvas class="bg-dark p-2"
+                            baseChart
+                            [data]="subjectCount"
+                            [labels]="subjectLabels"
+                            chartType="doughnut">
+                        </canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Second main column here-->
+        <div class="col-md-5">
+
+            <!--Past year A/L Student details here-->
+            <div class="row">
+                <div class="card card-body m-2">
+                    <h4 class="text-center text-muted mb-3 font-italic">Check Students for University Addmission</h4>
+                    <!--Cutoff section here-->
+                    <div class="row mb-3">
+                        <div class="col">
+                            <label>Enter Cuttoff Mark:</label>
+                            <input type="text" [(ngModel)]="cutoff" class="form-control w-50">
+                        </div>
+                        <div class="col">
+                            <label>Select Stream</label>
+                            <select [(ngModel)]="cutoffStream" (change)="cutoffFilter(cutoffStream=$event.target.value)" class="form-control p-1">
+                                <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
+                            </select>
+                        </div>
+                    </div>
+            
+                    <table *ngIf="cutoffList" class="table text-center">
+                       <tr class="bg-info">
+                            <th>Index</th>
+                            <th>Student ID</th>
+                            <th>District Rank</th>
+                            <th>Island Rank</th>
+                            <th>Z score</th>
+                       </tr>
+                       <tbody>
+                           <tr *ngFor="let result of cutoffList|paginate: {currentPage: page,itemsPerPage: 10}"  [class.bg]="result.zscore>=cutoff">
+                               <td>{{result.indexnumber}}</td>
+                               <td>{{result.studentid}}</td>
+                               <td>{{result.districtrank}}</td>
+                               <td>{{result.islandrank}}</td>
+                               <td>{{result.zscore}}</td>
+                           </tr>
+                       </tbody>
+                    </table>
+
+                    <div class="form-group mx-auto" *ngIf="cutoffList">
+                        <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                    </div>
+
+                    <h3 *ngIf="!cutoffList" class="mt-2 font-italic text-center">Please Select the Stream</h3>
+                </div>
+            </div>
+
             <!--Past year stat count analysis-->
             <div class="row">
                 <div class="card card-body m-2">
@@ -90,7 +180,7 @@
                     </div>
 
                     <!--Past year perfomance related students here-->
-                    <div class="form-group" *ngIf="show">
+                    <div class="form-group" *ngIf="show && pastYearData.length!=0">
                         <table class="table text-center">
                             <tr class="bg-info">
                                 <th>Index</th>
@@ -102,7 +192,7 @@
                             </tr>
         
                             <tbody>
-                                <tr *ngFor="let student of pastYearData| paginate: {currentPage: page,itemsPerPage: 10}">
+                                <tr *ngFor="let student of pastYearData| paginate: {currentPage: pageLastCount,itemsPerPage: 8}">
                                     <td>{{student.indexnumber}}</td>
                                     <td>{{student.studentid}}</td>
                                     <td>{{student.districtrank}}</td>
@@ -113,94 +203,14 @@
                             </tbody>
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Second main column here-->
-        <div class="col-md-5">
-
-            <!--Past year A/L Student details here-->
-            <div class="row">
-                <div class="card card-body m-2">
-                    <h4 class="text-center text-muted mb-3 font-italic">Check Students for University Addmission</h4>
-                    <!--Cutoff section here-->
-                    <div class="row mb-3">
-                        <div class="col">
-                            <label>Enter Cuttoff Mark:</label>
-                            <input type="text" [(ngModel)]="cutoff" class="form-control w-50">
-                        </div>
-                        <div class="col">
-                            <label>Select Stream</label>
-                            <select [(ngModel)]="cutoffStream" (change)="cutoffFilter(cutoffStream=$event.target.value)" class="form-control p-1">
-                                <option [value]="stream" *ngFor="let stream of streams">{{stream}}</option>
-                            </select>
-                        </div>
-                    </div>
-            
-                    <table class="table text-center">
-                       <tr class="bg-info">
-                            <th>Index</th>
-                            <th>Student ID</th>
-                            <th>District Rank</th>
-                            <th>Island Rank</th>
-                            <th>Z score</th>
-                       </tr>
-                       <tbody>
-                           <tr *ngFor="let result of cutoffList|paginate: {currentPage: page,itemsPerPage: 15}"  [class.bg]="result.zscore>=cutoff">
-                               <td>{{result.indexnumber}}</td>
-                               <td>{{result.studentid}}</td>
-                               <td>{{result.districtrank}}</td>
-                               <td>{{result.islandrank}}</td>
-                               <td>{{result.zscore}}</td>
-                           </tr>
-                       </tbody>
-                    </table>
                     
-                    <div class="form-group mx-auto">
-                        <pagination-controls (pageChange)="page=$event"></pagination-controls>
+                    <div class="form-group mx-auto" *ngIf="show && pastYearData.length!=0">
+                        <pagination-controls (pageChange)="pageLastCount=$event"></pagination-controls>
                     </div>
                 </div>
-            </div>
 
-            <!--Subject wise analysis here-->
-            <div class="row">
-                <div class="card card-body m-2">
-                    <h4 class="font-italic text-muted text-center">subject analysis</h4>
-                    <!--subject and year selection here-->
-                    <div class="row">
-                        <div class="col">
-                            <label>Year</label>
-                            <input type="number" [(ngModel)]="subjectYear" (change)="subjectAnalysis(1)" class="form-control">
-                        </div>
-
-                        <div class="col">
-                            <label>Stream</label>
-                            <select name="stream" ngModel (change)="onSubjectStreamChange($event.target.value)" class="form-control">
-                                <option value="13_MATH">Physical</option>
-                                <option value="13_BIO">Biology</option>
-                                <option value="13_COM">Commerce</option>
-                                <option value="13_ART">Art</option>
-                                <option value="13_TEC">Technology</option>
-                            </select>
-                        </div>
-
-                        <div class="col">
-                            <label>Subject</label>
-                            <select name="subject" ngModel (change)="subjectAnalysis(subjectName=$event.target.value)" class="form-control">
-                                <option [value]="subject" *ngFor="let subject of subjectList">{{subject| titlecase}}</option>
-                            </select>
-                        </div>
-                    </div>
-                    <!--Subject dougnut chart here-->
-                    <div class="form-group mt-4">
-                        <canvas class="bg-dark p-2"
-                            baseChart
-                            [data]="subjectCount"
-                            [labels]="subjectLabels"
-                            chartType="doughnut">
-                        </canvas>
-                    </div>
+                <div class="card card-body m-2" *ngIf="show && pastYearData.length==0">
+                    <h3 class="mt-3 font-italic text-center">No students to display</h3>
                 </div>
             </div>
         
