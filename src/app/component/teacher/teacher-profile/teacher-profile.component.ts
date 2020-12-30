@@ -13,7 +13,7 @@ export class TeacherProfileComponent implements OnInit {
   loggedTeacherID: string;
   teacherProfileData: TeacherProfileData;
   qualifications: string[];
-
+  page=1; //for pagination
   imagepath: string;
 
   constructor(

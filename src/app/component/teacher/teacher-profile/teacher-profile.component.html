@@ -137,13 +137,17 @@
               <th>Class</th>
             </tr>
             <tbody>
-              <tr *ngFor="let subject of teacherProfileData.subjects">
+              <tr *ngFor="let subject of teacherProfileData.subjects|paginate: {currentPage: page,itemsPerPage: 6}">
                 <td>{{ subject.subjectid }}</td>
                 <td>{{ subject.subjectname | titlecase }}</td>
                 <td>{{ subject.grade }}</td>
               </tr>
             </tbody>
           </table>
+          
+          <div class="row mx-auto">
+            <pagination-controls (pageChange)="page=$event"></pagination-controls>
+          </div>
         </div>
       </div>
 

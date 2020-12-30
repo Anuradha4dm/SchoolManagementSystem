@@ -291,72 +291,7 @@ export class SiderbarComponent implements OnInit {
         },
       ]
     }
-//to remove
-    if (this.userRoll === 'admin') {
-      this.sideBarItems = [
-        {
-          path: '/user/profile',
-          title: 'Profile',
-          icon: 'users_single-02',
-          class: '',
-        },
-        {
-          path: '/user/add-new-class',
-          title: 'Create Class',
-          icon: 'objects_globe',
-          class: '',
-        },
-        {
-          path: '/user/add-new-teacher',
-          title: 'Add Teacher',
-          icon: 'education_hat',
-          class: '',
-        },
-        {
-          path: '/user/add-non-academic',
-          title: 'Add Nonacademic',
-          icon: 'users_circle-08',
-          class: '',
-        },
-        {
-          path: '/user/add-timetable',
-          title: 'Add Timetables',
-          icon: 'ui-1_calendar-60',
-          class: '',
-        },
-        {
-          path: '/user/handle-leave',
-          title: 'HANDLE LEAVES',
-          icon: 'files_single-copy-04',
-          class: '',
-        },
-        {
-          path: '/user/class-handler',
-          title: 'HANDLE CLASS',
-          icon: 'shopping_shop',
-          class: '',
-        },
-        {
-          path: '/user/main-exam-layout',
-          title: 'Main Exams',
-          icon: 'education_paper',
-          class: '',
-        },
-        {
-          path: '/user/ol-analysis',
-          title: 'O/L Analysis',
-          icon: 'business_chart-bar-32',
-          class: '',
-        },
-        {
-          path: '/user/al-analysis',
-          title: 'A/L Analysis',
-          icon: 'business_chart-pie-36',
-          class: '',
-        },
-      ];
-    }
-//to remove
+
   }
 
   logout() {
