@@ -21,6 +21,7 @@ export class LeavehandleComponent implements OnInit {
   leavetype:number;
   title: string;
   reason: string=' '; //contain the reason to reject leave
+  page: number=1; //for pagination
 
   constructor(
     private nonAcademicService: NonAcademicService,
