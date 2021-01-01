@@ -13,6 +13,8 @@ import html2canvas from 'html2canvas';
 })
 export class EditTermResultsComponent implements OnInit {
   loggedUserID: string;
+  gender: string //contain teacher gender
+  teachername: string;
   classID: string;
   year: number = new Date().getFullYear();
   selectedTerm: number = 1;
@@ -43,6 +45,8 @@ export class EditTermResultsComponent implements OnInit {
       .getTeacherProfileData(this.loggedUserID)
       .subscribe((data) => {
         this.classID = data.class;
+        this.gender=(data.gender=="male"?'Mr.':'Mrs.');
+        this.teachername=data.firstname + " "+ data.surname;
         this.onTermChange();
       });
   }
@@ -56,7 +60,6 @@ export class EditTermResultsComponent implements OnInit {
         this.avarageData = data.avarageData.sort((a, b) => {
           return b.average - a.average;
         });
-        console.log(this.avarageData);
       });
   }
 
@@ -113,12 +116,20 @@ export class EditTermResultsComponent implements OnInit {
       var imgHeight = 388;
 
       const contentDataURL = canvas.toDataURL('image/png');
-      var position = 0;
       let pdf = new jsPDF('p', 'pt', 'a5');
-      pdf.addImage(contentDataURL, 'PNG', 10, position, imgWidth, imgHeight);
+      pdf.rect(8,8,400,570);
+      pdf.addImage(contentDataURL, 'PNG', 12, 60, imgWidth, imgHeight);
+      pdf.line(10,45,405,45)
+      pdf.text("E Report",330,30);
+      pdf.text("School Management System",15,30);
+
+      pdf.setFontSize(10);
+      pdf.text("Certified By:",25,525);
+      pdf.text(this.gender+this.teachername+"  (Class Teacher)",40,560);
 
       formData.append('id', this.selectedStudent._id);
       formData.append('grade', this.classID);
+      formData.append('year', this.year.toString());
       formData.append('term', this.selectedTerm.toString());
       formData.append('place', this.place.toString());
 

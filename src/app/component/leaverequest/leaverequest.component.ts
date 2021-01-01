@@ -21,13 +21,18 @@ export class LeaverequestComponent implements OnInit {
   pendingLeaves; //to contain logged user pending data
   leaveType: number =2;
 
-  public chartData = [];
-  public chartLabel = ['Leaves Taken','Leaves Available'];
+  chartData = [];
+  chartLabel = ['Leaves Taken','Leaves Available'];
 
-  public chartOption = {
-    responsive: true,
-    legend: false
-  };
+  myOption = {
+    legend:{
+      labels:{
+        fontSize: 16,
+        fontColor: 'white'
+      }
+    }
+  };// this is used for chart labels styles
+  
 
 
   constructor(

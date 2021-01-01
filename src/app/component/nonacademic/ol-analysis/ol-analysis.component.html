@@ -62,7 +62,8 @@
                         <canvas class="bg-dark p-2" baseChart
                             [data]="subjectData"
                             [labels]="subjectLabels"
-                            chartType="doughnut">
+                            chartType="doughnut"
+                            [options]="myOption">
                         </canvas>
                     </div>
                 </div>
@@ -103,7 +104,8 @@
                         <canvas class="bg-dark p-2" baseChart
                             [data]="pastYearData"
                             [labels]="pastYearLabels"
-                            chartType="pie">
+                            chartType="pie"
+                            [options]="myOption">
                         </canvas>
                     </div>
                 </div>

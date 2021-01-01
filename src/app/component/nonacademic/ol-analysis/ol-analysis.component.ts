@@ -37,16 +37,22 @@ export class OlAnalysisComponent implements OnInit {
   subjectYear = this.year;
   subjectName="mathematics";
 
+  myOption = {
+    legend:{
+      labels:{
+        fontSize: 16,
+        fontColor: 'white'
+      }
+    }
+  };// this is used for chart labels styles
+  
   /*Subject wise analysis details here
 
   public myLegend = 'helo';
   public myLabel = ['A', 'B', 'C'];
   public myData = [100, 200, 300];
   public myType = 'doughnut';
-  public myOption = {
-    scaleShowVerticalLines: false,
-    responsive: true,
-  };
+
   /*myColor = [
     {
       backgroundColor: 'silver',

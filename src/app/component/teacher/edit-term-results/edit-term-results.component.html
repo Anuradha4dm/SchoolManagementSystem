@@ -64,13 +64,18 @@
 
         <!--Edit results form here-->
         <div class="col-md-5" *ngIf="show">
-            <div class="card card-body border border-dark p-3">
+            <div class="card card-body border border-dark">
                 <form id="formContent" #EditResultForm="ngForm">
                     
                     <div class="row">
                         <div class="col">
                             <label>Year</label>
                             <input type="text" class="form-control" [value]="year" disabled>
+                        </div>
+
+                        <div class="col">
+                            <label>Class</label>
+                            <input type="text" class="form-control" [value]="classID" disabled>
                         </div>
 
                         <div class="col">
@@ -101,7 +106,7 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group mt-3">
                         <table>
                             <tr *ngFor="let result of studentPastResults.result">
                                 <td>
@@ -115,7 +120,7 @@
                     </div>
                 </form>
                 
-                <div class="form-group text-center mt-5">
+                <div class="form-group text-center mt-3">
                     <button type="button" class="btn btn-info btn-sm" (click)="updateResults(EditResultForm.value)">Update Results</button>
                     <button type="button" class="btn btn-danger btn-sm" (click)="show=false">Cancel</button>
                     <button type="button" class="btn btn-dark btn-sm" (click)="printResults()">Print Report</button>

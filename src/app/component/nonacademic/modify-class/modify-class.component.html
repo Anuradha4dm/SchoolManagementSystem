@@ -130,11 +130,13 @@
                 <h5 class="font-italic mb-3">Already assigned subjects</h5>
                 <table class="table text-center">
                     <tr class="bg-secondary">
+                        <th>Subject ID</th>
                         <th>Subject Name</th>
                         <th>Teacher ID</th>
                     </tr>
                     <tbody>
                         <tr *ngFor="let subject of alreadyRegisteredSubjects.List">
+                            <td>{{subject.subjectid}}</td>
                             <td>{{subject.subjectname| uppercase}}</td>
                             <td>{{subject.teacherTeacherid}}</td>
                         </tr>

@@ -45,14 +45,20 @@ export class AlAnalysisComponent implements OnInit {
   subjectName;
   subjectYear = this.year;
 
-  public myLegend = 'helo';
-  public myLabel = ['A', 'B', 'C'];
-  public myData = [100, 200, 300];
-  public myType = 'doughnut';
-  public myOption = {
-    scaleShowVerticalLines: false,
-    responsive: true,
-  };
+  myLegend = 'helo';
+  myLabel = ['A', 'B', 'C'];
+  myData = [100, 200, 300];
+  myType = 'doughnut';
+  
+  myOption = {
+    legend:{
+      labels:{
+        fontSize: 16,
+        fontColor: 'white'
+      }
+    }
+  };// this is used for chart labels styles
+  
 
   constructor(
     private nonService: NonAcademicService,

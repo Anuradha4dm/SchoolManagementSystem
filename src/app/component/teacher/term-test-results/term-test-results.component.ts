@@ -72,7 +72,6 @@ export class TermTestResultsComponent implements OnInit {
             subjectList.forEach((data)=>{
               if(element.subjectid==data.subjectid)
                 this.resultList.push({subjectname: data.subjectname,id: data.subjectid,mark: element.marks});
-                console.log(this.resultList)
             });
           })
         }
