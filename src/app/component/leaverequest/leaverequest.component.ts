@@ -19,7 +19,7 @@ export class LeaverequestComponent implements OnInit {
   role: string;
   profile;
   pendingLeaves; //to contain logged user pending data
-  leaveType: number =2;
+  leaveType;
 
   chartData = [];
   chartLabel = ['Leaves Taken','Leaves Available'];

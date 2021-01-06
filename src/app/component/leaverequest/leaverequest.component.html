@@ -30,10 +30,13 @@
 
               <div class="form-group">
                 <label>Leave Type</label>
-                <select class="form-control w-50 p-1" name="type" [ngModel]="leaveType">
+                <select class="form-control w-50 p-1" name="type" [ngModel]="leaveType" required>
                   <option value="0">Half-day</option>
                   <option value="1">Short-leave</option>
                   <option value="2">Full-day</option>
+                  <option value="3">Medical</option>
+                  <option value="4">Educational</option>
+                  <option value="5">No Pay</option>
                 </select>
               </div>
 
